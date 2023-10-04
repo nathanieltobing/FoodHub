@@ -14,7 +14,7 @@ class ContactUsController extends Controller
         $categories = DB::table('categories')->get();
 
         return view('contactUs', ['categories' => $categories]);
-     
+     // tessss
     }
 
 }
