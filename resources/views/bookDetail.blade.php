@@ -10,7 +10,7 @@
 <body>
     <div class="text-center bg-primary" style="display : flex; justify-content : center; font-size:5vh; color:white">
         
-        Giant Book Supplier
+        Giant Book Suppliers
       </div>
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
