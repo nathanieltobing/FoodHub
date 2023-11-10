@@ -7,14 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    use HasFactory;
 
-    public function publishers(){
-        return $this->hasOne(Publisher::class, 'id','publisher_id');
-    }
-
-    public function categories(){
-        return $this->belongsToMany(Category::class, 'book_categories', 'category_id', 'book_id');
-    }
-    // tes commit by geary
 }
