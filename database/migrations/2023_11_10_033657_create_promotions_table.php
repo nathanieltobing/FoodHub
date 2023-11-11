@@ -17,6 +17,7 @@ class CreatePromotionsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->double("discount");
+            $table->foreignId('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
         });
     }
