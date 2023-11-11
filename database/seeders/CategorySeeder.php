@@ -16,15 +16,7 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             'id' => 1,
-            'name' => 'Action'
-        ]);
-        DB::table('categories')->insert([
-            'id' => 2,
-            'name' => 'Romance'
-        ]);
-        DB::table('categories')->insert([
-            'id' => 3,
-            'name' => 'Comedy'
+            'name' => 'Makanan India'
         ]);
     }
 }
