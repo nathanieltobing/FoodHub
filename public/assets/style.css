@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+
+*
+{
+    /* box-sizing: border-box; */
+    margin: 0;
+    padding: 0;
+    /* background-color: #24252A; */
+}
+
+li,a,button{
+    font-family: "Montserrat",sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #2B2B2B;
+    text-decoration: none;
+}
+header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: #24252A;
+}
+
+.logo{
+    cursor: pointer;
+    margin-right: auto;
+}
+nav ul li a{
+    text-decoration: none;
+    line-height:30px;
+    text-transform: uppercase;
+    padding:19px;
+    color : #FFE3BB;
+}
+.nav_links {
+    list-style: none;
+}
+.nav_links li {
+    display: inline-block;
+    padding: 0px 20px;
+
+}
+.nav_links li:nth-child(1) {
+    padding: 0 20px 0 0;
+}
+.nav_links li a:hover{
+    color:#0088a9
+}
+.nav_links li a{
+    transition: all 0.3s ease 0s;
+}
+.cta {
+    order: 2;
+}
+button{
+    margin-left: 20px;
+    padding: 9px 25px;
+    background-color: #FFD28F;
+    /* background-color: rgba(0,136,169,1); */
+    border: none;
+    border-radius: 50px;
+    cursor:pointer;
+    transition: all 0.3s ease 0s;
+}
+button:hover
+{
+    background-color: rgba(0,136,169,1);
+}
+
+footer{
+    background-color: #24252A;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.footerContainer{
+    width:100%;
+    padding: 30px 10%;
+}
+.socialIcons{
+    display: flex;
+    justify-content: center;
+}
+.socialIcons a{
+    text-decoration: none;
+    padding: 10px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.socialIcons a i{
+ font-size: 2em;
+ color: #2B2B2B;
+ opacity: 0.9;
+}
+
+.socialIcons a:hover{
+    background-color: #2B2B2B;
+    transition: 0.5s;
+}
+
+.socialIcons a:hover i{
+    color: white;
+    transition: 0.5s;
+}
+
+.footerNav{
+    margin: 30px 0;
+}
+
+.footerNav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: nonedisc;
+}
+.footerNav ul li a{
+    font-family: "Montserrat",sans-serif;
+    color : #FFE3BB;
+    margin: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.footerNav ul li a:hover{
+    opacity: 1;
+}
+.footerBottom{
+    background-color: #24252A;
+    text-align: center;
+}
+.footerBottom p {
+    color: white;
+}
+
+@media (max-width:700px){
+    .footerNav ul{
+        flex-direction: column;
+    }
+    .footerNav ul li{
+        width: 100%;
+        text-align: center;
+        margin: 10px;
+    }
+}
