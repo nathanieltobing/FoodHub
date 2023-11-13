@@ -19,8 +19,11 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->enum('status', ['OPEN','REJECTED','ON GOING','FINISHED']);
             $table->dateTime('transactionDate')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->foreignId('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('vendor_id');
             $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('order_detail_id');
             $table->foreign('order_detail_id')->references('id')->on('order_details')->onUpdate('cascade')->onDelete('cascade');
         });
     }

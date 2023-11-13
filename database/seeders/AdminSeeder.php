@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class OrderSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,12 +14,12 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('orders')->insert([
+        DB::table('admins')->insert([
             'id' => 1,
-            'status' => 'OPEN',
-            'customer_id' => 1,
-            'vendor_id' => 1,
-            'order_detail_id' => 1
+            'name' => 'Admin 1',
+            'email' => 'admin1@gmail.com',
+            'password' => bcrypt('123'),
+            'role' => 'ADMIN',
         ]);
     }
 }

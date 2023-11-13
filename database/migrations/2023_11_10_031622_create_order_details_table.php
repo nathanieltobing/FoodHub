@@ -17,8 +17,9 @@ class CreateOrderDetailsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('order_quantity');
-            $table->double('pricePerItem');
+            $table->double('pricePerProduct');
             $table->double('total_price');
+            $table->foreignId('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
         });
     }
