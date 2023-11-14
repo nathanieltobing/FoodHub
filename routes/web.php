@@ -3,6 +3,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublisherController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/',[BookController::class, 'index']);
+Route::get('/login', function () {
+    return view('login');
+})->name('login')->middleware('guest');
+Route::get('/register', function () {
+    return view('register');
+})->name('register')->middleware('guest');
+Route::get('/register/{lang}', function ($lang) {
+    App::setLocale($lang);
+    return view ('register');
+})->name('register')->middleware('guest');
 Route::get('/contact-us',[ContactUsController::class, 'index']);
 Route::get('/publisher',[PublisherController::class, 'index']);
 Route::get('/publisher/{id}',[PublisherController::class, 'showDetail']);

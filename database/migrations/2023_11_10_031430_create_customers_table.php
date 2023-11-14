@@ -22,7 +22,7 @@ class CreateCustomersTable extends Migration
             $table->json('customer_membership');
             $table->rememberToken()->NULL;
             $table->enum('role', ['CUSTOMER' , 'VENDOR' , 'ADMIN']);
-            $table->enum('status', ['ACTIVE' , 'SUSPENDED']);
+            $table->enum('status', ['ACTIVE' , 'INACTIVE']);
             $table->foreignId('status_updated_by');
             $table->foreign('status_updated_by')->references('id')->on('admins')->onUpdate('cascade')->onDelete('cascade');
         });
