@@ -10,6 +10,6 @@ class Customer extends User
     use HasFactory;
 
     public function orders(){
-        return $this->belongsTo(Order::class,'customer_id', 'id');
+        return $this->hasMany(Order::class,'customer_id', 'id');
     }
 }

@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->enum('status', ['OPEN','REJECTED','ON GOING','FINISHED']);
-            $table->dateTime('transactionDate')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('transaction_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->foreignId('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('vendor_id');

@@ -26,8 +26,13 @@
         </nav>
     </header>
 
-</body>
+{{-- content --}}
+<div class="content">
+    @yield('content')
+</div>
+{{-- end of content --}}
 
+</body>
 
 <footer>
     <div class="footerContainer">
