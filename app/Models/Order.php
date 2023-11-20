@@ -10,7 +10,7 @@ class Order extends Model
     use HasFactory;
 
     public function customers(){
-        return $this->hasOne(Customer::class,'id','customer_id');
+        return $this->belongsTo(Customer::class,'id','customer_id');
     }
     public function order_details(){
         return $this->hasOne(OrderDetail::class,'id','order_detail_id');
