@@ -18,12 +18,12 @@
 
                   {{-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up</p> --}}
 
-                  <form class="mx-1 mx-md-4">
-
+                  <form action="/register/customer" method="POST" enctype="multipart/form-data" class="mx-1 mx-md-4">
+                    @csrf
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" class="form-control" />
+                        <input type="text" id="form3Example1c" name="name" class="form-control" />
                         <label class="form-label" for="form3Example1c">Your Name</label>
                       </div>
                     </div>
@@ -31,15 +31,15 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="email" id="form3Example3c" class="form-control" />
+                        <input type="email" id="form3Example3c" name="email" class="form-control" />
                         <label class="form-label" for="form3Example3c">Your Email</label>
                       </div>
                     </div>
-
+                    <input type="hidden" name="role" value="CUSTOMER">
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4c" class="form-control" />
+                        <input type="password" id="form3Example4c" name="password" class="form-control" />
                         <label class="form-label" for="form3Example4c">Password</label>
                       </div>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-key fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4cd" class="form-control" />
+                        <input type="password" id="form3Example4cd" name="password_confirmation" class="form-control" />
                         <label class="form-label" for="form3Example4cd">Repeat your password</label>
                       </div>
                     </div>
@@ -60,8 +60,21 @@
                     </div>
 
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="button" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins;">Register</button>
+                      <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins;">Register</button>
                     </div>
+
+                    <div class="row text-danger">
+                      @if(session()->has('error'))
+                              <p>{{ session()->get('error') }}</p>
+                          @endif
+                          @if ($errors->any())
+                          <ul class="ps-5">
+                              @foreach ($errors->all() as $error)
+                                  <li>{{ $error }}</li>
+                              @endforeach
+                          </ul>
+                          @endif
+                  </div>
 
                   </form>
 
@@ -78,7 +91,7 @@
                         <div class="testimonial  " style="width: 10rem;">
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                           <div class="card-body">
-                            <a href="" class="card-title">CUSTOMER</a>
+                            <a href="/register/customer" class="card-title">CUSTOMER</a>
 
                           </div>
 
@@ -87,7 +100,7 @@
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                           <div class="card-body">
 
-                            <a href="" class="card-title">VENDOR</a>
+                            <a href="/register/vendor" class="card-title">VENDOR</a>
 
                           </div>
 

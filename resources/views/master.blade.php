@@ -26,7 +26,7 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
               </form></li>
               <li> <a class= "cta" href="/login"><button>Login</button></a></li>
-              <li> <a class= "cta" href="/register"><button>Register</button></a></li>
+              <li> <a class= "cta" href="/register/customer"><button>Register</button></a></li>
             </ul>
         </nav>
     </header>

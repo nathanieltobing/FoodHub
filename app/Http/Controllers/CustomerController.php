@@ -12,17 +12,14 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class CustomerController extends Controller
+class CustomerController extends UserController
 {
     public function register(Request $req){
 
         $rules = [
-            'first_name' => 'required|max:25|alpha',
-            'last_name' => 'required|max:25|alpha',
+            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',        
             'email' => 'required|email:rfc,dns',
-            'role' => 'required', Rule::in([1, 2]),
-            'gender' => 'required',
-            'dp' => 'required|image',
+            'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
             'password' => 'required | min:8 | alpha_num |confirmed'
         ];
 
@@ -40,46 +37,18 @@ class CustomerController extends Controller
         
 
         $customer = new Customer();
-        $customer->role_id = $req->role;
-        $customer->gender_id = $req->gender;
-        $customer->first_name = $req->first_name;
-        $customer->last_name = $req->last_name;
+        $customer->role = $req->role;
+        $customer->name = $req->name;
         $customer->email = $req->email;
        // $customer->display_picture_link = $imageName;
         $customer->password = bcrypt($req->password);
+        $customer->status = 'ACTIVE';
 
 
-        
 
         $customer->save();
 
         return redirect('/login');
     }
 
-    public function login(Request $request){
-        $credential = [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
-        //dd($credential);
-
-        if($request->remember_me) {
-            Cookie::queue("email", $request->email);
-            Cookie::queue("password", $request->password);
-            
-        }
-        else {
-            Cookie::queue(Cookie::forget("email"));
-            Cookie::queue(Cookie::forget("password"));
-        }
-        if(Auth::attempt($credential,true)){
-            Session::put('mysession',Auth::user()->first_name);
-            return redirect('/');
-        }
-        else{
-            return redirect()->back()->withErrors('Username or Password is incorrect !');
-        
-        }      
-        
-    }
 }

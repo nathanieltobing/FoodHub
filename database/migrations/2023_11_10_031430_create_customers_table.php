@@ -19,11 +19,11 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
-            $table->json('customer_membership');
+            $table->json('customer_membership')->nullable();
             $table->rememberToken()->NULL;
             $table->enum('role', ['CUSTOMER' , 'VENDOR' , 'ADMIN']);
             $table->enum('status', ['ACTIVE' , 'INACTIVE']);
-            $table->foreignId('status_updated_by');
+            $table->foreignId('status_updated_by')->nullable();
             $table->foreign('status_updated_by')->references('id')->on('admins')->onUpdate('cascade')->onDelete('cascade');
         });
     }
