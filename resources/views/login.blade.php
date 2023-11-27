@@ -1,6 +1,32 @@
 @extends('master-clean')
 
 @section('content')
+<script type="text/javascript">
+
+  window.onload = test;
+
+  function test(){
+    let role = document.getElementById("hidden1");
+   let button = document.getElementById("btn123");
+   console.log(role);
+  }
+//  console.log("test");
+//   let role = document.getElementById("hidden1");
+//   let button = document.getElementById("btn123");
+//   console.log(role);
+  
+
+//   button.addEventListener("click", updateButton);
+
+//   function updateButton(){
+//     console.log("test");
+//     if(button.value === "CUSTOMER"){
+//         role.value = "CUSTOMER";
+//     }
+//   }
+  
+</script>
+
 <section class="vh-100" style="background-color: #eee;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -25,7 +51,7 @@
                         <label class="form-label" for="form3Example3c">Your Email</label>
                       </div>
                     </div>
-
+                    <input type="hidden" id="hidden1" name="role" value="">
                     <div class="d-flex flex-row align-items-center mb-2">
                       <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
@@ -84,9 +110,9 @@
                         <div class="testimonial  " style="width: 10rem;">
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                           <div class="card-body">
-                            {{-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> --}}
-                            <input type="radio" id="html" name="fav_language" value="CUSTOMER">
-                            <label for="html">CUSTOMER</label><br>
+                            <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
+                            <input type="button" id="btn123" name="role_button" value="CUSTOMER">
+                            <!-- <label for="html">CUSTOMER</label><br> -->
                           </div>
 
                         </div>
