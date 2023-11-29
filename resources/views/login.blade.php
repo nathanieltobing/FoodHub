@@ -3,28 +3,31 @@
 @section('content')
 <script type="text/javascript">
 
-  window.onload = test;
+document.addEventListener("DOMContentLoaded", function(arg) {
+  
+  let role = document.getElementById("hidden1");
+  let customerButton = document.getElementById("customerBtn");
+  let vendorButton = document.getElementById("vendorBtn");
+  let adminButton = document.getElementById("adminBtn");
 
-  function test(){
-    let role = document.getElementById("hidden1");
-   let button = document.getElementById("btn123");
-   console.log(role);
+  customerButton.addEventListener("click", updateButton);
+  vendorButton.addEventListener("click", updateButton);
+  adminButton.addEventListener("click", updateButton);
+
+  function updateButton(button){
+    if(button.currentTarget.value === "CUSTOMER"){
+        role.value = "CUSTOMER";
+    }
+    else if(button.currentTarget.value === "VENDOR"){
+      role.value = "VENDOR";
+    }
+    else if(button.currentTarget.value === "ADMIN"){
+      role.value = "ADMIN";
+    }
+      console.log(role.value);
   }
-//  console.log("test");
-//   let role = document.getElementById("hidden1");
-//   let button = document.getElementById("btn123");
-//   console.log(role);
-  
-
-//   button.addEventListener("click", updateButton);
-
-//   function updateButton(){
-//     console.log("test");
-//     if(button.value === "CUSTOMER"){
-//         role.value = "CUSTOMER";
-//     }
-//   }
-  
+});
+   
 </script>
 
 <section class="vh-100" style="background-color: #eee;">
@@ -111,7 +114,7 @@
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                           <div class="card-body">
                             <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
-                            <input type="button" id="btn123" name="role_button" value="CUSTOMER">
+                            <input type="button" id="customerBtn" name="role_button" value="CUSTOMER">
                             <!-- <label for="html">CUSTOMER</label><br> -->
                           </div>
 
@@ -120,7 +123,8 @@
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                           <div class="card-body">
 
-                            <a href="/login" class="card-title"  style="text-align: center">VENDOR</a>
+                           
+                            <input type="button" id="vendorBtn" name="role_button" value="VENDOR">
 
                           </div>
 
@@ -129,7 +133,8 @@
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                           <div class="card-body">
 
-                            <a href="/login"class= "card-title"  style="text-align: center">ADMIN</a>
+                            
+                            <input type="button" id="adminBtn" name="role_button" value="ADMIN">
 
                           </div>
 

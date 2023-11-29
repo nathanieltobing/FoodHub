@@ -19,6 +19,7 @@ class VendorSeeder extends Seeder
             'name' => 'Vendor 1',
             'email' => 'vendor1@gmail.com',
             'password' => bcrypt('123'),
+            'vendor_picture' => 'images/product1.jpg',
             'vendor_membership' => json_encode([
                 'tes'
             ]),

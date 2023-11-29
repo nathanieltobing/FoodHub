@@ -9,6 +9,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,10 @@ Route::get('/login', function () {
 Route::get('/register/customer', function () {
     return view('register');
 })->name('register')->middleware('guest');
+Route::get('/register/vendor', function () {
+    return view('registerVendor');
+})->name('register')->middleware('guest');
+Route::get('/vendorList',[VendorController::class, 'index']);
 Route::get('/register/{lang}', function ($lang) {
     App::setLocale($lang);
     return view ('register');
