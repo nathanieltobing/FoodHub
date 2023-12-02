@@ -20,7 +20,7 @@
         <nav>
             <ul class="nav_links">
              <li><a href="/"> Home</a></li>
-             <li><a href="#"> Order List</a></li>
+             <li><a href="/orderList"> Order List</a></li>
              <li><a href="/vendorList"> Vendor List</a></li>
              <li> <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

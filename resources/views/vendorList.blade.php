@@ -19,11 +19,17 @@
       <img src="/" class="card-img-top" alt="..." style="height:500px">
       <div class="card-body">
         <h5 class="card-title">{{$vendor->name}}</h5>
+        <div class="stars">
+            @for ($i = 0; $i < $vendor->rating ; $i++)
+               <i class="fas fa-star"></i>
+            @endfor
+        </div>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         {{-- <h5 class="card-text">Category : {{$vendor->category}}</h5>
         <h5 class="card-text">Price : Rp {{$vendor->price}}</h5>
         <h5 class="card-text">Description : {{$vendor->description}}</h5> --}}
         <div class="row">
-          <a href="/productDetail/test" class="btn btn-primary btn-lg">Detail</a>
+          <a href="/product/{{$vendor->id}}" class="btn btn-primary btn-lg">Detail</a>
         </div>
      </div>
     </div>               
