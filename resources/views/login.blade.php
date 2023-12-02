@@ -14,7 +14,7 @@
 //   let role = document.getElementById("hidden1");
 //   let button = document.getElementById("btn123");
 //   console.log(role);
-  
+
 
 //   button.addEventListener("click", updateButton);
 
@@ -24,7 +24,7 @@
 //         role.value = "CUSTOMER";
 //     }
 //   }
-  
+
 </script>
 
 <section class="vh-100" style="background-color: #eee;">
@@ -91,10 +91,10 @@
                               @endforeach
                           </ul>
                           @endif
-            
+
                    {{-- <div class="row"> --}}
 
-                  
+
 
                 </div>
 
@@ -105,35 +105,31 @@
                       </div>
 
                         <div class="d-flex flex-row align-items-center mb-4" style="gap: 10px;">
-
-
-                        <div class="testimonial  " style="width: 10rem;">
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                          <div class="card-body">
-                            <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
-                            <input type="button" id="btn123" name="role_button" value="CUSTOMER">
-                            <!-- <label for="html">CUSTOMER</label><br> -->
-                          </div>
+                            {{-- <div class="card-body"> --}}
+                             <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
+                             <input style="border: none ;width: 10rem;" type="button" id="btn123" name="role_button" value="CUSTOMER">
+                             <!-- <label for="html">CUSTOMER</label><br> -->
+                             {{-- </div> --}}
 
-                        </div>
-                        <div class="testimonial" style="width: 10rem;">
-                          {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                          <div class="card-body">
+                            {{-- <div class="testimonial" style="width: 10rem;"> --}}
+                                     {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                {{-- <div class="card-body"> --}}
 
-                            <a href="/login" class="card-title"  style="text-align: center">VENDOR</a>
+                                    <input style="border: none ;width: 10rem;" type="button" id="btn123" name="role_button" value="VENDOR">
 
-                          </div>
+                                {{-- </div> --}}
 
-                        </div>
-                        <div class="testimonial" style="width: 10rem;">
-                          {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                          <div class="card-body">
+                             {{-- </div> --}}
+                            {{-- <div class="testimonial" style="width: 10rem;"> --}}
+                                 {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                {{-- <div class="card-body"> --}}
 
-                            <a href="/login"class= "card-title"  style="text-align: center">ADMIN</a>
+                                    <input style="border: none ;width: 10rem;" type="button" id="btn123" name="role_button" value="ADMIN">
 
-                          </div>
+                                {{-- </div> --}}
 
-                        </div>
+                            {{-- </div> --}}
                     </div>
 
                   </form>
@@ -141,6 +137,7 @@
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                     class="img-fluid" alt="Sample image">
                     <h1>Don't have an account ? <a href="/register/customer" class="signup-image-link" style="text-decoration: underline;">Register</a></h1>
+
                 </div>
               </div>
             </div>

@@ -2,7 +2,47 @@
 
 
 @section('content')
-<div class="cover">
+<div >
+
+
+        <div class="inner" style="margin-top: 80px;text-align: center;">
+            <h2>Promotion</h2>
+            <div class="border"></div>
+        </div>
+<div  class="slider" style="margin-top: 30px">
+    <div class="list">
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+        </div>
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+        </div>
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+        </div>
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+        </div>
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+        </div>
+    </div>
+    <div class="buttons">
+        <button id="prev"><</button>
+        <button id="next">></button>
+    </div>
+    <ul class="dots">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    </div>
+
+</div>
+<script src="{{ asset('assets/script.js') }}"></script>
+{{-- <div class="cover">
 
 
     <div class="container">
@@ -23,7 +63,7 @@
           </div>
      </div>
     </div>
-</div>
+</div> --}}
 
 <div class="about-us">
     <div class="about-section">
