@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactUsController;
@@ -35,7 +36,7 @@ Route::get('/register/vendor', function () {
 })->name('register')->middleware('guest');
 Route::get('/vendorList',[VendorController::class, 'index']);
 Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
-Route::get('/checkout/{id}',[ProductController::class, 'checkout']);
+Route::get('/checkout',[CartController::class, 'cartIndex']);
 Route::get('/register/{lang}', function ($lang) {
     App::setLocale($lang);
     return view ('register');
