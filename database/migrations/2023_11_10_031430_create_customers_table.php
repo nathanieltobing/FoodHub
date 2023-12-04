@@ -19,6 +19,9 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('image')->nullable();
             $table->json('customer_membership');
             $table->rememberToken()->NULL;
             $table->enum('role', ['CUSTOMER' , 'VENDOR' , 'ADMIN']);

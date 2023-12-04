@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PublisherController;
 
@@ -30,3 +31,10 @@ return view('homepage');
 
 Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
 Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
+
+Route::get('/profile/{c:id}',[CustomerController::class, 'viewCustomerProfile']);
+Route::put('/editprofile/{c:id}',[CustomerController::class, 'editProfile']);
+Route::post('/profile/{c:id}',[CustomerController::class, 'enableEdit']);
+Route::get('/editprofpic/{c:id}', [CustomerController::class, 'showEditPict']);
+Route::put('/editprofpic/{c:id}', [CustomerController::class, 'editPicture']);
+Route::get('/removeprofpic/{c:id}', [CustomerController::class, 'removePicture']);
