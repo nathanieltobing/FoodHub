@@ -19,13 +19,17 @@ class CreateVendorsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
+            $table->text('description');
+            $table->string('vendor_picture');
+            $table->json("category");
+            $table->integer('rating');
             $table->string('phone')->nullable();
             $table->string('image')->nullable();
-            $table->json('vendor_membership');
+            $table->json('vendor_membership')->nullable();
             $table->rememberToken()->NULL;
             $table->enum('role', ['CUSTOMER' , 'VENDOR' , 'ADMIN']);
-            $table->enum('status', ['ACTIVE' , 'SUSPENDED']);
-            $table->foreignId('status_updated_by');
+            $table->enum('status', ['ACTIVE' , 'INACTIVE']);
+            $table->foreignId('status_updated_by')->nullable();
             $table->foreign('status_updated_by')->references('id')->on('admins')->onUpdate('cascade')->onDelete('cascade');
         });
     }

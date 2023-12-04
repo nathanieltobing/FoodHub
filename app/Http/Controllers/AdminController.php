@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class AdminController extends UserController
 {
     /**
      * Display a listing of the resource.
