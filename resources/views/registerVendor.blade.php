@@ -8,7 +8,7 @@
           <div class="card text-black mb-5" style="border-radius: 25px;">
             <div class="card-body p-md-5">
               <div class="row justify-content-center">
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up as Customer</p>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up as Vendor</p>
 
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 " style=" font-weight: 700; color:#222; font-family: Poppins;">FH</p>
@@ -24,10 +24,26 @@
                       <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="text" id="form3Example1c" name="name" class="form-control" />
-                        <label class="form-label" for="form3Example1c">Your Name</label>
+                        <label class="form-label" for="form3Example1c">Vendor Name</label>
                       </div>
                     </div>
-
+                    {{-- <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            <select class="form-select" name="category" aria-label="Default select example">
+                                <option selected value=1>Food</option>
+                                <option value=2>Beverages</option>
+                              </select>
+                              <label class="form-label" for="form3Example1c">Category</label>
+                        </div>
+                      </div> --}}
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            <input class="form-control" name="dp" type="file" id="formFile">
+                          <label class="form-label" for="form3Example1c">Upload your vendor's picture</label>
+                        </div>
+                      </div>
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
@@ -35,7 +51,7 @@
                         <label class="form-label" for="form3Example3c">Your Email</label>
                       </div>
                     </div>
-                    <input type="hidden" name="role" value="CUSTOMER">
+                    <input type="hidden" name="role" value="VENDOR">
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">

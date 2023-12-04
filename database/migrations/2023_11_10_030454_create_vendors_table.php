@@ -19,6 +19,10 @@ class CreateVendorsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
+            $table->text('description');
+            $table->string('vendor_picture');
+            $table->json("category");
+            $table->integer('rating');
             $table->json('vendor_membership')->nullable();
             $table->rememberToken()->NULL;
             $table->enum('role', ['CUSTOMER' , 'VENDOR' , 'ADMIN']);

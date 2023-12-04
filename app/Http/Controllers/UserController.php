@@ -20,7 +20,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ];
-        dd($request->role);
+        // dd($request->role);
 
         if($request->remember_me) {
             Cookie::queue("email", $request->email);

@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +31,12 @@ Route::get('/login', function () {
 Route::get('/register/customer', function () {
     return view('register');
 })->name('register')->middleware('guest');
+Route::get('/register/vendor', function () {
+    return view('registerVendor');
+})->name('register')->middleware('guest');
+Route::get('/vendorList',[VendorController::class, 'index']);
+Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
+Route::get('/checkout',[ProductController::class, 'cartIndex']);
 Route::get('/register/{lang}', function ($lang) {
     App::setLocale($lang);
     return view ('register');

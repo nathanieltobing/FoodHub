@@ -3,18 +3,33 @@
 @section('content')
 <script type="text/javascript">
 
-  window.onload = test;
+document.addEventListener("DOMContentLoaded", function(arg) {
 
-  function test(){
-    let role = document.getElementById("hidden1");
-   let button = document.getElementById("btn123");
-   console.log(role);
+  let role = document.getElementById("hidden1");
+  let customerButton = document.getElementById("customerBtn");
+  let vendorButton = document.getElementById("vendorBtn");
+  let adminButton = document.getElementById("adminBtn");
+
+  customerButton.addEventListener("click", updateButton);
+  vendorButton.addEventListener("click", updateButton);
+  adminButton.addEventListener("click", updateButton);
+
+  function updateButton(button){
+    if(button.currentTarget.value === "CUSTOMER"){
+        role.value = "CUSTOMER";
+    }
+    else if(button.currentTarget.value === "VENDOR"){
+      role.value = "VENDOR";
+    }
+    else if(button.currentTarget.value === "ADMIN"){
+      role.value = "ADMIN";
+    }
+      console.log(role.value);
   }
 //  console.log("test");
 //   let role = document.getElementById("hidden1");
 //   let button = document.getElementById("btn123");
 //   console.log(role);
-
 
 //   button.addEventListener("click", updateButton);
 
@@ -24,6 +39,8 @@
 //         role.value = "CUSTOMER";
 //     }
 //   }
+
+});
 
 </script>
 
@@ -108,15 +125,22 @@
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                             {{-- <div class="card-body"> --}}
                              <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
-                             <input style="border: none ;width: 10rem;" type="button" id="btn123" name="role_button" value="CUSTOMER">
+                             <input style="border: none ;width: 10rem;" type="button" id="customerBtn" name="role_button" value="CUSTOMER">
                              <!-- <label for="html">CUSTOMER</label><br> -->
                              {{-- </div> --}}
+
+                            <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
+
+                            <!-- <label for="html">CUSTOMER</label><br> -->
+
 
                             {{-- <div class="testimonial" style="width: 10rem;"> --}}
                                      {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                 {{-- <div class="card-body"> --}}
 
-                                    <input style="border: none ;width: 10rem;" type="button" id="btn123" name="role_button" value="VENDOR">
+                                    <input style="border: none ;width: 10rem;" type="button" id="vendorBtn" name="role_button" value="VENDOR">
+
+
 
                                 {{-- </div> --}}
 
@@ -125,7 +149,9 @@
                                  {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                 {{-- <div class="card-body"> --}}
 
-                                    <input style="border: none ;width: 10rem;" type="button" id="btn123" name="role_button" value="ADMIN">
+                                    <input style="border: none ;width: 10rem;" type="button" id="adminBtn" name="role_button" value="ADMIN">
+
+
 
                                 {{-- </div> --}}
 
