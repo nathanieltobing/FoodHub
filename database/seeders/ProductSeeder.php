@@ -20,6 +20,7 @@ class ProductSeeder extends Seeder
             'price' => 50000.00,
             'stock' => 10,
             'description' => 'ini adalah first product dari vendor 1',
+            'product_picture' => 'test',
             'category_id' => 1,
             'vendor_id' => 1
         ]);
