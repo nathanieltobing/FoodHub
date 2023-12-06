@@ -31,9 +31,24 @@
         <a href="/" style="--i:0; margin-top: -10px">Home</a>
         <a href="/orderList" style="--i:1">Order List</a>
         <a href="/vendorList" style="--i:2">Vendor List</a>
-        <a href="/login" style="--i:3">Login</a>
-    </nav>
+        @guest
+          <a href="/login" style="--i:3">Login</a>
+          {{-- Register --}}
+        @else
+          @if(Auth::guard('webcustomer')->user()->role == 'CUSTOMER')
+          <div class="container d-flex justify-content-center" style="gap: 50px">
+            <a class="text-white" href="/home">Home</a>
+          </div>
+          @elseif (Auth::guard('webvendor')->user()->role == 'VENDOR')
+          <div class="container d-flex justify-content-center" style="gap: 50px">
+            <a class="text-white" href="/home">Home</a>
+          </div>
+          @else
+            {{-- Button khusus Admin --}}
+          @endif
 
+        @endguest
+    </nav>
 
 </header>
 
