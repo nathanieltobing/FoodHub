@@ -10,6 +10,10 @@
     /* background-color: #24252A; */
 }
 
+body{
+    padding-top: 6rem;
+}
+
 li,a,button,h1{
     font-family: "Montserrat",sans-serif;
     font-weight: 500;

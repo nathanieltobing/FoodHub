@@ -47,13 +47,13 @@
             </form>
             @endif
         </div>
-        <hr>
+        <hr class="bg-dark">
         @if(!$editMode)
         <form action="/profile/{{$customer->id}}" method="POST" class="pb-5 pt-3" enctype="multipart/form-data">
         @csrf
-        <div class="px-5" style="margin: 0 20%">
+        <div class="px-5" style="margin: 0 10%">
             <h3 class="text-center mb-3">Profile</h3>
-            <div class="form-group px-5 row">
+            <div class="form-group px-5 my-1 row">
                 <label class="col-sm-3 my-1" for="title">Name:</label>
                 <div class="col-sm-9">
                     <input id="name" type="text" class="form-control" value="{{ $customer->name }}" readonly>
@@ -87,7 +87,7 @@
         <form action="/editprofile/{{$customer->id}}" method="POST" class="pb-5 pt-3" enctype="multipart/form-data">
             @csrf
             {{method_field('PUT')}}
-            <div class="px-5" style="margin: 0 20%">
+            <div class="px-5" style="margin: 0 10%">
                 <h3 class="text-center mb-3">Edit Your Profile</h3>
                 <div class="form-group px-5 my-1 row">
                     <label class="col-sm-3 my-1" for="title">Name:</label>

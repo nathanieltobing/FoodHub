@@ -8,7 +8,6 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
@@ -63,3 +62,6 @@ Route::post('/profile/{c:id}',[CustomerController::class, 'enableEdit']);
 Route::get('/editprofpic/{c:id}', [CustomerController::class, 'showEditPict']);
 Route::put('/editprofpic/{c:id}', [CustomerController::class, 'editPicture']);
 Route::get('/removeprofpic/{c:id}', [CustomerController::class, 'removePicture']);
+
+Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
+Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
