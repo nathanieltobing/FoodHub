@@ -34,9 +34,11 @@ Route::post('/login',[UserController::class, 'login']);
 Route::get('/register/customer', function () {
     return view('register');
 })->name('register')->middleware('guest');
+Route::post('/register/customer',[CustomerController::class, 'register']);
 Route::get('/register/vendor', function () {
     return view('registerVendor');
 })->name('register')->middleware('guest');
+Route::post('/register/customer',[VendorController::class, 'register']);
 Route::get('/vendorList',[VendorController::class, 'index']);
 
 
@@ -46,7 +48,7 @@ Route::get('/vendorList',[VendorController::class, 'index']);
 // })->name('register')->middleware('guest');
 
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['admin'])->group(function(){
         Route::get('/accountMaintain', [AccountController::class, 'accountMaintain']);
         Route::get('/changeRole/{id}', [AccountController::class, 'changeRole']);

@@ -67,4 +67,18 @@ class UserController extends Controller
           
         
     }
+
+    public function logout(){
+        if(Auth::guard('webcustomer')->check()){
+            Auth::guard('webcustomer')->logout();
+        }
+        else if(Auth::guard('webvendor')->check()){
+            Auth::guard('webvendor')->logout();
+        }
+        else if(Auth::guard('wedamin')->check()){
+            Auth::guard('wedamin')->logout();
+        }
+        Session::flush();
+        return view('/');
+    }
 }
