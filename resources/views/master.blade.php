@@ -28,20 +28,20 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form></a>
-        <a href="/" style="--i:0; margin-top: -10px">Home</a>
+        {{-- <a href="/" style="--i:0; margin-top: -10px">Home</a>
         <a href="/orderList" style="--i:1">Order List</a>
-        <a href="/vendorList" style="--i:2">Vendor List</a>
+        <a href="/vendorList" style="--i:2">Vendor List</a> --}}
         @guest
-          <a href="/login" style="--i:3">Login</a>
+          <a href="/login" style="--i:3">{{Auth::guard('webvendor')->user()->role}}</a>
           {{-- Register --}}
         @else
           @if(Auth::guard('webcustomer')->user()->role == 'CUSTOMER')
           <div class="container d-flex justify-content-center" style="gap: 50px">
-            <a class="text-white" href="/home">Home</a>
+            <a class="text-white" href="/home">Customer</a>
           </div>
           @elseif (Auth::guard('webvendor')->user()->role == 'VENDOR')
           <div class="container d-flex justify-content-center" style="gap: 50px">
-            <a class="text-white" href="/home">Home</a>
+            <a class="text-white" href="/home">sdsd</a>
           </div>
           @else
             {{-- Button khusus Admin --}}
