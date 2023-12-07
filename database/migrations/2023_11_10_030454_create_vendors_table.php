@@ -23,6 +23,8 @@ class CreateVendorsTable extends Migration
             $table->string('vendor_picture');
             $table->json("category");
             $table->integer('rating');
+            $table->string('phone')->nullable();
+            $table->string('image')->nullable();
             $table->json('vendor_membership')->nullable();
             $table->rememberToken()->NULL;
             $table->enum('role', ['CUSTOMER' , 'VENDOR' , 'ADMIN']);

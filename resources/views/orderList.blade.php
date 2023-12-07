@@ -10,7 +10,8 @@
     </div>
     @endif
     <div class="p-5" style="background-color: #black">
-    <h1>Orders</h1>
+    <h1>Order List</h1>
+    <hr>
     <br>
       @foreach ($order as $key => $o)
       <div class="d-flex justify-content-around align-items-center">
