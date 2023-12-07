@@ -19,6 +19,8 @@ class CreateAdminsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->string('image')->nullable();
             $table->rememberToken()->NULL;
             $table->enum('role', ['CUSTOMER' , 'VENDOR' , 'ADMIN']);
         });

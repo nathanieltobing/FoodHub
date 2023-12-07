@@ -25,7 +25,7 @@ class VendorController extends UserController
     public function register(Request $req){
 
         $rules = [
-            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',        
+            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',
             'email' => 'required|email:rfc,dns',
             'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
             'category' => 'required', Rule::in(['Food', 'Beverages']),
@@ -44,7 +44,7 @@ class VendorController extends UserController
         $imageName = time().'.'.$file->getClientOriginalExtension();
         Storage::putFileAs('public/images', $file,$imageName);
         $imageName = 'images/'.$imageName;
-        
+
 
         $vendor = new Vendor();
         $vendor->role = $req->role;
@@ -59,6 +59,12 @@ class VendorController extends UserController
         $vendor->save();
 
         return redirect('/login');
+    }
+
+    public function showProductList(Vendor $v){
+        return view('productList',[
+            'products' => $v->products,
+        ]);
     }
 
 }

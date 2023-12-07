@@ -10,6 +10,10 @@
     /* background-color: #24252A; */
 }
 
+body{
+    padding-top: 6rem;
+}
+
 li,a,button,h1{
     font-family: "Montserrat",sans-serif;
     font-weight: 500;
@@ -152,7 +156,7 @@ margin-left: 2.5rem;
 }
 
 button{
-    margin-left: 20px;
+    /* margin-left: 20px; */
     padding: 9px 25px;
     background-color: #FFD28F;
     /* background-color: rgba(0,136,169,1); */
