@@ -24,37 +24,52 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-// Route::get('/',[BookController::class, 'index']);
+Route::get('/', function(){
+    return view('homepage');
+});
 Route::get('/login', function () {
     return view('login');
 })->name('login')->middleware('guest');
+Route::post('/login',[UserController::class, 'login']);
 Route::get('/register/customer', function () {
     return view('register');
 })->name('register')->middleware('guest');
+Route::post('/register/customer',[CustomerController::class, 'register']);
 Route::get('/register/vendor', function () {
     return view('registerVendor');
 })->name('register')->middleware('guest');
+Route::post('/register/customer',[VendorController::class, 'register']);
 Route::get('/vendorList',[VendorController::class, 'index']);
-Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
-Route::get('/checkout',[ProductController::class, 'cartIndex']);
-Route::get('/register/{lang}', function ($lang) {
-    App::setLocale($lang);
-    return view ('register');
-})->name('register')->middleware('guest');
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/register/customer', [CustomerController::class, 'register']);
-Route::get('/contact-us',[ContactUsController::class, 'index']);
-Route::get('/publisher',[PublisherController::class, 'index']);
-Route::get('/publisher/{id}',[PublisherController::class, 'showDetail']);
-Route::get('/category/{id}',[CategoryController::class, 'showBooks']);
-Route::get('/bookDetail/{id}',[BookController::class, 'showDetail']);
 
-Route::get('/', function(){
-return view('homepage');
+
+// Route::get('/register/{lang}', function ($lang) {
+//     App::setLocale($lang);
+//     return view ('register');
+// })->name('register')->middleware('guest');
+
+
+Route::middleware(['checkauth'])->group(function(){
+    Route::middleware(['admin'])->group(function(){
+        Route::get('/accountMaintain', [AccountController::class, 'accountMaintain']);
+        Route::get('/changeRole/{id}', [AccountController::class, 'changeRole']);
+    }); 
+    Route::middleware(['customer'])->group(function(){
+        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
+        Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
+        // Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
+        Route::get('/checkout',[ProductController::class, 'cartIndex']);
+    }); 
+    Route::middleware(['vendor'])->group(function(){
+        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
+        Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
+        Route::get('/addProduct', function () {
+            return view('addProduct');
+        });
+        Route::post('/addProduct', [ProductController::class, 'insertProduct']);
+        Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
+    }); 
 });
 
-Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
-Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
 
 Route::get('/profile/{c:id}',[CustomerController::class, 'viewCustomerProfile']);
 Route::put('/editprofile/{c:id}',[CustomerController::class, 'editProfile']);
