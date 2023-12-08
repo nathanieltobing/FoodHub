@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-bottom: -5px;"></i>
                       <div class="form-outline flex-fill mb-0" style="margin-top: 35px">
-                        <input type="email" id="form3Example3c" name="email" class="form-control" />
+                        <input type="email" id="form3Example3c" name="email" class="form-control" value = {{Cookie::get('email') != null ? Cookie::get('email') : ""}} />
                         <label class="form-label" for="form3Example3c">Your Email</label>
                       </div>
                     </div>
@@ -72,15 +72,15 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                     <div class="d-flex flex-row align-items-center mb-2">
                       <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="form3Example4c" name="password" class="form-control" />
+                        <input type="password" id="form3Example4c" name="password" class="form-control" value = {{Cookie::get('password') != null ? Cookie::get('password') : ""}}/>
                         <label class="form-label" for="form3Example4c">Password</label>
                       </div>
                     </div>
                     <div class="d-flex flex-row align-items-center mb-4" style="margin-left:42px">
                         <!-- Checkbox -->
                         <div class="form-check mb-0">
-                          <input class="form-check-input me-2" name="remember_me" type="checkbox" value="" id="form2Example3" />
-                          <label class="form-check-label" for="form2Example3">
+                          <input class="form-check-input me-2" name="remember_me" type="checkbox" id="remember_me" />
+                          <label class="form-check-label" for="remember_me">
                             Remember me
                           </label>
                         </div>

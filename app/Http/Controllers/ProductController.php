@@ -41,13 +41,16 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $req->name;
         $product->price = $req->price;
-        $product->stock = $req->stock;
-        $product->description = $req->description;
+
+        $product->stock = $req->quantity;
+        $product->description = $req->desc;
         $product->product_picture = $req->dp;
         // dd($req->category);
         $category = Category::where('name', $req->category)->first();
         $product->category_id = $category->id;
-        $product->vendor_id = Auth::guard('webvendor')->id;
+
+        $product->vendor_id = Auth::guard('webvendor')->user()->id;
+
         
         $product->save();
 
