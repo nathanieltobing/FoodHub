@@ -48,6 +48,13 @@ Route::get('/vendorList/search', [VendorController::class, 'search'])->name('ven
 //     return view ('register');
 // })->name('register')->middleware('guest');
 
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/register/customer', [CustomerController::class, 'register']);
+Route::post('/register/vendor', [VendorController::class, 'register']);
+
+
+
+
 
 Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['admin'])->group(function(){
