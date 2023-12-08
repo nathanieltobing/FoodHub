@@ -18,7 +18,7 @@
 </head>
 <body>
 <header class="header">
-        <a href="#" class="logo">FH</a>
+        <a href="/" class="logo">FH</a>
         <input type="checkbox" id="check">
         <label for="check" class="icons">
             <i class="bx bx-menu" id="menu-icon"></i>
@@ -29,12 +29,26 @@
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form></a>
-        <a href="/" style="--i:0; margin-top: -10px">Home</a>
-        <a href="/orderList" style="--i:1">Order List</a>
-        <a href="/vendorList" style="--i:2">Vendor List</a>
-        <a href="/login" style="--i:3">Login</a>
+          {{-- <a href="/" style="--i:0; margin-top: -10px">Home</a>
+          <a href="/orderList" style="--i:1">Order List</a>
+          <a href="/vendorList" style="--i:2">Vendor List</a> --}}
+        @if(Auth::guard('webcustomer')->check())
+          <div class="container d-flex justify-content-center" style="gap: 50px">
+            <a href="/login" style="--i:3">Customer</a>
+          </div>
+          @elseif (Auth::guard('webvendor')->check())
+          <div class="container d-flex justify-content-center" style="gap: 50px">
+            <a href="/login" style="--i:3">Vendor</a>
+          </div>
+          @elseif(Auth::guard('webadmin')->check())
+            {{-- Button khusus Admin --}}
+            <a class="text-white" href="/home">Admin</a>
+          @else
+            {{--Button belom login --}}  
+            <a href="/login" style="--i:3">Login</a>
+            <a href="/login" style="--i:3">Register</a>
+          @endif
     </nav>
-
 
 </header>
 
