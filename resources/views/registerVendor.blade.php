@@ -18,7 +18,7 @@
 
                   {{-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up</p> --}}
 
-                  <form action="/register/customer" method="POST" enctype="multipart/form-data" class="mx-1 mx-md-4">
+                  <form action="/register/vendor" method="POST" enctype="multipart/form-data" class="mx-1 mx-md-4">
                     @csrf
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
