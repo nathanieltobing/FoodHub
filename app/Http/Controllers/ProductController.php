@@ -8,6 +8,7 @@ use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Validation\Rule;
+use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,7 @@ class ProductController extends Controller
     public function insertProduct(Request $req){
 
         $rules = [
-            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',        
+            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',
             'quantity' => 'required',
             'price' => 'required',
             'category' => 'required', Rule::in(['Main Course', 'Appetizer', 'Desserts']),
@@ -51,7 +52,6 @@ class ProductController extends Controller
 
         $product->vendor_id = Auth::guard('webvendor')->user()->id;
 
-        
         $product->save();
 
         return redirect('/');
@@ -73,22 +73,22 @@ class ProductController extends Controller
             ];
         }
         session()->put('cart', $cart);
-        
+
         // $cart->name = $product->name;
         // $cart->price = $product->price;
         // $cart->quantity = 1;
         // $cart->customer_id = Auth::guard('webcustomer')->id;
         // $cart->product_id = $product->id;
- 
+
         // $cart->save();
         return redirect('/checkout');
      }
- 
+
      public function cartIndex(){
- 
+
          return view('checkout');
      }
- 
+
      public function deleteItem(Request $request){
         if($request->id){
             $cart = session()->get('cart');
@@ -98,7 +98,7 @@ class ProductController extends Controller
             }
         }
      }
- 
+
      public function checkout(){
         $order = new Order();
         $order_detail = new OrderDetail();
@@ -116,6 +116,11 @@ class ProductController extends Controller
         $order->customer_id = Auth::guard('webcustomer')->id;
         $order->vendor_id = $vendor_id;
         $order->save();
+
+
+
+        //  Cart::truncate();
+        //  return view('checkcoutCart');
         $most_recent_order = DB::table('orders')->latest()->first();
         foreach ($carts as $cart) {
             $order_detail = new OrderDetail();
@@ -126,5 +131,13 @@ class ProductController extends Controller
             $order_detail->product_id = $cart->product_id;
             $order_detail->save();
         }
+     }
+
+     public function search(Vendor $v, Request $request)
+     {
+         return view('productList',[
+            'vendor' => $v,
+             'products' => Product::where('name', 'LIKE', "%$request->search%" , 'and', 'vendor_id', 'like', "$v->id")->get()
+         ]);
      }
 }

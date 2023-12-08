@@ -40,6 +40,7 @@ Route::get('/register/vendor', function () {
 })->name('register')->middleware('guest');
 Route::post('/register/customer',[VendorController::class, 'register']);
 Route::get('/vendorList',[VendorController::class, 'index']);
+Route::get('/vendorList/search', [VendorController::class, 'search'])->name('vendor.search');
 
 
 // Route::get('/register/{lang}', function ($lang) {
@@ -59,13 +60,13 @@ Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['admin'])->group(function(){
         Route::get('/accountMaintain', [AccountController::class, 'accountMaintain']);
         Route::get('/changeRole/{id}', [AccountController::class, 'changeRole']);
-    }); 
+    });
     Route::middleware(['customer'])->group(function(){
         Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         // Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
         Route::get('/checkout',[ProductController::class, 'cartIndex']);
-    }); 
+    });
     Route::middleware(['vendor'])->group(function(){
         Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
@@ -74,7 +75,7 @@ Route::middleware(['checkauth'])->group(function(){
         });
         Route::post('/addProduct', [ProductController::class, 'insertProduct']);
         Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
-    }); 
+    });
 });
 
 
@@ -87,3 +88,4 @@ Route::get('/removeprofpic/{c:id}', [CustomerController::class, 'removePicture']
 
 Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
 Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
+Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');

@@ -5,15 +5,21 @@
 
 <div class="container">
     <div class ="row">
-      <div class="col d-flex justify-content-center">                  
+      <div class="col d-flex justify-content-center">
          {{-- <h1 style="color: white"><b>Book List</b></h2>   --}}
-            <p style="font-size: 35px">Vendor List</p>             
+            <p style="font-size: 35px">Vendor List</p>
       </div>
+      <hr class="bg-dark">
+      <form action="/vendorList/search" class="row justify-content-start mb-4" role="search">
+          <div class="col-md-4">
+              <input class="form-control me-2"  name="search" type="search" placeholder="Search" aria-label="Search">
+          </div>
+      </form>
     </div>
   </div>
 
 <div class="container d-flex justify-content-center" >
-    
+
     @foreach ($vendors as $vendor)
     <div class="card text-center mx-2 mt-4" style="width: 30rem;">
       <img src="/" class="card-img-top" alt="..." style="height:500px">
@@ -29,12 +35,12 @@
         <h5 class="card-text">Price : Rp {{$vendor->price}}</h5>
         <h5 class="card-text">Description : {{$vendor->description}}</h5> --}}
         <div class="row">
-          <a href="/product/{{$vendor->id}}" class="btn btn-primary btn-lg">Detail</a>
+          <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg">Detail</a>
         </div>
      </div>
-    </div>               
-   @endforeach      
- </div>             
+    </div>
+   @endforeach
+ </div>
  {{-- <div class = "d-flex justify-content-center mt-4">
    {{$products->links()}}
  </div>                   --}}
