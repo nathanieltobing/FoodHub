@@ -3,6 +3,12 @@
    <div class="container mt-5">
         <h1>Product List</h1>
         <hr class="bg-dark">
+        <form action="/products/search/{{$vendor->id}}" class="row justify-content-start mb-4" role="search">
+            <div class="col-md-4">
+                <input class="form-control me-2"  name="search" type="search" placeholder="Search" aria-label="Search">
+            </div>
+        </form>
+
         <div class="row justify-content-start">
             @forelse($products as $product)
                 <div class="col-md-4 mb-4">

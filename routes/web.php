@@ -35,6 +35,7 @@ Route::get('/register/vendor', function () {
     return view('registerVendor');
 })->name('register')->middleware('guest');
 Route::get('/vendorList',[VendorController::class, 'index']);
+Route::get('/vendorList/search', [VendorController::class, 'search'])->name('vendor.search');
 Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
 Route::get('/checkout',[ProductController::class, 'cartIndex']);
 Route::get('/register/{lang}', function ($lang) {
@@ -65,3 +66,4 @@ Route::get('/removeprofpic/{c:id}', [CustomerController::class, 'removePicture']
 
 Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
 Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
+Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');

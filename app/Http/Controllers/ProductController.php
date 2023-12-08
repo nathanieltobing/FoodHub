@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -26,22 +27,22 @@ class ProductController extends Controller
             ];
         }
         session()->put('cart', $cart);
-        
+
         // $cart->name = $product->name;
         // $cart->price = $product->price;
         // $cart->quantity = 1;
         // $cart->customer_id = Auth::guard('webcustomer')->id;
         // $cart->product_id = $product->id;
- 
+
         // $cart->save();
         return redirect('/checkout');
      }
- 
+
      public function cartIndex(){
- 
+
          return view('checkout');
      }
- 
+
      public function deleteItem(Request $request){
         if($request->id){
             $cart = session()->get('cart');
@@ -51,7 +52,7 @@ class ProductController extends Controller
             }
         }
      }
- 
+
      public function checkout(){
         $order = new Order();
         $order_detail = new OrderDetail();
@@ -70,9 +71,17 @@ class ProductController extends Controller
         $order->vendor_id = $vendor_id;
         $order->save();
 
-        
+
 
         //  Cart::truncate();
         //  return view('checkcoutCart');
+     }
+
+     public function search(Vendor $v, Request $request)
+     {
+         return view('productList',[
+            'vendor' => $v,
+             'products' => Product::where('name', 'LIKE', "%$request->search%" , 'and', 'vendor_id', 'like', "$v->id")->get()
+         ]);
      }
 }
