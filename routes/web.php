@@ -41,6 +41,24 @@ Route::get('/register/vendor', function () {
 Route::post('/register/customer',[VendorController::class, 'register']);
 Route::get('/vendorList',[VendorController::class, 'index']);
 
+Route::get('/addProduct', function () {
+    return view('addProduct');
+})->name('register')->middleware('guest');
+Route::post('/addProduct', [ProductController::class, 'insertProduct']);
+Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
+Route::get('/checkout',[ProductController::class, 'cartIndex']);
+Route::get('/register/{lang}', function ($lang) {
+    App::setLocale($lang);
+    return view ('register');
+})->name('register')->middleware('guest');
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/register/customer', [CustomerController::class, 'register']);
+Route::get('/contact-us',[ContactUsController::class, 'index']);
+Route::get('/publisher',[PublisherController::class, 'index']);
+Route::get('/publisher/{id}',[PublisherController::class, 'showDetail']);
+Route::get('/category/{id}',[CategoryController::class, 'showBooks']);
+Route::get('/bookDetail/{id}',[BookController::class, 'showDetail']);
+
 
 // Route::get('/register/{lang}', function ($lang) {
 //     App::setLocale($lang);
