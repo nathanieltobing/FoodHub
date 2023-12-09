@@ -5,7 +5,7 @@
 <div >
 
 
-        <div class="inner" style="margin-top: 80px;text-align: center;">
+        <div class="inner" style="margin-top: 100px;text-align: center;">
             <h2>Promotion</h2>
             <div class="border"></div>
         </div>

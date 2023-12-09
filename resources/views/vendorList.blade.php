@@ -5,15 +5,15 @@
 
 <div class="container">
     <div class ="row">
-      <div class="col d-flex justify-content-center">                  
+      <div class="col d-flex justify-content-center" style="margin-top: 10%">
          {{-- <h1 style="color: white"><b>Book List</b></h2>   --}}
-            <p style="font-size: 35px">Vendor List</p>             
+            <p style="font-size: 35px">Vendor List</p>
       </div>
     </div>
   </div>
 
 <div class="container d-flex justify-content-center" >
-    
+
     @foreach ($vendors as $vendor)
     <div class="card text-center mx-2 mt-4" style="width: 30rem;">
       <img src="/" class="card-img-top" alt="..." style="height:500px">
@@ -32,9 +32,9 @@
           <a href="/product/{{$vendor->id}}" class="btn btn-primary btn-lg">Detail</a>
         </div>
      </div>
-    </div>               
-   @endforeach      
- </div>             
+    </div>
+   @endforeach
+ </div>
  {{-- <div class = "d-flex justify-content-center mt-4">
    {{$products->links()}}
  </div>                   --}}
