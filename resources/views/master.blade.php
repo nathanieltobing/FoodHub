@@ -35,14 +35,17 @@
         @if(Auth::guard('webcustomer')->check())
           <div class="container d-flex justify-content-center" style="gap: 50px">
             <a href="/login" style="--i:3">Customer</a>
+            <a href="/logout" style="--i:3">Logout</a>
           </div>
           @elseif (Auth::guard('webvendor')->check())
           <div class="container d-flex justify-content-center" style="gap: 50px">
             <a href="/login" style="--i:3">Vendor</a>
+            <a href="/logout" style="--i:3">Logout</a>
           </div>
           @elseif(Auth::guard('webadmin')->check())
             {{-- Button khusus Admin --}}
             <a class="text-white" href="/home">Admin</a>
+            <a href="/logout" style="--i:3">Logout</a>
           @else
             {{--Button belom login --}}  
             <a href="/login" style="--i:3">Login</a>
