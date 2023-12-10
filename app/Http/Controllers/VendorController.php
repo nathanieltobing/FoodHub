@@ -63,7 +63,15 @@ class VendorController extends UserController
 
     public function showProductList(Vendor $v){
         return view('productList',[
-            'products' => $v->products,
+            'vendor' => $v,
+            'products' => $v->products
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        return view('vendorList',[
+            'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->get()
         ]);
     }
 
