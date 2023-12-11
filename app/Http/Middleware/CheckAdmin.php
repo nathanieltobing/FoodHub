@@ -17,7 +17,7 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('webadmin')->user()->role == 'ADMIN'){
+        if(Auth::guard('webadmin')->check()){
             return $next($request);
         }
         return redirect('/login');

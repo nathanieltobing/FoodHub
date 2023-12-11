@@ -1,5 +1,31 @@
 @extends('master')
 @section('content')
+
+
+    <div class="covering" style="margin-top:5%">
+        <div class="cards">
+            <div class="imgBx">
+                <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+            </div>
+            <div class="content">
+                <div class="details">
+                    <h2>Tobing Catering <br><span> Catering for bla ba</span></h2>
+                    <div class="data">
+                        <h3>342 <br> <span> Review</span> </h3>
+                        <h3>2K <br> <span> Order</span> </h3>
+                        <h3>3K <br> <span> Posts</span> </h3>
+                    </div>
+                    <div class="actionBtn">
+                        <button>Follow </button>
+                        <button>Message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
    <div class="container mt-5">
         <h1>Product List</h1>
         <hr class="bg-dark">

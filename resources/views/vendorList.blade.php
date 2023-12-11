@@ -5,7 +5,9 @@
 
 <div class="container">
     <div class ="row">
-      <div class="col d-flex justify-content-center">
+
+      <div class="col d-flex justify-content-center" style="margin-top: 10%">
+
          {{-- <h1 style="color: white"><b>Book List</b></h2>   --}}
             <p style="font-size: 35px">Vendor List</p>
       </div>

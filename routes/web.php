@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
@@ -38,7 +39,7 @@ Route::post('/register/customer',[CustomerController::class, 'register']);
 Route::get('/register/vendor', function () {
     return view('registerVendor');
 })->name('register')->middleware('guest');
-Route::post('/register/customer',[VendorController::class, 'register']);
+Route::post('/register/vendor',[VendorController::class, 'register']);
 Route::get('/vendorList',[VendorController::class, 'index']);
 Route::get('/vendorList/search', [VendorController::class, 'search'])->name('vendor.search');
 
@@ -58,24 +59,26 @@ Route::post('/register/vendor', [VendorController::class, 'register']);
 
 Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['admin'])->group(function(){
-        Route::get('/accountMaintain', [AccountController::class, 'accountMaintain']);
-        Route::get('/changeRole/{id}', [AccountController::class, 'changeRole']);
-    });
+        Route::get('/logout', [UserController::class, 'logout']);
+    }); 
     Route::middleware(['customer'])->group(function(){
         Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         // Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
         Route::get('/checkout',[ProductController::class, 'cartIndex']);
-    });
+        Route::get('/logout', [UserController::class, 'logout']);
+    }); 
     Route::middleware(['vendor'])->group(function(){
         Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         Route::get('/addProduct', function () {
             return view('addProduct');
         });
+        Route::get('/editProduct/{id}',[ProductController::class, 'editIndex']);
         Route::post('/addProduct', [ProductController::class, 'insertProduct']);
         Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
-    });
+        Route::get('/logout', [UserController::class, 'logout']);
+    }); 
 });
 
 

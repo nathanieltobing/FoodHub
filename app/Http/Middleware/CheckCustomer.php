@@ -17,7 +17,7 @@ class CheckCustomer
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('webcustomer')->user()->role == 'CUSTOMER'){
+        if(Auth::guard('webcustomer')->check()){
             return $next($request);
         }
         return redirect('/login');
