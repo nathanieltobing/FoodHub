@@ -52,7 +52,6 @@ class ProductController extends Controller
 
         $product->vendor_id = Auth::guard('webvendor')->user()->id;
 
-
         $product->save();
 
         return redirect('/');
