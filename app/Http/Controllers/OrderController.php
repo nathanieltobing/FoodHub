@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Review;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,4 +34,16 @@ class OrderController extends Controller
         ]);
         return redirect()->back()->with('message','Order #'.$o->id.' status edited successfully!');
     }
+
+    public function finishOrder(Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'status' => 'FINISHED'
+        ]);
+        return view('finishOrder',[
+            'order' => $o,
+        ]);
+    }
+
 }

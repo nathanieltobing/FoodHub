@@ -29,27 +29,35 @@
                         <img class="img-thumbnail ms-2 me-3" src="{{url('storage/images/book1.jpg')}}" alt="" style="width:100px">
                         <div>
                             <h3 class="">Order #{{$o->id}}</h3>
-                            <p class="card-text mx-1">{{$o->vendors->name}}</p>
-                            <p class="card-text mx-1">{{$o->order_details->products->name}}</p>
+                            <h5 class="card-text mx-1">{{$o->vendors->name}}</h5>
+                            <ul class="list-unstyled">
+                                @foreach ($o->order_details as $od)
+                                    <li class="card-text">- {{ $od->product_name }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                     <div class="div mx-5">
-                        <p class="card-text">Total <br> Rp{{number_format($o->order_details->total_price)}}</p>
+                        <p class="card-text">Total <br> Rp{{number_format($o->total_price)}}</p>
+                        @if(in_array($o->status, ['OPEN', 'ON GOING']))
+                            <a href="/finishorder/{{$o->id}}" class="btn btn-primary text-light">Finish Order</a>
+                        @endif
                     </div>
-
                   </div>
               </div>
           </div>
           <div class="col-3">
-          @if ($o->status == "OPEN")
-          <form class="d-flex" method="post" action="/editstatus/{{$o->id}}">
-            @csrf
-            <div class="col-3">
-                <button type="submit" class="btn btn-success m-3 fs-5" value="1" name="status" id="status">Accept</button>
-                <button type="submit" class="btn btn-danger m-3 fs-5"value="2" name="status" id="status">Decline</button>
-            </div>
-            </form>
-          @endif
+            @if (Auth::guard('webvendor')->check())
+                @if ($o->status == "OPEN")
+                <form class="d-flex" method="post" action="/editstatus/{{$o->id}}">
+                @csrf
+                <div class="col-3">
+                    <button type="submit" class="btn btn-success m-3 fs-5" value="1" name="status" id="status">Accept</button>
+                    <button type="submit" class="btn btn-danger m-3 fs-5"value="2" name="status" id="status">Decline</button>
+                </div>
+                </form>
+                @endif
+            @endif
         </div>
        </div>
        <br>
@@ -58,6 +66,3 @@
 </div>
 
 @endsection
-
-
-

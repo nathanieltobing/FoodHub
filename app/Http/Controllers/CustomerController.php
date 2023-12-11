@@ -55,7 +55,7 @@ class CustomerController extends UserController
         $editmode = false;
         $editprofpic = false;
         return view('profile',[
-            'customer' => $c,
+            'user' => $c,
             'editMode' => $editmode,
             'editprofpic' => $editprofpic
         ]);
@@ -65,7 +65,7 @@ class CustomerController extends UserController
         $editmode = true;
         $editprofpic = false;
         return view('profile',[
-            'customer' => $c,
+            'user' => $c,
             'editMode' => $editmode,
             'editprofpic' => $editprofpic
         ]);
@@ -75,7 +75,7 @@ class CustomerController extends UserController
         $editmode = true;
         $editprofpic = true;
         return view('profile',[
-            'customer' => $c,
+            'user' => $c,
             'editMode' => $editmode,
             'editprofpic' => $editprofpic
         ]);

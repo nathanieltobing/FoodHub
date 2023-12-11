@@ -16,7 +16,7 @@ class Product extends Model
         return $this->belongsTo(Vendor::class,'id','vendor_id');
     }
     public function order_details(){
-        return $this->belongsTo(OrderDetail::class,'product_id', 'id');
+        return $this->hasMany(OrderDetail::class);
     }
     public function promotions(){
         return $this->belongsTo(Promotion::class,'product_id', 'id');

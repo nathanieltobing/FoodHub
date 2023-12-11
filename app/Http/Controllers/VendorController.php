@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -73,6 +74,82 @@ class VendorController extends UserController
         return view('vendorList',[
             'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->get()
         ]);
+    }
+
+    public function viewVendorProfile(Vendor $v){
+        $editmode = false;
+        $editprofpic = false;
+        return view('profile',[
+            'user' => $v,
+            'editMode' => $editmode,
+            'editprofpic' => $editprofpic
+        ]);
+    }
+
+    public function enableEdit(Vendor $v){
+        $editmode = true;
+        $editprofpic = false;
+        return view('profile',[
+            'user' => $v,
+            'editMode' => $editmode,
+            'editprofpic' => $editprofpic
+        ]);
+    }
+
+    public function showEditPict(Vendor $v){
+        $editmode = true;
+        $editprofpic = true;
+        return view('profile',[
+            'user' => $v,
+            'editMode' => $editmode,
+            'editprofpic' => $editprofpic
+        ]);
+    }
+
+    public function editProfile(Request $request, Vendor $v)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'description' => 'required',
+            'password' => 'nullable'
+        ]);
+
+        if(empty($validated['password'])){
+            unset($validated['password']);
+        }
+
+        DB::table('vendors')->where('id', $v->id)->update($validated);
+        return redirect('profile/'.$v->id)->with('message','Profile edited successfully');
+    }
+
+    public function editPicture(Request $request, Vendor $v)
+    {
+
+        if($request->hasFile('image')){
+            $fileImage = $request->file('image');
+            $imageName ='user '.$v->name.'.'.$fileImage->getClientOriginalExtension();
+            Storage::putFileAs('public/images', $fileImage, $imageName);
+        }
+        else{
+            $imageName = $v->image;
+        }
+
+        DB::table('vendors')->where('id', $v->id)->update([
+            'image' => $imageName
+        ]);
+
+        return redirect('profile/'.$v->id)->with('message','Profile picture edited succesfully');
+    }
+
+    public function removePicture(Vendor $v)
+    {
+        Storage::delete ('public/image/'.$v->image);
+        DB::table('vendors')->where('id', $v->id)->update([
+            'image' => NULL
+        ]);
+
+        return redirect('profile/'.$v->id)->with('message','Profile picture removed!');
     }
 
 }
