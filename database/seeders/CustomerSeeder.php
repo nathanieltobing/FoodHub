@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,13 +15,20 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
+
+        $startPeriod = Carbon::now();
+        $endPeriod = $startPeriod->addDays(30);
         DB::table('customers')->insert([
             'id' => 1,
             'name' => 'Customer 1',
             'email' => 'customer1@gmail.com',
             'password' => bcrypt('123'),
             'customer_membership' => json_encode([
-                'tes'
+                'id' => 1,
+                'status'=> 'ACTIVE',
+                'startPeriod'=> $startPeriod,
+                'endPeriod' => $endPeriod,
+                'discount' => 10
             ]),
             'role' => 'CUSTOMER',
             'status' => 'ACTIVE',
