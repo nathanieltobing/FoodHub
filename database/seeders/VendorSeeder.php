@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +15,9 @@ class VendorSeeder extends Seeder
      */
     public function run()
     {
+        $startPeriod = Carbon::now();
+        $endPeriod = $startPeriod->addDays(30);
+
         DB::table('vendors')->insert([
             'id' => 1,
             'name' => 'Vendor 1',
@@ -28,7 +32,15 @@ class VendorSeeder extends Seeder
             'rating' => 3,
             'vendor_picture' => 'images/product1.jpg',
             'vendor_membership' => json_encode([
-                'tes'
+                'id' => 1,
+                'status' => 'ACTIVE',
+                'startPeriod' => $startPeriod,
+                'endPeriod' => $endPeriod,
+                'promotionList' => json_encode([
+                    'promotionId',
+                    'promotionId',
+                    'promotionId'
+                ])
             ]),
             'role' => 'VENDOR',
             'status' => 'ACTIVE',

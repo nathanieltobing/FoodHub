@@ -54,8 +54,11 @@ Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
 
 
-
-
+// Route::get('/checkout', function () {
+//     return view('checkout');
+// });
+Route::get('/checkout',[ProductController::class, 'cartIndex']);
+Route::delete('/checkout/{id}',[ProductController::class, 'deleteItem']);
 
 Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['admin'])->group(function(){
@@ -65,7 +68,7 @@ Route::middleware(['checkauth'])->group(function(){
         Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         // Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
-        Route::get('/checkout',[ProductController::class, 'cartIndex']);
+        Route::post('/checkout',[ProductController::class, 'checkout']);
         Route::get('/logout', [UserController::class, 'logout']);
     }); 
     Route::middleware(['vendor'])->group(function(){
