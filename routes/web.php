@@ -60,7 +60,7 @@ Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['customer'])->group(function(){
         Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
-        Route::post('/checkout',[ProductController::class, 'checkout']);
+        Route::post('/checkout',[OrderController::class, 'checkout']);
         Route::get('/logout', [UserController::class, 'logout']);
         Route::post('/minQuantity/{id}',[ProductController::class, 'decreaseQuantity']);
         Route::post('/addQuantity/{id}',[ProductController::class, 'addQuantity']);
