@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Review;
+use App\Models\Vendor;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,11 +12,16 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function viewOrderList(Customer $c)
+    public function viewOrderList()
     {
+        if(Auth::guard('webvendor')->check()){
+            $user = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        } else if(Auth::guard('webcustomer')->check()){
+            $user = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
+        }
         return view('orderList',[
-            'order' => $c->orders,
-            'customer' => $c
+            'order' => $user->orders,
+            'user' => $user
         ]);
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $fillable = ['promotion_id'];
 
     public function categories(){
         return $this->hasOne(Category::class,'id','category_id');
@@ -19,6 +20,6 @@ class Product extends Model
         return $this->hasMany(OrderDetail::class);
     }
     public function promotions(){
-        return $this->belongsTo(Promotion::class,'product_id', 'id');
+        return $this->belongsTo(Promotion::class,'promotion_id', 'id');
     }
 }

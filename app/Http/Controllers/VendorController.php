@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Vendor;
+use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -76,38 +78,57 @@ class VendorController extends UserController
         ]);
     }
 
-    public function viewVendorProfile(Vendor $v){
+    public function viewVendorProfile(){
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
         $editmode = false;
         $editprofpic = false;
-        return view('profile',[
+        $membership = json_decode($v->vendor_membership);
+        if($membership->status == 'ACTIVE') $ismember = true;
+        else $ismember = false;
+        return view('vendorprofile',[
             'user' => $v,
             'editMode' => $editmode,
-            'editprofpic' => $editprofpic
+            'editprofpic' => $editprofpic,
+            'membership' => $membership,
+            'isMember' => $ismember
         ]);
     }
 
-    public function enableEdit(Vendor $v){
+    public function enableEdit(){
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
         $editmode = true;
         $editprofpic = false;
-        return view('profile',[
+        $membership = json_decode($v->vendor_membership);
+        if($membership->status == 'ACTIVE') $ismember = true;
+        else $ismember = false;
+        return view('vendorprofile',[
             'user' => $v,
             'editMode' => $editmode,
-            'editprofpic' => $editprofpic
+            'editprofpic' => $editprofpic,
+            'membership' => $membership,
+            'isMember' => $ismember
         ]);
     }
 
-    public function showEditPict(Vendor $v){
+    public function showEditPict(){
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
         $editmode = true;
         $editprofpic = true;
-        return view('profile',[
+        $membership = json_decode($v->vendor_membership);
+        if($membership->status == 'ACTIVE') $ismember = true;
+        else $ismember = false;
+        return view('vendorprofile',[
             'user' => $v,
             'editMode' => $editmode,
-            'editprofpic' => $editprofpic
+            'editprofpic' => $editprofpic,
+            'membership' => $membership,
+            'isMember' => $ismember
         ]);
     }
 
-    public function editProfile(Request $request, Vendor $v)
+    public function editProfile(Request $request)
     {
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
@@ -120,12 +141,12 @@ class VendorController extends UserController
         }
 
         DB::table('vendors')->where('id', $v->id)->update($validated);
-        return redirect('profile/'.$v->id)->with('message','Profile edited successfully');
+        return redirect('vendor/profile')->with('message','Profile edited successfully');
     }
 
-    public function editPicture(Request $request, Vendor $v)
+    public function editPicture(Request $request)
     {
-
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
         if($request->hasFile('image')){
             $fileImage = $request->file('image');
             $imageName ='user '.$v->name.'.'.$fileImage->getClientOriginalExtension();
@@ -139,17 +160,55 @@ class VendorController extends UserController
             'image' => $imageName
         ]);
 
-        return redirect('profile/'.$v->id)->with('message','Profile picture edited succesfully');
+        return redirect('vendor/profile')->with('message','Profile picture edited succesfully');
     }
 
-    public function removePicture(Vendor $v)
+    public function removePicture()
     {
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
         Storage::delete ('public/image/'.$v->image);
         DB::table('vendors')->where('id', $v->id)->update([
             'image' => NULL
         ]);
 
-        return redirect('profile/'.$v->id)->with('message','Profile picture removed!');
+        return redirect('vendor/profile')->with('message','Profile picture removed!');
+    }
+
+    public function cancelMembership()
+    {
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        $membership = json_decode($v->vendor_membership);
+        $membership->status = 'INACTIVE';
+        $membership->startPeriod = '';
+        $membership->endPeriod = '';
+        $membership->promotionList = '';
+        $membershipData = json_encode($membership);
+        DB::table('vendors')->where('id', $v->id)->update([
+            'vendor_membership' => $membershipData
+        ]);
+        foreach($v->products as $product){
+            $product->promotion_id = NULL;
+            $product->save();
+        };
+
+        $v->promotions()->delete();
+
+        return redirect('vendor/profile')->with('message','Membership successfuly cancelled!');
+    }
+
+    public function registerMembership()
+    {
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        $membership = json_decode($v->vendor_membership);
+        $membership->status = 'ACTIVE';
+        $membership->startPeriod = Carbon::now();
+        $membership->endPeriod = Carbon::now()->addDays(30);
+        $membershipData = json_encode($membership);
+        DB::table('vendors')->where('id', $v->id)->update([
+            'vendor_membership' => $membershipData
+        ]);
+
+        return redirect('vendor/profile')->with('message','Sucessfully registered as member!');
     }
 
 }
