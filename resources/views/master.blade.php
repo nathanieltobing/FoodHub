@@ -25,20 +25,24 @@
             <i class="bx bx-x" id="close-icon"></i>
         </label>
     <nav class="navbar" style="display: block">
-        <a class="forms" href="#"  style="--i:4;display:inline-flex;"> <form class="d-flex" role="search">
+        {{-- <a class="forms" href="#"  style="--i:4;display:inline-flex;"> <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
-          </form></a>
+          </form></a> --}}
 
         @if(Auth::guard('webcustomer')->check())
-          <div class="container d-flex justify-content-center" style="gap: 50px">
-            <a href="/login" style="--i:3">Customer</a>
-            <a href="/logout" style="--i:3">Logout</a>
+          <div class="justify-content-center" style="gap: 50px;display :block">
+            <a href="/homepage" style="--i:3">Vendor List</a>
+            <a href="/homepage" style="--i:3">Membership</a>
+            <a href="/homepage" style="--i:3">Profile</a>
+            <a href="/homepage" style="--i:3">Logout</a>
           </div>
           @elseif (Auth::guard('webvendor')->check())
-          <div class="container d-flex justify-content-center" style="gap: 50px">
-            <a href="/login" style="--i:3">Vendor</a>
-            <a href="/logout" style="--i:3">Logout</a>
+          <div class="justify-content-center" style="gap: 50px">
+            <a href="/homepage" style="--i:3">Order List</a>
+            <a href="/homepage" style="--i:3">Membership</a>
+            <a href="/homepage" style="--i:3">Profile</a>
+            <a href="/homepage" style="--i:3">Logout</a>
           </div>
           @elseif(Auth::guard('webadmin')->check())
             {{-- Button khusus Admin --}}
