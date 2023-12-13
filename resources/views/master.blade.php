@@ -47,6 +47,7 @@
           @elseif(Auth::guard('webadmin')->check())
             {{-- Button khusus Admin --}}
             <a class="text-white" href="/home">Admin</a>
+            <a href="/logout" style="--i:3">Logout</a>
           @else
             {{--Button belom login --}}
             <a href="/login" style="--i:3">Login</a>

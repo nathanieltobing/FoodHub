@@ -14,7 +14,7 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-   
+    
     public function login(Request $request){
         $credential = [
             'email' => $request->email,
@@ -62,6 +62,8 @@ class UserController extends Controller
                 
                 }   
                 break;
+            default:
+                return redirect()->back()->withErrors('Username or Password is incorrect !');    
 
         }
           
@@ -79,6 +81,6 @@ class UserController extends Controller
             Auth::guard('wedamin')->logout();
         }
         Session::flush();
-        return view('/');
+        return redirect('/');
     }
 }

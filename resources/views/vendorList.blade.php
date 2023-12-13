@@ -5,10 +5,18 @@
 
 <div class="container">
     <div class ="row">
+
       <div class="col d-flex justify-content-center" style="margin-top: 10%">
+
          {{-- <h1 style="color: white"><b>Book List</b></h2>   --}}
             <p style="font-size: 35px">Vendor List</p>
       </div>
+      <hr class="bg-dark">
+      <form action="/vendorList/search" class="row justify-content-start mb-4" role="search">
+          <div class="col-md-4">
+              <input class="form-control me-2"  name="search" type="search" placeholder="Search" aria-label="Search">
+          </div>
+      </form>
     </div>
   </div>
 
@@ -29,7 +37,7 @@
         <h5 class="card-text">Price : Rp {{$vendor->price}}</h5>
         <h5 class="card-text">Description : {{$vendor->description}}</h5> --}}
         <div class="row">
-          <a href="/product/{{$vendor->id}}" class="btn btn-primary btn-lg">Detail</a>
+          <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg">Detail</a>
         </div>
      </div>
     </div>

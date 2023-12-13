@@ -17,7 +17,7 @@ class CheckVendor
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('webvendor')->user()->role == 'VENDOR'){
+        if(Auth::guard('webvendor')->check()){
             return $next($request);
         }
         return redirect('/login');
