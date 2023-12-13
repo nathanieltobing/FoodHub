@@ -53,13 +53,6 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
 
-
-// Route::get('/checkout', function () {
-//     return view('checkout');
-// });
-Route::get('/checkout',[ProductController::class, 'cartIndex']);
-Route::delete('/checkout/{id}',[ProductController::class, 'deleteItem']);
-
 Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['admin'])->group(function(){
         Route::get('/logout', [UserController::class, 'logout']);
@@ -67,9 +60,16 @@ Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['customer'])->group(function(){
         Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
-        // Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
         Route::post('/checkout',[ProductController::class, 'checkout']);
         Route::get('/logout', [UserController::class, 'logout']);
+        Route::post('/minQuantity/{id}',[ProductController::class, 'decreaseQuantity']);
+        Route::post('/addQuantity/{id}',[ProductController::class, 'addQuantity']);
+        Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
+        Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
+        Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');
+        Route::get('/checkout',[ProductController::class, 'cartIndex']);
+        Route::delete('/checkout/{id}',[ProductController::class, 'deleteItem']);
+        
     }); 
     Route::middleware(['vendor'])->group(function(){
         Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
@@ -91,7 +91,3 @@ Route::post('/profile/{c:id}',[CustomerController::class, 'enableEdit']);
 Route::get('/editprofpic/{c:id}', [CustomerController::class, 'showEditPict']);
 Route::put('/editprofpic/{c:id}', [CustomerController::class, 'editPicture']);
 Route::get('/removeprofpic/{c:id}', [CustomerController::class, 'removePicture']);
-
-Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
-Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
-Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');

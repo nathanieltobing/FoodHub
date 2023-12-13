@@ -112,7 +112,7 @@ class ProductController extends Controller
             $cart[$id]['quantity']++;
         }
         else{
-            $cart[$id] = [
+            $cart[$id] = [          
                 "name" => $product->name,
                 "quantity" => 1,
                 "price" => $product->price,
@@ -147,6 +147,27 @@ class ProductController extends Controller
             unset($cart[$id]);
             session()->put('cart', $cart);
             // dd($cart);
+        }
+        return redirect('/checkout');
+     }
+
+     public function addQuantity($id){
+        $cart = session()->get('cart');
+        if(isset($cart[$id])){          
+            $cart[$id]['quantity']++;
+            session()->put('cart', $cart);
+            
+        }
+        return redirect('/checkout');
+     }
+
+     public function decreaseQuantity($id){
+        $cart = session()->get('cart');
+        if(isset($cart[$id])){  
+            if($cart[$id]['quantity'] > 1){
+                $cart[$id]['quantity']--;
+            }        
+            session()->put('cart', $cart);
         }
         return redirect('/checkout');
      }
