@@ -6,7 +6,7 @@
 
 
         <div class="inner" style="margin-top: 100px;text-align: center;">
-            <h2>Promotion</h2>
+            <h2 class="h2-text">Promotion</h2>
             <div class="border"></div>
         </div>
 <div  class="slider" style="margin-top: 30px">
@@ -85,7 +85,7 @@
 
 <div class="testimonials">
     <div class="inner">
-      <h2>Best Vendors</h2>
+      <h2 class="h2-text">Best Vendors</h2>
       <div class="border"></div>
 
       <div class="row">
