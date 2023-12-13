@@ -25,9 +25,9 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function(){
-    return view('homepage');
-});
+
+Route::get('/',[VendorController::class, 'indexHomepage']);
+Route::get('/homepage',[VendorController::class, 'indexHomepage']);
 Route::get('/login', function () {
     return view('login');
 })->name('login')->middleware('guest');
@@ -55,13 +55,14 @@ Route::post('/register/vendor', [VendorController::class, 'register']);
 
 Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['admin'])->group(function(){
-        Route::get('/logout', [UserController::class, 'logout']);
+       
+    }); 
+    Route::middleware(['checkCustOrVend'])->group(function(){
+        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);       
     }); 
     Route::middleware(['customer'])->group(function(){
-        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         Route::post('/checkout',[OrderController::class, 'checkout']);
-        Route::get('/logout', [UserController::class, 'logout']);
         Route::post('/minQuantity/{id}',[ProductController::class, 'decreaseQuantity']);
         Route::post('/addQuantity/{id}',[ProductController::class, 'addQuantity']);
         Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
@@ -72,16 +73,14 @@ Route::middleware(['checkauth'])->group(function(){
         
     }); 
     Route::middleware(['vendor'])->group(function(){
-        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         Route::get('/addProduct', function () {
             return view('addProduct');
         });
         Route::get('/editProduct/{id}',[ProductController::class, 'editIndex']);
         Route::post('/addProduct', [ProductController::class, 'insertProduct']);
-        Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
-        Route::get('/logout', [UserController::class, 'logout']);
     }); 
+    Route::get('/logout', [UserController::class, 'logout']);
 });
 
 

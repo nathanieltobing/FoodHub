@@ -14,12 +14,41 @@ use Illuminate\Validation\Rule;
 class VendorController extends UserController
 {
     public function index(){
-        // $books = DB::table('books')->get();
-        // $books = Book::paginate(4);
-        // $categories = DB::table('categories')->get();
+       
         $vendors = Vendor::paginate(3);
-        // dd($products->isEmpty());
         return view('vendorList', ['vendors'=> $vendors]);
+    }
+
+    public function getFeaturedVendors(){
+        $vendorAll = Vendor::where(function ($query){
+            $query->whereNull('vendor_membership')
+                  ->orWhereJsonContains('vendor_membership->status','INACTIVE');
+        })->get();
+        $vendors = Vendor::whereNotNull('vendor_membership')->whereJsonContains('vendor_membership->status','ACTIVE')->get();
+
+        if($vendors->count() < 5){
+            foreach($vendorAll as $vendor){
+                $vendors->push($vendor);
+                if($vendors->count() == 5){
+                    break;
+                }
+            }
+        }       
+
+        return $vendors;
+    }
+
+    public function getTopRatedVendor(){
+        $vendor = Vendor::orderBy('rating', 'DESC')->limit(3)->get();
+        return $vendor;
+    }
+
+    public function indexHomepage(){
+        $featuredVendors = $this->getFeaturedVendors();
+        $topRatedVendors = $this->getTopRatedVendor();
+        
+        return view('homepage', ['featuredVendors'=> $featuredVendors , 'topRatedVendors' => $topRatedVendors]);
+
     }
 
     public function register(Request $req){

@@ -30,7 +30,7 @@ class VendorSeeder extends Seeder
                 'Fruits'
             ]),
             'rating' => 3,
-            'vendor_picture' => 'images/product1.jpg',
+            'vendor_picture' => 'images/1702475666.jpg',
             'vendor_membership' => json_encode([
                 'id' => 1,
                 'status' => 'ACTIVE',
@@ -59,9 +59,17 @@ class VendorSeeder extends Seeder
                 'Fruits'
             ]),
             'rating' => 3,
-            'vendor_picture' => 'images/product1.jpg',
+            'vendor_picture' => 'images/1702475666.jpg',
             'vendor_membership' => json_encode([
-                'tes'
+                'id' => 1,
+                'status' => 'ACTIVE',
+                'startPeriod' => $startPeriod,
+                'endPeriod' => $endPeriod,
+                'promotionList' => json_encode([
+                    'promotionId',
+                    'promotionId',
+                    'promotionId'
+                ])
             ]),
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
@@ -80,10 +88,7 @@ class VendorSeeder extends Seeder
                 'Fruits'
             ]),
             'rating' => 3,
-            'vendor_picture' => 'images/product1.jpg',
-            'vendor_membership' => json_encode([
-                'tes'
-            ]),
+            'vendor_picture' => 'images/1702475666.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1'
@@ -101,10 +106,7 @@ class VendorSeeder extends Seeder
                 'Fruits'
             ]),
             'rating' => 3,
-            'vendor_picture' => 'images/product1.jpg',
-            'vendor_membership' => json_encode([
-                'tes'
-            ]),
+            'vendor_picture' => 'images/1702475666.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1'
@@ -122,9 +124,17 @@ class VendorSeeder extends Seeder
                 'Fruits'
             ]),
             'rating' => 3,
-            'vendor_picture' => 'images/product1.jpg',
+            'vendor_picture' => 'images/1702475666.jpg',
             'vendor_membership' => json_encode([
-                'tes'
+                'id' => 1,
+                'status' => 'INACTIVE',
+                'startPeriod' => $startPeriod,
+                'endPeriod' => $endPeriod,
+                'promotionList' => json_encode([
+                    'promotionId',
+                    'promotionId',
+                    'promotionId'
+                ])
             ]),
             'role' => 'VENDOR',
             'status' => 'ACTIVE',

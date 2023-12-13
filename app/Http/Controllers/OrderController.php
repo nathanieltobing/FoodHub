@@ -69,6 +69,6 @@ class OrderController extends Controller
             $order_detail->discount = (double)$customerMembership['discount'] /100;
             $order_detail->save();
         }
-        return redirect('/');
+        return view('succesfulPage');
      }
 }
