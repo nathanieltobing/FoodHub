@@ -24,6 +24,6 @@ class ReviewController extends Controller
             ]
         ));
 
-        return redirect('orderlist/'.$o->customer_id)->with('message','Order #'.$o->id.' status edited successfully!');
+        return redirect('orderlist')->with('message','Order #'.$o->id.' status edited successfully!');
     }
 }
