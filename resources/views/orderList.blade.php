@@ -53,6 +53,14 @@
               </div>
               </form>
             @endif
+            @if ($o->status == "ON GOING" && Auth::guard('webcustomer')->check())
+            <form class="d-flex" method="post" action="/editstatus/{{$o->id}}">
+              @csrf
+              <div class="col-3">
+                <button type="submit" class="btn btn-success m-3 fs-5" value="1" name="status" id="status">Approve</button>             
+              </div>
+              </form>
+            @endif
           </div>
          </div>
          <br>
