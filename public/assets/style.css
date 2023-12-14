@@ -356,6 +356,28 @@ footer{
 	opacity: 1;
 }
 
+.wrappers{
+  height: 80px;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.wrappers span{
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600px;
+  cursor: pointer;
+}
+.wrappers span.num{
+  font-size: 20px;
+  border-right: 2px solid rgba(0, 0, 0,0.2);
+  border-left: 2px solid rgba(0, 0, 0,0.2);
+  pointer-events: none;
+}
+
 .testimonials{
 
     padding: 10px 0;

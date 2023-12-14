@@ -19,7 +19,7 @@
 
     <div class="dismiss-btn">
         <button id="dismiss-popup">
-            Dismiss
+            <a href="/vendorList" style="--i:3">Dismiss</a>
         </button>
     </div>
 </div>
