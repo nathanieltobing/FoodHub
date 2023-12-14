@@ -10,6 +10,11 @@ class Promotion extends Model
     use HasFactory;
 
     public function products(){
-        return $this->hasOne(Product::class,'id','product_id');
+        return $this->hasOne(Product::class,'promotion_id','id');
     }
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id', 'id');
+    }
+
 }

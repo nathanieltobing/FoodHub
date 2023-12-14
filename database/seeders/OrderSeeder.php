@@ -21,31 +21,34 @@ class OrderSeeder extends Seeder
             'total_quantity' => 1,
             'customer_id' => 1,
             'vendor_id' => 1
-            
+
         ]);
 
-        // DB::table('orders')->insert([
-        //     'id' => 2,
-        //     'status' => 'ON GOING',
-        //     'customer_id' => 1,
-        //     'vendor_id' => 1,
-        //     'order_detail_id' => 2
-        // ]);
+        DB::table('orders')->insert([
+            'id' => 2,
+            'status' => 'ON GOING',
+            'total_price' => 10.0,
+            'total_quantity' => 1,
+            'customer_id' => 1,
+            'vendor_id' => 1,
+        ]);
 
-        // DB::table('orders')->insert([
-        //     'id' => 3,
-        //     'status' => 'REJECTED',
-        //     'customer_id' => 1,
-        //     'vendor_id' => 1,
-        //     'order_detail_id' => 3
-        // ]);
+        DB::table('orders')->insert([
+            'id' => 3,
+            'status' => 'REJECTED',
+            'total_price' => 10.0,
+            'total_quantity' => 1,
+            'customer_id' => 1,
+            'vendor_id' => 1,
+        ]);
 
-        // DB::table('orders')->insert([
-        //     'id' => 4,
-        //     'status' => 'FINISHED',
-        //     'customer_id' => 1,
-        //     'vendor_id' => 1,
-        //     'order_detail_id' => 4
-        // ]);
+        DB::table('orders')->insert([
+            'id' => 4,
+            'status' => 'FINISHED',
+            'total_price' => 10.0,
+            'total_quantity' => 1,
+            'customer_id' => 1,
+            'vendor_id' => 1,
+        ]);
     }
 }

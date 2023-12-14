@@ -14,10 +14,14 @@ class Vendor extends User
     ];
 
     public function orders(){
-        return $this->belongsTo(Order::class,'vendor_id', 'id');
+        return $this->hasMany(Order::class,'vendor_id', 'id');
     }
 
     public function products(){
         return $this->hasMany(Product::class);
+    }
+
+    public function promotions(){
+        return $this->hasMany(Promotion::class, 'vendor_id', 'id');
     }
 }
