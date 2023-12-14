@@ -30,11 +30,12 @@
                         <div>
                             <h3 class="">Order #{{$o->id}}</h3>
                             <p class="card-text mx-1">{{$o->vendors->name}}</p>
-                            <p class="card-text mx-1">{{$o->order_details->products->name}}</p>
+                            {{-- <p class="card-text mx-1">{{$o->order_details->products->name}}</p> --}}
+                             <p class="card-text mx-1">{{$o->order_details}}</p>
                         </div>
                     </div>
                     <div class="div mx-5">
-                        <p class="card-text">Total <br> Rp{{number_format($o->order_details->total_price)}}</p>
+                        {{-- <p class="card-text">Total <br> Rp{{number_format($o->order_details->total_price)}}</p> --}}
                     </div>
 
                   </div>
