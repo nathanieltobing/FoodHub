@@ -36,6 +36,7 @@
             <a href="/orderlist/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Order List</a>
             {{-- <a href="/profile/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Membership</a> --}}
             <a href="/profile/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Profile</a>
+            <a href="/checkout" style="--i:3">Cart</a>
             <a href="/logout" style="--i:3">Logout</a>
           </div>
           @elseif (Auth::guard('webvendor')->check())

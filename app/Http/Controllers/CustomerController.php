@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class CustomerController extends UserController
 {
@@ -51,38 +52,57 @@ class CustomerController extends UserController
         return redirect('/login');
     }
 
-    public function viewCustomerProfile(Customer $c){
+    public function viewCustomerProfile(){
+        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
         $editmode = false;
         $editprofpic = false;
-        return view('profile',[
-            'customer' => $c,
+        $membership = json_decode($c->customer_membership);
+        if($membership->status == 'ACTIVE') $ismember = true;
+        else $ismember = false;
+        return view('customerprofile',[
+            'user' => $c,
             'editMode' => $editmode,
-            'editprofpic' => $editprofpic
+            'editprofpic' => $editprofpic,
+            'membership' => $membership,
+            'isMember' => $ismember
         ]);
     }
 
-    public function enableEdit(Customer $c){
+    public function enableEdit(){
+        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
         $editmode = true;
         $editprofpic = false;
-        return view('profile',[
-            'customer' => $c,
+        $membership = json_decode($c->customer_membership);
+        if($membership->status == 'ACTIVE') $ismember = true;
+        else $ismember = false;
+        return view('customerprofile',[
+            'user' => $c,
             'editMode' => $editmode,
-            'editprofpic' => $editprofpic
+            'editprofpic' => $editprofpic,
+            'membership' => $membership,
+            'isMember' => $ismember
         ]);
     }
 
-    public function showEditPict(Customer $c){
+    public function showEditPict(){
+        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
         $editmode = true;
         $editprofpic = true;
-        return view('profile',[
-            'customer' => $c,
+        $membership = json_decode($c->customer_membership);
+        if($membership->status == 'ACTIVE') $ismember = true;
+        else $ismember = false;
+        return view('customerprofile',[
+            'user' => $c,
             'editMode' => $editmode,
-            'editprofpic' => $editprofpic
+            'editprofpic' => $editprofpic,
+            'membership' => $membership,
+            'isMember' => $ismember
         ]);
     }
 
-    public function editProfile(Request $request, Customer $c)
+    public function editProfile(Request $request)
     {
+        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
@@ -96,12 +116,12 @@ class CustomerController extends UserController
         }
 
         DB::table('customers')->where('id', $c->id)->update($validated);
-        return redirect('profile/'.$c->id)->with('message','Profile edited successfully');
+        return redirect('customer/profile')->with('message','Profile edited successfully');
     }
 
-    public function editPicture(Request $request, Customer $c)
+    public function editPicture(Request $request)
     {
-
+        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
         if($request->hasFile('image')){
             $fileImage = $request->file('image');
             $imageName ='user '.$c->name.'.'.$fileImage->getClientOriginalExtension();
@@ -115,16 +135,46 @@ class CustomerController extends UserController
             'image' => $imageName
         ]);
 
-        return redirect('profile/'.$c->id)->with('message','Profile picture edited succesfully');
+        return redirect('customer/profile')->with('message','Profile picture edited succesfully');
     }
 
-    public function removePicture(Customer $c)
+    public function removePicture()
     {
+        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
         Storage::delete ('public/image/'.$c->image);
         DB::table('customers')->where('id', $c->id)->update([
             'image' => NULL
         ]);
 
-        return redirect('profile/'.$c->id)->with('message','Profile picture removed!');
+        return redirect('customer/profile')->with('message','Profile picture removed!');
     }
+
+    public function cancelMembership()
+    {
+        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
+        $membership = json_decode($c->customer_membership);
+        $membership->status = 'INACTIVE';
+        $membership->startPeriod = '';
+        $membership->endPeriod = '';
+        $membershipData = json_encode($membership);
+        DB::table('customers')->where('id', $c->id)->update([
+            'customer_membership' => $membershipData
+        ]);
+        return redirect('customer/profile')->with('message','Membership successfuly cancelled!');
+    }
+
+    public function registerMembership()
+    {
+        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
+        $membership = json_decode($c->customer_membership);
+        $membership->status = 'ACTIVE';
+        $membership->startPeriod = Carbon::now();
+        $membership->endPeriod = Carbon::now()->addDays(30);
+        $membershipData = json_encode($membership);
+        DB::table('customers')->where('id', $c->id)->update([
+            'customer_membership' => $membershipData
+        ]);
+        return redirect('customer/profile')->with('message','Sucessfully registered as member!');
+    }
+
 }

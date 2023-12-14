@@ -32,6 +32,7 @@ class VendorSeeder extends Seeder
             'rating' => 3,
             'vendor_picture' => 'images/1702475666.jpg',
             'vendor_membership' => json_encode([
+
                 'id' => 1,
                 'status' => 'ACTIVE',
                 'startPeriod' => $startPeriod,
@@ -50,7 +51,7 @@ class VendorSeeder extends Seeder
         DB::table('vendors')->insert([
             'id' => 2,
             'name' => 'Vendor 2',
-            'email' => 'vendor1@gmail.com',
+            'email' => 'vendor2@gmail.com',
             'password' => bcrypt('123'),
             'description' => 'Ini adalah contoh vendor category main course',
             'category' => json_encode([
@@ -61,6 +62,7 @@ class VendorSeeder extends Seeder
             'rating' => 3,
             'vendor_picture' => 'images/1702475666.jpg',
             'vendor_membership' => json_encode([
+
                 'id' => 1,
                 'status' => 'ACTIVE',
                 'startPeriod' => $startPeriod,
@@ -79,7 +81,7 @@ class VendorSeeder extends Seeder
         DB::table('vendors')->insert([
             'id' => 3,
             'name' => 'Vendor 3',
-            'email' => 'vendor1@gmail.com',
+            'email' => 'vendor3@gmail.com',
             'password' => bcrypt('123'),
             'description' => 'Ini adalah contoh vendor category main course',
             'category' => json_encode([
