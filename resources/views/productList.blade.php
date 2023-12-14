@@ -1,8 +1,19 @@
 @extends('master')
 @section('content')
 
+{{-- <div class="toast">
+    <div class="toast-content">
+        <i class="fas fa-solid fa-check check"></i>
+        <div class="message">
+            <span class="text text-1">Success</span>
+            <span class="text text-2">Your changes has been saved</span>
+        </div>
+    </div>
+    <i class="fa-solid fa-xmark close"></i>
+    <div class="progress"></div>
+</div> --}}
 
-    <div class="covering" style="margin-top:5%">
+    <div class="covering" style="margin-top:7%">
         <div class="cards">
             <div class="imgBx">
                 <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
@@ -46,8 +57,10 @@
                             <p class="card-text">Price: ${{ $product->price }}</p>
                             <form action="/products/add/{{$product->id}}" method="post">
                                 @csrf
-                                <button class="payment-form-submit-button" style="margin-left:5em;" type="submit" >Add to Cart</button>
+
+                                <button class="submit-button" style="margin-left:5em;" type="submit" >Add to Cart</button>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -57,4 +70,17 @@
         </div>
     </div>
 
+    {{-- <div class="popups" id="popup-1">
+        <div class="overlay"></div>
+        <div class="content-popup">
+            <div class="close-btn" onclick="togglePopup()">&times;</div>
+            <h1>Title</h1>
+            <p> You can't add products from 2 different vendors</p>
+        </div>
+
+
+    </div>
+    <button onclick="togglePopup()" class="submit-button" style="margin-left:5em;" type="submit" >Add to Cart</button>
+
+    <script src="{{ asset('assets/popup.js') }}"></script> --}}
 @endsection
