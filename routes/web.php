@@ -6,13 +6,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +29,9 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function(){
-    return view('homepage');
-});
+
+Route::get('/',[VendorController::class, 'indexHomepage']);
+Route::get('/homepage',[VendorController::class, 'indexHomepage']);
 Route::get('/login', function () {
     return view('login');
 })->name('login')->middleware('guest');
@@ -52,43 +56,64 @@ Route::get('/vendorList/search', [VendorController::class, 'search'])->name('ven
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
-
-
-
-
+Route::get('/orderDetail/{id}', [OrderDetailController::class, 'index']);
+// Route::get('/orderDetail', function () {
+//     return view('orderDetail');
+// });
 
 Route::middleware(['checkauth'])->group(function(){
-    Route::middleware(['admin'])->group(function(){
-        Route::get('/logout', [UserController::class, 'logout']);
+    Route::get('/orderlist',[OrderController::class, 'viewOrderList']);
+    Route::get('/cancelmembership',[MembershipController::class, 'viewCancelMembership']);
+    Route::get('/registermembership',[MembershipController::class, 'ViewRegisterMembership']);
+    Route::middleware(['admin'])->group(function(){       
+    }); 
+    Route::middleware(['checkCustOrVend'])->group(function(){
+        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);       
     }); 
     Route::middleware(['customer'])->group(function(){
-        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
-        // Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
+        Route::post('/checkout',[OrderController::class, 'checkout']);
+        Route::post('/minQuantity/{id}',[ProductController::class, 'decreaseQuantity']);
+        Route::post('/addQuantity/{id}',[ProductController::class, 'addQuantity']);
+        Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
+        Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
+        Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');
         Route::get('/checkout',[ProductController::class, 'cartIndex']);
-        Route::get('/logout', [UserController::class, 'logout']);
+        Route::delete('/checkout/{id}',[ProductController::class, 'deleteItem']);
+        Route::get('/customer/profile',[CustomerController::class, 'viewCustomerProfile']);
+        Route::put('/customer/editprofile',[CustomerController::class, 'editProfile']);
+        Route::post('/customer/profile',[CustomerController::class, 'enableEdit']);
+        Route::get('/customer/editprofpic', [CustomerController::class, 'showEditPict']);
+        Route::put('/customer/editprofpic', [CustomerController::class, 'editPicture']);
+        Route::get('/customer/removeprofpic', [CustomerController::class, 'removePicture']);
+        Route::post('/customer/registermembership', [CustomerController::class, 'registerMembership']);
+        Route::post('/customer/cancelmembership', [CustomerController::class, 'cancelMembership']);
+        Route::get('/finishorder/{o:id}', [OrderController::class, 'finishOrder']);
+        Route::post('/addreview/{o:id}', [ReviewController::class, 'addReview']);
     }); 
+
     Route::middleware(['vendor'])->group(function(){
-        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         Route::get('/addProduct', function () {
             return view('addProduct');
         });
         Route::get('/editProduct/{id}',[ProductController::class, 'editIndex']);
         Route::post('/addProduct', [ProductController::class, 'insertProduct']);
-        Route::get('/orderList/{id}',[OrderController::class, 'viewOrderList']);
-        Route::get('/logout', [UserController::class, 'logout']);
-    }); 
+        Route::get('/vendor/profile',[VendorController::class, 'viewVendorProfile']);
+        Route::put('/vendor/editprofile',[VendorController::class, 'editProfile']);
+        Route::post('/vendor/profile',[VendorController::class, 'enableEdit']);
+        Route::get('/vendor/editprofpic', [VendorController::class, 'showEditPict']);
+        Route::put('/vendor/editprofpic', [VendorController::class, 'editPicture']);
+        Route::get('/vendor/removeprofpic', [VendorController::class, 'removePicture']);
+        Route::get('/registermembership/products', [MembershipController::class, 'showVendorProducts']);
+        Route::post('/vendor/registermembership', [VendorController::class, 'registerMembership']);
+        Route::post('/vendor/cancelmembership', [VendorController::class, 'cancelMembership']);
+        Route::get('/promotion/create/{p:id}', [PromotionController::class, 'viewCreatePromotion']);
+        Route::post('/promotion/add/{p:id}', [PromotionController::class, 'addPromotion']);
+        
+    });
+     Route::get('/logout', [UserController::class, 'logout']);
 });
-
-
-Route::get('/profile/{c:id}',[CustomerController::class, 'viewCustomerProfile']);
-Route::put('/editprofile/{c:id}',[CustomerController::class, 'editProfile']);
-Route::post('/profile/{c:id}',[CustomerController::class, 'enableEdit']);
-Route::get('/editprofpic/{c:id}', [CustomerController::class, 'showEditPict']);
-Route::put('/editprofpic/{c:id}', [CustomerController::class, 'editPicture']);
-Route::get('/removeprofpic/{c:id}', [CustomerController::class, 'removePicture']);
-
 Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
 Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
 Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');

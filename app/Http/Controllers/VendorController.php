@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Vendor;
+use App\Models\Promotion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -14,12 +17,41 @@ use Illuminate\Validation\Rule;
 class VendorController extends UserController
 {
     public function index(){
-        // $books = DB::table('books')->get();
-        // $books = Book::paginate(4);
-        // $categories = DB::table('categories')->get();
+       
         $vendors = Vendor::paginate(3);
-        // dd($products->isEmpty());
         return view('vendorList', ['vendors'=> $vendors]);
+    }
+
+    public function getFeaturedVendors(){
+        $vendorAll = Vendor::where(function ($query){
+            $query->whereNull('vendor_membership')
+                  ->orWhereJsonContains('vendor_membership->status','INACTIVE');
+        })->get();
+        $vendors = Vendor::whereNotNull('vendor_membership')->whereJsonContains('vendor_membership->status','ACTIVE')->get();
+
+        if($vendors->count() < 5){
+            foreach($vendorAll as $vendor){
+                $vendors->push($vendor);
+                if($vendors->count() == 5){
+                    break;
+                }
+            }
+        }       
+
+        return $vendors;
+    }
+
+    public function getTopRatedVendor(){
+        $vendor = Vendor::orderBy('rating', 'DESC')->limit(3)->get();
+        return $vendor;
+    }
+
+    public function indexHomepage(){
+        $featuredVendors = $this->getFeaturedVendors();
+        $topRatedVendors = $this->getTopRatedVendor();
+        
+        return view('homepage', ['featuredVendors'=> $featuredVendors , 'topRatedVendors' => $topRatedVendors]);
+
     }
 
     public function register(Request $req){
@@ -73,6 +105,139 @@ class VendorController extends UserController
         return view('vendorList',[
             'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->get()
         ]);
+    }
+
+    public function viewVendorProfile(){
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        $editmode = false;
+        $editprofpic = false;
+        $membership = json_decode($v->vendor_membership);
+        if($membership->status == 'ACTIVE') $ismember = true;
+        else $ismember = false;
+        return view('vendorprofile',[
+            'user' => $v,
+            'editMode' => $editmode,
+            'editprofpic' => $editprofpic,
+            'membership' => $membership,
+            'isMember' => $ismember
+        ]);
+    }
+
+    public function enableEdit(){
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        $editmode = true;
+        $editprofpic = false;
+        $membership = json_decode($v->vendor_membership);
+        if($membership->status == 'ACTIVE') $ismember = true;
+        else $ismember = false;
+        return view('vendorprofile',[
+            'user' => $v,
+            'editMode' => $editmode,
+            'editprofpic' => $editprofpic,
+            'membership' => $membership,
+            'isMember' => $ismember
+        ]);
+    }
+
+    public function showEditPict(){
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        $editmode = true;
+        $editprofpic = true;
+        $membership = json_decode($v->vendor_membership);
+        if($membership->status == 'ACTIVE') $ismember = true;
+        else $ismember = false;
+        return view('vendorprofile',[
+            'user' => $v,
+            'editMode' => $editmode,
+            'editprofpic' => $editprofpic,
+            'membership' => $membership,
+            'isMember' => $ismember
+        ]);
+    }
+
+    public function editProfile(Request $request)
+    {
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'description' => 'required',
+            'password' => 'nullable'
+        ]);
+
+        if(empty($validated['password'])){
+            unset($validated['password']);
+        }
+
+        DB::table('vendors')->where('id', $v->id)->update($validated);
+        return redirect('vendor/profile')->with('message','Profile edited successfully');
+    }
+
+    public function editPicture(Request $request)
+    {
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        if($request->hasFile('image')){
+            $fileImage = $request->file('image');
+            $imageName ='user '.$v->name.'.'.$fileImage->getClientOriginalExtension();
+            Storage::putFileAs('public/images', $fileImage, $imageName);
+        }
+        else{
+            $imageName = $v->image;
+        }
+
+        DB::table('vendors')->where('id', $v->id)->update([
+            'image' => $imageName
+        ]);
+
+        return redirect('vendor/profile')->with('message','Profile picture edited succesfully');
+    }
+
+    public function removePicture()
+    {
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        Storage::delete ('public/image/'.$v->image);
+        DB::table('vendors')->where('id', $v->id)->update([
+            'image' => NULL
+        ]);
+
+        return redirect('vendor/profile')->with('message','Profile picture removed!');
+    }
+
+    public function cancelMembership()
+    {
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        $membership = json_decode($v->vendor_membership);
+        $membership->status = 'INACTIVE';
+        $membership->startPeriod = '';
+        $membership->endPeriod = '';
+        $membership->promotionList = '';
+        $membershipData = json_encode($membership);
+        DB::table('vendors')->where('id', $v->id)->update([
+            'vendor_membership' => $membershipData
+        ]);
+        foreach($v->products as $product){
+            $product->promotion_id = NULL;
+            $product->save();
+        };
+
+        $v->promotions()->delete();
+
+        return redirect('vendor/profile')->with('message','Membership successfuly cancelled!');
+    }
+
+    public function registerMembership()
+    {
+        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+        $membership = json_decode($v->vendor_membership);
+        $membership->status = 'ACTIVE';
+        $membership->startPeriod = Carbon::now();
+        $membership->endPeriod = Carbon::now()->addDays(30);
+        $membershipData = json_encode($membership);
+        DB::table('vendors')->where('id', $v->id)->update([
+            'vendor_membership' => $membershipData
+        ]);
+
+        return redirect('vendor/profile')->with('message','Sucessfully registered as member!');
     }
 
 }

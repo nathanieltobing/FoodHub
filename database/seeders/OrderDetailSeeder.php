@@ -19,32 +19,37 @@ class OrderDetailSeeder extends Seeder
             'quantity' => 5,
             'price' => 50000.00,
             'product_name' => 'product_test_1',
+            'discount' => 0.1,
             'order_id' => 1,
             'product_id' => 1
         ]);
 
-        // DB::table('order_details')->insert([
-        //     'id' => 2,
-        //     'order_quantity' => 6,
-        //     'price_per_product' => 50000.00,
-        //     'total_price' => 6*50000.00,
-        //     'product_id' => 1,
-        // ]);
+        DB::table('order_details')->insert([
+            'id' => 2,
+            'quantity' => 6,
+            'price' => 50000.00,
+            'product_name' => 'product_test_2',
+            'order_id' => 1,
+            'product_id' => 1,
+        ]);
 
-        // DB::table('order_details')->insert([
-        //     'id' => 3,
-        //     'order_quantity' => 6,
-        //     'price_per_product' => 50000.00,
-        //     'total_price' => 6*50000.00,
-        //     'product_id' => 1,
-        // ]);
+        DB::table('order_details')->insert([
+            'id' => 3,
+            'quantity' => 5,
+            'price' => 50000.00,
+            'product_name' => 'product_test_3',
+            'order_id' => 2,
+            'product_id' => 1
+        ]);
 
-        // DB::table('order_details')->insert([
-        //     'id' => 4,
-        //     'order_quantity' => 6,
-        //     'price_per_product' => 50000.00,
-        //     'total_price' => 6*50000.00,
-        //     'product_id' => 1,
-        // ]);
+        DB::table('order_details')->insert([
+            'id' => 4,
+            'quantity' => 6,
+            'price' => 50000.00,
+            'product_name' => 'product_test_4',
+            'order_id' => 4,
+            'product_id' => 1,
+        ]);
+
     }
 }

@@ -11,21 +11,11 @@
         </div>
 <div  class="slider" style="margin-top: 30px">
     <div class="list">
+      @foreach ($featuredVendors as $vendor)
         <div class="item">
-            <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+          <img src="{{Storage::url($vendor->vendor_picture)}}" alt="">
         </div>
-        <div class="item">
-            <img src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
-        </div>
-        <div class="item">
-            <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
-        </div>
-        <div class="item">
-            <img src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
-        </div>
-        <div class="item">
-            <img src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
-        </div>
+      @endforeach
     </div>
     <div class="buttons">
         <button id="prev"><</button>
@@ -42,28 +32,6 @@
 
 </div>
 <script src="{{ asset('assets/script.js') }}"></script>
-{{-- <div class="cover">
-
-
-    <div class="container">
-     <div class="inner">
-        <h2 style="margin-left:43%">Promotion</h2>
-        <div class="border"></div>
-     </div>
-         <div class="slider-wrapper">
-            <div class="slider">
-            <img id="slide-1" src="storage/images/foodbanner1.jpg" alt="3D rendering of an imaginary orange planet in space" />
-            <img id="slide-2" src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="3D rendering of an imaginary green planet in space" />
-            <img id="slide-3" src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="3D rendering of an imaginary blue planet in space" />
-            </div>
-          <div class="slider-nav">
-            <a href="#slide-1"></a>
-            <a href="#slide-2"></a>
-            <a href="#slide-3"></a>
-          </div>
-     </div>
-    </div>
-</div> --}}
 
 <div class="about-us">
     <div class="about-section">
@@ -87,55 +55,25 @@
     <div class="inner">
       <h2 class="h2-text">Best Vendors</h2>
       <div class="border"></div>
-
+      
       <div class="row">
-        <div class="col">
-          <div class="testimonial">
-            <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
-            <div class="name">Tobing Catering</div>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+        @foreach ($topRatedVendors as $vendor)
+          <div class="col">
+            <div class="testimonial">
+              <img src="{{Storage::url($vendor->vendor_picture)}}" alt="">
+              <div class="name">{{$vendor->name}}</div>
+              <div class="stars">
+                @for ($i = 0; $i < $vendor->rating ; $i++)
+                  <i class="fas fa-star"></i>
+               @endfor             
+              </div>
+
+
             </div>
-
-
           </div>
-        </div>
+            
+        @endforeach
 
-        <div class="col">
-          <div class="testimonial">
-            <img src="storage/images/foodbanner1.jpg" alt="">
-            <div class="name">Tobing Catering</div>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-
-
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="testimonial">
-            <img src="storage/images/foodbanner1.jpg" alt="">
-            <div class="name">Steven Catering</div>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
-
-
-          </div>
-        </div>
       </div>
     </div>
   </div>

@@ -14,7 +14,6 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    
     public function login(Request $request){
         $credential = [
             'email' => $request->email,
@@ -25,7 +24,7 @@ class UserController extends Controller
         if($request->remember_me) {
             Cookie::queue("email", $request->email);
             Cookie::queue("password", $request->password);
-            
+
         }
         else {
             Cookie::queue(Cookie::forget("email"));
@@ -39,8 +38,8 @@ class UserController extends Controller
                 }
                 else{
                     return redirect()->back()->withErrors('Username or Password is incorrect !');
-                
-                }   
+
+                }
                 break;
             case "VENDOR" :
                 if(Auth::guard('webvendor')->attempt($credential,true)){
@@ -49,8 +48,8 @@ class UserController extends Controller
                 }
                 else{
                     return redirect()->back()->withErrors('Username or Password is incorrect !');
-                
-                }   
+
+                }
                 break;
             case "ADMIN" :
                 if(Auth::guard('webadmin')->attempt($credential,true)){
@@ -59,15 +58,15 @@ class UserController extends Controller
                 }
                 else{
                     return redirect()->back()->withErrors('Username or Password is incorrect !');
-                
-                }   
+
+                }
                 break;
             default:
                 return redirect()->back()->withErrors('Username or Password is incorrect !');    
 
         }
-          
-        
+
+
     }
 
     public function logout(){
@@ -77,8 +76,8 @@ class UserController extends Controller
         else if(Auth::guard('webvendor')->check()){
             Auth::guard('webvendor')->logout();
         }
-        else if(Auth::guard('wedamin')->check()){
-            Auth::guard('wedamin')->logout();
+        else if(Auth::guard('webadmin')->check()){
+            Auth::guard('webadmin')->logout();
         }
         Session::flush();
         return redirect('/');

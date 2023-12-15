@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vendor;
 use App\Models\Membership;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MembershipController extends Controller
 {
@@ -12,74 +14,40 @@ class MembershipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function viewCancelMembership()
     {
-        //
+        return view('cancelmembership');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function viewRegisterMembership()
     {
-        //
+        if(Auth::guard('webvendor')->check()){
+            $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+            $showProducts = false;
+            return view('registermembership',[
+                'vendor' => $v,
+                'showProducts' => $showProducts
+            ]);
+        } else{
+            return view('registermembership');
+        }
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function showVendorProducts()
     {
-        //
+        if(Auth::guard('webvendor')->check()){
+            $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+            $showProducts = true;
+            return view('registermembership',[
+                'vendor' => $v,
+                'showProducts' => $showProducts,
+                'countDiscountedProducts' => 0
+            ]);
+        } else{
+            return view('registermembership');
+        }
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Membership  $membership
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Membership $membership)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Membership  $membership
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Membership $membership)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Membership  $membership
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Membership $membership)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Membership  $membership
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Membership $membership)
-    {
-        //
-    }
 }
