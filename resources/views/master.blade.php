@@ -15,6 +15,7 @@
     <script src="js/YourExternalJQueryScripts.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="{{ asset('assets/script.js') }}"></script>
 </head>
 <body>
 <header class="header">
