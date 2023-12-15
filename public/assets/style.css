@@ -1009,7 +1009,7 @@ input:checked + .payment-method-item::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 100%;
     border: none;
     cursor: pointer;
     color: var(--white);
