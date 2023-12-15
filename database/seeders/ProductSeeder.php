@@ -55,7 +55,7 @@ class ProductSeeder extends Seeder
             'description' => 'ini adalah first product dari vendor 4',
             'product_picture' => '1701874795.jpg',
             'category_id' => 1,
-            'vendor_id' => 1
+            'vendor_id' => 2
         ]);
 
         DB::table('products')->insert([
@@ -66,7 +66,7 @@ class ProductSeeder extends Seeder
             'description' => 'ini adalah first product dari vendor 5',
             'product_picture' => '1701874795.jpg',
             'category_id' => 1,
-            'vendor_id' => 1
+            'vendor_id' => 2
         ]);
     }
 }

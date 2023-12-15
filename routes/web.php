@@ -17,7 +17,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderDetailController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,9 +56,6 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
 Route::get('/orderDetail/{id}', [OrderDetailController::class, 'index']);
-// Route::get('/orderDetail', function () {
-//     return view('orderDetail');
-// });
 
 Route::middleware(['checkauth'])->group(function(){
     Route::get('/orderlist',[OrderController::class, 'viewOrderList']);

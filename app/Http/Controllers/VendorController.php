@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Carbon\Carbon;
 use App\Models\Vendor;
 use App\Models\Promotion;
@@ -93,10 +94,28 @@ class VendorController extends UserController
         return redirect('/login');
     }
 
+    public function checkInAnotherVendorPage($id){
+        $carts = session()->get('cart');
+        if(empty($carts)){
+            return "1";
+        }
+        else{
+            $cart = reset($carts);
+            if($id == $cart['vendor_id']){
+                return "-1";
+            }
+            return "1";
+        }
+    }
+
     public function showProductList(Vendor $v){
+        $products = Product::where('vendor_id', $v->id)->paginate(3);
+        $error = $this->checkInAnotherVendorPage($v->id);
+        // dd($error);
         return view('productList',[
             'vendor' => $v,
-            'products' => $v->products
+            'products' => $products,
+            'error' => $error
         ]);
     }
 

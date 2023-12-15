@@ -55,11 +55,15 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">{{ $product->description }}</p>
                             <p class="card-text">Price: ${{ $product->price }}</p>
-                            <form action="/products/add/{{$product->id}}" method="post">
-                                @csrf
+                            @if ($error == '-1')
+                                <form action="/products/add/{{$product->id}}" method="POST">
+                                    @csrf
 
-                                <button class="submit-button" style="margin-left:5em;" type="submit" >Add to Cart</button>
-                            </form>
+                                    <button class="submit-button" style="margin-left:5em;" type="submit" id="error_trigger">Add to Cart</button>
+                                </form>
+                            @else
+                                <button class="submit-button" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button> 
+                            @endif
 
                         </div>
                     </div>
@@ -67,6 +71,22 @@
             @empty
                 <p>No products available</p>
             @endforelse
+            <div class = "d-flex justify-content-center mt-4">
+                {{$products->links()}}
+              </div>  
+            <input type="hidden" id="hidden1" name="role" value={{$error}}>
+            <div class="popups" id="error" style="width: 50%">
+                <div class="popup-content">
+                  <div class="imgbox">
+                    <img src="{{ asset('assets/images/cancel.png') }}" alt="" class="img">
+                  </div>
+                  <p class="para">YOU CAN'T ADD PRODUCTS FROM TWO DIFFERENT VENDORS</p>
+                  <form action="">
+                    <a href="#" class="buttons" id="e_button">EXIT</a>
+                  </form>
+                </div>
+              </div>
+              <script src="{{ asset('assets/popup.js') }}"></script>
         </div>
     </div>
 
