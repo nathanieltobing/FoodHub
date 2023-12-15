@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Giant Book Supplier</title>
+    <title>FH</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -35,7 +35,7 @@
             <a href="/vendorList" style="--i:3">Vendor List</a>
             <a href="/orderlist/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Order List</a>
             {{-- <a href="/profile/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Membership</a> --}}
-            <a href="/profile/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Profile</a>
+            <a href="/customer/profile" style="--i:3">Profile</a>
             <a href="/checkout" style="--i:3">Cart</a>
             <a href="/logout" style="--i:3">Logout</a>
           </div>
@@ -43,7 +43,7 @@
           <div class="justify-content-center" style="gap: 50px">
             <a href="/orderlist/{{Auth::guard('webvendor')->user()->id}}" style="--i:3">Order List</a>
             {{-- <a href="/homepage" style="--i:3">Membership</a> --}}
-            <a href="/profile/{{Auth::guard('webvendor')->user()->id}}" style="--i:3">Profile</a>
+            <a href="/vendor/profile" style="--i:3">Profile</a>
             <a href="/logout" style="--i:3">Logout</a>
           </div>
           @elseif(Auth::guard('webadmin')->check())

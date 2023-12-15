@@ -19,7 +19,7 @@
             <div class="col-8">
                 <div class="card card-body">
                   <div class="card-title d-flex pb-1">
-                      <h3 class="">{{ \Carbon\Carbon::parse($o->treansactionDate)->format('d M Y')}}</h3>
+                      <h3 class="">{{ \Carbon\Carbon::parse($o->transaction_date)->format('d M Y')}}</h3>
                       <p class="{{$o->status=='OPEN'? ''
                           : ($o->status=='ON GOING'? 'btn-warning'
                           : ($o->status=='REJECTED'? 'btn-danger'
