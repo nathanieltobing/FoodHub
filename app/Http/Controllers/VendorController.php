@@ -18,7 +18,7 @@ use Illuminate\Validation\Rule;
 class VendorController extends UserController
 {
     public function index(){
-       
+
         $vendors = Vendor::paginate(3);
         return view('vendorList', ['vendors'=> $vendors]);
     }
@@ -37,7 +37,7 @@ class VendorController extends UserController
                     break;
                 }
             }
-        }       
+        }
 
         return $vendors;
     }
@@ -50,7 +50,7 @@ class VendorController extends UserController
     public function indexHomepage(){
         $featuredVendors = $this->getFeaturedVendors();
         $topRatedVendors = $this->getTopRatedVendor();
-        
+
         return view('homepage', ['featuredVendors'=> $featuredVendors , 'topRatedVendors' => $topRatedVendors]);
 
     }
@@ -221,43 +221,6 @@ class VendorController extends UserController
         ]);
 
         return redirect('vendor/profile')->with('message','Profile picture removed!');
-    }
-
-    public function cancelMembership()
-    {
-        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
-        $membership = json_decode($v->vendor_membership);
-        $membership->status = 'INACTIVE';
-        $membership->startPeriod = '';
-        $membership->endPeriod = '';
-        $membership->promotionList = '';
-        $membershipData = json_encode($membership);
-        DB::table('vendors')->where('id', $v->id)->update([
-            'vendor_membership' => $membershipData
-        ]);
-        foreach($v->products as $product){
-            $product->promotion_id = NULL;
-            $product->save();
-        };
-
-        $v->promotions()->delete();
-
-        return redirect('vendor/profile')->with('message','Membership successfuly cancelled!');
-    }
-
-    public function registerMembership()
-    {
-        $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
-        $membership = json_decode($v->vendor_membership);
-        $membership->status = 'ACTIVE';
-        $membership->startPeriod = Carbon::now();
-        $membership->endPeriod = Carbon::now()->addDays(30);
-        $membershipData = json_encode($membership);
-        DB::table('vendors')->where('id', $v->id)->update([
-            'vendor_membership' => $membershipData
-        ]);
-
-        return redirect('vendor/profile')->with('message','Sucessfully registered as member!');
     }
 
 }
