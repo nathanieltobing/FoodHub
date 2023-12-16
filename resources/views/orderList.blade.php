@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<div class="container">
+<div class="container pt-5" style="margin-top: 3rem">
     @if(session('message'))
     <div class="container">
         <div class="d-grid gap-2 mt-3">
@@ -56,7 +56,44 @@
                     <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->total_price)}}</p>
                         @if($o->status == 'ON GOING' && Auth::guard('webcustomer')->check())
                         <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
-                            <span ><a href="/finishorder/{{$o->id}}" class="btn btn-danger" style="width: 100%;margin-right:80px">Finish Order</a> </span>
+                            <span ><a href="#" class="btn btn-primary" style="width: 100%;margin-right:80px" data-toggle="modal" data-target="#FinishOrderModal{{$o->id}}">Finish Order</a> </span>
+                        </div>
+                        <div class="modal fade" id="FinishOrderModal{{$o->id}}" tabindex="-1" role="dialog" aria-labelledby="FinishOrderModal{{$o->id}}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="cancelMembershipModalLabel">Give your review!</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="/addreview/{{$o->id}}">
+                                            @csrf
+                                            <div class="form-group mt-3">
+                                                <label for="rating">Rating:</label>
+                                                <select class="form-control" id="rating" name="rating">
+                                                    <option value="" disabled selected>Select a rating</option>
+                                                    <option value="5">5 stars</option>
+                                                    <option value="4">4 stars</option>
+                                                    <option value="3">3 stars</option>
+                                                    <option value="2">2 stars</option>
+                                                    <option value="1">1 star</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="review">Review:</label>
+                                                <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success">Submit and finish order</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         @elseif($o->status == 'OPEN' && Auth::guard('webvendor')->check())
                         <form class="d-flex justify-content-end" method="post" action="/editstatus/{{$o->id}}" style="gap:10px;margin-right: 35px;margin-top: -60px">

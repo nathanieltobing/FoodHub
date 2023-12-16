@@ -43,17 +43,6 @@ class OrderController extends Controller
         return redirect()->back()->with('message','Order #'.$o->id.' status edited successfully!');
     }
 
-    public function finishOrder(Order $o){
-        DB::table('orders')->where([
-            ['id',$o->id]
-            ])->update([
-            'status' => 'FINISHED'
-        ]);
-        return view('finishOrder',[
-            'order' => $o,
-        ]);
-    }
-
     public function checkout(){
         $order = new Order();
         $order_detail = new OrderDetail();
@@ -74,8 +63,8 @@ class OrderController extends Controller
 
         $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
             if($customerMembership != null){
-                $customerMembership = json_decode($customerMembership, true);                             
-            }                              
+                $customerMembership = json_decode($customerMembership, true);
+            }
 
         $most_recent_order = DB::table('orders')->latest()->first();
         foreach ($carts as $cart) {
