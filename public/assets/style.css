@@ -264,16 +264,16 @@ footer{
   height: 100vh !important;
   }
   }
-  
+
   .horizontal-timeline .items {
   border-top: 2px solid #ddd;
   }
-  
+
   .horizontal-timeline .items .items-list {
   position: relative;
   margin-right: 0;
   }
-  
+
   .horizontal-timeline .items .items-list:before {
   content: "";
   position: absolute;
@@ -284,7 +284,7 @@ footer{
   top: 0;
   margin-top: -5px;
   }
-  
+
   .horizontal-timeline .items .items-list {
   padding-top: 15px;
   }
@@ -2395,6 +2395,14 @@ select {
 }
 .active{
 border: 1px solid #2B2B2B;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #2b2b2b;
+    margin: 1em 0;
+    padding: 0;
 }
 
 
