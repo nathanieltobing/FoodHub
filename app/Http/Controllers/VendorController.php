@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Carbon\Carbon;
 use App\Models\Vendor;
 use App\Models\Promotion;
@@ -93,17 +94,36 @@ class VendorController extends UserController
         return redirect('/login');
     }
 
+    public function checkInAnotherVendorPage($id){
+        $carts = session()->get('cart');
+        if(empty($carts)){
+            return "-1";
+        }
+        else{
+            $cart = reset($carts);
+            if($id == $cart['vendor_id']){
+                return "-1";
+            }
+            return "1";
+        }
+    }
+
     public function showProductList(Vendor $v){
+        $products = Product::where('vendor_id', $v->id)->paginate(3);
+        $error = $this->checkInAnotherVendorPage($v->id);
+        // dd($error);
         return view('productList',[
             'vendor' => $v,
-            'products' => $v->products
+            'products' => $products,
+            'error' => $error
         ]);
     }
 
     public function search(Request $request)
     {
+        // $vendorsPaginate = Vendor::paginate(3);
         return view('vendorList',[
-            'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->get()
+            'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->paginate(3)
         ]);
     }
 
@@ -112,7 +132,7 @@ class VendorController extends UserController
         $editmode = false;
         $editprofpic = false;
         $membership = json_decode($v->vendor_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('vendorprofile',[
             'user' => $v,
@@ -128,7 +148,7 @@ class VendorController extends UserController
         $editmode = true;
         $editprofpic = false;
         $membership = json_decode($v->vendor_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('vendorprofile',[
             'user' => $v,
@@ -144,7 +164,7 @@ class VendorController extends UserController
         $editmode = true;
         $editprofpic = true;
         $membership = json_decode($v->vendor_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('vendorprofile',[
             'user' => $v,

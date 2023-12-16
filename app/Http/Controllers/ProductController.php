@@ -104,32 +104,40 @@ class ProductController extends Controller
         return redirect('/');
     }
 
+    public function checkProductFromOtherVendor(Product $product){
+        $carts = session()->get('cart');
+        if(empty($carts)){
+            return true;
+        }
+        else{
+            $cart = reset($carts);
+            if($product->vendor_id == $cart['vendor_id']){
+                return true;
+            }
+            return false;
+        }
+    }
+
     public function addToCart($id){
         $product = Product::find($id);
         $cart = session()-> get('cart',[]);
-
-        if(isset($cart[$id])){
-            $cart[$id]['quantity']++;
+        if($this->checkProductFromOtherVendor($product)){
+            if(isset($cart[$id])){
+                $cart[$id]['quantity']++;
+            }
+            else{
+                $cart[$id] = [          
+                    "name" => $product->name,
+                    "quantity" => 1,
+                    "price" => $product->price,
+                    "product_id"=> $id,
+                    "vendor_id"=>$product->vendor_id
+                ];
+            }
+            session()->put('cart', $cart);
+    
+            return redirect('/checkout');
         }
-        else{
-            $cart[$id] = [          
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "product_id"=> $id,
-                "vendor_id"=>$product->vendor_id
-            ];
-        }
-        session()->put('cart', $cart);
-
-        // $cart->name = $product->name;
-        // $cart->price = $product->price;
-        // $cart->quantity = 1;
-        // $cart->customer_id = Auth::guard('webcustomer')->id;
-        // $cart->product_id = $product->id;
-
-        // $cart->save();
-        return redirect('/checkout');
      }
 
      public function cartIndex(){

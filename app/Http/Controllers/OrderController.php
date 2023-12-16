@@ -20,6 +20,7 @@ class OrderController extends Controller
         } else if(Auth::guard('webcustomer')->check()){
             $user = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
         }
+        // dd($user->orders);
         return view('orderList',[
             'order' => $user->orders,
             'user' => $user
@@ -84,7 +85,9 @@ class OrderController extends Controller
             $order_detail->product_name = $cart['name'];
             $order_detail->order_id = $most_recent_order->id;
             $order_detail->product_id = $cart['product_id'];
-            $order_detail->discount = (double)$customerMembership['discount'] /100;
+            if($customerMembership != null){
+                $order_detail->discount = (double)$customerMembership['discount'] /100;
+            }
             $order_detail->save();
         }
         session()->put('cart', []);

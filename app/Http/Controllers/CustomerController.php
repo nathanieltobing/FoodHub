@@ -57,7 +57,7 @@ class CustomerController extends UserController
         $editmode = false;
         $editprofpic = false;
         $membership = json_decode($c->customer_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('customerprofile',[
             'user' => $c,
@@ -73,7 +73,7 @@ class CustomerController extends UserController
         $editmode = true;
         $editprofpic = false;
         $membership = json_decode($c->customer_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('customerprofile',[
             'user' => $c,
@@ -89,7 +89,7 @@ class CustomerController extends UserController
         $editmode = true;
         $editprofpic = true;
         $membership = json_decode($c->customer_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('customerprofile',[
             'user' => $c,

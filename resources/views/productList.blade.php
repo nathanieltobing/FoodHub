@@ -1,8 +1,19 @@
 @extends('master')
 @section('content')
 
+{{-- <div class="toast">
+    <div class="toast-content">
+        <i class="fas fa-solid fa-check check"></i>
+        <div class="message">
+            <span class="text text-1">Success</span>
+            <span class="text text-2">Your changes has been saved</span>
+        </div>
+    </div>
+    <i class="fa-solid fa-xmark close"></i>
+    <div class="progress"></div>
+</div> --}}
 
-    <div class="covering" style="margin-top:5%">
+    <div class="covering" style="margin-top:7%">
         <div class="cards">
             <div class="imgBx">
                 <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
@@ -44,17 +55,38 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">{{ $product->description }}</p>
                             <p class="card-text">Price: ${{ $product->price }}</p>
-                            <form action="/products/add/{{$product->id}}" method="post">
-                                @csrf
-                                <button class="payment-form-submit-button" style="margin-left:5em;" type="submit" >Add to Cart</button>
-                            </form>
+                            @if ($error == '-1')
+                                <form action="/products/add/{{$product->id}}" method="POST">
+                                    @csrf
+
+                                    <button class="submit-button" style="margin-left:5em;" type="submit" id="error_trigger">Add to Cart</button>
+                                </form>
+                            @else
+                                <button class="submit-button" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button> 
+                            @endif
+
                         </div>
                     </div>
                 </div>
             @empty
                 <p>No products available</p>
             @endforelse
+            <div class = "d-flex justify-content-center mt-4">
+                {{$products->links()}}
+              </div>  
+            <input type="hidden" id="hidden1" name="role" value={{$error}}>
+            <div class="popups" id="error" style="width: 50%">
+                <div class="popup-content">
+                  <div class="imgbox">
+                    <img src="{{ asset('assets/images/cancel.png') }}" alt="" class="img">
+                  </div>
+                  <p class="para">YOU CAN'T ADD PRODUCTS FROM TWO DIFFERENT VENDORS</p>
+                  <form action="">
+                    <a href="#" class="buttons" id="e_button">EXIT</a>
+                  </form>
+                </div>
+              </div>
+              <script src="{{ asset('assets/popup.js') }}"></script>
         </div>
     </div>
-
 @endsection

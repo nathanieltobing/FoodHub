@@ -19,6 +19,8 @@ class CreateReviewsTable extends Migration
             $table->text('comment')->nullable();
             $table->foreignId('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('vendor_id');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('cascade');
            $table->timestamps();
         });
     }

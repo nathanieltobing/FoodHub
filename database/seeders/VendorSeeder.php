@@ -16,7 +16,7 @@ class VendorSeeder extends Seeder
     public function run()
     {
         $startPeriod = Carbon::now();
-        $endPeriod = $startPeriod->addDays(30);
+        $endPeriod = Carbon::now()->addDays(30);
 
         DB::table('vendors')->insert([
             'id' => 1,
@@ -45,7 +45,9 @@ class VendorSeeder extends Seeder
             ]),
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
-            'status_updated_by' => '1'
+            'status_updated_by' => '1',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('vendors')->insert([
@@ -75,7 +77,9 @@ class VendorSeeder extends Seeder
             ]),
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
-            'status_updated_by' => '1'
+            'status_updated_by' => '1',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('vendors')->insert([
@@ -93,13 +97,15 @@ class VendorSeeder extends Seeder
             'vendor_picture' => 'images/1702475666.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
-            'status_updated_by' => '1'
+            'status_updated_by' => '1',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('vendors')->insert([
             'id' => 4,
             'name' => 'Vendor 4',
-            'email' => 'vendor1@gmail.com',
+            'email' => 'vendor4@gmail.com',
             'password' => bcrypt('123'),
             'description' => 'Ini adalah contoh vendor category main course',
             'category' => json_encode([
@@ -111,13 +117,15 @@ class VendorSeeder extends Seeder
             'vendor_picture' => 'images/1702475666.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
-            'status_updated_by' => '1'
+            'status_updated_by' => '1',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('vendors')->insert([
             'id' => 5,
             'name' => 'Vendor 5',
-            'email' => 'vendor1@gmail.com',
+            'email' => 'vendor5@gmail.com',
             'password' => bcrypt('123'),
             'description' => 'Ini adalah contoh vendor category main course',
             'category' => json_encode([
@@ -140,7 +148,40 @@ class VendorSeeder extends Seeder
             ]),
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
-            'status_updated_by' => '1'
+            'status_updated_by' => '1',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        DB::table('vendors')->insert([
+            'id' => 6,
+            'name' => 'Vendor 6',
+            'email' => 'vendor6@gmail.com',
+            'password' => bcrypt('123'),
+            'description' => 'Ini adalah contoh vendor category main course',
+            'category' => json_encode([
+                'Main Course',
+                'Desserts',
+                'Fruits'
+            ]),
+            'rating' => 3,
+            'vendor_picture' => 'images/1702475666.jpg',
+            'vendor_membership' => json_encode([
+                'id' => 1,
+                'status' => 'INACTIVE',
+                'startPeriod' => $startPeriod,
+                'endPeriod' => $endPeriod,
+                'promotionList' => json_encode([
+                    'promotionId',
+                    'promotionId',
+                    'promotionId'
+                ])
+            ]),
+            'role' => 'VENDOR',
+            'status' => 'ACTIVE',
+            'status_updated_by' => '1',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }

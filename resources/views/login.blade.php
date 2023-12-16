@@ -3,6 +3,7 @@
 @section('content')
 <script type="text/javascript">
 
+
 document.addEventListener("DOMContentLoaded", function(arg) {
 
   let role = document.getElementById("hidden1");
@@ -14,17 +15,28 @@ document.addEventListener("DOMContentLoaded", function(arg) {
   vendorButton.addEventListener("click", updateButton);
   adminButton.addEventListener("click", updateButton);
 
+  
+  let btnElementHighlight =customerButton;
   function updateButton(button){
-    if(button.currentTarget.value === "CUSTOMER"){
-        role.value = "CUSTOMER";
+    if(button.currentTarget.value === "CUSTOMER" ){
+      btnElementHighlight.style.border="none";
+      btnElementHighlight = customerButton;
+      btnElementHighlight.style.border="1px solid gray";
+      role.value = "CUSTOMER";
     }
     else if(button.currentTarget.value === "VENDOR"){
+      btnElementHighlight.style.border="none";
+      btnElementHighlight = vendorButton;
+      btnElementHighlight.style.border="1px solid gray";
       role.value = "VENDOR";
+
     }
     else if(button.currentTarget.value === "ADMIN"){
+      btnElementHighlight.style.border="none";
+      btnElementHighlight = adminButton;
+      btnElementHighlight.style.border="1px solid gray";
       role.value = "ADMIN";
     }
-      console.log(role.value);
   }
 //  console.log("test");
 //   let role = document.getElementById("hidden1");
@@ -64,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-bottom: -5px;"></i>
                       <div class="form-outline flex-fill mb-0" style="margin-top: 35px">
-                        <input type="email" id="inputEmail" name="email" class="form-control" aria-describedby="passwordHelpBlock"  value = {{Cookie::get('email') != null ? Cookie::get('email') : ""}}>             
+                        <input type="email" id="inputEmail" name="email" class="form-control" aria-describedby="passwordHelpBlock"  value = {{Cookie::get('email') != null ? Cookie::get('email') : ""}}>
                         <label class="form-label" for="form3Example3c">Email</label>
                       </div>
                     </div>
@@ -72,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                     <div class="d-flex flex-row align-items-center mb-2">
                       <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="password" id="inputPassword" name="password" class="form-control" aria-describedby="passwordHelpBlock" value = {{Cookie::get('password') != null ? Cookie::get('password') : ""}}>                     
+                        <input type="password" id="inputPassword" name="password" class="form-control" aria-describedby="passwordHelpBlock" value = {{Cookie::get('password') != null ? Cookie::get('password') : ""}}>
                         <label class="form-label" for="form3Example4c">Password</label>
                       </div>
                     </div>
@@ -104,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                           @if ($errors->any())
                           <ul class="ps-5">
                               @foreach ($errors->all() as $error)
-                                  <li>{{ $error }}</li>
+                                  <li class="text-danger">{{ $error }}</li>
                               @endforeach
                           </ul>
                           @endif

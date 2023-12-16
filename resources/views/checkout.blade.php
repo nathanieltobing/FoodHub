@@ -60,12 +60,22 @@
                         </td>
                             <td >
                                 <div class="payment-summary-price">{{$cart['price']}}</div>
-                            </td>          
-                                <td>
-                                    <p class="w-25 pl-1">3</p>
-                                    {{-- <input class="w-25 pl-1" value="{{$cart['quantity']}}" id="quantity" name="quantity" type="number"> --}}
-                                    <button type="submit" style="border:0; background:none;"><i class="fas fa-plus"></i></button>
-                                </td>    
+                            </td>   
+                            <td>
+                                <div class="wrappers">
+                                    <form action="/minQuantity/{{$cart['product_id']}}" method="POST">
+                                        @csrf
+                                        <button type="submit" style="border:0; background:none;"><span class="minus">- </span></i></button>    
+                                    </form>                                      
+                                    <span class="num">{{$cart['quantity']}} </span>
+                                    <form action="/addQuantity/{{$cart['product_id']}}" method="POST">
+                                        @csrf
+                                        <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button> 
+                                    </form>                                     
+                                    
+                                    
+                                </div>  
+                            </td>       
                                                        
                             <td> <div class="payment-summary-price">{{$cart['price'] * $cart['quantity']}}</div></td>
                             {{-- <td> <div class="payment-summary-price">{{Request::input('quantity')}}</div></td> --}}
@@ -75,65 +85,10 @@
                         </tr>                      
                         @endforeach
                     @else
-                        <p>Your cart is empty</p>
+                        <p class ="d-flex justify-content-center" style="font-size :50px;" >Your cart is empty</p>
                         
                     @endif
                    
-                    {{-- <tr>
-                        <td><a href=""><i class="fas fa-trash alt"></i></a> </td>
-                        <td ><img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""></td>
-                      <td>
-                        <div class="payment-summary-price">Paket 1 makanan</div>
-                      </td>
-                        <td>
-                            <div class="payment-summary-price">$65</div>
-                        </td>
-                        <td><input class="w-25 pl-1" value="1" type="number"></td>
-                        <td > <div class="payment-summary-price">$130</div></td>
-                    </tr>
-
-                    <tr>
-                        <td><a href=""><i class="fas fa-trash alt"></i></a> </td>
-                        <td ><img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""></td>
-                      <td>
-                        <div class="payment-summary-price">Paket 1 makanan</div>
-                      </td>
-
-                        <td>
-                            <div class="payment-summary-price">{{$cart['name']}}</div>
-                            {{-- <p  class="payment-plan-info-price" style="font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol"> Paket 1 makanan</p> --}}
-                        </td>
-
-                            <td >
-                                <div class="payment-summary-price">{{$cart['price']}}</div>
-                            </td>          
-                                <td>
-                                    <div class="wrappers">
-                                        <form action="/minQuantity/{{$cart['product_id']}}" method="POST">
-                                            @csrf
-                                            <button type="submit" style="border:0; background:none;"><span class="minus">- </span></i></button>    
-                                        </form>                                      
-                                        <span class="num">{{$cart['quantity']}} </span>
-                                        <form action="/addQuantity/{{$cart['product_id']}}" method="POST">
-                                            @csrf
-                                            <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button> 
-                                        </form>                                     
-                                        
-                                        
-                                    </div>
-                                </td>    
-                                                       
-                            <td> <div class="payment-summary-price">{{$cart['price'] * $cart['quantity']}}</div></td>
-                            {{-- <td> <div class="payment-summary-price">{{Request::input('quantity')}}</div></td> --}}
-                           <?php
-                                
-                           ?>
-                        </tr>                      
-                        @endforeach
-                    @else
-                        <p>Your cart is empty</p>
-                        
-                    @endif
 
                 </tbody>
             </table>
@@ -150,12 +105,12 @@
                 <div class="payment-header">
                     <div class="payment-header-icon"><i class="ri-flashlight-fill"></i></div>
                     <div class="payment-header-title">Order Summary</div>
-                    {{-- <p class="payment-header-description">This is the order</p> --}}
+                    
                 </div>
                 <div class="payment-content">
                     <div class="payment-body">
                         <div class="payment-plan">
-                            {{-- <div class="payment-plan-type">Order</div> --}}
+                            
                             <div class="payment-plan-info">
                                  @if ($customerMembership != null && $customerMembership['status'] =='ACTIVE')
                                     <div class="payment-plan-info-name">Professional Membership</div>
@@ -164,7 +119,7 @@
                                  @endif                           
 
                             </div>
-                            {{-- <a href="#" class="payment-plan-change">Change</a> --}}
+                           
                         </div>
                         <div class="payment-summary">                  
                             <div class="payment-summary-item">
@@ -206,19 +161,19 @@
                             <div class="payment-method">
                                 <input type="radio" name="payment-method" id="method-1" checked>
                                 <label for="method-1" class="payment-method-item">
-                                    <img src="images/visa.png" alt="">
+                                    <img src="{{ asset('assets/images/visa.png') }}" alt="">
                                 </label>
                                 <input type="radio" name="payment-method" id="method-2">
                                 <label for="method-2" class="payment-method-item">
-                                    <img src="images/mastercard.png" alt="">
+                                    <img src="{{ asset('assets/images/mastercard.png') }}" alt="">
                                 </label>
                                 <input type="radio" name="payment-method" id="method-3">
                                 <label for="method-3" class="payment-method-item">
-                                    <img src="images/paypal.png" alt="">
+                                    <img src="{{ asset('assets/images/bca.jpg') }}" alt="">
                                 </label>
                                 <input type="radio" name="payment-method" id="method-4">
                                 <label for="method-4" class="payment-method-item">
-                                    <img src="images/stripe.png" alt="">
+                                    <img src="{{ asset('assets/images/bri.png') }}" alt="">
                                 </label>
                             </div>
                             <div class="payment-form-group">
