@@ -27,11 +27,23 @@ class CustomerMembershipController extends Controller
     public function registerMembership()
     {
         $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
-        $membership = json_decode($c->customer_membership);
-        $membership->status = 'ACTIVE';
-        $membership->startPeriod = Carbon::now();
-        $membership->endPeriod = Carbon::now()->addDays(30);
-        $membershipData = json_encode($membership);
+        $startPeriod = Carbon::now();
+        $endPeriod = Carbon::now()->addDays(30);
+        if(!$c->customer_membership){
+            $membershipData = json_encode([
+                'status'=> 'ACTIVE',
+                'startPeriod'=> $startPeriod,
+                'endPeriod' => $endPeriod,
+                'discount' => 10
+            ]);
+        } else{
+            $membership = json_decode($c->customer_membership);
+            $membership->status = 'ACTIVE';
+            $membership->startPeriod = $startPeriod;
+            $membership->endPeriod = $endPeriod;
+            $membership->discount = 10;
+            $membershipData = json_encode($membership);
+        }
         DB::table('customers')->where('id', $c->id)->update([
             'customer_membership' => $membershipData
         ]);

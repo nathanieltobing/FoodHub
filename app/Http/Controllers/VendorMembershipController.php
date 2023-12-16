@@ -35,11 +35,22 @@ class VendorMembershipController extends Controller
     public function registerMembership()
     {
         $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
-        $membership = json_decode($v->vendor_membership);
-        $membership->status = 'ACTIVE';
-        $membership->startPeriod = Carbon::now();
-        $membership->endPeriod = Carbon::now()->addDays(30);
-        $membershipData = json_encode($membership);
+        $startPeriod = Carbon::now();
+        $endPeriod = Carbon::now()->addDays(30);
+        if(!$v->vendor_membership){
+            $membershipData = json_encode([
+                'status' => 'ACTIVE',
+                'startPeriod' => $startPeriod,
+                'endPeriod' => $endPeriod
+            ]);
+        } else{
+            $membership = json_decode($v->vendor_membership);
+            $membership->status = 'ACTIVE';
+            $membership->startPeriod = $startPeriod;
+            $membership->endPeriod = $endPeriod;
+            $membershipData = json_encode($membership);
+        }
+
         DB::table('vendors')->where('id', $v->id)->update([
             'vendor_membership' => $membershipData
         ]);

@@ -33,6 +33,6 @@ class PromotionController extends Controller
 
         $p->update(['promotion_id' => $promotion->id]);
 
-        return redirect('/registermembership/products');
+        return redirect('/registermembership');
     }
 }
