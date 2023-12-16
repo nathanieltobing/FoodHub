@@ -13,6 +13,9 @@
     <link href="{{ asset('assets/style.css') }}" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <script src="js/YourExternalJQueryScripts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="{{ asset('assets/script.js') }}"></script>
@@ -49,12 +52,12 @@
           </div>
           @elseif(Auth::guard('webadmin')->check())
             {{-- Button khusus Admin --}}
-            <a class="text-white" href="/home">Admin</a>
+            <a href="/manageUser" style="--i:3">Manage User</a>
             <a href="/logout" style="--i:3">Logout</a>
           @else
             {{--Button belom login --}}
             <a href="/login" style="--i:3">Login</a>
-            <a href="/register" style="--i:3">Register</a>
+            <a href="/register/customer" style="--i:3">Register</a>
           @endif
     </nav>
 

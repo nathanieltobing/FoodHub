@@ -97,7 +97,7 @@ class VendorController extends UserController
     public function checkInAnotherVendorPage($id){
         $carts = session()->get('cart');
         if(empty($carts)){
-            return "1";
+            return "-1";
         }
         else{
             $cart = reset($carts);
@@ -131,7 +131,7 @@ class VendorController extends UserController
         $editmode = false;
         $editprofpic = false;
         $membership = json_decode($v->vendor_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('vendorprofile',[
             'user' => $v,

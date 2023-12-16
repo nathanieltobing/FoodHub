@@ -89,18 +89,4 @@
               <script src="{{ asset('assets/popup.js') }}"></script>
         </div>
     </div>
-
-    {{-- <div class="popups" id="popup-1">
-        <div class="overlay"></div>
-        <div class="content-popup">
-            <div class="close-btn" onclick="togglePopup()">&times;</div>
-            <h1>Title</h1>
-            <p> You can't add products from 2 different vendors</p>
-        </div>
-
-
-    </div>
-    <button onclick="togglePopup()" class="submit-button" style="margin-left:5em;" type="submit" >Add to Cart</button>
-
-    <script src="{{ asset('assets/popup.js') }}"></script> --}}
 @endsection

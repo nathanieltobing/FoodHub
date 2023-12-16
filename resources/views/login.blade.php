@@ -15,33 +15,28 @@ document.addEventListener("DOMContentLoaded", function(arg) {
   vendorButton.addEventListener("click", updateButton);
   adminButton.addEventListener("click", updateButton);
 
+  
+  let btnElementHighlight =customerButton;
   function updateButton(button){
     if(button.currentTarget.value === "CUSTOMER" ){
-    customerButton.style.border="1px solid black";
-
-    customerButton.onclick=function(){
-    customerButton.style.border="none";
-    }
-        role.value = "CUSTOMER";
+      btnElementHighlight.style.border="none";
+      btnElementHighlight = customerButton;
+      btnElementHighlight.style.border="1px solid gray";
+      role.value = "CUSTOMER";
     }
     else if(button.currentTarget.value === "VENDOR"){
-        vendorButton.style.border="1px solid black";
-
-            vendorButton.onclick=function(){
-            vendorButton.style.border="none";
-            }
+      btnElementHighlight.style.border="none";
+      btnElementHighlight = vendorButton;
+      btnElementHighlight.style.border="1px solid gray";
       role.value = "VENDOR";
 
     }
     else if(button.currentTarget.value === "ADMIN"){
-        adminButton.style.border="1px solid black";
-
-    adminButton.onclick=function(){
-    adminButton.style.border="none";
-                }
+      btnElementHighlight.style.border="none";
+      btnElementHighlight = adminButton;
+      btnElementHighlight.style.border="1px solid gray";
       role.value = "ADMIN";
     }
-      console.log(role.value);
   }
 //  console.log("test");
 //   let role = document.getElementById("hidden1");

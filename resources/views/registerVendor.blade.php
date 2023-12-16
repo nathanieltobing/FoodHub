@@ -112,7 +112,7 @@
                           </div>
 
                         </div>
-                        <div class="testimonial" style="width: 10rem;">
+                        <div class="testimonial" style="width: 10rem; border:1px solid gray">
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                           <div class="card-body">
 

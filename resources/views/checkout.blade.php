@@ -161,19 +161,19 @@
                             <div class="payment-method">
                                 <input type="radio" name="payment-method" id="method-1" checked>
                                 <label for="method-1" class="payment-method-item">
-                                    <img src="images/visa.png" alt="">
+                                    <img src="{{ asset('assets/images/visa.png') }}" alt="">
                                 </label>
                                 <input type="radio" name="payment-method" id="method-2">
                                 <label for="method-2" class="payment-method-item">
-                                    <img src="images/mastercard.png" alt="">
+                                    <img src="{{ asset('assets/images/mastercard.png') }}" alt="">
                                 </label>
                                 <input type="radio" name="payment-method" id="method-3">
                                 <label for="method-3" class="payment-method-item">
-                                    <img src="images/paypal.png" alt="">
+                                    <img src="{{ asset('assets/images/bca.jpg') }}" alt="">
                                 </label>
                                 <input type="radio" name="payment-method" id="method-4">
                                 <label for="method-4" class="payment-method-item">
-                                    <img src="images/stripe.png" alt="">
+                                    <img src="{{ asset('assets/images/bri.png') }}" alt="">
                                 </label>
                             </div>
                             <div class="payment-form-group">

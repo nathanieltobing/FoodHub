@@ -5,6 +5,7 @@ var buttons = document.getElementsByName("btnAdd");
 var e_btn=document.getElementById("error_trigger");
 let error = document.getElementById("hidden1");
 console.log(buttons);
+console.log(error.value);
 
 window.onload=function(){ 
     for(var i=0;i<buttons.length;i++){
