@@ -1,21 +1,23 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\PublisherController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\VendorController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\VendorMembershipController;
+use App\Http\Controllers\CustomerMembershipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,13 +61,12 @@ Route::post('/register/vendor', [VendorController::class, 'register']);
 
 Route::middleware(['checkauth'])->group(function(){
     Route::get('/orderlist',[OrderController::class, 'viewOrderList']);
-    Route::get('/cancelmembership',[MembershipController::class, 'viewCancelMembership']);
     Route::get('/registermembership',[MembershipController::class, 'ViewRegisterMembership']);
-    Route::middleware(['admin'])->group(function(){       
-    }); 
+    Route::middleware(['admin'])->group(function(){
+    });
     Route::middleware(['checkCustOrVend'])->group(function(){
-        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);       
-    }); 
+        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);
+    });
     Route::middleware(['customer'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         Route::post('/checkout',[OrderController::class, 'checkout']);
@@ -82,11 +83,11 @@ Route::middleware(['checkauth'])->group(function(){
         Route::get('/customer/editprofpic', [CustomerController::class, 'showEditPict']);
         Route::put('/customer/editprofpic', [CustomerController::class, 'editPicture']);
         Route::get('/customer/removeprofpic', [CustomerController::class, 'removePicture']);
-        Route::post('/customer/registermembership', [CustomerController::class, 'registerMembership']);
-        Route::post('/customer/cancelmembership', [CustomerController::class, 'cancelMembership']);
+        Route::post('/customer/registermembership', [CustomerMembershipController::class, 'registerMembership']);
+        Route::post('/customer/cancelmembership', [CustomerMembershipController::class, 'cancelMembership']);
         Route::get('/finishorder/{o:id}', [OrderController::class, 'finishOrder']);
         Route::post('/addreview/{o:id}', [ReviewController::class, 'addReview']);
-    }); 
+    });
 
     Route::middleware(['vendor'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
@@ -101,12 +102,11 @@ Route::middleware(['checkauth'])->group(function(){
         Route::get('/vendor/editprofpic', [VendorController::class, 'showEditPict']);
         Route::put('/vendor/editprofpic', [VendorController::class, 'editPicture']);
         Route::get('/vendor/removeprofpic', [VendorController::class, 'removePicture']);
-        Route::get('/registermembership/products', [MembershipController::class, 'showVendorProducts']);
-        Route::post('/vendor/registermembership', [VendorController::class, 'registerMembership']);
-        Route::post('/vendor/cancelmembership', [VendorController::class, 'cancelMembership']);
+        Route::post('/vendor/registermembership', [VendorMembershipController::class, 'registerMembership']);
+        Route::post('/vendor/cancelmembership', [VendorMembershipController::class, 'cancelMembership']);
         Route::get('/promotion/create/{p:id}', [PromotionController::class, 'viewCreatePromotion']);
         Route::post('/promotion/add/{p:id}', [PromotionController::class, 'addPromotion']);
-        
+
     });
      Route::get('/logout', [UserController::class, 'logout']);
 });
