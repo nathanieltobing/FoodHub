@@ -55,10 +55,9 @@ Route::get('/vendorList/search', [VendorController::class, 'search'])->name('ven
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
-Route::get('/orderDetail/{id}', [OrderDetailController::class, 'index']);
+Route::get('/orderdetail/{id}', [OrderDetailController::class, 'index']);
 
 Route::middleware(['checkauth'])->group(function(){
-    Route::get('/orderlist',[OrderController::class, 'viewOrderList']);
     Route::get('/cancelmembership',[MembershipController::class, 'viewCancelMembership']);
     Route::get('/registermembership',[MembershipController::class, 'ViewRegisterMembership']);
     Route::middleware(['admin'])->group(function(){    
@@ -69,7 +68,7 @@ Route::middleware(['checkauth'])->group(function(){
         Route::put('/deactivate/vendor/{id}',[AdminController::class, 'deActivateVendor']);
     }); 
     Route::middleware(['checkCustOrVend'])->group(function(){
-        Route::get('/orderlist/{c:id}',[OrderController::class, 'viewOrderList']);       
+        Route::get('/orderlist',[OrderController::class, 'viewOrderList']);   
     }); 
     Route::middleware(['customer'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);

@@ -86,7 +86,7 @@
             <h3 class="text-center mb-3">Membership</h3>
             <div class="form-group px-5 my-1 row">
                 <div class="col-sm-9">
-                    @if ($isMember)
+                    @if ($membership != null && $isMember)
                         <p class="text-center">Your membership expires in {{\Carbon\Carbon::parse($membership->endPeriod)->format('d M Y')}}</p>
                         <a href="/cancelmembership" id="membership" type="text" class="form-control text-center btn-danger text-light" style="text-decoration: none">Cancel member subscription</a>
                     @else
@@ -122,12 +122,12 @@
                         <input id="dob" name="dob" type="date" class="form-control" value="{{ $user->dob }}">
                     </div>
                 </div>
-                <div class="form-group px-5 my-1 row">
+                {{-- <div class="form-group px-5 my-1 row">
                     <label class="col-sm-3 my-1" for="title">Membership:</label>
                     <div class="col-sm-9">
                         <input id="membership" type="text" class="form-control" value="expires in {{\Carbon\Carbon::parse($membership->endPeriod)->format('d M Y')}}" readonly>
                     </div>
-                </div>
+                </div> --}}
                 <div class="form-group px-5 my-1 row">
                     <label class="col-sm-3 my-1" for="title">Email:</label>
                     <div class="col-sm-9">

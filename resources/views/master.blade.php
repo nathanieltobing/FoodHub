@@ -37,7 +37,7 @@
         @if(Auth::guard('webcustomer')->check())
           <div class="justify-content-center" style="gap: 50px;display :block">
             <a href="/vendorList" style="--i:3">Vendor List</a>
-            <a href="/orderlist/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Order List</a>
+            <a href="/orderlist" style="--i:3">Order List</a>
             {{-- <a href="/profile/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Membership</a> --}}
             <a href="/customer/profile" style="--i:3">Profile</a>
             <a href="/checkout" style="--i:3">Cart</a>
@@ -45,7 +45,7 @@
           </div>
           @elseif (Auth::guard('webvendor')->check())
           <div class="justify-content-center" style="gap: 50px">
-            <a href="/orderlist/{{Auth::guard('webvendor')->user()->id}}" style="--i:3">Order List</a>
+            <a href="/orderlist" style="--i:3">Order List</a>
             {{-- <a href="/homepage" style="--i:3">Membership</a> --}}
             <a href="/vendor/profile" style="--i:3">Profile</a>
             <a href="/logout" style="--i:3">Logout</a>

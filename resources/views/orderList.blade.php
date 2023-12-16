@@ -49,8 +49,8 @@
                             {{-- <h5 class="card-text mx-1">{{$o->vendors->name}}</h5> --}}
                             <ul class="list-unstyled">
                                 @foreach ($o->order_details as $od)
-                                    <li class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;" >- {{ $od->product_name }}</li>
-                                    <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name"> x2 </span>
+                                    <li class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;" >{{ $od->product_name }}</li>
+                                    <span style="font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name"> x2 </span>
                                 @endforeach
                             </ul>
                         </div>
@@ -78,8 +78,8 @@
                         <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->total_price)}}</p>
                         @if(in_array($o->status, ['ON GOING']))
                         <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
-                            <span ><a href="/finishorder/{{$o->id}}" class="btn btn-danger" style="width: 100%;margin-right:80px">Reject</a> </span>
-                            <span ><a href="/finishorder/{{$o->id}}" class="btn btn-success" style="width: 100%;margin-right:80px">Accept</a> </span>
+                            <span ><a href="/finishorder/{{$o->id}}" class="btn btn-danger" style="width: 100%;margin-right:80px">Finish Order</a> </span>
+                            {{-- <span ><a href="/finishorder/{{$o->id}}" class="btn btn-success" style="width: 100%;margin-right:80px">Accept</a> </span> --}}
                             {{-- <span ><a href="/finishorder/{{$o->id}}" class="btn btn-danger" style="width: 200%">Reject</a> </span> --}}
                         </div>
                         @endif

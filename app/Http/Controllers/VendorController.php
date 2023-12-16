@@ -121,8 +121,9 @@ class VendorController extends UserController
 
     public function search(Request $request)
     {
+        // $vendorsPaginate = Vendor::paginate(3);
         return view('vendorList',[
-            'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->get()
+            'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->paginate(3)
         ]);
     }
 
@@ -147,7 +148,7 @@ class VendorController extends UserController
         $editmode = true;
         $editprofpic = false;
         $membership = json_decode($v->vendor_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('vendorprofile',[
             'user' => $v,
@@ -163,7 +164,7 @@ class VendorController extends UserController
         $editmode = true;
         $editprofpic = true;
         $membership = json_decode($v->vendor_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('vendorprofile',[
             'user' => $v,

@@ -70,7 +70,7 @@
                           @if ($errors->any())
                           <ul class="ps-5">
                               @foreach ($errors->all() as $error)
-                                  <li>{{ $error }}</li>
+                                  <li class="text-danger">{{ $error }}</li>
                               @endforeach
                           </ul>
                           @endif
@@ -92,7 +92,7 @@
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                           <div class="card-body">
                             <a href="/register/customer" class="card-title">CUSTOMER</a>
-
+                          
                           </div>
 
                         </div>

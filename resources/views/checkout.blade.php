@@ -85,7 +85,7 @@
                         </tr>                      
                         @endforeach
                     @else
-                        <p>Your cart is empty</p>
+                        <p class ="d-flex justify-content-center" style="font-size :50px;" >Your cart is empty</p>
                         
                     @endif
                    
@@ -105,12 +105,12 @@
                 <div class="payment-header">
                     <div class="payment-header-icon"><i class="ri-flashlight-fill"></i></div>
                     <div class="payment-header-title">Order Summary</div>
-                    {{-- <p class="payment-header-description">This is the order</p> --}}
+                    
                 </div>
                 <div class="payment-content">
                     <div class="payment-body">
                         <div class="payment-plan">
-                            {{-- <div class="payment-plan-type">Order</div> --}}
+                            
                             <div class="payment-plan-info">
                                  @if ($customerMembership != null && $customerMembership['status'] =='ACTIVE')
                                     <div class="payment-plan-info-name">Professional Membership</div>
@@ -119,7 +119,7 @@
                                  @endif                           
 
                             </div>
-                            {{-- <a href="#" class="payment-plan-change">Change</a> --}}
+                           
                         </div>
                         <div class="payment-summary">                  
                             <div class="payment-summary-item">
