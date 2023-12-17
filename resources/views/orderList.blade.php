@@ -49,10 +49,17 @@
                             {{-- <h5 class="card-text mx-1">{{$o->vendors->name}}</h5> --}}
                             <ul class="list-unstyled">
                                 @foreach ($o->order_details as $od)
-                                    <li class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;" >{{ $od->product_name }}</li>
-                                    <span style="font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name"> x2 </span>
+
+               
+
+                                    <li class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;" >- {{ $od->product_name }}</li>
+                                    <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name"> x2 </span>
+
                                 @endforeach
                             </ul>
+                            <div class="actionBtn">
+                                <button>View Detail</button>
+                            </div>
                         </div>
 
                     </div>

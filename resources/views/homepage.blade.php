@@ -13,7 +13,7 @@
     <div class="list">
       @foreach ($featuredVendors as $vendor)
         <div class="item">
-          <img src="{{Storage::url($vendor->vendor_picture)}}" alt="">
+          <a href="/products/{{$vendor->id}}"><img src="{{Storage::url($vendor->vendor_picture)}}" alt=""></a>
         </div>
       @endforeach
     </div>
@@ -55,23 +55,23 @@
     <div class="inner">
       <h2 class="h2-text">Best Vendors</h2>
       <div class="border"></div>
-      
+
       <div class="row">
         @foreach ($topRatedVendors as $vendor)
           <div class="col">
             <div class="testimonial">
-              <img src="{{Storage::url($vendor->vendor_picture)}}" alt="">
+              <a href="/products/{{$vendor->id}}"><img src="{{Storage::url($vendor->vendor_picture)}}" alt=""></a>
               <div class="name">{{$vendor->name}}</div>
               <div class="stars">
                 @for ($i = 0; $i < $vendor->rating ; $i++)
                   <i class="fas fa-star"></i>
-               @endfor             
+               @endfor
               </div>
 
 
             </div>
           </div>
-            
+
         @endforeach
 
       </div>
