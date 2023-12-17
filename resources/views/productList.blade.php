@@ -20,7 +20,7 @@
                             <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
                 @endif
                 @if ($vendor->image)
-                            <img src="{{ url('storage/images/'.$vendor->image) }}">
+                            <img src="{{Storage::url($vendor->image)}}">
                 @endif
                 {{-- <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""> --}}
             </div>
@@ -49,8 +49,8 @@
             <h1>Product List</h1>
         @else
             <div class="d-flex">
-                <h1 style="padding-top :0%" class="align-self-end">Product List</h1>                       
-            <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:green;text-decoration:none;color:white"id="editProduct">Add Product</a>               
+                <h1 style="padding-top :0%" class="align-self-end">Product List</h1>
+            <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:green;text-decoration:none;color:white"id="editProduct">Add Product</a>
             </div>
         @endif
         <hr class="bg-dark">
@@ -78,10 +78,10 @@
                                         <button class="submit-button" style="margin-left:5em;" type="submit" id="error_trigger">Add to Cart</button>
                                     </form>
                                 @else
-                                    <button class="submit-button" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button> 
-                                @endif                    
+                                    <button class="submit-button" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button>
+                                @endif
                             @else
-                                <a href="/product/vendor/edit/{{$product->id}}" class="submit-button" style="margin-left:5em;text-decoration:none;color:white">Edit</a>  
+                                <a href="/product/vendor/edit/{{$product->id}}" class="submit-button" style="margin-left:5em;text-decoration:none;color:white">Edit</a>
                             @endif
 
                         </div>
@@ -92,7 +92,7 @@
             @endforelse
             <div class = "d-flex justify-content-center mt-4">
                 {{$products->links()}}
-              </div>  
+              </div>
               @if (Auth::guard('webcustomer')->check())
                 <input type="hidden" id="hidden1" name="role" value={{$error}}>
                 <div class="popups" id="error" style="width: 50%">
@@ -105,7 +105,7 @@
                         <a href="#" class="buttons" id="e_button">EXIT</a>
                         </form>
                     </div>
-                    </div>   
+                    </div>
               @endif
               <script src="{{ asset('assets/popup.js') }}"></script>
         </div>
