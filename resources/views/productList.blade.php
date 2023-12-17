@@ -16,11 +16,17 @@
     <div class="covering" style="margin-top:7%">
         <div class="cards">
             <div class="imgBx">
-                <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+                @if(!$vendor->image)
+                            <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
+                @endif
+                @if ($vendor->image)
+                            <img src="{{Storage::url($vendor->image)}}">
+                @endif
+                {{-- <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""> --}}
             </div>
             <div class="content" style="margin-left: -80%;">
                 <div class="details">
-                    <h2>Tobing Catering <br><span> Catering for bla ba asdasd asdasdadasdasdasdasda</span></h2>
+                    <h2>{{$vendor->name}} <br><span>{{$vendor->description}}</span></h2>
 {{--
                     <div class="data">
                         <h3>342 <br> <span> Review</span> </h3>
@@ -29,7 +35,7 @@
                     </div> --}}
                     <div class="actionBtn">
                         {{-- <button style="height: 40px">Message</button> --}}
-                        <button style="margin-top: 10px">+620817598474 </button>
+                        <button style="margin-top: 10px">{{$vendor->phone}}</button>
                     </div>
                 </div>
             </div>
@@ -63,7 +69,7 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <h6 class="card-title">Category : {{ $product->categories->name }}</h6>
                             <p class="card-text">{{ $product->description }}</p>
-                            <p class="card-text">Harga: Rp{{number_format($product->price,2,",",".")}}</p>
+                            <h6 class="card-text">Rp{{number_format($product->price,2,",",".")}}</h6>
                             @if (Auth::guard('webcustomer')->check())
                                 @if ($error == '-1')
                                     <form action="/products/add/{{$product->id}}" method="POST">

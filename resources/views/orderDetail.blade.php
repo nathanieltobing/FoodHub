@@ -29,7 +29,12 @@
                 ?>
                 @foreach ($orderDetails as $od)
                 <?php
-                    $totalPrice += $od->price * $od->quantity;
+                     if($od->discount_price != null){
+                        $totalPrice += $od->discount_price * $od->quantity;
+                     }
+                     else{
+                        $totalPrice += $od->price * $od->quantity;
+                     }
                  ?>
                     <div class="row">
                     <div class="col-md-6 col-lg-6">
@@ -70,12 +75,21 @@
                 </div>
                 
               </div>
-  
-              <div class="row my-4">
-                <div class="col-md-6 offset-md-8 col-lg-6 offset-lg-9">
-                  <p class="lead fw-bold mb-0" style="color: #f37a27;">Rp{{number_format($totalPrice + 2000,2,",",".")}}</p>
+              
+              @if ($order->membership_discount != null)
+                <div class="row my-4">
+                  <div class="col-md-6 offset-md-8 col-lg-6 offset-lg-9">
+                    <p class="lead fw-bold mb-0" style="color: #f37a27;">Rp{{number_format($totalPrice + 2000 - (int)($totalPrice * $order->membership_discount),2,",",".")}}</p>
+                  </div>
                 </div>
-              </div>
+              @else
+                <div class="row my-4">
+                  <div class="col-md-6 offset-md-8 col-lg-6 offset-lg-9">
+                    <p class="lead fw-bold mb-0" style="color: #f37a27;">Rp{{number_format($totalPrice + 2000 ,2,",",".")}}</p>
+                  </div>
+                </div>              
+              @endif
+              
   
               <p class="lead fw-bold mb-4 pb-2" style="color: #f37a27;">Tracking Order</p>
   
@@ -141,10 +155,7 @@
   
                 </div>
               </div>
-  
-              {{-- <p class="mt-4 pt-2 mb-0">Want any help? <a href="#!" style="color: #f37a27;">Please contact
-                  us</a></p> --}}
-  
+
             </div>
           </div>
         </div>

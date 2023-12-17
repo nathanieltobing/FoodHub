@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Email;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Vendor;
@@ -10,6 +11,7 @@ use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -43,17 +45,6 @@ class OrderController extends Controller
             'status' => $status
         ]);
         return redirect()->back()->with('message','Order #'.$o->id.' status edited successfully!');
-    }
-
-    public function finishOrder(Order $o){
-        DB::table('orders')->where([
-            ['id',$o->id]
-            ])->update([
-            'status' => 'FINISHED'
-        ]);
-        return view('finishOrder',[
-            'order' => $o,
-        ]);
     }
 
     public function checkout(Request $req){
@@ -103,12 +94,18 @@ class OrderController extends Controller
             $order_detail->product_name = $cart['name'];
             $order_detail->order_id = $most_recent_order->id;
             $order_detail->product_id = $cart['product_id'];
-            if($cart->discounted_price != null){
+            if($cart['discounted_price'] != null){
                 $order_detail->discount_price = $cart->discounted_price;
             }
             $order_detail->save();
         }
+        $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
+        $this->sendEmail($most_recent_order,$orderDetails);
         session()->put('cart', []);
         return view('succesfulPage');
+     }
+
+     public function sendEmail($order,$orderDetails){
+        Mail::to('nathanieltobing@gmail.com')->send(new Email($order,$orderDetails));
      }
 }
