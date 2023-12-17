@@ -69,7 +69,15 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <h6 class="card-title">Category : {{ $product->categories->name }}</h6>
                             <p class="card-text">{{ $product->description }}</p>
-                            <h6 class="card-text">Rp{{number_format($product->price,2,",",".")}}</h6>
+                            @if(!$product->promotions)
+                                <h6 class="card-text">Rp{{number_format($product->price,2,",",".")}}</h6>
+                            @else
+                            @php
+                                $discountedPrice = $product->price - $product->promotions->discount;
+                            @endphp
+                                <h6 class="card-text">Rp{{number_format($discountedPrice,2,",",".")}}</h6>
+                                <small><p class="card-text" style="text-decoration: line-through">Rp{{number_format($product->price,2,",",".")}}</p></small>
+                            @endif
                             @if (Auth::guard('webcustomer')->check())
                                 @if ($error == '-1')
                                     <form action="/products/add/{{$product->id}}" method="POST">

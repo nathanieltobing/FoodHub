@@ -58,7 +58,7 @@
                 </div>
                 <div class="card-text d-flex flex-column">
                     <span class="payment-summary-price" style="font-size:18px;font-weight: 700;margin-left:8px;margin-top:10px;justify-content-start">Total Belanja</span>
-                    <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->total_price)}}</p>
+                    <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->total_price,2,",",".")}}</p>
                         @if($o->status == 'ON GOING' && Auth::guard('webcustomer')->check())
                         <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
                             <span ><a href="#" class="btn btn-primary" style="width: 100%;margin-right:80px" data-toggle="modal" data-target="#FinishOrderModal{{$o->id}}">Finish Order</a> </span>

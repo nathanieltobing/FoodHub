@@ -27,9 +27,9 @@
                             <tr>
                                 <td><img src="{{Storage::url($product->product_picture)}}" alt="" style="height: 5rem"></td>
                                 <td>{{ $product->name }}</td>
-                                <td>Rp{{ $product->price }}</td>
+                                <td>Rp{{number_format($product->price,2,",",".")}}</td>
                                 @if ($product->promotion_id)
-                                    <td>Rp{{$product->promotions->discount}}</td>
+                                    <td>Rp{{number_format($product->promotions->discount,2,",",".")}}</td>
                                     @php
                                         $countDiscountedProducts++;
                                     @endphp
