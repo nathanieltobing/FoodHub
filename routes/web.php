@@ -18,6 +18,7 @@ use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\VendorMembershipController;
 use App\Http\Controllers\CustomerMembershipController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

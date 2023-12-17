@@ -48,8 +48,9 @@
                                     @endif
                                 @endforeach
                             </ul>
-                            <div class="actionBtn">
-                                <button>View Detail</button>
+                            <div class="actionBtn">   
+                                <a href="/orderdetail/{{$o->id}}" style="text-decoration: none;"> <button>View Detail</button></a>                             
+                               
                             </div>
                         </div>
                     </div>
@@ -111,6 +112,8 @@
        </div>
        <br>
       @endforeach
+       
+
       @else
         <p>You have no orders yet!</p>
       @endif

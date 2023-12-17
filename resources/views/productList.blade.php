@@ -20,7 +20,7 @@
                             <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
                 @endif
                 @if ($vendor->image)
-                            <img src="{{ url('storage/images/'.$vendor->image) }}">
+                            <img src="{{Storage::url($vendor->image)}}">
                 @endif
                 {{-- <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""> --}}
             </div>
