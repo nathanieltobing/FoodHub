@@ -7,6 +7,7 @@
         <div class="col-lg-12 col-xl-11">
           <div class="card text-black mb-5" style="border-radius: 25px;">
             <div class="card-body p-md-5">
+               <a href="/productList"> <i class="fa-solid fa-arrow-left fa-xl me-3 fa-fw"></i></a>
               <div class="row justify-content-center">
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">FH</p>
 
@@ -21,33 +22,35 @@
                   <form action="/addProduct" method="POST" enctype="multipart/form-data" class="mx-1 mx-md-4">
                     @csrf
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                      <i class="fa-solid fa-pen-to-square fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                      {{-- "fa-regular fa-pen fa-lg me-3 fa-fw" --}}
+                      {{-- fa-solid fa-pen-to-square --}}
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" name="name" class="form-control" style="border: 1px solid;" />
+                        <input type="text" id="form3Example1c" name="name" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500" />
                         <label class="form-label" for="form3Example1c" style="font-size:16 px;font-weight:700">Product Name</label>
                       </div>
 
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                      <i class="fa-solid fa-square-poll-vertical fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="number" id="form3Example3c" name="quantity" class="form-control" style="border: 1px solid;"/>
+                        <input type="number" id="form3Example3c" name="quantity" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500"/>
                         <label class="form-label" for="form3Example3c" style="font-size:16 px;font-weight:700">Quantity</label>
                       </div>
                     </div>
 
                     <input type="hidden" name="role" value="CUSTOMER">
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                      <i class="fa-solid fa-tags fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example4c" name="price" class="form-control" style="border: 1px solid;"/>
+                        <input type="text" id="form3Example4c" name="price" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500"/>
                         <label class="form-label" for="form3Example4c" style="font-size:16 px;font-weight:700">Price</label>
                       </div>
 
                     </div>
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
+                      <i class="fa-solid fa-list fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
                       <div class="form-outline flex-fill mb-0">
                         <select  class="select" name="category" id="format">
                           <option value="Main Course">Main Course</option>
@@ -58,14 +61,14 @@
                       </div>
                     </div>
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
+                      <i class="fa-solid fa-square-pen fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
                       <div class="form-outline flex-fill mb-0 ">
-                        <textarea rows="3" cols="22" name="desc" placeholder="" class="form-control" style="border: 1px solid;"></textarea>
+                        <textarea rows="3" cols="22" name="desc" placeholder="" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500"></textarea>
                         <label class="form-label" for="form3Example1c" style="font-size:16 px;font-weight:700">Description</label>
                       </div>
                     </div>
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
+                      <i class="fas fa-image fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
                         <div class="form-outline flex-fill mb-0">
                             <input class="form-control" name="dp" type="file" id="formFile" style="border: 1px solid;font-size:16 px;font-weight:500">
                           <label class="form-label" for="form3Example1c" style="font-size:16 px;font-weight:700">Upload your product's picture</label>

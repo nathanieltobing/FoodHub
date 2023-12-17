@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
   vendorButton.addEventListener("click", updateButton);
   adminButton.addEventListener("click", updateButton);
 
-  
+
   let btnElementHighlight =customerButton;
   function updateButton(button){
     if(button.currentTarget.value === "CUSTOMER" ){
@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
         <div class="col-lg-12 col-xl-11">
           <div class="card text-black mb-5" style="border-radius: 25px;">
             <div class="card-body p-md-5">
+                <a href="/productList"> <i class="fa-solid fa-arrow-left fa-xl me-3 fa-fw"></i></a>
               <div class="row justify-content-center">
                 <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 " style=" font-weight: 700; color:#222; font-family: Poppins;">Login</p>
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1" style ="margin-top: 48px">
@@ -107,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                       </div> --}}
 
                     <div class="d-grid gap-2 mb-3 mb-lg-4">
-                      <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 500; font-family: Poppins;">Login</button>
+                      <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 500; font-family: Poppins;background-color:var(--indigo-500)">Login</button>
                     </div>
                     {{-- <div class="row text-danger"> --}}
                       @if(session()->has('error'))

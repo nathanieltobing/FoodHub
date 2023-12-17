@@ -32,11 +32,11 @@
                     <td>Total</td>
                 </tr>
             </thead>
-            
+
             <?php
                 $totalPrice = 0;
             ?>
-            <tbody>           
+            <tbody>
                     @foreach ($carts as $cart)
                     <?php
                         $totalPrice += $cart['price'] * $cart['quantity'];
@@ -49,7 +49,7 @@
                                 <button type="submit" style="border:0; background:none;"><i class="fas fa-trash alt"></i></button>
                             </form>
                         </td>
-                        
+
                         <td ><img src="{{Storage::url($cart['image'])}}" alt="" style="margin-top:4px;margin-bottom:4px"></td>
 
                     <td>
@@ -63,25 +63,25 @@
                             <div class="wrappers">
                                 <form action="/minQuantity/{{$cart['product_id']}}" method="POST">
                                     @csrf
-                                    <button type="submit" style="border:0; background:none;"><span class="minus">- </span></i></button>    
-                                </form>                                      
-                                <span class="num">{{$cart['quantity']}} </span>
+                                    <button type="submit" style="border:0; background:none;margin-left:10px"><span style="margin-right: 10px" class="minus">- </span></i></button>
+                                </form>
+                                <span style="margin-left: 10px" class="num">{{$cart['quantity']}} </span>
                                 <form action="/addQuantity/{{$cart['product_id']}}" method="POST">
                                     @csrf
-                                    <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button> 
-                                </form>                                     
-                                                                   
-                            </div>  
-                        </td>       
-                                                   
+                                    <button type="submit" style="border:0; background:none;margin-right:10px"><span style="margin-left: 10px" class="plus">+ </span></i></button>
+                                </form>
+
+                            </div>
+                        </td>
+
                         <td> <div class="payment-summary-price">Rp{{number_format($cart['price'] * $cart['quantity'],2,",",".")}}</div></td>
                         {{-- <td> <div class="payment-summary-price">{{Request::input('quantity')}}</div></td> --}}
                        <?php
-                            
+
                        ?>
-                    </tr>                      
-                    @endforeach               
-               
+                    </tr>
+                    @endforeach
+
 
             </tbody>
         </table>
@@ -89,8 +89,8 @@
     <?php
         $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
         if($customerMembership != null){
-            $customerMembership = json_decode($customerMembership, true);                             
-        }                              
+            $customerMembership = json_decode($customerMembership, true);
+        }
     ?>
 
     <div id="cart-bottom" class="container">
@@ -98,23 +98,23 @@
             <div class="payment-header">
                 <div class="payment-header-icon"><i class="ri-flashlight-fill"></i></div>
                 <div class="payment-header-title">Order Summary</div>
-                
+
             </div>
             <div class="payment-content">
                 <div class="payment-body">
                     <div class="payment-plan">
-                        
+
                         <div class="payment-plan-info">
                              @if ($customerMembership != null && $customerMembership['status'] =='ACTIVE')
                                 <div class="payment-plan-info-name">Professional Membership</div>
                              @else
                                 <div class="payment-plan-info-name">Regular Customer</div>
-                             @endif                           
+                             @endif
 
                         </div>
-                       
+
                     </div>
-                    <div class="payment-summary">                  
+                    <div class="payment-summary">
                         <div class="payment-summary-item">
                             <div class="payment-summary-name">Subtotal</div>
                             <div class="payment-summary-price">Rp{{number_format($totalPrice,2,",",".")}}</div>
@@ -137,7 +137,7 @@
                             @if ($customerMembership != null)
                                 <div class="payment-summary-price">Rp{{number_format($totalPrice + 2000 - (int)($totalPrice * $customerMembership['discount'] / 100),2,",",".")}}</div>
                             @else
-                                <div class="payment-summary-price">Rp{{number_format($totalPrice + 2000 ,2,",",".")}}</div>     
+                                <div class="payment-summary-price">Rp{{number_format($totalPrice + 2000 ,2,",",".")}}</div>
                             @endif
                         </div>
                     </div>
@@ -206,7 +206,7 @@
 
     @else
        <p class ="d-flex justify-content-center" style="font-size :45px;" >Your cart is empty<i class="fa-regular fa-face-frown" style="margin-left:1%; margin-top:14px;"></i></p>
-       
+
     @endif
 
   </div>

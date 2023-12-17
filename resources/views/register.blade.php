@@ -7,6 +7,7 @@
         <div class="col-lg-12 col-xl-11">
           <div class="card text-black mb-5" style="border-radius: 25px;">
             <div class="card-body p-md-5">
+                <a href="/productList"> <i class="fa-solid fa-arrow-left fa-xl me-3 fa-fw"></i></a>
               <div class="row justify-content-center">
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up as Customer</p>
 
@@ -60,7 +61,7 @@
                     </div> --}}
 
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins;">Register</button>
+                      <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Register</button>
                     </div>
 
                     <div class="row text-danger">
