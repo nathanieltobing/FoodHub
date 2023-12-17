@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
@@ -31,8 +30,8 @@ use App\Http\Controllers\CustomerMembershipController;
 */
 
 
-Route::get('/',[VendorController::class, 'indexHomepage']);
-Route::get('/homepage',[VendorController::class, 'indexHomepage']);
+Route::get('/',[VendorController::class, 'indexHomepage'])->middleware('checkIfAdmin');
+Route::get('/homepage',[VendorController::class, 'indexHomepage'])->middleware('checkIfAdmin');
 Route::get('/login', function () {
     return view('login');
 })->name('login')->middleware('guest');
@@ -70,16 +69,17 @@ Route::middleware(['checkauth'])->group(function(){
         Route::put('/deactivate/vendor/{id}',[AdminController::class, 'deActivateVendor']);
     });
     Route::middleware(['checkCustOrVend'])->group(function(){
-        Route::get('/orderlist',[OrderController::class, 'viewOrderList']);
-    });
+        Route::get('/orderlist',[OrderController::class, 'viewOrderList']);   
+        Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');
+        
+    }); 
     Route::middleware(['customer'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         Route::post('/checkout',[OrderController::class, 'checkout']);
         Route::post('/minQuantity/{id}',[ProductController::class, 'decreaseQuantity']);
-        Route::post('/addQuantity/{id}',[ProductController::class, 'addQuantity']);
-        Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
+        Route::post('/addQuantity/{id}',[ProductController::class, 'addQuantity']);     
         Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
-        Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');
+        Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
         Route::get('/checkout',[ProductController::class, 'cartIndex']);
         Route::delete('/checkout/{id}',[ProductController::class, 'deleteItem']);
         Route::get('/customer/profile',[CustomerController::class, 'viewCustomerProfile']);
@@ -102,6 +102,11 @@ Route::middleware(['checkauth'])->group(function(){
         Route::get('/editProduct/{id}',[ProductController::class, 'editIndex']);
         Route::post('/addProduct', [ProductController::class, 'insertProduct']);
         Route::get('/vendor/profile',[VendorController::class, 'viewVendorProfile']);
+        Route::get('/product/vendor',[VendorController::class, 'showVendorProductList']);
+        Route::get('/product/vendor/add',[ProductController::class, 'addIndex']);
+        Route::post('/product/vendor',[ProductController::class, 'insertProduct']);
+        Route::get('/product/vendor/edit/{id}',[ProductController::class, 'editIndex']);
+        Route::put('/product/vendor/{id}',[ProductController::class, 'editProduct']);
         Route::put('/vendor/editprofile',[VendorController::class, 'editProfile']);
         Route::post('/vendor/profile',[VendorController::class, 'enableEdit']);
         Route::get('/vendor/editprofpic', [VendorController::class, 'showEditPict']);
@@ -117,4 +122,3 @@ Route::middleware(['checkauth'])->group(function(){
 });
 Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
 Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
-Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');

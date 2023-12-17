@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'checkauth' => \App\Http\Middleware\CheckAuth::class,
         'checkCustOrVend' => \App\Http\Middleware\CheckCustOrVend::class,
+        'checkIfAdmin' => \App\Http\Middleware\CheckIfAdmin::class,
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'customer' =>\App\Http\Middleware\CheckCustomer::class,
         'vendor' =>\App\Http\Middleware\CheckVendor::class,

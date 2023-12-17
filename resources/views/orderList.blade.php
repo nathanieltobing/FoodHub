@@ -48,6 +48,9 @@
                                     @endif
                                 @endforeach
                             </ul>
+                            <div class="actionBtn">
+                                <button>View Detail</button>
+                            </div>
                         </div>
                     </div>
                 </div>

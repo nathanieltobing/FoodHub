@@ -58,11 +58,11 @@ class VendorController extends UserController
     public function register(Request $req){
 
         $rules = [
-            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',
+            'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
+            'phoneNumber' => 'required|regex:/^(0)[0-9]{11}/',
             'email' => 'required|email:rfc,dns',
-            'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
-            'category' => 'required', Rule::in(['Food', 'Beverages']),
-            'dp' => 'required|image',
+            'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),         
+            'dp' => 'image',
             'password' => 'required | min:8 | alpha_num |confirmed'
         ];
 
@@ -73,21 +73,23 @@ class VendorController extends UserController
             return back()->withErrors($validator);
         }
 
-        $file = $req->file('dp');
-        $imageName = time().'.'.$file->getClientOriginalExtension();
-        Storage::putFileAs('public/images', $file,$imageName);
-        $imageName = 'images/'.$imageName;
-
-
         $vendor = new Vendor();
+        if($req->hasFile('dp')){
+            $file = $req->file('dp');
+            $imageName = time().'.'.$file->getClientOriginalExtension();
+            Storage::putFileAs('public/images', $file,$imageName);
+            $imageName = 'images/'.$imageName;
+            $vendor->image = $imageName;
+        }
+
+        $vendor->phone = $req->phoneNumber;
+        $vendor->description ="";
+        $vendor->rating = 3;
         $vendor->role = $req->role;
         $vendor->name = $req->name;
         $vendor->email = $req->email;
-        $vendor->vendor_picture = $imageName;
         $vendor->password = bcrypt($req->password);
         $vendor->status = 'ACTIVE';
-
-
 
         $vendor->save();
 
@@ -116,6 +118,14 @@ class VendorController extends UserController
             'vendor' => $v,
             'products' => $products,
             'error' => $error
+        ]);
+    }
+
+    public function showVendorProductList(){
+        $products = Product::where('vendor_id',Auth::guard('webvendor')->user()->id)->paginate(3);
+        return view('productList',[
+            'products' => $products,
+            'vendor' => Auth::guard('webvendor')->user(),
         ]);
     }
 

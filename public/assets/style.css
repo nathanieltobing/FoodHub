@@ -1041,6 +1041,7 @@ input:checked + .payment-method-item::before {
     padding: 8px;
     transition: all .15s ease-in-out;
 }
+
 .submit-button:hover {
     background-color: var(--indigo-600);
 }

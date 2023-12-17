@@ -18,14 +18,13 @@ class CustomerController extends UserController
     public function register(Request $req){
 
         $rules = [
-            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',
+            'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
             'email' => 'required|email:rfc,dns',
             'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
             'password' => 'required | min:8 | alpha_num |confirmed'
         ];
 
         $validator = Validator::make($req->all(), $rules);
-        // $validator = $this->validate($req, $rules);
 
         if($validator->fails()){
             return back()->withErrors($validator);

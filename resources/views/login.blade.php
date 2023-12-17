@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                         <label class="form-label" for="form3Example3c">Email</label>
                       </div>
                     </div>
-                    <input type="hidden" id="hidden1" name="role" value="">
+                    <input type="hidden" id="hidden1" name="role" value="CUSTOMER">
                     <div class="d-flex flex-row align-items-center mb-2">
                       <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                             {{-- <div class="card-body"> --}}
                              <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
-                             <input style="border: none ;width: 10rem;" type="button" id="customerBtn" name="role_button" value="CUSTOMER">
+                             <input style="border: 1px solid gray ;width: 10rem;" type="button" id="customerBtn" name="role_button" value="CUSTOMER">
                              <!-- <label for="html">CUSTOMER</label><br> -->
                              {{-- </div> --}}
 

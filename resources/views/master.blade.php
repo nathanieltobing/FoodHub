@@ -46,13 +46,13 @@
           @elseif (Auth::guard('webvendor')->check())
           <div class="justify-content-center" style="gap: 50px">
             <a href="/orderlist" style="--i:3">Order List</a>
+            <a href="/product/vendor" style="--i:3">Products</a>
             {{-- <a href="/homepage" style="--i:3">Membership</a> --}}
             <a href="/vendor/profile" style="--i:3">Profile</a>
             <a href="/logout" style="--i:3">Logout</a>
           </div>
           @elseif(Auth::guard('webadmin')->check())
             {{-- Button khusus Admin --}}
-            <a href="/manageUser" style="--i:3">Manage User</a>
             <a href="/logout" style="--i:3">Logout</a>
           @else
             {{--Button belom login --}}

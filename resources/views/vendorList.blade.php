@@ -24,7 +24,7 @@
 
     @foreach ($vendors as $vendor)
     <div class="card text-center mx-2 mt-4" style="width: 30rem;">
-      <img src="{{Storage::url($vendor->vendor_picture)}}" class="card-img-top" alt="..." style="height:500px">
+      <img src="{{Storage::url($vendor->image)}}" class="card-img-top" alt="..." style="height:500px">
       <div class="card-body">
         <h5 class="card-title">{{$vendor->name}}</h5>
         <div class="stars">

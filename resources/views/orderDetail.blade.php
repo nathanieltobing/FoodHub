@@ -39,18 +39,24 @@
                     <div class="col-md-2 col-lg-2">
                         <p>{{$od->quantity}} qty</p>
                     </div>
+                    @if ($od->discount_price != null)
                     <div class="col-md-4 col-lg-4">
-                        <p>Rp{{number_format($od->price,2,",",".")}}</p>
-                    </div>
+                      <p>Rp{{number_format($od->discount_price,2,",",".")}}</p>
+                  </div>
+                    @else
+                      <div class="col-md-4 col-lg-4">
+                          <p>Rp{{number_format($od->price,2,",",".")}}</p>
+                      </div>
+                    @endif
                     </div>
                 @endforeach
-                @if ($od->discount != null)
+                @if ($order->membership_discount != null)
                 <div class="row">
                     <div class="col-md-8 col-lg-8">
-                      <p class="mb-0">Discount</p>
+                      <p class="mb-0">Membership Discount</p>
                     </div>
                     <div class="col-md-4 col-lg-4">
-                      <p class="mb-0">Rp{{number_format((int)($totalPrice * $od->discount),2,",",".")}}</p>
+                      <p class="mb-0">Rp{{number_format((int)($totalPrice * $order->membership_discount),2,",",".")}}</p>
                     </div>
                 </div>
                 @endif
@@ -116,7 +122,7 @@
                           <li class="list-inline-item items-list text-end" style="margin-right: 8px;">
                             <p class="py-1 px-2 rounded text-white" style="margin-right: -8px;background-color: red;">Rejected</p>
                           </li>
-                        @elseif($order->status == ' FINISHED')
+                        @elseif($order->status == 'FINISHED')
                         <li class="list-inline-item items-list">
                             <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Open</p
                               class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
@@ -126,7 +132,7 @@
                               class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">
                           </li>
                           <li class="list-inline-item items-list text-end" style="margin-right: 8px;">
-                            <p class="py-1 px-2 rounded text-white" style="margin-right: -8px;background-color: green;">Rejected</p>
+                            <p class="py-1 px-2 rounded text-white" style="margin-right: -8px;background-color: green;">Finished</p>
                           </li>
                         @endif
                     </ul>

@@ -27,6 +27,13 @@
                         <label class="form-label" for="form3Example1c">Vendor Name</label>
                       </div>
                     </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example1c" name="phoneNumber" class="form-control" />
+                        <label class="form-label" for="form3Example1c">Phone Number</label>
+                      </div>
+                    </div>
                     {{-- <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                         <div class="form-outline flex-fill mb-0">
@@ -38,7 +45,7 @@
                         </div>
                       </div> --}}
                       <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                        <i class="fas fa-image fa-lg me-3 fa-fw"aria-hidden="true" style="margin-bottom: 30px"></i>
                         <div class="form-outline flex-fill mb-0">
                             <input class="form-control" name="dp" type="file" id="formFile">
                           <label class="form-label" for="form3Example1c">Upload your vendor's picture</label>
@@ -68,12 +75,12 @@
                       </div>
                     </div>
 
-                    <div class="form-check d-flex justify-content-center mb-5">
+                    {{-- <div class="form-check d-flex justify-content-center mb-5">
                       <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
                       <label class="form-check-label" for="form2Example3">
                         I agree all statements in <a href="#!">Terms of service</a>
                       </label>
-                    </div>
+                    </div> --}}
 
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins;">Register</button>
