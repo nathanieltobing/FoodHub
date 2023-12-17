@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PromotionController extends Controller
 {
-    public function viewCreatePromotion(Product $p){
-        return view('createpromotion',[
-            'product' => $p
-        ]);
-    }
-
     public function addPromotion(Product $p, Request $req){
         $rules = [
             'discount' => 'required|numeric'

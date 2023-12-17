@@ -34,9 +34,34 @@
                                         $countDiscountedProducts++;
                                     @endphp
                                 @else
-                                <td><a href="/promotion/create/{{$product->id}}" class="btn btn-primary">Add discount to product</a></td>
+                                <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#AddDiscount{{$product->id}}">Add discount to product</a></td>
                                 @endif
                             </tr>
+                            <div class="modal fade" id="AddDiscount{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="AddDiscount{{$product->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="cancelMembershipModalLabel">Input discount for {{$product->name}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <p>Current price : Rp{{number_format($product->price,2,",",".")}}</p>
+                                                <form method="post" action="/promotion/add/{{$product->id}}">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label for="name">Discount:</label>
+                                                        <input type="number" class="form-control" id="discount" name="discount" placeholder="" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Add discount</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @empty
                             <tr>
                                 <td colspan="2">No products available</td>
