@@ -45,17 +45,6 @@ class OrderController extends Controller
         return redirect()->back()->with('message','Order #'.$o->id.' status edited successfully!');
     }
 
-    public function finishOrder(Order $o){
-        DB::table('orders')->where([
-            ['id',$o->id]
-            ])->update([
-            'status' => 'FINISHED'
-        ]);
-        return view('finishOrder',[
-            'order' => $o,
-        ]);
-    }
-
     public function checkout(Request $req){
         $rules = [
             'email' => 'required|email:rfc,dns',
