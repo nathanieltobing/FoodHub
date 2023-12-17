@@ -23,14 +23,9 @@ class VendorSeeder extends Seeder
             'name' => 'Vendor 1',
             'email' => 'vendor1@gmail.com',
             'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',
-            'category' => json_encode([
-                'Main Course',
-                'Desserts',
-                'Fruits'
-            ]),
+            'description' => 'Ini adalah contoh vendor category main course',         
             'rating' => 3,
-            'vendor_picture' => 'images/1702475666.jpg',
+            'image' => 'images/1702475666.jpg',
             'vendor_membership' => json_encode([
 
                 'id' => 1,
@@ -46,6 +41,7 @@ class VendorSeeder extends Seeder
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
+            'phone' => '081234567891',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -56,13 +52,8 @@ class VendorSeeder extends Seeder
             'email' => 'vendor2@gmail.com',
             'password' => bcrypt('123'),
             'description' => 'Ini adalah contoh vendor category main course',
-            'category' => json_encode([
-                'Main Course',
-                'Desserts',
-                'Fruits'
-            ]),
             'rating' => 3,
-            'vendor_picture' => 'images/1702475666.jpg',
+            'image' => 'images/1702475666.jpg',
             'vendor_membership' => json_encode([
 
                 'id' => 1,
@@ -78,6 +69,7 @@ class VendorSeeder extends Seeder
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
+            'phone' => '081234567891',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -87,17 +79,13 @@ class VendorSeeder extends Seeder
             'name' => 'Vendor 3',
             'email' => 'vendor3@gmail.com',
             'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',
-            'category' => json_encode([
-                'Main Course',
-                'Desserts',
-                'Fruits'
-            ]),
+            'description' => 'Ini adalah contoh vendor category main course',          
             'rating' => 3,
-            'vendor_picture' => 'images/1702475666.jpg',
+            'image' => 'images/1702475666.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
+            'phone' => '081234567891',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -107,17 +95,13 @@ class VendorSeeder extends Seeder
             'name' => 'Vendor 4',
             'email' => 'vendor4@gmail.com',
             'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',
-            'category' => json_encode([
-                'Main Course',
-                'Desserts',
-                'Fruits'
-            ]),
+            'description' => 'Ini adalah contoh vendor category main course',         
             'rating' => 3,
-            'vendor_picture' => 'images/1702475666.jpg',
+            'image' => 'images/1702475666.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
+            'phone' => '081234567891',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -127,14 +111,9 @@ class VendorSeeder extends Seeder
             'name' => 'Vendor 5',
             'email' => 'vendor5@gmail.com',
             'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',
-            'category' => json_encode([
-                'Main Course',
-                'Desserts',
-                'Fruits'
-            ]),
+            'description' => 'Ini adalah contoh vendor category main course',         
             'rating' => 3,
-            'vendor_picture' => 'images/1702475666.jpg',
+            'image' => 'images/1702475666.jpg',
             'vendor_membership' => json_encode([
                 'id' => 1,
                 'status' => 'INACTIVE',
@@ -149,6 +128,7 @@ class VendorSeeder extends Seeder
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
+            'phone' => '081234567891',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -159,13 +139,8 @@ class VendorSeeder extends Seeder
             'email' => 'vendor6@gmail.com',
             'password' => bcrypt('123'),
             'description' => 'Ini adalah contoh vendor category main course',
-            'category' => json_encode([
-                'Main Course',
-                'Desserts',
-                'Fruits'
-            ]),
             'rating' => 3,
-            'vendor_picture' => 'images/1702475666.jpg',
+            'image' => 'images/1702475666.jpg',
             'vendor_membership' => json_encode([
                 'id' => 1,
                 'status' => 'INACTIVE',
@@ -180,6 +155,7 @@ class VendorSeeder extends Seeder
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
+            'phone' => '081234567891',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);

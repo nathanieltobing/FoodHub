@@ -18,7 +18,7 @@ class CustomerController extends UserController
     public function register(Request $req){
 
         $rules = [
-            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',
+            'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
             'email' => 'required|email:rfc,dns',
             'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
             'password' => 'required | min:8 | alpha_num |confirmed'

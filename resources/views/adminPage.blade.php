@@ -118,7 +118,7 @@
                 @forelse ($vendors as $v)
                 <tr>
                   <td>
-                    <img src="{{Storage::url($v->vendor_picture)}}" alt="" />
+                    <img src="{{Storage::url($v->image)}}" alt="" />
                     <p>{{$v->name}}</p>
                   </td>
                   <td>{{\Carbon\Carbon::parse($v->created_at)->format('d-m-Y')}}</td>

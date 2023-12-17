@@ -19,7 +19,7 @@ class OrderDetailSeeder extends Seeder
             'quantity' => 5,
             'price' => 50000.00,
             'product_name' => 'product_test_1',
-            'discount' => 0.1,
+            'discount_price' => 40000,
             'order_id' => 1,
             'product_id' => 1
         ]);
