@@ -15,33 +15,28 @@ document.addEventListener("DOMContentLoaded", function(arg) {
   vendorButton.addEventListener("click", updateButton);
   adminButton.addEventListener("click", updateButton);
 
+  
+  let btnElementHighlight =customerButton;
   function updateButton(button){
     if(button.currentTarget.value === "CUSTOMER" ){
-    customerButton.style.border="1px solid black";
-
-    customerButton.onclick=function(){
-    customerButton.style.border="none";
-    }
-        role.value = "CUSTOMER";
+      btnElementHighlight.style.border="none";
+      btnElementHighlight = customerButton;
+      btnElementHighlight.style.border="1px solid gray";
+      role.value = "CUSTOMER";
     }
     else if(button.currentTarget.value === "VENDOR"){
-        vendorButton.style.border="1px solid black";
-
-            vendorButton.onclick=function(){
-            vendorButton.style.border="none";
-            }
+      btnElementHighlight.style.border="none";
+      btnElementHighlight = vendorButton;
+      btnElementHighlight.style.border="1px solid gray";
       role.value = "VENDOR";
 
     }
     else if(button.currentTarget.value === "ADMIN"){
-        adminButton.style.border="1px solid black";
-
-    adminButton.onclick=function(){
-    adminButton.style.border="none";
-                }
+      btnElementHighlight.style.border="none";
+      btnElementHighlight = adminButton;
+      btnElementHighlight.style.border="1px solid gray";
       role.value = "ADMIN";
     }
-      console.log(role.value);
   }
 //  console.log("test");
 //   let role = document.getElementById("hidden1");
@@ -85,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                         <label class="form-label" for="form3Example3c">Email</label>
                       </div>
                     </div>
-                    <input type="hidden" id="hidden1" name="role" value="">
+                    <input type="hidden" id="hidden1" name="role" value="CUSTOMER">
                     <div class="d-flex flex-row align-items-center mb-2">
                       <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
@@ -121,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                           @if ($errors->any())
                           <ul class="ps-5">
                               @foreach ($errors->all() as $error)
-                                  <li>{{ $error }}</li>
+                                  <li class="text-danger">{{ $error }}</li>
                               @endforeach
                           </ul>
                           @endif
@@ -142,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                           {{-- <img src="..." class="card-img-top" alt="..."> --}}
                             {{-- <div class="card-body"> --}}
                              <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
-                             <input style="border: none ;width: 10rem;" type="button" id="customerBtn" name="role_button" value="CUSTOMER">
+                             <input style="border: 1px solid gray ;width: 10rem;" type="button" id="customerBtn" name="role_button" value="CUSTOMER">
                              <!-- <label for="html">CUSTOMER</label><br> -->
                              {{-- </div> --}}
 

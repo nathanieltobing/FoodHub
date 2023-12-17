@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +23,9 @@ class ProductSeeder extends Seeder
             'description' => 'ini adalah first product dari vendor 1',
             'product_picture' => 'public/storage/images/1701874795.jpg',
             'category_id' => 1,
-            'vendor_id' => 1
+            'vendor_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('products')->insert([
@@ -33,7 +36,9 @@ class ProductSeeder extends Seeder
             'description' => 'ini adalah first product dari vendor 2',
             'product_picture' => '1701874795.jpg',
             'category_id' => 1,
-            'vendor_id' => 1
+            'vendor_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('products')->insert([
@@ -44,7 +49,9 @@ class ProductSeeder extends Seeder
             'description' => 'ini adalah first product dari vendor 3',
             'product_picture' => '1701874795.jpg',
             'category_id' => 1,
-            'vendor_id' => 1
+            'vendor_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('products')->insert([
@@ -55,7 +62,9 @@ class ProductSeeder extends Seeder
             'description' => 'ini adalah first product dari vendor 4',
             'product_picture' => '1701874795.jpg',
             'category_id' => 1,
-            'vendor_id' => 1
+            'vendor_id' => 2,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         DB::table('products')->insert([
@@ -66,7 +75,35 @@ class ProductSeeder extends Seeder
             'description' => 'ini adalah first product dari vendor 5',
             'product_picture' => '1701874795.jpg',
             'category_id' => 1,
-            'vendor_id' => 1
+            'vendor_id' => 2,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        DB::table('products')->insert([
+            'id' => 6,
+            'name' => 'Fifth Product',
+            'price' => 50000.00,
+            'stock' => 10,
+            'description' => 'ini adalah first product dari vendor 5',
+            'product_picture' => '1701874795.jpg',
+            'category_id' => 1,
+            'vendor_id' => 3,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        DB::table('products')->insert([
+            'id' => 7,
+            'name' => 'Fifth Product',
+            'price' => 50000.00,
+            'stock' => 10,
+            'description' => 'ini adalah first product dari vendor 5',
+            'product_picture' => '1701874795.jpg',
+            'category_id' => 1,
+            'vendor_id' => 3,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
     }
 }

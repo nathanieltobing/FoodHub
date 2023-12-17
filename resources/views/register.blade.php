@@ -8,7 +8,7 @@
           <div class="card text-black mb-5" style="border-radius: 25px;">
             <div class="card-body p-md-5">
               <div class="row justify-content-center">
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up as Customer/Vendor</p>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up as Customer</p>
 
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 " style=" font-weight: 700; color:#222; font-family: Poppins;">FH</p>
@@ -52,12 +52,12 @@
                       </div>
                     </div>
 
-                    <div class="form-check d-flex justify-content-center mb-5">
+                    {{-- <div class="form-check d-flex justify-content-center mb-5">
                       <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
                       <label class="form-check-label" for="form2Example3">
                         I agree all statements in <a href="#!">Terms of service</a>
                       </label>
-                    </div>
+                    </div> --}}
 
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins;">Register</button>
@@ -70,7 +70,7 @@
                           @if ($errors->any())
                           <ul class="ps-5">
                               @foreach ($errors->all() as $error)
-                                  <li>{{ $error }}</li>
+                                  <li class="text-danger">{{ $error }}</li>
                               @endforeach
                           </ul>
                           @endif
@@ -88,7 +88,10 @@
                         <div class="d-flex flex-row align-items-center mb-4" style="gap: 10px;">
 
 
+
+
                             <a href="/register/customer" class="card-body fullwidth" style="width: 10rem; background: #fff; padding: 27px; border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A;">CUSTOMER</a>
+
 
 
                             <a href="/register/vendor" class="card-body fullwidth" style="width: 10rem; background: #fff; padding: 27px; border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A;">VENDOR</a>

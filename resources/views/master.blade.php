@@ -13,6 +13,9 @@
     <link href="{{ asset('assets/style.css') }}" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <script src="js/YourExternalJQueryScripts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="{{ asset('assets/script.js') }}"></script>
@@ -34,7 +37,7 @@
         @if(Auth::guard('webcustomer')->check())
           <div class="justify-content-center" style="gap: 50px;display :block">
             <a href="/vendorList" style="--i:3">Vendor List</a>
-            <a href="/orderlist/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Order List</a>
+            <a href="/orderlist" style="--i:3">Order List</a>
             {{-- <a href="/profile/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Membership</a> --}}
             <a href="/customer/profile" style="--i:3">Profile</a>
             <a href="/checkout" style="--i:3">Cart</a>
@@ -42,19 +45,19 @@
           </div>
           @elseif (Auth::guard('webvendor')->check())
           <div class="justify-content-center" style="gap: 50px">
-            <a href="/orderlist/{{Auth::guard('webvendor')->user()->id}}" style="--i:3">Order List</a>
+            <a href="/orderlist" style="--i:3">Order List</a>
+            <a href="/product/vendor" style="--i:3">Products</a>
             {{-- <a href="/homepage" style="--i:3">Membership</a> --}}
             <a href="/vendor/profile" style="--i:3">Profile</a>
             <a href="/logout" style="--i:3">Logout</a>
           </div>
           @elseif(Auth::guard('webadmin')->check())
             {{-- Button khusus Admin --}}
-            <a class="text-white" href="/home">Admin</a>
             <a href="/logout" style="--i:3">Logout</a>
           @else
             {{--Button belom login --}}
             <a href="/login" style="--i:3">Login</a>
-            <a href="/register" style="--i:3">Register</a>
+            <a href="/register/customer" style="--i:3">Register</a>
           @endif
     </nav>
 

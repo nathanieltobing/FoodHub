@@ -25,7 +25,6 @@ class CustomerController extends UserController
         ];
 
         $validator = Validator::make($req->all(), $rules);
-        // $validator = $this->validate($req, $rules);
 
         if($validator->fails()){
             return back()->withErrors($validator);
@@ -57,7 +56,7 @@ class CustomerController extends UserController
         $editmode = false;
         $editprofpic = false;
         $membership = json_decode($c->customer_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('customerprofile',[
             'user' => $c,
@@ -73,7 +72,7 @@ class CustomerController extends UserController
         $editmode = true;
         $editprofpic = false;
         $membership = json_decode($c->customer_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('customerprofile',[
             'user' => $c,
@@ -89,7 +88,7 @@ class CustomerController extends UserController
         $editmode = true;
         $editprofpic = true;
         $membership = json_decode($c->customer_membership);
-        if($membership->status == 'ACTIVE') $ismember = true;
+        if($membership != null && $membership->status == 'ACTIVE') $ismember = true;
         else $ismember = false;
         return view('customerprofile',[
             'user' => $c,
@@ -148,33 +147,4 @@ class CustomerController extends UserController
 
         return redirect('customer/profile')->with('message','Profile picture removed!');
     }
-
-    public function cancelMembership()
-    {
-        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
-        $membership = json_decode($c->customer_membership);
-        $membership->status = 'INACTIVE';
-        $membership->startPeriod = '';
-        $membership->endPeriod = '';
-        $membershipData = json_encode($membership);
-        DB::table('customers')->where('id', $c->id)->update([
-            'customer_membership' => $membershipData
-        ]);
-        return redirect('customer/profile')->with('message','Membership successfuly cancelled!');
-    }
-
-    public function registerMembership()
-    {
-        $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
-        $membership = json_decode($c->customer_membership);
-        $membership->status = 'ACTIVE';
-        $membership->startPeriod = Carbon::now();
-        $membership->endPeriod = Carbon::now()->addDays(30);
-        $membershipData = json_encode($membership);
-        DB::table('customers')->where('id', $c->id)->update([
-            'customer_membership' => $membershipData
-        ]);
-        return redirect('customer/profile')->with('message','Sucessfully registered as member!');
-    }
-
 }

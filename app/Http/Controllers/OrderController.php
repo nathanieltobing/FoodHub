@@ -10,6 +10,8 @@ use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -20,6 +22,7 @@ class OrderController extends Controller
         } else if(Auth::guard('webcustomer')->check()){
             $user = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
         }
+        // dd($user->orders);
         return view('orderList',[
             'order' => $user->orders,
             'user' => $user
@@ -53,7 +56,20 @@ class OrderController extends Controller
         ]);
     }
 
-    public function checkout(){
+    public function checkout(Request $req){
+        $rules = [
+            'email' => 'required|email:rfc,dns',
+            'cardNumber' => 'required|numeric',
+            'expiryDate' => 'required',
+            'cvv' => 'required | numeric'
+        ];
+
+        $validator = Validator::make($req->all(), $rules);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
         $order = new Order();
         $order_detail = new OrderDetail();
         $carts = session()->get('cart');
@@ -64,17 +80,20 @@ class OrderController extends Controller
             $total_price+=$cart['price'] * $cart['quantity'];
             $vendor_id = $cart['vendor_id'];
         }
+        $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
+            if($customerMembership != null){
+                $customerMembership = json_decode($customerMembership, true);                             
+            }     
+
         $order->status = 'OPEN';
         $order->total_price = $total_price;
         $order->total_quantity = $total_quantity;
         $order->customer_id = Auth::guard('webcustomer')->user()->id;
+        if($customerMembership != null){
+            $order->membership_discount = (double)$customerMembership['discount'] /100;
+        }
         $order->vendor_id = $vendor_id;
         $order->save();
-
-        $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
-            if($customerMembership != null){
-                $customerMembership = json_decode($customerMembership, true);                             
-            }                              
 
         $most_recent_order = DB::table('orders')->latest()->first();
         foreach ($carts as $cart) {
@@ -84,7 +103,9 @@ class OrderController extends Controller
             $order_detail->product_name = $cart['name'];
             $order_detail->order_id = $most_recent_order->id;
             $order_detail->product_id = $cart['product_id'];
-            $order_detail->discount = (double)$customerMembership['discount'] /100;
+            if($cart->discounted_price != null){
+                $order_detail->discount_price = $cart->discounted_price;
+            }
             $order_detail->save();
         }
         session()->put('cart', []);

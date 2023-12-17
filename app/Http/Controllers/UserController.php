@@ -54,7 +54,7 @@ class UserController extends Controller
             case "ADMIN" :
                 if(Auth::guard('webadmin')->attempt($credential,true)){
                     Session::put('mysession',Auth::guard('webadmin')->user()->name);
-                    return redirect('/');
+                    return redirect('/manageUser');
                 }
                 else{
                     return redirect()->back()->withErrors('Username or Password is incorrect !');
