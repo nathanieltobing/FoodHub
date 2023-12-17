@@ -51,6 +51,7 @@
         </div>
         <div class="container pb-3">
             <div class="payment-right">
+                <form action="{{ Auth::guard('webvendor')->check() ? '/vendor/registermembership' : '/customer/registermembership' }}" method="post">
                 @csrf
                 <h1 class="payment-title">Payment Details</h1>
                 <div class="payment-method">
@@ -72,36 +73,41 @@
                     </label>
                 </div>
                 <div class="payment-form-group">
-                    <input type="email" placeholder=" " class="payment-form-control" id="email">
+                    <input type="email" placeholder=" " class="payment-form-control" id="email" name="email">
                     <label for="email" class="payment-form-label payment-form-label-required">Email Address</label>
                 </div>
                 <div class="payment-form-group">
-                    <input type="text" placeholder=" " class="payment-form-control" id="card-number">
+                    <input type="text" placeholder=" " class="payment-form-control" id="cardNumber" name="cardNumber">
                     <label for="card-number" class="payment-form-label payment-form-label-required">Card Number</label>
                 </div>
                 <div class="payment-form-group-flex">
                     <div class="payment-form-group">
-                        <input type="date" placeholder=" " class="payment-form-control" id="expiry-date">
+                        <input type="date" placeholder=" " class="payment-form-control" id="expiryDate" name="expiryDate">
                         <label for="expiry-date" class="payment-form-label payment-form-label-required">Expiry Date</label>
                     </div>
                     <div class="payment-form-group">
-                        <input type="text" placeholder=" " class="payment-form-control" id="cvv">
+                        <input type="text" placeholder=" " class="payment-form-control" id="cvv" name="cvv">
                         <label for="cvv" class="payment-form-label payment-form-label-required">CVV</label>
                     </div>
                 </div>
                 @if (Auth::guard('webcustomer')->check())
-                    <form action="/customer/registermembership" class="d-flex justify-content-center" method="post">
-                    @csrf
                         <button type="submit" class="payment-form-submit-button"><i class="ri-wallet-line"></i>Confirm Payment</button>
-                    </form>
-                @elseif (Auth::guard('webvendor')->check())
-                    <form action="/vendor/registermembership" class="row justify-content-center" method="post">
-                    @csrf
-                        {{-- <button type="submit" class="payment-form-submit-button" {{ $vendorHasDiscountedProduct ? '' : 'disabled' }}><i class="ri-wallet-line"></i>Confirm Payment</button> --}}
-                        <button type="submit" class="payment-form-submit-button btn btn-success" {{ $vendorHasDiscountedProduct ? '' : 'disabled' }}>Confirm Payment</button>
+                @elseif (Auth::guard('webvendor')->check())<button type="submit" class="payment-form-submit-button btn btn-success" {{ $vendorHasDiscountedProduct ? '' : 'disabled' }}>Confirm Payment</button>
                         <p class="text-center text-danger mt-3">You must select at least 3 products to be added to promotion</p>
-                    </form>
                 @endif
+                </form>
+                <div class="row text-danger">
+                    @if(session()->has('error'))
+                            <p>{{ session()->get('error') }}</p>
+                        @endif
+                        @if ($errors->any())
+                        <ul class="ps-5">
+                            @foreach ($errors->all() as $error)
+                                <li class="text-danger">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        @endif
+                </div>
         </div>
         </div>
     </div>

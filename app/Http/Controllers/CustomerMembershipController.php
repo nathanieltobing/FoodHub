@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerMembershipController extends Controller
 {
@@ -24,8 +25,21 @@ class CustomerMembershipController extends Controller
         return redirect('customer/profile')->with('message','Membership successfuly cancelled!');
     }
 
-    public function registerMembership()
+    public function registerMembership(Request $req)
     {
+        $rules = [
+            'email' => 'required|email:rfc,dns',
+            'cardNumber' => 'required|numeric',
+            'expiryDate' => 'required',
+            'cvv' => 'required | numeric'
+        ];
+
+        $validator = Validator::make($req->all(), $rules);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
         $c = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
         $startPeriod = Carbon::now();
         $endPeriod = Carbon::now()->addDays(30);
