@@ -20,15 +20,16 @@
             </div>
             <div class="content" style="margin-left: -80%;">
                 <div class="details">
-                    <h2>Tobing Catering <br><span> Catering for bla ba</span></h2>
+                    <h2>Tobing Catering <br><span> Catering for bla ba asdasd asdasdadasdasdasdasda</span></h2>
+{{--
                     <div class="data">
                         <h3>342 <br> <span> Review</span> </h3>
                         <h3>2K <br> <span> Order</span> </h3>
                         <h3>3K <br> <span> Posts</span> </h3>
-                    </div>
+                    </div> --}}
                     <div class="actionBtn">
-                        <button>Follow </button>
-                        <button>Message</button>
+                        {{-- <button style="height: 40px">Message</button> --}}
+                        <button style="margin-top: 10px">+620817598474 </button>
                     </div>
                 </div>
             </div>

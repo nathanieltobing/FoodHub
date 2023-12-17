@@ -45,7 +45,7 @@
                         </div>
                       </div> --}}
                       <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                        <i class="fas fa-image fa-lg me-3 fa-fw"aria-hidden="true" style="margin-bottom: 30px"></i>
                         <div class="form-outline flex-fill mb-0">
                             <input class="form-control" name="dp" type="file" id="formFile">
                           <label class="form-label" for="form3Example1c">Upload your vendor's picture</label>
