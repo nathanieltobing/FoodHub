@@ -57,7 +57,6 @@ Route::get('/vendorList/search', [VendorController::class, 'search'])->name('ven
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
-Route::get('/orderdetail/{id}', [OrderDetailController::class, 'index']);
 
 Route::middleware(['checkauth'])->group(function(){
     Route::get('/cancelmembership',[MembershipController::class, 'viewCancelMembership']);
@@ -72,6 +71,7 @@ Route::middleware(['checkauth'])->group(function(){
     Route::middleware(['checkCustOrVend'])->group(function(){
         Route::get('/orderlist',[OrderController::class, 'viewOrderList']);   
         Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');
+        Route::get('/orderdetail/{id}', [OrderDetailController::class, 'index']);
         
     }); 
     Route::middleware(['customer'])->group(function(){
