@@ -27,6 +27,13 @@
                         <label class="form-label" for="form3Example1c">Vendor Name</label>
                       </div>
                     </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example1c" name="phoneNumber" class="form-control" />
+                        <label class="form-label" for="form3Example1c">Phone Number</label>
+                      </div>
+                    </div>
                     {{-- <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                         <div class="form-outline flex-fill mb-0">

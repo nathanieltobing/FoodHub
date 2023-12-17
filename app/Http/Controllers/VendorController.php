@@ -59,6 +59,7 @@ class VendorController extends UserController
 
         $rules = [
             'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',
+            'phoneNumber' => 'required|regex:/^(0)[0-9]{9}/',
             'email' => 'required|email:rfc,dns',
             'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
             'category' => 'required', Rule::in(['Food', 'Beverages']),
@@ -80,6 +81,7 @@ class VendorController extends UserController
 
 
         $vendor = new Vendor();
+        $vendor->phone = $req->phoneNumber;
         $vendor->role = $req->role;
         $vendor->name = $req->name;
         $vendor->email = $req->email;

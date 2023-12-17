@@ -144,7 +144,8 @@ class ProductController extends Controller
                     "price" => $product->price,
                     "product_id"=> $id,
                     "vendor_id"=>$product->vendor_id,
-                    "discounted_price"=>$discount
+                    "discounted_price"=>$discount,
+                    "image"=>$product->product_picture
                 ];
             }
             session()->put('cart', $cart);
