@@ -59,8 +59,8 @@
                             {{-- <p  class="payment-plan-info-price" style="font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol"> Paket 1 makanan</p> --}}
                         </td>
                             <td >
-                                <div class="payment-summary-price">{{$cart['price']}}</div>
-                            </td>   
+                                <div class="payment-summary-price">Rp{{number_format($cart['price'],2,",",".")}}</div>
+                            </td>
                             <td>
                                 <div class="wrappers">
                                     <form action="/minQuantity/{{$cart['product_id']}}" method="POST">
@@ -72,12 +72,11 @@
                                         @csrf
                                         <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button> 
                                     </form>                                     
-                                    
-                                    
+                                                                       
                                 </div>  
                             </td>       
                                                        
-                            <td> <div class="payment-summary-price">{{$cart['price'] * $cart['quantity']}}</div></td>
+                            <td> <div class="payment-summary-price">Rp{{number_format($cart['price'] * $cart['quantity'],2,",",".")}}</div></td>
                             {{-- <td> <div class="payment-summary-price">{{Request::input('quantity')}}</div></td> --}}
                            <?php
                                 
@@ -177,24 +176,36 @@
                                 </label>
                             </div>
                             <div class="payment-form-group">
-                                <input type="email" placeholder=" " class="payment-form-control" id="email">
+                                <input type="email" placeholder=" " class="payment-form-control" name="email">
                                 <label for="email" class="payment-form-label payment-form-label-required">Email Address</label>
                             </div>
                             <div class="payment-form-group">
-                                <input type="text" placeholder=" " class="payment-form-control" id="card-number">
+                                <input type="text" placeholder=" " maxlength="16" class="payment-form-control" name="cardNumber">
                                 <label for="card-number" class="payment-form-label payment-form-label-required">Card Number</label>
                             </div>
                             <div class="payment-form-group-flex">
                                 <div class="payment-form-group">
-                                    <input type="date" placeholder=" " class="payment-form-control" id="expiry-date">
+                                    <input type="date" placeholder=" " class="payment-form-control" name="expiryDate">
                                     <label for="expiry-date" class="payment-form-label payment-form-label-required">Expiry Date</label>
                                 </div>
                                 <div class="payment-form-group">
-                                    <input type="text" placeholder=" " class="payment-form-control" id="cvv">
+                                    <input type="text" placeholder=" " maxlength="3" class="payment-form-control" name="cvv">
                                     <label for="cvv" class="payment-form-label payment-form-label-required">CVV</label>
                                 </div>
                             </div>
                             <button type="submit" class="payment-form-submit-button"><i class="ri-wallet-line"></i> Pay</button>
+                            <div class="row text-danger">
+                                @if(session()->has('error'))
+                                        <p>{{ session()->get('error') }}</p>
+                                    @endif
+                                    @if ($errors->any())
+                                    <ul class="ps-5">
+                                        @foreach ($errors->all() as $error)
+                                            <li class="text-danger">{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                            </div>
                         </form>
                     </div>
                 </div>

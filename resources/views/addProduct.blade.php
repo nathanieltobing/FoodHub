@@ -49,7 +49,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <select  class="select" name="format" id="format">
+                        <select  class="select" name="category" id="format">
                           <option value="Main Course">Main Course</option>
                           <option value="Appetizer">Appetizer</option>
                           <option value="Desserts">Desserts</option>

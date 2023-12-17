@@ -25,7 +25,6 @@ class CustomerController extends UserController
         ];
 
         $validator = Validator::make($req->all(), $rules);
-        // $validator = $this->validate($req, $rules);
 
         if($validator->fails()){
             return back()->withErrors($validator);

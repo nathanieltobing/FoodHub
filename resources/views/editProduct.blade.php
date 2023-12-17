@@ -1,7 +1,7 @@
 @extends('master-clean')
 
 @section('content')
-<section class="vh-100" style="background-color: #eee;">
+<section style="background-color: #eee;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-12 col-xl-11">
@@ -18,9 +18,12 @@
 
                   {{-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up</p> --}}
 
-                  <form action="/addProduct" method="POST" enctype="multipart/form-data" class="mx-1 mx-md-4">
+                  <form action="/product/vendor/{{$product->id}}" method="POST" enctype="multipart/form-data" class="mx-1 mx-md-4">
+                    {{method_field('PUT')}}
                     @csrf
-                    <img src="{{Storage::url($product->product_picture)}}" class="card-img-top" alt="..." style="height:500px">
+                    <div class="d-flex justify-content-center">
+                      <img src="{{Storage::url($product->product_picture)}}" class="card-img-top" alt="..." style="height:300px; margin-bottom:3%; width:40%">
+                    </div>
                     {{-- <div class="d-flex flex-row align-items-center mb-4">
                       <img src="{{url($product->product_picture)}}" class="card-img-top" alt="..." style="height:500px">
                       </div>
@@ -29,9 +32,11 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input type="text" id="form3Example1c" name="name" class="form-control" value={{$product->name}}">
+                        <input type="text" id="form3Example1c" name="name" class="form-control" value="{{$product->name}}">
                         <label class="form-label" for="form3Example1c">Product Name</label>
                       </div>
+
+                      
                     
                     </div>
 
@@ -51,18 +56,20 @@
                         <label class="form-label" for="form3Example4c">Price</label>
                       </div>
                     
-                    </div>                
+                    </div>  
+
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <select id="ct" name="category">                         
+                        <select class="select" name="category" id="format">                         
                           <option value="Main Course" {{strcmp($product->categories->name,"Main Course") == 0 ? 'selected' : ''}}>Main Course</option>
                           <option value="Appetizer" {{strcmp($product->categories->name,"Appetizer") == 0 ? 'selected' : ''}}>Appetizer</option>
                           <option value="Desserts" {{strcmp($product->categories->name,"Desserts") == 0 ? 'selected' : ''}}>Desserts</option>                   
                         </select>
-                        <label class="form-label" for="form3Example3c">Category</label>
+                        <label class="form-label" style="display: flex;font-size:16 px;font-weight:700" for="form3Example3c">Category</label>
                       </div>
                     </div>
+
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
                       <div class="form-outline flex-fill mb-0">                 

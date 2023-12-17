@@ -17,7 +17,7 @@ class CreateOrderDetailsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('quantity');
-            $table->double('discount')->nullable();
+            $table->integer('discount_price')->nullable();
             $table->double('price');
             $table->string('product_name');
             $table->foreignId('order_id');

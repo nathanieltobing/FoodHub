@@ -119,6 +119,14 @@ class VendorController extends UserController
         ]);
     }
 
+    public function showVendorProductList(){
+        $products = Product::where('vendor_id',Auth::guard('webvendor')->user()->id)->paginate(3);
+        return view('productList',[
+            'products' => $products,
+            'vendor' => Auth::guard('webvendor')->user(),
+        ]);
+    }
+
     public function search(Request $request)
     {
         // $vendorsPaginate = Vendor::paginate(3);

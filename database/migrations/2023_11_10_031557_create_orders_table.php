@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->enum('status', ['OPEN','REJECTED','ON GOING','FINISHED']);
             $table->dateTime('transaction_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->double('membership_discount')->nullable();
             $table->double('total_price');
             $table->integer('total_quantity');
             $table->foreignId('customer_id');

@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Promotion;
 use Illuminate\Validation\Rule;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class ProductController extends Controller
     public function insertProduct(Request $req){
 
         $rules = [
-            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',
+            'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
             'quantity' => 'required',
             'price' => 'required',
             'category' => 'required', Rule::in(['Main Course', 'Appetizer', 'Desserts']),
@@ -55,7 +56,11 @@ class ProductController extends Controller
         
         $product->save();
 
-        return redirect('/');
+        return redirect('/product/vendor');
+    }
+
+    public function addIndex(){
+        return view('addProduct');
     }
 
     public function editIndex(Product $id){
@@ -63,14 +68,14 @@ class ProductController extends Controller
 
     }
 
-    public function editProduct(Request $req){
+    public function editProduct(Product $id, Request $req){
 
         $rules = [
-            'name' => 'required|max:25|regex:/^[\pL\s\-]+$/u',        
+            'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',        
             'quantity' => 'required',
             'price' => 'required',
             'category' => 'required', Rule::in(['Main Course', 'Appetizer', 'Desserts']),
-            'dp' => 'required|image',
+            'dp' => 'image',
             'desc' => 'required'
         ];
 
@@ -81,27 +86,29 @@ class ProductController extends Controller
             return back()->withErrors($validator);
         }
 
-        $file = $req->file('dp');
-        $imageName = time().'.'.$file->getClientOriginalExtension();
-        Storage::putFileAs('public/images', $file,$imageName);
-        $imageName = 'images/'.$imageName;
+        if($req->hasFile('dp')){
+            $file = $req->file('dp');
+            $imageName = time().'.'.$file->getClientOriginalExtension();
+            Storage::putFileAs('public/images', $file,$imageName);
+            $imageName = 'images/'.$imageName;
+        }
+        else{
+            $imageName = $id->product_picture;
+        }
 
-        $product = new Product();
-        $product->name = $req->name;
-        $product->price = $req->price;
+        $id->name = $req->name;
+        $id->price = $req->price;
 
-        $product->stock = $req->quantity;
-        $product->description = $req->desc;
-        $product->product_picture = $req->dp;
+        $id->stock = $req->quantity;
+        $id->description = $req->desc;
+        $id->product_picture = $imageName;
         // dd($req->category);
         $category = Category::where('name', $req->category)->first();
-        $product->category_id = $category->id;
+        $id->category_id = $category->id;
 
-        $product->vendor_id = Auth::guard('webvendor')->user()->id;
+        $id->save();
 
-        $product->save();
-
-        return redirect('/');
+        return redirect('/product/vendor');
     }
 
     public function checkProductFromOtherVendor(Product $product){
@@ -121,6 +128,11 @@ class ProductController extends Controller
     public function addToCart($id){
         $product = Product::find($id);
         $cart = session()-> get('cart',[]);
+        $discount = null;
+        if($product->promotion_id != null){
+            $promotion = Promotion::where('id',$product->promotion_id)->first();
+            $discount = $promotion->discount;
+        }
         if($this->checkProductFromOtherVendor($product)){
             if(isset($cart[$id])){
                 $cart[$id]['quantity']++;
@@ -131,7 +143,8 @@ class ProductController extends Controller
                     "quantity" => 1,
                     "price" => $product->price,
                     "product_id"=> $id,
-                    "vendor_id"=>$product->vendor_id
+                    "vendor_id"=>$product->vendor_id,
+                    "discounted_price"=>$discount
                 ];
             }
             session()->put('cart', $cart);
@@ -181,10 +194,13 @@ class ProductController extends Controller
      }
 
      public function search(Vendor $v, Request $request)
-     {
+     {  
+        $vc = new VendorController();
+        $error = $vc->checkInAnotherVendorPage($v->id);
          return view('productList',[
             'vendor' => $v,
-             'products' => Product::where('name', 'LIKE', "%$request->search%" , 'and', 'vendor_id', 'like', "$v->id")->get()
+             'products' => Product::where('name', 'LIKE', "%$request->search%")->where('vendor_id','like',"$v->id")->paginate(3),
+             'error' => $error
          ]);
      }
 }
