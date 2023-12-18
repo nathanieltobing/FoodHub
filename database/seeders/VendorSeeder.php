@@ -20,144 +20,115 @@ class VendorSeeder extends Seeder
 
         DB::table('vendors')->insert([
             'id' => 1,
-            'name' => 'Vendor 1',
-            'email' => 'vendor1@gmail.com',
-            'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',         
+            'name' => 'Gerai Snack Tangerang',
+            'email' => 'geraisnacktangerang@gmail.com',
+            'password' => bcrypt('12345678'),
+            'description' => 'Gerai Snack Tangerang adalah vendor makanan penyedia makanan ringan berkualitas dan terjangkau',         
             'rating' => 3,
-            'image' => 'images/1702475666.jpg',
-            'vendor_membership' => json_encode([
-
-                'id' => 1,
-                'status' => 'ACTIVE',
-                'startPeriod' => $startPeriod,
-                'endPeriod' => $endPeriod,
-                'promotionList' => json_encode([
-                    'promotionId',
-                    'promotionId',
-                    'promotionId'
-                ])
-            ]),
+            'image' => 'images/geraiSnack.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
-            'phone' => '081234567891',
+            'phone' => '081235287823',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
         DB::table('vendors')->insert([
             'id' => 2,
-            'name' => 'Vendor 2',
-            'email' => 'vendor2@gmail.com',
-            'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',
-            'rating' => 3,
-            'image' => 'images/1702475666.jpg',
-            'vendor_membership' => json_encode([
-
-                'id' => 1,
-                'status' => 'ACTIVE',
-                'startPeriod' => $startPeriod,
-                'endPeriod' => $endPeriod,
-                'promotionList' => json_encode([
-                    'promotionId',
-                    'promotionId',
-                    'promotionId'
-                ])
-            ]),
+            'name' => 'Aneka Snack',
+            'email' => 'anekasnack@gmail.com',
+            'password' => bcrypt('12345678'),
+            'description' => 'Aneka Snack adalah penyedia snack atau makanan ringan yang mempunyai produk beragam mulai dari keripik sampai makanan ringan pesta',
+            'rating' => 4,
+            'image' => 'images/anekaSnack.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
-            'phone' => '081234567891',
+            'phone' => '081243547696',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
         DB::table('vendors')->insert([
             'id' => 3,
-            'name' => 'Vendor 3',
-            'email' => 'vendor3@gmail.com',
-            'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',          
-            'rating' => 3,
-            'image' => 'images/1702475666.jpg',
+            'name' => 'Sweet Bakery',
+            'email' => 'sweetbakery@gmail.com',
+            'password' => bcrypt('12345678'),
+            'description' => 'Sweet Bakery merupakan bakery yang menyediakan beragam jenis kue maupun roti dengan beraneka rasa',          
+            'rating' => 5,
+            'image' => 'images/sweetbakery.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
-            'phone' => '081234567891',
+            'phone' => '081223567221',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
         DB::table('vendors')->insert([
             'id' => 4,
-            'name' => 'Vendor 4',
-            'email' => 'vendor4@gmail.com',
-            'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',         
-            'rating' => 3,
-            'image' => 'images/1702475666.jpg',
+            'name' => 'Salama Catering',
+            'email' => 'salamacatering@gmail.com',
+            'password' => bcrypt('12345678'),
+            'description' => 'Salama catering menyediakan berbagai menu nasi kotak untuk acara besar maupun kecil dengan rasa yang terpecaya',         
+            'rating' => 5,
+            'image' => 'images/salamaCatering.jpg',
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
-            'phone' => '081234567891',
+            'phone' => '081231335611',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
-        DB::table('vendors')->insert([
-            'id' => 5,
-            'name' => 'Vendor 5',
-            'email' => 'vendor5@gmail.com',
-            'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',         
-            'rating' => 3,
-            'image' => 'images/1702475666.jpg',
-            'vendor_membership' => json_encode([
-                'id' => 1,
-                'status' => 'INACTIVE',
-                'startPeriod' => $startPeriod,
-                'endPeriod' => $endPeriod,
-                'promotionList' => json_encode([
-                    'promotionId',
-                    'promotionId',
-                    'promotionId'
-                ])
-            ]),
-            'role' => 'VENDOR',
-            'status' => 'ACTIVE',
-            'status_updated_by' => '1',
-            'phone' => '081234567891',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        // DB::table('vendors')->insert([
+        //     'id' => 5,
+        //     'name' => 'Vendor 5',
+        //     'email' => 'vendor5@gmail.com',
+        //     'password' => bcrypt('123'),
+        //     'description' => 'Ini adalah contoh vendor category main course',         
+        //     'rating' => 3,
+        //     'image' => 'images/1702475666.jpg',
+        //     'vendor_membership' => json_encode([
+        //         'id' => 1,
+        //         'status' => 'INACTIVE',
+        //         'startPeriod' => $startPeriod,
+        //         'endPeriod' => $endPeriod
+        //     ]),
+        //     'role' => 'VENDOR',
+        //     'status' => 'ACTIVE',
+        //     'status_updated_by' => '1',
+        //     'phone' => '081234567891',
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now()
+        // ]);
 
-        DB::table('vendors')->insert([
-            'id' => 6,
-            'name' => 'Vendor 6',
-            'email' => 'vendor6@gmail.com',
-            'password' => bcrypt('123'),
-            'description' => 'Ini adalah contoh vendor category main course',
-            'rating' => 3,
-            'image' => 'images/1702475666.jpg',
-            'vendor_membership' => json_encode([
-                'id' => 1,
-                'status' => 'INACTIVE',
-                'startPeriod' => $startPeriod,
-                'endPeriod' => $endPeriod,
-                'promotionList' => json_encode([
-                    'promotionId',
-                    'promotionId',
-                    'promotionId'
-                ])
-            ]),
-            'role' => 'VENDOR',
-            'status' => 'ACTIVE',
-            'status_updated_by' => '1',
-            'phone' => '081234567891',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        // DB::table('vendors')->insert([
+        //     'id' => 6,
+        //     'name' => 'Vendor 6',
+        //     'email' => 'vendor6@gmail.com',
+        //     'password' => bcrypt('123'),
+        //     'description' => 'Ini adalah contoh vendor category main course',
+        //     'rating' => 3,
+        //     'image' => 'images/1702475666.jpg',
+        //     'vendor_membership' => json_encode([
+        //         'id' => 1,
+        //         'status' => 'INACTIVE',
+        //         'startPeriod' => $startPeriod,
+        //         'endPeriod' => $endPeriod,
+        //         'promotionList' => json_encode([
+        //             'promotionId',
+        //             'promotionId',
+        //             'promotionId'
+        //         ])
+        //     ]),
+        //     'role' => 'VENDOR',
+        //     'status' => 'ACTIVE',
+        //     'status_updated_by' => '1',
+        //     'phone' => '081234567891',
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now()
+        // ]);
     }
 }
