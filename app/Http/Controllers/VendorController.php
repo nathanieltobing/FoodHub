@@ -19,7 +19,7 @@ class VendorController extends UserController
 {
     public function index(){
 
-        $vendors = Vendor::paginate(2);
+        $vendors = Vendor::orderBy('rating','DESC')->paginate(2);
         return view('vendorList', ['vendors'=> $vendors]);
     }
 
@@ -30,10 +30,10 @@ class VendorController extends UserController
         })->get();
         $vendors = Vendor::whereNotNull('vendor_membership')->whereJsonContains('vendor_membership->status','ACTIVE')->get();
 
-        if($vendors->count() < 5){
+        if($vendors->count() < 2){
             foreach($vendorAll as $vendor){
                 $vendors->push($vendor);
-                if($vendors->count() == 5){
+                if($vendors->count() == 2){
                     break;
                 }
             }
