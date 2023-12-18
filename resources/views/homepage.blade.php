@@ -23,10 +23,9 @@
     </div>
     <ul class="dots">
         <li class="active"></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        @for ($i = 1; $i < $featuredVendors->count(); $i++)
+          <li></li>
+        @endfor
     </ul>
     </div>
 
