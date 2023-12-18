@@ -20,7 +20,7 @@ class CustomerSeeder extends Seeder
         $endPeriod = Carbon::now()->addDays(30);
         DB::table('customers')->insert([
             'id' => 1,
-            'name' => 'Customer 1',
+            'name' => 'Danang Prasetyo',
             'email' => 'customer1@gmail.com',
             'password' => bcrypt('123'),
             'customer_membership' => json_encode([
@@ -34,31 +34,24 @@ class CustomerSeeder extends Seeder
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
             'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-
+            'updated_at' => Carbon::now(),
+            'image' => 'images/danangprasetyo.png'
         ]);
         DB::table('customers')->insert([
             'id' => 2,
-            'name' => 'Customer 2',
+            'name' => 'Vera Purwanti',
             'email' => 'customer2@gmail.com',
             'password' => bcrypt('123'),
-            'customer_membership' => json_encode([
-                'id' => 1,
-                'status'=> 'ACTIVE',
-                'startPeriod'=> $startPeriod,
-                'endPeriod' => $endPeriod,
-                'discount' => 10
-            ]),
             'role' => 'CUSTOMER',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
             'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-
+            'updated_at' => Carbon::now(),
+            'image' => 'images/verapurwanti.png'
         ]);
         DB::table('customers')->insert([
             'id' => 3,
-            'name' => 'Customer 3',
+            'name' => 'Zizi Mulyani',
             'email' => 'customer3@gmail.com',
             'password' => bcrypt('123'),
             'role' => 'CUSTOMER',
@@ -70,7 +63,7 @@ class CustomerSeeder extends Seeder
         ]);
         DB::table('customers')->insert([
             'id' => 4,
-            'name' => 'Customer 4',
+            'name' => 'Endah Nuraini',
             'email' => 'customer4@gmail.com',
             'password' => bcrypt('123'),
             'role' => 'CUSTOMER',
@@ -82,7 +75,7 @@ class CustomerSeeder extends Seeder
         ]);
         DB::table('customers')->insert([
             'id' => 5,
-            'name' => 'Customer 5',
+            'name' => 'Labuh Kuswoyo',
             'email' => 'customer5@gmail.com',
             'password' => bcrypt('123'),
             'customer_membership' => json_encode([
@@ -101,7 +94,7 @@ class CustomerSeeder extends Seeder
         ]);
         DB::table('customers')->insert([
             'id' => 6,
-            'name' => 'Customer 6',
+            'name' => 'Elisa Mardhiyah',
             'email' => 'customer6@gmail.com',
             'password' => bcrypt('123'),
             'role' => 'CUSTOMER',
@@ -109,8 +102,7 @@ class CustomerSeeder extends Seeder
             'status_updated_by' => '1',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
-
         ]);
-        
+
     }
 }
