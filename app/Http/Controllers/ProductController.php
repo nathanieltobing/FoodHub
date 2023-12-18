@@ -200,7 +200,7 @@ class ProductController extends Controller
         $error = $vc->checkInAnotherVendorPage($v->id);
          return view('productList',[
             'vendor' => $v,
-             'products' => Product::where('name', 'LIKE', "%$request->search%")->where('vendor_id','like',"$v->id")->paginate(3),
+             'products' => Product::where('name', 'LIKE', "%$request->search%")->where('vendor_id','like',"$v->id")->paginate(2),
              'error' => $error
          ]);
      }

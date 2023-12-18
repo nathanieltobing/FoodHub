@@ -102,9 +102,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="title">Description:</label>
+                                    <label class="col-sm-3 col-form-label" for="title"><strong>Description</strong></label>
                                     <div class="col-sm-9">
-                                        <textarea id="description" name="description" class="form-control" placeholder="Not provided" rows="4">{{ $user->description }}</textarea>
+                                        <textarea id="description" name="description" class="form-control" maxlength="160" placeholder="Not provided" rows="4">{{ $user->description }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">

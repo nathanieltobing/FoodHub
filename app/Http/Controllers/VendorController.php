@@ -133,7 +133,7 @@ class VendorController extends UserController
     {
         // $vendorsPaginate = Vendor::paginate(3);
         return view('vendorList',[
-            'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->paginate(3)
+            'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->paginate(2)
         ]);
     }
 
