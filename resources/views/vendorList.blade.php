@@ -32,7 +32,7 @@
                   <i class="fas fa-star"></i>
                 @endfor
             </div>
-            <p class="card-text" style="font-weight: 600; font-family: Poppins;">{{$vendor->description}}</p>
+            <p class="card-text" style="height:80px;font-weight: 600; font-family: Poppins;">{{$vendor->description}}</p>
             <div class="row">
               <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg vendor-listbtn" style="margin-top:10px;line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Detail</a>
             </div>
@@ -46,7 +46,7 @@
           <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg vendor-listbtn" style="margin-top:10px;line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Detail</a>
 
         </div>
-      @endforeach  
+      @endforeach
     @else
       @foreach ($vendors as $vendor)
       <div class="card text-center mx-2 mt-4" style="width: 100%;border: 1px solid rgba(0, 0, 0, .05);     border-radius: 15px;     box-shadow: 0 4px 24px rgba(0, 0, 0, .10);">
@@ -58,13 +58,13 @@
                 <i class="fas fa-star"></i>
               @endfor
           </div>
-          <p class="card-text" style="font-weight: 600; font-family: Poppins;">{{$vendor->description}}</p>
+          <p class="card-text" style="height:80px;font-weight: 600; font-family: Poppins;">{{$vendor->description}}</p>
           <div class="row">
             <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg vendor-listbtn" style="margin-top:10px;line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Detail</a>
           </div>
       </div>
       </div>
-    @endforeach  
+    @endforeach
     @endif
 
  </div>

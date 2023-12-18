@@ -1237,6 +1237,7 @@ object-fit: cover;
     width: 100%;
     transition: 0.5s;
     transform: translateY(170px);
+    margin-bottom: -44px;
  }
 
  .cards:hover .content .details{
@@ -1250,7 +1251,7 @@ object-fit: cover;
    font-weight: 600;
    color: #555;
    line-height: 1.2em;
-   margin-bottom: 22px;
+ 
  }
 
 

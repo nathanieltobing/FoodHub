@@ -26,10 +26,10 @@
             </div>
             <div class="content" style="margin-left: -80%;">
                 <div class="details">
-                    {{-- <h2>{{$vendor->name}} <br><span>{{$vendor->description}}</span></h2> --}}
+                     <h2>{{$vendor->name}}</h2>
 
                     <div class="data">
-                        <h2>{{$vendor->name}} <br> <span> {{$vendor->description}}</span> </h2>
+                        <span> {{$vendor->description}}</span> 
 
                     </div>
                     <div class="actionBtn">
