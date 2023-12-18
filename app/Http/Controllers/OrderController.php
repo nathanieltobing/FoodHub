@@ -105,7 +105,7 @@ class OrderController extends Controller
             $order_detail->save();
         }
         $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
-        $this->sendEmail($most_recent_order,$orderDetails);
+        // $this->sendEmail($most_recent_order,$orderDetails);
         session()->put('cart', []);
         return view('succesfulPage');
      }
