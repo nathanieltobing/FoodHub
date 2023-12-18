@@ -103,7 +103,7 @@
               </div>
               @if (Auth::guard('webcustomer')->check())
                 <input type="hidden" id="hidden1" name="role" value={{$error}}>
-                <div class="popups" id="error">
+                <div class="popups" id="error" style="width: 30%">
                     <div class="popup-content">
                         <div class="imgbox">
                         <img src="{{ asset('assets/images/cancel.png') }}" alt="" class="img">

@@ -146,7 +146,7 @@
                         <div class="payment-summary-divider"></div>
                         <div class="payment-summary-item payment-summary-total">
                             <div class="payment-summary-name">Total</div>
-                            @if ($customerMembership != null)
+                            @if ($customerMembership != null && $customerMembership['status'] == 'ACTIVE')
                                 <div class="payment-summary-price">Rp{{number_format($totalPrice + 2000 - (int)($totalPrice * $customerMembership['discount'] / 100),2,",",".")}}</div>
                             @else
                                 <div class="payment-summary-price">Rp{{number_format($totalPrice + 2000 ,2,",",".")}}</div>

@@ -42,6 +42,11 @@ class VendorSeeder extends Seeder
             'description' => 'Aneka Snack adalah penyedia snack atau makanan ringan yang mempunyai produk beragam mulai dari keripik sampai makanan ringan pesta',
             'rating' => 4,
             'image' => 'images/anekaSnack.jpg',
+            'vendor_membership' => json_encode([             
+                'status' => 'ACTIVE',
+                'startPeriod' => $startPeriod,
+                'endPeriod' => $endPeriod
+            ]),
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
@@ -58,6 +63,11 @@ class VendorSeeder extends Seeder
             'description' => 'Sweet Bakery merupakan bakery yang menyediakan beragam jenis kue maupun roti dengan beraneka rasa',          
             'rating' => 5,
             'image' => 'images/sweetbakery.jpg',
+            'vendor_membership' => json_encode([             
+                'status' => 'ACTIVE',
+                'startPeriod' => $startPeriod,
+                'endPeriod' => $endPeriod
+            ]),
             'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
@@ -90,12 +100,12 @@ class VendorSeeder extends Seeder
         //     'description' => 'Ini adalah contoh vendor category main course',         
         //     'rating' => 3,
         //     'image' => 'images/1702475666.jpg',
-        //     'vendor_membership' => json_encode([
-        //         'id' => 1,
-        //         'status' => 'INACTIVE',
-        //         'startPeriod' => $startPeriod,
-        //         'endPeriod' => $endPeriod
-        //     ]),
+            // 'vendor_membership' => json_encode([
+            //     'id' => 1,
+            //     'status' => 'INACTIVE',
+            //     'startPeriod' => $startPeriod,
+            //     'endPeriod' => $endPeriod
+            // ]),
         //     'role' => 'VENDOR',
         //     'status' => 'ACTIVE',
         //     'status_updated_by' => '1',

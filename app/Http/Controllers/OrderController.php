@@ -88,7 +88,7 @@ class OrderController extends Controller
         $order->total_price = $total_price;
         $order->total_quantity = $total_quantity;
         $order->customer_id = Auth::guard('webcustomer')->user()->id;
-        if($customerMembership != null){
+        if($customerMembership != null && $customerMembership['status'] == 'ACTIVE'){
             $order->membership_discount = (double)$customerMembership['discount'] /100;
         }
         $order->vendor_id = $vendor_id;
@@ -108,7 +108,7 @@ class OrderController extends Controller
             $order_detail->save();
         }
         $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
-        $this->sendEmail($most_recent_order,$orderDetails);
+        // $this->sendEmail($most_recent_order,$orderDetails);
         session()->put('cart', []);
         return view('succesfulPage');
      }
