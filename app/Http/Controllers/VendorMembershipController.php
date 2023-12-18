@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vendor;
+use App\Models\Product;
+use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class VendorMembershipController extends Controller
 {
@@ -30,24 +31,17 @@ class VendorMembershipController extends Controller
 
         $v->promotions()->delete();
 
+        foreach (session()->all() as $key => $value) {
+            if (strpos($key, 'promotion_') === 0) {
+                session()->forget($key);
+            }
+        }
+
         return redirect('vendor/profile')->with('message','Membership successfuly cancelled!');
     }
 
     public function registerMembership(Request $req)
     {
-        $rules = [
-            'email' => 'required|email:rfc,dns',
-            'cardNumber' => 'required|numeric',
-            'expiryDate' => 'required',
-            'cvv' => 'required | numeric'
-        ];
-
-        $validator = Validator::make($req->all(), $rules);
-
-        if($validator->fails()){
-            return back()->withErrors($validator);
-        }
-
         $v = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
         $startPeriod = Carbon::now();
         $endPeriod = Carbon::now()->addDays(30);
@@ -68,6 +62,24 @@ class VendorMembershipController extends Controller
         DB::table('vendors')->where('id', $v->id)->update([
             'vendor_membership' => $membershipData
         ]);
+
+        $promotionAttributes = [];
+        foreach (session()->all() as $key => $value) {
+            if (strpos($key, 'promotion_') === 0) {
+                $promotionAttributes[$key] = $value;
+            }
+        }
+
+        $numbers = [];
+        foreach ($promotionAttributes as $key => $promo) {
+            $number = (int) substr($key, strlen('promotion_'));
+            // $p = Product::where('id',$n)->first();
+            $promotion = new Promotion();
+            $promotion->discount = $promo;
+            $promotion->vendor_id = Auth::guard('webvendor')->user()->id;
+            $promotion->save();
+            Product::where('id',$number)->update(['promotion_id' => $promotion->id]);
+        }
 
         return redirect('vendor/profile')->with('message','Sucessfully registered as member!');
     }

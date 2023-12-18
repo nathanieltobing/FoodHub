@@ -73,10 +73,7 @@
                             @if(!$product->promotions)
                                 <h6 class="card-text">Rp{{number_format($product->price,2,",",".")}}</h6>
                             @else
-                            @php
-                                $discountedPrice = $product->price - $product->promotions->discount;
-                            @endphp
-                                <h6 class="card-text">Rp{{number_format($discountedPrice,2,",",".")}}</h6>
+                                <h6 class="card-text">Rp{{number_format($product->promotions->discount,2,",",".")}}</h6>
                                 <small><p class="card-text" style="text-decoration: line-through">Rp{{number_format($product->price,2,",",".")}}</p></small>
                             @endif
                             @if (Auth::guard('webcustomer')->check())

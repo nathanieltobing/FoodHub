@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Promotion;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class PromotionController extends Controller
@@ -20,13 +19,11 @@ class PromotionController extends Controller
             return back()->withErrors($validator);
         }
 
-        $promotion = new Promotion();
-        $promotion->discount = $req->discount;
-        $promotion->vendor_id = Auth::guard('webvendor')->user()->id;
-        $promotion->save();
 
-        $p->update(['promotion_id' => $promotion->id]);
+        $discount = $req->input('discount');
 
+        $promotionKey = 'promotion_'.$p->id;
+        Session::put($promotionKey, $discount);
         return redirect('/registermembership');
     }
 }
