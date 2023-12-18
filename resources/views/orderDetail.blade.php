@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-5 mb-3">
                   <p class="small text-muted mb-1">Vendor</p>
-                  <p>{{$order->vendors->name}}</p>
+                  <p>{{$vendor->name}}</p>
                 </div>
                 <div class="col-3 mb-3">
                   <p class="small text-muted mb-1">Order No.</p>

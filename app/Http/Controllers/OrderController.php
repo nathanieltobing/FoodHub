@@ -85,7 +85,7 @@ class OrderController extends Controller
         $order->total_price = $total_price;
         $order->total_quantity = $total_quantity;
         $order->customer_id = Auth::guard('webcustomer')->user()->id;
-        if($customerMembership != null){
+        if($customerMembership != null && $customerMembership['status'] == 'ACTIVE'){
             $order->membership_discount = (double)$customerMembership['discount'] /100;
         }
         $order->vendor_id = $vendor_id;

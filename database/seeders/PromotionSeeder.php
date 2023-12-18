@@ -36,5 +36,26 @@ class PromotionSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
+        DB::table('promotions')->insert([
+            'id' => 4,
+            'discount' => 220000.00,
+            'vendor_id' => 2,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('promotions')->insert([
+            'id' => 5,
+            'discount' => 1300000.00,
+            'vendor_id' => 2,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('promotions')->insert([
+            'id' => 6,
+            'discount' => 1700000.00,
+            'vendor_id' => 2,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
     }
 }
