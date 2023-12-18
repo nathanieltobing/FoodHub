@@ -53,7 +53,7 @@
             <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:green;text-decoration:none;color:white"id="editProduct">Add Product</a>
             </div>
         @else
-            <h1>Product List</h1> 
+            <h1>Product List</h1>
         @endif
         <hr class="bg-dark">
         <form action="/products/search/{{$vendor->id}}" class="row justify-content-start mb-4" role="search">
@@ -74,10 +74,7 @@
                             @if(!$product->promotions)
                                 <h6 class="card-text">Rp{{number_format($product->price,2,",",".")}}</h6>
                             @else
-                            @php
-                                $discountedPrice = $product->price - $product->promotions->discount;
-                            @endphp
-                                <h6 class="card-text">Rp{{number_format($discountedPrice,2,",",".")}}</h6>
+                                <h6 class="card-text">Rp{{number_format($product->promotions->discount,2,",",".")}}</h6>
                                 <small><p class="card-text" style="text-decoration: line-through">Rp{{number_format($product->price,2,",",".")}}</p></small>
                             @endif
                             @if (Auth::guard('webcustomer')->check())
@@ -93,7 +90,7 @@
                             @elseif(Auth::guard('webvendor')->check())
                                 <a href="/product/vendor/edit/{{$product->id}}" class="submit-button" style="margin-left:5em;text-decoration:none;color:white">Edit</a>
                             @else
-                                <a href="/login" class="submit-button" style="margin-left:3em;text-decoration:none;color:white;width:70%;margin-top:1.3em">Login to add to cart</a> 
+                                <a href="/login" class="submit-button" style="margin-left:3em;text-decoration:none;color:white;width:70%;margin-top:1.3em">Login to add to cart</a>
                             @endif
 
                         </div>
