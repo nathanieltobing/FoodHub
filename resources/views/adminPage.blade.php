@@ -75,7 +75,7 @@
                     {{method_field('PUT')}}
                     @csrf
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
-                    <td><button class="status complete">Active</button></td>
+                    <td><button class="status complete" style="border:none">Active</button></td>
                   </form>    
 
               
@@ -84,7 +84,7 @@
                     {{method_field('PUT')}}
                     @csrf
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
-                    <td><button class="status pending">Inactive</button></td>
+                    <td><button class="status pending" style="border:none;">Inactive</button></td>
                   </form>    
                   @endif
                   
@@ -127,14 +127,14 @@
                     {{method_field('PUT')}}
                     @csrf
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
-                    <td><button class="status complete">Active</button></td>
+                    <td><button class="status complete" style="border:none">Active</button></td>
                   </form>    
                   @else
                   <form action="/activate/vendor/{{$v->id}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
-                    <td><button class="status pending">Inactive</button></td>
+                    <td><button class="status pending" style="border:none;">Inactive</button></td>
                   </form>    
                   @endif
                 </tr>     

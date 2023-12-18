@@ -47,11 +47,13 @@
    <div class="container mt-5">
         @if (Auth::guard('webcustomer')->check())
             <h1>Product List</h1>
-        @else
+        @elseif(Auth::guard('webvendor')->check())
             <div class="d-flex">
                 <h1 style="padding-top :0%" class="align-self-end">Product List</h1>
             <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:green;text-decoration:none;color:white"id="editProduct">Add Product</a>
             </div>
+        @else
+            <h1>Product List</h1> 
         @endif
         <hr class="bg-dark">
         <form action="/products/search/{{$vendor->id}}" class="row justify-content-start mb-4" role="search">
@@ -88,8 +90,10 @@
                                 @else
                                     <button class="submit-button" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button>
                                 @endif
-                            @else
+                            @elseif(Auth::guard('webvendor')->check())
                                 <a href="/product/vendor/edit/{{$product->id}}" class="submit-button" style="margin-left:5em;text-decoration:none;color:white">Edit</a>
+                            @else
+                                <a href="/login" class="submit-button" style="margin-left:3em;text-decoration:none;color:white;width:70%;margin-top:1.3em">Login to add to cart</a> 
                             @endif
 
                         </div>
@@ -103,7 +107,7 @@
               </div>
               @if (Auth::guard('webcustomer')->check())
                 <input type="hidden" id="hidden1" name="role" value={{$error}}>
-                <div class="popups" id="error" style="width: 50%">
+                <div class="popups" id="error">
                     <div class="popup-content">
                         <div class="imgbox">
                         <img src="{{ asset('assets/images/cancel.png') }}" alt="" class="img">
@@ -113,7 +117,8 @@
                         <a href="#" class="buttons" id="e_button">EXIT</a>
                         </form>
                     </div>
-                    </div>
+                </div>
+
               @endif
               <script src="{{ asset('assets/popup.js') }}"></script>
         </div>

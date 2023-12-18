@@ -7,7 +7,7 @@
         <div class="col-lg-12 col-xl-11">
           <div class="card text-black mb-5" style="border-radius: 25px;">
             <div class="card-body p-md-5">
-                <a href="/productList"> <i class="fa-solid fa-arrow-left fa-xl me-3 fa-fw"></i></a>
+                <a href="/"> <i class="fa-solid fa-arrow-left fa-xl me-3 fa-fw"></i></a>
               <div class="row justify-content-center">
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up as Customer</p>
 
@@ -91,7 +91,7 @@
 
 
 
-                            <a href="/register/customer" class="card-body fullwidth" style="width: 10rem; background: #fff; padding: 27px; border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A;">CUSTOMER</a>
+                            <a href="/register/customer" class="card-body fullwidth" style="width: 10rem; background: #fff; padding: 27px; border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A; border:1px solid gray">CUSTOMER</a>
 
 
 

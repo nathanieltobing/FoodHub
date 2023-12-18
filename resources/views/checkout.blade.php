@@ -39,7 +39,12 @@
             <tbody>
                     @foreach ($carts as $cart)
                     <?php
+                    if($cart['discounted_price'] != null){
+                        $totalPrice += $cart['discounted_price'] * $cart['quantity'];
+                    }
+                    else{
                         $totalPrice += $cart['price'] * $cart['quantity'];
+                    }
                     ?>
                     <tr>
                         <td>
@@ -57,7 +62,11 @@
                         {{-- <p  class="payment-plan-info-price" style="font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol"> Paket 1 makanan</p> --}}
                     </td>
                         <td >
-                            <div class="payment-summary-price">Rp{{number_format($cart['price'],2,",",".")}}</div>
+                            @if ($cart['discounted_price'] != null)                                                  
+                              <div class="payment-summary-price">Rp{{number_format($cart['discounted_price'],2,",",".")}}</div>                        
+                            @else                                                        
+                              <div class="payment-summary-price">Rp{{number_format($cart['price'],2,",",".")}}</div>                            
+                            @endif                          
                         </td>
                         <td>
                             <div class="wrappers">
@@ -73,9 +82,12 @@
 
                             </div>
                         </td>
-
-                        <td> <div class="payment-summary-price">Rp{{number_format($cart['price'] * $cart['quantity'],2,",",".")}}</div></td>
-                        {{-- <td> <div class="payment-summary-price">{{Request::input('quantity')}}</div></td> --}}
+                        @if ($cart['discounted_price'] != null)
+                            <td> <div class="payment-summary-price">Rp{{number_format($cart['discounted_price'] * $cart['quantity'],2,",",".")}}</div></td>
+                        @else
+                            <td> <div class="payment-summary-price">Rp{{number_format($cart['price'] * $cart['quantity'],2,",",".")}}</div></td>  
+                        @endif       
+                
                        <?php
 
                        ?>

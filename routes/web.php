@@ -19,7 +19,6 @@ use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\VendorMembershipController;
 use App\Http\Controllers\CustomerMembershipController;
-use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,8 +31,7 @@ use App\Http\Controllers\UserController;
 */
 
 
-Route::get('/',[VendorController::class, 'indexHomepage'])->middleware('checkIfAdmin');
-Route::get('/homepage',[VendorController::class, 'indexHomepage'])->middleware('checkIfAdmin');
+
 Route::get('/login', function () {
     return view('login');
 })->name('login')->middleware('guest');
@@ -46,8 +44,6 @@ Route::get('/register/vendor', function () {
     return view('registerVendor');
 })->name('register')->middleware('guest');
 Route::post('/register/vendor',[VendorController::class, 'register']);
-Route::get('/vendorList',[VendorController::class, 'index']);
-Route::get('/vendorList/search', [VendorController::class, 'search'])->name('vendor.search');
 
 
 // Route::get('/register/{lang}', function ($lang) {
@@ -58,6 +54,14 @@ Route::get('/vendorList/search', [VendorController::class, 'search'])->name('ven
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
+
+Route::middleware(['checkIfAdmin','checkIfVendor'])->group(function(){
+    Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
+    Route::get('/vendorList',[VendorController::class, 'index']);
+    Route::get('/vendorList/search', [VendorController::class, 'search'])->name('vendor.search');
+    Route::get('/',[VendorController::class, 'indexHomepage']);
+    Route::get('/homepage',[VendorController::class, 'indexHomepage']);
+}); 
 
 Route::middleware(['checkauth'])->group(function(){
     Route::get('/cancelmembership',[MembershipController::class, 'viewCancelMembership']);
@@ -80,7 +84,6 @@ Route::middleware(['checkauth'])->group(function(){
         Route::post('/minQuantity/{id}',[ProductController::class, 'decreaseQuantity']);
         Route::post('/addQuantity/{id}',[ProductController::class, 'addQuantity']);
         Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
-        Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
         Route::get('/checkout',[ProductController::class, 'cartIndex']);
         Route::delete('/checkout/{id}',[ProductController::class, 'deleteItem']);
         Route::get('/customer/profile',[CustomerController::class, 'viewCustomerProfile']);
@@ -120,5 +123,3 @@ Route::middleware(['checkauth'])->group(function(){
     });
      Route::get('/logout', [UserController::class, 'logout']);
 });
-Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
-Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
