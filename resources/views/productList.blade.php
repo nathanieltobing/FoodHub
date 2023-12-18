@@ -26,13 +26,12 @@
             </div>
             <div class="content" style="margin-left: -80%;">
                 <div class="details">
-                    <h2>{{$vendor->name}} <br><span>{{$vendor->description}}</span></h2>
-{{--
+                    {{-- <h2>{{$vendor->name}} <br><span>{{$vendor->description}}</span></h2> --}}
+
                     <div class="data">
-                        <h3>342 <br> <span> Review</span> </h3>
-                        <h3>2K <br> <span> Order</span> </h3>
-                        <h3>3K <br> <span> Posts</span> </h3>
-                    </div> --}}
+                        <h2>{{$vendor->name}} <br> <span> {{$vendor->description}}</span> </h2>
+
+                    </div>
                     <div class="actionBtn">
                         {{-- <button style="height: 40px">Message</button> --}}
                         <button style="margin-top: 10px">{{$vendor->phone}}</button>
