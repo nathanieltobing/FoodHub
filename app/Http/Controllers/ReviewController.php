@@ -7,10 +7,23 @@ use App\Models\Review;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ReviewController extends Controller
 {
     public function addReview(Request $request, Order $o){
+
+        $rules = [
+            'rating' => 'required',
+            'comment' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
         DB::table('orders')->where([
             ['id',$o->id]
             ])->update([
@@ -37,6 +50,6 @@ class ReviewController extends Controller
         $newRating = round(($totalRating/$totalReview));
         $vendor->rating = $newRating;
         $vendor->save();
-        
+
     }
 }

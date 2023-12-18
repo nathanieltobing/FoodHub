@@ -81,7 +81,7 @@
                                                 @csrf
                                                 <div class="form-group mt-3">
                                                     <label for="rating">Rating:</label>
-                                                    <select class="form-control" id="rating" name="rating">
+                                                    <select class="form-control" id="rating" name="rating" required>
                                                         <option value="" disabled selected>Select a rating</option>
                                                         <option value="5">5 stars</option>
                                                         <option value="4">4 stars</option>
@@ -93,7 +93,7 @@
 
                                                 <div class="form-group">
                                                     <label for="review">Review:</label>
-                                                    <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
+                                                    <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
