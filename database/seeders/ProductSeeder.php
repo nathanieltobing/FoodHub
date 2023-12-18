@@ -24,6 +24,7 @@ class ProductSeeder extends Seeder
             'product_picture' => '/images/chocolate-cake.jpeg',
             'category_id' => 3,
             'vendor_id' => 3,
+            'promotion_id' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -37,6 +38,7 @@ class ProductSeeder extends Seeder
             'product_picture' => '/images/strawberry-cake.jpg',
             'category_id' => 3,
             'vendor_id' => 3,
+            'promotion_id' => 2,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -50,6 +52,7 @@ class ProductSeeder extends Seeder
             'product_picture' => '/images/vanilla-cake.jpg',
             'category_id' => 3,
             'vendor_id' => 3,
+            'promotion_id' => 3,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
