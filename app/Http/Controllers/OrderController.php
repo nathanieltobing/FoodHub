@@ -21,12 +21,15 @@ class OrderController extends Controller
     {
         if(Auth::guard('webvendor')->check()){
             $user = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+            $order = Order::where('vendor_id',$user->id)->orderBy('created_at','DESC')->get();
         } else if(Auth::guard('webcustomer')->check()){
             $user = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
+            $order = Order::where('customer_id',$user->id)->orderBy('created_at', 'DESC')->get();
         }
         // dd($user->orders);
+
         return view('orderList',[
-            'order' => $user->orders,
+            'order' => $order,
             'user' => $user
         ]);
     }
@@ -78,8 +81,8 @@ class OrderController extends Controller
         }
         $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
             if($customerMembership != null){
-                $customerMembership = json_decode($customerMembership, true);                             
-            }     
+                $customerMembership = json_decode($customerMembership, true);
+            }
 
         $order->status = 'OPEN';
         $order->total_price = $total_price;
