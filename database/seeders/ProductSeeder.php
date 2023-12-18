@@ -141,5 +141,17 @@ class ProductSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
+        DB::table('products')->insert([
+            'id' => 11,
+            'name' => 'Basreng',
+            'price' => 200000.00,
+            'stock' => 10,
+            'description' => 'Basreng untuk acara ukuran menengh untuk jumlah orang 30-50',
+            'product_picture' => '/images/basreng.jpg',
+            'category_id' => 1,
+            'vendor_id' => 2,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
     }
 }
