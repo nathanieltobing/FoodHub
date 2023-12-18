@@ -4,7 +4,7 @@
 <div class="container my-5" style="padding-top: 7rem">
     <div class="card">
         <div class="card-body">
-            <a href="{{ Auth::guard('webvendor')->check() ? '/vendor/profile' : '/customer/profile' }}" class="fa-solid fa-angle-left"></a>
+            <a href="{{url()->previous()}}"> <i class="fa-solid fa-arrow-left fa-xl me-3 fa-fw" style="margin-left:1030px"></i></a>
             <h3 class="card-title">Register Membership</h3>
             <p>Your membership will start as you register and ends in {{\Carbon\Carbon::now()->addDays(30)->format('d M Y')}}</p>
             <p>You will be charged <strong>Rp50.000,-</strong> per month</p>
@@ -102,7 +102,7 @@
                     <label for="email" class="payment-form-label payment-form-label-required">Email Address</label>
                 </div>
                 <div class="payment-form-group">
-                    <input type="text" placeholder=" " class="payment-form-control" id="cardNumber" name="cardNumber">
+                    <input type="text" placeholder=" " class="payment-form-control" maxlength="16" id="cardNumber" name="cardNumber">
                     <label for="card-number" class="payment-form-label payment-form-label-required">Card Number</label>
                 </div>
                 <div class="payment-form-group-flex">
@@ -111,7 +111,7 @@
                         <label for="expiry-date" class="payment-form-label payment-form-label-required">Expiry Date</label>
                     </div>
                     <div class="payment-form-group">
-                        <input type="text" placeholder=" " class="payment-form-control" id="cvv" name="cvv">
+                        <input type="text" placeholder=" " class="payment-form-control" maxlength="3" id="cvv" name="cvv">
                         <label for="cvv" class="payment-form-label payment-form-label-required">CVV</label>
                     </div>
                 </div>

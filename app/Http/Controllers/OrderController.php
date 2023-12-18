@@ -68,7 +68,12 @@ class OrderController extends Controller
         $total_quantity = 0; $total_price = 0;
         foreach ($carts as $cart) {
             $total_quantity+=$cart['quantity'];
-            $total_price+=$cart['price'] * $cart['quantity'];
+            if($cart['discounted_price'] != null){
+                $total_price+=$cart['discounted_price'] * $cart['quantity'];
+            }
+            else{
+                $total_price+=$cart['price'] * $cart['quantity'];
+            }
             $vendor_id = $cart['vendor_id'];
         }
         $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
@@ -95,7 +100,7 @@ class OrderController extends Controller
             $order_detail->order_id = $most_recent_order->id;
             $order_detail->product_id = $cart['product_id'];
             if($cart['discounted_price'] != null){
-                $order_detail->discount_price = $cart->discounted_price;
+                $order_detail->discount_price = $cart['discounted_price'];
             }
             $order_detail->save();
         }

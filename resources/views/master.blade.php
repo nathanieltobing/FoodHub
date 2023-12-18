@@ -52,7 +52,7 @@
             {{-- Button khusus Admin --}}
             <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a>
           @else
-            
+            <a href="/vendorList" style="--i:3"><img src="{{ asset('assets/images/vendoricon.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
             <a href="/login" style="--i:3">Login</a>
             <a href="/register/customer" style="--i:3">Register</a>
           @endif
