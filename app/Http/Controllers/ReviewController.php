@@ -32,8 +32,8 @@ class ReviewController extends Controller
 
     public function calculcateAndSaveNewRating(Order $o){
         $vendor = Vendor::where('id',$o->vendor_id)->first();
-        $totalRating = Review::where('vendor_id',$o->vendor_id)->sum('rating');
-        $totalReview = Review::where('vendor_id',$o->vendor_id)->count();
+        $totalRating = Review::where('vendor_id',$o->vendor_id)->sum('rating') + $vendor->rating;
+        $totalReview = Review::where('vendor_id',$o->vendor_id)->count() + 1;
         $newRating = round(($totalRating/$totalReview));
         $vendor->rating = $newRating;
         $vendor->save();
