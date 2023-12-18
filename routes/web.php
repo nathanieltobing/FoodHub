@@ -59,7 +59,6 @@ Route::middleware(['checkIfAdmin','checkIfVendor'])->group(function(){
     Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
     Route::get('/vendorList',[VendorController::class, 'index']);
     Route::get('/vendorList/search', [VendorController::class, 'search'])->name('vendor.search');
-    Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');
     Route::get('/',[VendorController::class, 'indexHomepage']);
     Route::get('/homepage',[VendorController::class, 'indexHomepage']);
 }); 
@@ -76,7 +75,8 @@ Route::middleware(['checkauth'])->group(function(){
     });
     Route::middleware(['checkCustOrVend'])->group(function(){
         Route::get('/orderlist',[OrderController::class, 'viewOrderList']);
-        Route::get('/orderdetail/{id}', [OrderDetailController::class, 'index']);       
+        Route::get('/orderdetail/{id}', [OrderDetailController::class, 'index']);   
+        Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');    
     }); 
     Route::middleware(['customer'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);

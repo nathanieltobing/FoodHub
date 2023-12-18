@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <p>We send this email to inform you your order has been successfully processed.</p>
+    <p>We send this email to inform you that your order has been successfully processed.</p>
     <p>
         Order No : ODR-{{$order->id}}
     </p>

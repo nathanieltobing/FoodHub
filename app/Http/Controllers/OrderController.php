@@ -111,6 +111,6 @@ class OrderController extends Controller
      }
 
      public function sendEmail($order,$orderDetails){
-        Mail::to('nathanieltobing@gmail.com')->send(new Email($order,$orderDetails));
+        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails));
      }
 }
