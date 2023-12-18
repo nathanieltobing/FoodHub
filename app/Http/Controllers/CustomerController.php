@@ -125,6 +125,7 @@ class CustomerController extends UserController
             $fileImage = $request->file('image');
             $imageName ='user '.$c->name.'.'.$fileImage->getClientOriginalExtension();
             Storage::putFileAs('public/images', $fileImage, $imageName);
+            $imageName = 'images/'.$imageName;
         }
         else{
             $imageName = $c->image;

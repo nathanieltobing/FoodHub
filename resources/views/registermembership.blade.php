@@ -25,18 +25,43 @@
                     <tbody>
                         @forelse($vendor->products as $product)
                             <tr>
-                                <td><img src="{{url('storage/images/'.$product->product_picture)}}" alt="" style="height: 5rem"></td>
+                                <td><img src="{{Storage::url($product->product_picture)}}" alt="" style="height: 5rem"></td>
                                 <td>{{ $product->name }}</td>
-                                <td>Rp{{ $product->price }}</td>
+                                <td>Rp{{number_format($product->price,2,",",".")}}</td>
                                 @if ($product->promotion_id)
-                                    <td>Rp{{$product->promotions->discount}}</td>
+                                    <td>Rp{{number_format($product->promotions->discount,2,",",".")}}</td>
                                     @php
                                         $countDiscountedProducts++;
                                     @endphp
                                 @else
-                                <td><a href="/promotion/create/{{$product->id}}" class="btn btn-primary">Add discount to product</a></td>
+                                <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#AddDiscount{{$product->id}}">Add discount to product</a></td>
                                 @endif
                             </tr>
+                            <div class="modal fade" id="AddDiscount{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="AddDiscount{{$product->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="cancelMembershipModalLabel">Input discount for {{$product->name}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <p>Current price : Rp{{number_format($product->price,2,",",".")}}</p>
+                                                <form method="post" action="/promotion/add/{{$product->id}}">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label for="name">Discount:</label>
+                                                        <input type="number" class="form-control" id="discount" name="discount" placeholder="" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Add discount</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @empty
                             <tr>
                                 <td colspan="2">No products available</td>
@@ -51,57 +76,63 @@
         </div>
         <div class="container pb-3">
             <div class="payment-right">
+                <form action="{{ Auth::guard('webvendor')->check() ? '/vendor/registermembership' : '/customer/registermembership' }}" method="post">
                 @csrf
                 <h1 class="payment-title">Payment Details</h1>
                 <div class="payment-method">
                     <input type="radio" name="payment-method" id="method-1" checked>
                     <label for="method-1" class="payment-method-item">
-                        <img src="images/visa.png" alt="">
+                        <img src="{{asset('assets/images/visa.png')}}" alt="">
                     </label>
                     <input type="radio" name="payment-method" id="method-2">
                     <label for="method-2" class="payment-method-item">
-                        <img src="images/mastercard.png" alt="">
+                        <img src="{{asset('assets/images/mastercard.png')}}" alt="">
                     </label>
                     <input type="radio" name="payment-method" id="method-3">
                     <label for="method-3" class="payment-method-item">
-                        <img src="images/paypal.png" alt="">
+                        <img src="{{asset('assets/images/bca.jpg')}}" alt="">
                     </label>
                     <input type="radio" name="payment-method" id="method-4">
                     <label for="method-4" class="payment-method-item">
-                        <img src="images/stripe.png" alt="">
+                        <img src="{{asset('assets/images/bri.png')}}" alt="">
                     </label>
                 </div>
                 <div class="payment-form-group">
-                    <input type="email" placeholder=" " class="payment-form-control" id="email">
+                    <input type="email" placeholder=" " class="payment-form-control" id="email" name="email">
                     <label for="email" class="payment-form-label payment-form-label-required">Email Address</label>
                 </div>
                 <div class="payment-form-group">
-                    <input type="text" placeholder=" " class="payment-form-control" id="card-number">
+                    <input type="text" placeholder=" " class="payment-form-control" id="cardNumber" name="cardNumber">
                     <label for="card-number" class="payment-form-label payment-form-label-required">Card Number</label>
                 </div>
                 <div class="payment-form-group-flex">
                     <div class="payment-form-group">
-                        <input type="date" placeholder=" " class="payment-form-control" id="expiry-date">
+                        <input type="date" placeholder=" " class="payment-form-control" id="expiryDate" name="expiryDate">
                         <label for="expiry-date" class="payment-form-label payment-form-label-required">Expiry Date</label>
                     </div>
                     <div class="payment-form-group">
-                        <input type="text" placeholder=" " class="payment-form-control" id="cvv">
+                        <input type="text" placeholder=" " class="payment-form-control" id="cvv" name="cvv">
                         <label for="cvv" class="payment-form-label payment-form-label-required">CVV</label>
                     </div>
                 </div>
                 @if (Auth::guard('webcustomer')->check())
-                    <form action="/customer/registermembership" class="d-flex justify-content-center" method="post">
-                    @csrf
                         <button type="submit" class="payment-form-submit-button"><i class="ri-wallet-line"></i>Confirm Payment</button>
-                    </form>
-                @elseif (Auth::guard('webvendor')->check())
-                    <form action="/vendor/registermembership" class="row justify-content-center" method="post">
-                    @csrf
-                        {{-- <button type="submit" class="payment-form-submit-button" {{ $vendorHasDiscountedProduct ? '' : 'disabled' }}><i class="ri-wallet-line"></i>Confirm Payment</button> --}}
-                        <button type="submit" class="payment-form-submit-button btn btn-success" {{ $vendorHasDiscountedProduct ? '' : 'disabled' }}>Confirm Payment</button>
+                @elseif (Auth::guard('webvendor')->check())<button type="submit" class="payment-form-submit-button btn btn-success" {{ $vendorHasDiscountedProduct ? '' : 'disabled' }}>Confirm Payment</button>
                         <p class="text-center text-danger mt-3">You must select at least 3 products to be added to promotion</p>
-                    </form>
                 @endif
+                </form>
+                <div class="row text-danger">
+                    @if(session()->has('error'))
+                            <p>{{ session()->get('error') }}</p>
+                        @endif
+                        @if ($errors->any())
+                        <ul class="ps-5">
+                            @foreach ($errors->all() as $error)
+                                <li class="text-danger">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        @endif
+                </div>
         </div>
         </div>
     </div>

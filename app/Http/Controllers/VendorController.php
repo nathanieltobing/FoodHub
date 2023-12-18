@@ -61,7 +61,7 @@ class VendorController extends UserController
             'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
             'phoneNumber' => 'required|regex:/^(0)[0-9]{11}/',
             'email' => 'required|email:rfc,dns',
-            'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),         
+            'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
             'dp' => 'image',
             'password' => 'required | min:8 | alpha_num |confirmed'
         ];
@@ -210,6 +210,7 @@ class VendorController extends UserController
             $fileImage = $request->file('image');
             $imageName ='user '.$v->name.'.'.$fileImage->getClientOriginalExtension();
             Storage::putFileAs('public/images', $fileImage, $imageName);
+            $imageName = 'images/'.$imageName;
         }
         else{
             $imageName = $v->image;
