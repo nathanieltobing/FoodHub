@@ -13,14 +13,14 @@
     <div class="progress"></div>
 </div> --}}
 
-    <div class="covering" style="margin-top:7%">
+    <div class="covering mt-5" style="padding-top:7rem">
         <div class="cards">
             <div class="imgBx">
                 @if(!$vendor->image)
-                            <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
+                    <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
                 @endif
                 @if ($vendor->image)
-                            <img src="{{Storage::url($vendor->image)}}">
+                    <img src="{{Storage::url($vendor->image)}}">
                 @endif
                 {{-- <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""> --}}
             </div>
@@ -65,17 +65,17 @@
         <div class="row justify-content-start">
             @forelse($products as $product)
                 <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="{{Storage::url($product->product_picture)}}" class="card-img-top" alt="Product Image" style="width: 100%; height: 200px; object-fit: cover;">
-                        <div class="card-body">
+                    <div class="card shadow text-center" style="border-radius: 15px;" >
+                        <img src="{{Storage::url($product->product_picture)}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
+                        <div class="card-body" style="height: 17.5rem; overflow: hidden;">
                             <h5 class="card-title">{{ $product->name }}</h5>
-                            <h6 class="card-title">Category : {{ $product->categories->name }}</h6>
-                            <p class="card-text">{{ $product->description }}</p>
+                            <h6 class="card-title text-secondary">{{ $product->categories->name }}</h6>
+                            <p class="card-text" style="height:5rem; overflow:hidden;" >{{ $product->description }}</p>
                             @if(!$product->promotions)
-                                <h6 class="card-text">Rp{{number_format($product->price,2,",",".")}}</h6>
+                                <h6 class="card-text mb-4">Rp{{number_format($product->price,2,",",".")}}</h6>
                             @else
-                                <h6 class="card-text">Rp{{number_format($product->promotions->discount,2,",",".")}}</h6>
-                                <small><p class="card-text" style="text-decoration: line-through">Rp{{number_format($product->price,2,",",".")}}</p></small>
+                                <h6 class="card-text" style="margin-top:-0.9rem">Rp{{number_format($product->promotions->discount,2,",",".")}}</h6>
+                                <small><p class="card-text mb-2" style="text-decoration: line-through">Rp{{number_format($product->price,2,",",".")}}</p></small>
                             @endif
                             @if (Auth::guard('webcustomer')->check())
                                 @if ($error == '-1')
