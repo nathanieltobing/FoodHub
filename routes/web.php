@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
@@ -69,16 +70,15 @@ Route::middleware(['checkauth'])->group(function(){
         Route::put('/deactivate/vendor/{id}',[AdminController::class, 'deActivateVendor']);
     });
     Route::middleware(['checkCustOrVend'])->group(function(){
-        Route::get('/orderlist',[OrderController::class, 'viewOrderList']);   
+        Route::get('/orderlist',[OrderController::class, 'viewOrderList']);
         Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');
-        Route::get('/orderdetail/{id}', [OrderDetailController::class, 'index']);
-        
+        Route::get('/orderdetail/{id}', [OrderDetailController::class, 'index']);       
     }); 
     Route::middleware(['customer'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         Route::post('/checkout',[OrderController::class, 'checkout']);
         Route::post('/minQuantity/{id}',[ProductController::class, 'decreaseQuantity']);
-        Route::post('/addQuantity/{id}',[ProductController::class, 'addQuantity']);     
+        Route::post('/addQuantity/{id}',[ProductController::class, 'addQuantity']);
         Route::post('/products/add/{id}', [ProductController::class, 'addToCart']);
         Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
         Route::get('/checkout',[ProductController::class, 'cartIndex']);
@@ -115,7 +115,6 @@ Route::middleware(['checkauth'])->group(function(){
         Route::get('/vendor/removeprofpic', [VendorController::class, 'removePicture']);
         Route::post('/vendor/registermembership', [VendorMembershipController::class, 'registerMembership']);
         Route::post('/vendor/cancelmembership', [VendorMembershipController::class, 'cancelMembership']);
-        Route::get('/promotion/create/{p:id}', [PromotionController::class, 'viewCreatePromotion']);
         Route::post('/promotion/add/{p:id}', [PromotionController::class, 'addPromotion']);
 
     });

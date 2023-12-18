@@ -49,8 +49,8 @@
             <h1>Product List</h1>
         @else
             <div class="d-flex">
-                <h1 style="padding-top :0%" class="align-self-end">Product List</h1>                       
-            <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:green;text-decoration:none;color:white"id="editProduct">Add Product</a>               
+                <h1 style="padding-top :0%" class="align-self-end">Product List</h1>
+            <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:green;text-decoration:none;color:white"id="editProduct">Add Product</a>
             </div>
         @endif
         <hr class="bg-dark">
@@ -69,7 +69,15 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <h6 class="card-title">Category : {{ $product->categories->name }}</h6>
                             <p class="card-text">{{ $product->description }}</p>
-                            <h6 class="card-text">Rp{{number_format($product->price,2,",",".")}}</h6>
+                            @if(!$product->promotions)
+                                <h6 class="card-text">Rp{{number_format($product->price,2,",",".")}}</h6>
+                            @else
+                            @php
+                                $discountedPrice = $product->price - $product->promotions->discount;
+                            @endphp
+                                <h6 class="card-text">Rp{{number_format($discountedPrice,2,",",".")}}</h6>
+                                <small><p class="card-text" style="text-decoration: line-through">Rp{{number_format($product->price,2,",",".")}}</p></small>
+                            @endif
                             @if (Auth::guard('webcustomer')->check())
                                 @if ($error == '-1')
                                     <form action="/products/add/{{$product->id}}" method="POST">
@@ -78,10 +86,10 @@
                                         <button class="submit-button" style="margin-left:5em;" type="submit" id="error_trigger">Add to Cart</button>
                                     </form>
                                 @else
-                                    <button class="submit-button" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button> 
-                                @endif                    
+                                    <button class="submit-button" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button>
+                                @endif
                             @else
-                                <a href="/product/vendor/edit/{{$product->id}}" class="submit-button" style="margin-left:5em;text-decoration:none;color:white">Edit</a>  
+                                <a href="/product/vendor/edit/{{$product->id}}" class="submit-button" style="margin-left:5em;text-decoration:none;color:white">Edit</a>
                             @endif
 
                         </div>
@@ -92,7 +100,7 @@
             @endforelse
             <div class = "d-flex justify-content-center mt-4">
                 {{$products->links()}}
-              </div>  
+              </div>
               @if (Auth::guard('webcustomer')->check())
                 <input type="hidden" id="hidden1" name="role" value={{$error}}>
                 <div class="popups" id="error" style="width: 50%">
@@ -105,7 +113,7 @@
                         <a href="#" class="buttons" id="e_button">EXIT</a>
                         </form>
                     </div>
-                    </div>   
+                    </div>
               @endif
               <script src="{{ asset('assets/popup.js') }}"></script>
         </div>

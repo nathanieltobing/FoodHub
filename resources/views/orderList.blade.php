@@ -1,6 +1,9 @@
 @extends('master')
 
 @section('content')
+@php
+    use App\Models\Product;
+@endphp
 <div class="container pt-5" style="margin-top: 3rem">
     @if(session('message'))
     <div class="container">
@@ -34,30 +37,29 @@
                         : 'btn-success'))}} mx-3 btn active">{{$o->status}}</span>
 
                 </div>
-
                 <hr>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                        <img class="img-thumbnail ms-2 me-3" src="{{url('storage/images/book1.jpg')}}" alt="" style="width:80px">
+                        @foreach ($o->order_details as $index=>$od)
+                        @if ($index == 0)
+                        <img class="img-thumbnail ms-2 me-3" src="{{Storage::url(Product::where('id',$od->product_id)->value('product_picture'))}}" alt="" style="width:80px">
                         <div>
                             <ul class="list-unstyled">
-                                @foreach ($o->order_details as $index=>$od)
-                                    @if ($index == 0)
                                         <li class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;" >{{ $od->product_name }}</li>
                                         <span style="font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name">x{{ $od->quantity }}</span>
-                                    @endif
-                                @endforeach
                             </ul>
                             <div class="actionBtn">   
                                 <a href="/orderdetail/{{$o->id}}" style="text-decoration: none;"> <button>View Detail</button></a>                             
                                
                             </div>
                         </div>
+                        @endif
+                        @endforeach
                     </div>
                 </div>
                 <div class="card-text d-flex flex-column">
                     <span class="payment-summary-price" style="font-size:18px;font-weight: 700;margin-left:8px;margin-top:10px;justify-content-start">Total Belanja</span>
-                    <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->total_price)}}</p>
+                    <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->total_price,2,",",".")}}</p>
                         @if($o->status == 'ON GOING' && Auth::guard('webcustomer')->check())
                         <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
                             <span ><a href="#" class="btn btn-primary" style="width: 100%;margin-right:80px" data-toggle="modal" data-target="#FinishOrderModal{{$o->id}}">Finish Order</a> </span>
