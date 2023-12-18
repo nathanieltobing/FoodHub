@@ -19,7 +19,7 @@ class VendorController extends UserController
 {
     public function index(){
 
-        $vendors = Vendor::paginate(3);
+        $vendors = Vendor::paginate(2);
         return view('vendorList', ['vendors'=> $vendors]);
     }
 
