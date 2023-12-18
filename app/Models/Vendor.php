@@ -14,7 +14,7 @@ class Vendor extends User
     ];
 
     public function orders(){
-        return $this->belongsTo(Order::class,'id', 'vendor_id');
+        return $this->hasMany(Order::class,'vendor_id', 'id');
     }
 
     public function products(){
