@@ -18,24 +18,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="{{ asset('assets/script.js') }}"></script>
+    
 </head>
 <body>
 <header class="header">
-        <a href="/" class="logo">FH</a>
+       <a href="/" class="logo">FH</a>
         <input type="checkbox" id="check">
         <label for="check" class="icons">
             <i class="bx bx-menu" id="menu-icon"></i>
             <i class="bx bx-x" id="close-icon"></i>
         </label>
     <nav class="navbar" style="display: block">
-        {{-- <a class="forms" href="#"  style="--i:4;display:inline-flex;"> <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form></a> --}}
 
         @if(Auth::guard('webcustomer')->check())
           <div class="justify-content-center" style="gap: 50px;display :block">
+
             <a href="/vendorList" style="--i:3"><img src="{{ asset('assets/images/vendoricon.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
             <a href="/orderlist" style="--i:3"><img src="{{ asset('assets/images/orderlist.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
             {{-- <a href="/profile/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Membership</a> --}}
@@ -55,7 +52,7 @@
             {{-- Button khusus Admin --}}
             <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a>
           @else
-            {{--Button belom login --}}
+            
             <a href="/login" style="--i:3">Login</a>
             <a href="/register/customer" style="--i:3">Register</a>
           @endif
@@ -64,99 +61,11 @@
 </header>
 
 
-    </header>
         @yield('content')
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-{{-- content --}}
-
-{{-- end of content --}}
-
-    {{-- <section class="container">
-        <div class="inner">
-            <h1 style="margin-left:40%">Promotion</h1>
-            <div class="border"></div>
-        </div>
-        <div class="slider-wrapper">
-            <div class="slider">
-                <img id="slide-1" src="storage/images/foodbanner1.jpg" alt="3D rendering of an imaginary orange planet in space" />
-                <img id="slide-2" src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="3D rendering of an imaginary green planet in space" />
-                <img id="slide-3" src="https://images.unsplash.com/photo-1656077217715-bdaeb06bd01f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="3D rendering of an imaginary blue planet in space" />
-            </div>
-            <div class="slider-nav">
-                <a href="#slide-1"></a>
-                <a href="#slide-2"></a>
-                <a href="#slide-3"></a>
-            </div>
-        </div>
-    </section>
-
-    <div class="testimonials">
-        <div class="inner">
-          <h1>Best Vendors</h1>
-          <div class="border"></div>
-
-          <div class="row">
-            <div class="col">
-              <div class="testimonial">
-                <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
-                <div class="name">Full name</div>
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                </p>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="testimonial">
-                <img src="storage/images/foodbanner1.jpg" alt="">
-                <div class="name">Full name</div>
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                </div>
-
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                </p>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="testimonial">
-                <img src="storage/images/foodbanner1.jpg" alt="">
-                <div class="name">Full name</div>
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </div>
-
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> --}}
-
 
 </body>
 
