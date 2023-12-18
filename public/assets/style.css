@@ -1195,7 +1195,7 @@ position: absolute;
 left: 50%;
 top: -50px;
 transform: translateX(-50%);
-width: 150px;
+width: 200px;
 height: 190px;
 background: #fff;
 border-radius: 20px;
@@ -1264,7 +1264,7 @@ object-fit: cover;
   .cards .content .details .data {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0;
+  /* margin: 20px 0; */
   }
 
 
@@ -2467,8 +2467,15 @@ hr {
     padding: 0;
 }
 
+/* .vendor-listbtn:hover{
+    border: 1px solid var(--indigo-500);
+    color: var(--indigo-500);
+    background: #fff;
+} */
 
 
+
+/*  */
 
 /* .popups .overlay{
     position: fixed;

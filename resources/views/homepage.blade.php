@@ -38,8 +38,7 @@
         <div class="inner-container">
          <h1>ABOUT US</h1>
             <p class="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium minus eum beatae veniam odio ducimus quo iste sint adipisci libero similique consequuntur natus, minima suscipit, quisquam amet? Est, temporibus quae!
-
+                At Foodhub, we pride ourselves as a bridge connecting vendors and customers. We serve as the trusted middleman, ensuring a harmonious connection between exceptional vendors and discerning customers
            </p>
           <div class="skills">
             <span> Food Management</span>

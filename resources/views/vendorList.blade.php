@@ -32,7 +32,7 @@
                <i class="fas fa-star"></i>
             @endfor
         </div>
-        <p class="card-text" style="font-weight: 600; font-family: Poppins;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text" style="font-weight: 600; font-family: Poppins;margin-bottom:20px">"Salama catering menyediakan berbagai menu nasi kotak untuk acara besar maupun kecil dengan rasa yang terpecaya test test test test test test test test test test test"</p>
         {{-- <h5 class="card-text">Category : {{$vendor->category}}</h5>
         <h5 class="card-text">Price : Rp {{$vendor->price}}</h5>
         <h5 class="card-text">Description : {{$vendor->description}}</h5> --}}
