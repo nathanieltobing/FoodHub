@@ -17,8 +17,7 @@
     <hr>
     <br>
       @if ($order != null && $order->count() != 0)
-
-        @foreach ($order as $key => $o)
+        @foreach ($order as  $o)
         <div class="d-flex justify-content-around align-items-center">
             <div class="col-10" >
                 <div class="card card-body"style=" border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A;">
@@ -28,7 +27,7 @@
                         <i style="font-size:30px; margin-top:20px;margin-right:20px;margin-left:9px" class="fa">&#xf290;</i>
                         <div class="" style="margin-top:10px">
                             <p class="payment-summary-price justify-content-start" style="font-size:18px;font-weight: 700;margin-bottom:0;"> Belanja</p>
-                            <p class="payment-summary-name justify-content-start">{{ \Carbon\Carbon::parse($o->treansactionDate)->format('d M Y')}}</p>
+                            <p class="payment-summary-name justify-content-start">{{ \Carbon\Carbon::parse($o->transaction_date)->format('d M Y')}}</p>
                         </div>
                     </div>
 
@@ -51,9 +50,9 @@
                                             <li class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;" >{{ $od->product_name }}</li>
                                             <span style="font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name">x{{ $od->quantity }}</span>
                                 </ul>
-                                <div class="actionBtn">   
-                                    <a href="/orderdetail/{{$o->id}}" style="text-decoration: none;"> <button>View Detail</button></a>                             
-                                
+                                <div class="actionBtn">
+                                    <a href="/orderdetail/{{$o->id}}" style="text-decoration: none;"> <button>View Detail</button></a>
+
                                 </div>
 
                             </div>
@@ -119,7 +118,7 @@
         </div>
         <br>
         @endforeach
-       
+
 
       @else
       <div class="justify-content-center" style="align-items: center;text-align:center">
