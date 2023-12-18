@@ -62,11 +62,11 @@
                         {{-- <p  class="payment-plan-info-price" style="font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol"> Paket 1 makanan</p> --}}
                     </td>
                         <td >
-                            @if ($cart['discounted_price'] != null)                                                  
-                              <div class="payment-summary-price">Rp{{number_format($cart['discounted_price'],2,",",".")}}</div>                        
-                            @else                                                        
-                              <div class="payment-summary-price">Rp{{number_format($cart['price'],2,",",".")}}</div>                            
-                            @endif                          
+                            @if ($cart['discounted_price'] != null)
+                              <div class="payment-summary-price">Rp{{number_format($cart['discounted_price'],2,",",".")}}</div>
+                            @else
+                              <div class="payment-summary-price">Rp{{number_format($cart['price'],2,",",".")}}</div>
+                            @endif
                         </td>
                         <td>
                             <div class="wrappers">
@@ -85,9 +85,9 @@
                         @if ($cart['discounted_price'] != null)
                             <td> <div class="payment-summary-price">Rp{{number_format($cart['discounted_price'] * $cart['quantity'],2,",",".")}}</div></td>
                         @else
-                            <td> <div class="payment-summary-price">Rp{{number_format($cart['price'] * $cart['quantity'],2,",",".")}}</div></td>  
-                        @endif       
-                
+                            <td> <div class="payment-summary-price">Rp{{number_format($cart['price'] * $cart['quantity'],2,",",".")}}</div></td>
+                        @endif
+
                        <?php
 
                        ?>
@@ -217,8 +217,13 @@
             </div>
 
     @else
-       <p class ="d-flex justify-content-center" style="font-size :45px;" >Your cart is empty<i class="fa-regular fa-face-frown" style="margin-left:1%; margin-top:14px;"></i></p>
+             <div class="justify-content-center" style="align-items: center;text-align:center">
 
+                
+            <img src="{{ asset('assets/images/emptycart.png') }}" alt="" style="  max-width: 150%;   height: auto;">
+            <p class ="payment-summary-price" style="font-size :45px;" >Your cart is empty<i class="fa-regular fa-face-frown" style="margin-left:1%; margin-top:14px;"></i></p>
+            <p class ="payment-summary-name" style="font-size :20px;" >Add Something to make me happy<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:144px"></i></p>
+            </div>
     @endif
 
   </div>

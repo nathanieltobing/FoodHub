@@ -112,23 +112,16 @@
                         <div class="d-flex flex-row align-items-center mb-4" style="gap: 10px;">
 
 
-                        <div class="testimonial  " style="width: 10rem;">
-                          {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                          <div class="card-body">
-                            <a href="/register/customer" class="card-title">CUSTOMER</a>
 
-                          </div>
 
-                        </div>
-                        <div class="testimonial" style="width: 10rem; border:1px solid gray">
-                          {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                          <div class="card-body">
+                            <a href="/register/customer" class="card-body fullwidth" style="width: 10rem; background: #fff; padding: 27px; border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A;">CUSTOMER</a>
 
-                            <a href="/register/vendor" class="card-title">VENDOR</a>
 
-                          </div>
 
-                        </div>
+                            <a href="/register/vendor" class="card-body fullwidth" style="width: 10rem; background: #fff; padding: 27px; border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A; border:1px solid gray">VENDOR</a>
+
+
+
                         {{-- <div class="testimonial" style="width: 10rem;">
                           <img src="..." class="card-img-top" alt="...">
                           <div class="card-body">

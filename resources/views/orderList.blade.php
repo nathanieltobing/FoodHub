@@ -17,10 +17,12 @@
     <hr>
     <br>
       @if ($order != null && $order->count() != 0)
+
         @foreach ($order as $key => $o)
         <div class="d-flex justify-content-around align-items-center">
             <div class="col-10" >
                 <div class="card card-body"style=" border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A;">
+
 
                     <div class="card-title d-flex pb-1">
                         <i style="font-size:30px; margin-top:20px;margin-right:20px;margin-left:9px" class="fa">&#xf290;</i>
@@ -35,6 +37,7 @@
                             : ($o->status=='ON GOING'? 'btn-warning'
                             : ($o->status=='REJECTED'? 'btn-danger'
                             : 'btn-success'))}} mx-3 btn active">{{$o->status}}</span>
+
 
                     </div>
                     <hr>
@@ -52,6 +55,7 @@
                                     <a href="/orderdetail/{{$o->id}}" style="text-decoration: none;"> <button>View Detail</button></a>                             
                                 
                                 </div>
+
                             </div>
                             @endif
                             @endforeach
@@ -110,13 +114,20 @@
                             @endif
                     </div>
                 </div>
+
             </div>
         </div>
         <br>
         @endforeach
        
+
       @else
-        <p>You have no orders yet!</p>
+      <div class="justify-content-center" style="align-items: center;text-align:center">
+        <img src="{{ asset('assets/images/emptyorder.png') }}" alt="" style="  max-width: 150%;   height: auto;">
+        <p class ="payment-summary-price" style="font-size :45px;" >Your Order is empty</i></p>
+        <p class ="payment-summary-name" style="font-size :20px;" >Order Something to Fill it Up<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:225px"></i></p>
+     </div>
+
       @endif
     </div>
 </div>

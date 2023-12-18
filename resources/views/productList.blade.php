@@ -26,13 +26,12 @@
             </div>
             <div class="content" style="margin-left: -80%;">
                 <div class="details">
-                    <h2>{{$vendor->name}} <br><span>{{$vendor->description}}</span></h2>
-{{--
+                    {{-- <h2>{{$vendor->name}} <br><span>{{$vendor->description}}</span></h2> --}}
+
                     <div class="data">
-                        <h3>342 <br> <span> Review</span> </h3>
-                        <h3>2K <br> <span> Order</span> </h3>
-                        <h3>3K <br> <span> Posts</span> </h3>
-                    </div> --}}
+                        <h2>{{$vendor->name}} <br> <span> {{$vendor->description}}</span> </h2>
+
+                    </div>
                     <div class="actionBtn">
                         {{-- <button style="height: 40px">Message</button> --}}
                         <button style="margin-top: 10px">{{$vendor->phone}}</button>
@@ -53,7 +52,7 @@
             <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:green;text-decoration:none;color:white"id="editProduct">Add Product</a>
             </div>
         @else
-            <h1>Product List</h1> 
+            <h1>Product List</h1>
         @endif
         <hr class="bg-dark">
         <form action="/products/search/{{$vendor->id}}" class="row justify-content-start mb-4" role="search">
@@ -93,7 +92,7 @@
                             @elseif(Auth::guard('webvendor')->check())
                                 <a href="/product/vendor/edit/{{$product->id}}" class="submit-button" style="margin-left:5em;text-decoration:none;color:white">Edit</a>
                             @else
-                                <a href="/login" class="submit-button" style="margin-left:3em;text-decoration:none;color:white;width:70%;margin-top:1.3em">Login to add to cart</a> 
+                                <a href="/login" class="submit-button" style="margin-left:3em;text-decoration:none;color:white;width:70%;margin-top:1.3em">Login to add to cart</a>
                             @endif
 
                         </div>

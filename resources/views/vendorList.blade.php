@@ -37,6 +37,14 @@
               <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg vendor-listbtn" style="margin-top:10px;line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Detail</a>
             </div>
         </div>
+
+        <p class="card-text" style="font-weight: 600; font-family: Poppins;margin-bottom:20px">"Salama catering menyediakan berbagai menu nasi kotak untuk acara besar maupun kecil dengan rasa yang terpecaya test test test test test test test test test test test"</p>
+        {{-- <h5 class="card-text">Category : {{$vendor->category}}</h5>
+        <h5 class="card-text">Price : Rp {{$vendor->price}}</h5>
+        <h5 class="card-text">Description : {{$vendor->description}}</h5> --}}
+        <div class="row">
+          <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg vendor-listbtn" style="margin-top:10px;line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Detail</a>
+
         </div>
       @endforeach  
     @else
