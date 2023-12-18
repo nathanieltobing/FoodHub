@@ -69,11 +69,11 @@ class ProductSeeder extends Seeder
 
         DB::table('products')->insert([
             'id' => 5,
-            'name' => 'Fifth Product',
-            'price' => 50000.00,
+            'name' => 'Soes Kering',
+            'price' => 250000.00,
             'stock' => 10,
-            'description' => 'ini adalah first product dari vendor 5',
-            'product_picture' => '1701874795.jpg',
+            'description' => 'Soes kering untuk acara ukuran menengah untuk jumlah orang 30-50',
+            'product_picture' => '/images/Soes_kering.jpg',
             'category_id' => 1,
             'vendor_id' => 2,
             'created_at' => Carbon::now(),
@@ -82,11 +82,11 @@ class ProductSeeder extends Seeder
 
         DB::table('products')->insert([
             'id' => 6,
-            'name' => 'Fifth Product',
-            'price' => 50000.00,
+            'name' => 'Makaroni Balado',
+            'price' => 150000.00,
             'stock' => 10,
-            'description' => 'ini adalah first product dari vendor 5',
-            'product_picture' => '1701874795.jpg',
+            'description' => 'Makaroni Balado untuk acara ukuran menengh untuk jumlah orang 30-50',
+            'product_picture' => '/images/makaroni_balado.jpg',
             'category_id' => 1,
             'vendor_id' => 2,
             'created_at' => Carbon::now(),
@@ -95,13 +95,49 @@ class ProductSeeder extends Seeder
 
         DB::table('products')->insert([
             'id' => 7,
-            'name' => 'Fifth Product',
-            'price' => 50000.00,
+            'name' => 'Pie Susu',
+            'price' => 200000.00,
             'stock' => 10,
-            'description' => 'ini adalah first product dari vendor 5',
-            'product_picture' => '1701874795.jpg',
+            'description' => 'Pie Susu untuk acara ukuran menengh untuk jumlah orang 30-50',
+            'product_picture' => '/images/pie_susu.jpg',
             'category_id' => 1,
-            'vendor_id' => 2,
+            'vendor_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('products')->insert([
+            'id' => 8,
+            'name' => 'Coklat Kurma',
+            'price' => 300000.00,
+            'stock' => 10,
+            'description' => 'Coklat Kurma untuk acara ukuran menengh untuk jumlah orang 30-50',
+            'product_picture' => '/images/Coklat_kurma.jpg',
+            'category_id' => 1,
+            'vendor_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('products')->insert([
+            'id' => 9,
+            'name' => 'Nasi Kotak',
+            'price' => 2000000.00,
+            'stock' => 100,
+            'description' => 'Nasi Kotak untuk acara ukuran menengh untuk jumlah orang 100-150',
+            'product_picture' => '/images/Nasi_kotak.jpg',
+            'category_id' => 2,
+            'vendor_id' => 4,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('products')->insert([
+            'id' => 10,
+            'name' => 'Nasi Kuning',
+            'price' => 2500000.00,
+            'stock' => 100,
+            'description' => 'Nasi Kuning untuk acara ukuran menengh untuk jumlah orang 100-150',
+            'product_picture' => '/images/Nasi_kuning.jpg',
+            'category_id' => 2,
+            'vendor_id' => 4,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
