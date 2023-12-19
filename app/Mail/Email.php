@@ -11,17 +11,18 @@ class Email extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order,$orderDetails;
+    public $order,$orderDetails,$vendor;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($order,$orderDetails)
+    public function __construct($order,$orderDetails,$vendor)
     {
         $this->order = $order;
         $this->orderDetails = $orderDetails;
+        $this->vendor = $vendor;
     }
 
     /**
