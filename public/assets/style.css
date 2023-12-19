@@ -1237,7 +1237,7 @@ object-fit: cover;
     width: 100%;
     transition: 0.5s;
     transform: translateY(170px);
-    margin-bottom: -44px;
+    /* margin-bottom: -44px; */
  }
 
  .cards:hover .content .details{
@@ -1251,7 +1251,7 @@ object-fit: cover;
    font-weight: 600;
    color: #555;
    line-height: 1.2em;
-
+    height: 30px;
  }
 
 
@@ -1339,15 +1339,18 @@ object-fit: cover;
     background-color: var(--indigo-500);
     border-radius: 8px;
     outline: transparent;
-    width: 100%;
+    width: 25%;
     color: var(--white);
     transition: all .15s ease-in-out;
+    margin-right:40px ;
+    margin-bottom: 20px;
   }
 
-  .actionBtn button:hover{
+   .actionBtn button:hover{
     border: 1px solid var(--indigo-500);
     color: var(--indigo-500);
     background: #fff;
+
   }
 
   .actionbtn span{

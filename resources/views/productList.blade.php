@@ -25,14 +25,14 @@
                 {{-- <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""> --}}
             </div>
             <div class="content" style="margin-left: -80%;">
-                <div class="details">
-                     <h2>{{$vendor->name}}</h2>
+                <div class="details" style="height: 250px">
+                     <h2>{{$vendor->name}}</h2>      <span> {{$vendor->description}}</span>
 
                     <div class="data">
-                        <span> {{$vendor->description}}</span> 
+                        {{-- <span> {{$vendor->description}}</span> --}}
 
                     </div>
-                    <div class="actionBtn">
+                    <div class="actionBtn" style="width: 100%">
                         {{-- <button style="height: 40px">Message</button> --}}
                         <button style="margin-top: 10px">{{$vendor->phone}}</button>
                     </div>
