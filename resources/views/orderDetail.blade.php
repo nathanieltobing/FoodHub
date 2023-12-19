@@ -8,15 +8,19 @@
         <div class="col-lg-8 col-xl-6">
           <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
             <div class="card-body p-5">
-              <a href="{{url()->previous()}}"> <i class="fa-solid fa-arrow-left fa-xl me-3 fa-fw" style="margin-left:430px"></i></a>
+              <a href="{{url()->previous()}}"> <i class="fa-solid fa-arrow-left fa-xl me-3 fa-fw" style="margin-left:430px; margin-bottom:5%"></i></a>
               <p class="lead fw-bold mb-5" style="color: #f37a27;">Order Detail</p>
   
               <div class="row d-flex justify-content-start">
-                <div class="col mb-3">
+                <div class="col-4 mb-3">
                   <p class="small text-muted mb-1">Date</p>
                   <p>{{ \Carbon\Carbon::parse($order->transaction_date)->format('d M Y')}}</p>
                 </div>
-                <div class="col mb-3 ml-5">
+                <div class="col-5 mb-3">
+                  <p class="small text-muted mb-1">Vendor</p>
+                  <p>{{$vendor->name}}</p>
+                </div>
+                <div class="col-3 mb-3">
                   <p class="small text-muted mb-1">Order No.</p>
                   <p>ODR-{{$order->id}}</p>
                 </div>

@@ -21,12 +21,15 @@ class OrderController extends Controller
     {
         if(Auth::guard('webvendor')->check()){
             $user = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+            $order = Order::where('vendor_id',$user->id)->orderBy('created_at','DESC')->get();
         } else if(Auth::guard('webcustomer')->check()){
             $user = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
+            $order = Order::where('customer_id',$user->id)->orderBy('created_at', 'DESC')->get();
         }
         // dd($user->orders);
+
         return view('orderList',[
-            'order' => $user->orders,
+            'order' => $order,
             'user' => $user
         ]);
     }
@@ -44,7 +47,7 @@ class OrderController extends Controller
             ])->update([
             'status' => $status
         ]);
-        return redirect()->back()->with('message','Order #'.$o->id.' status edited successfully!');
+        return redirect()->back()->with('message','Order status edited successfully!');
     }
 
     public function checkout(Request $req){
@@ -78,14 +81,14 @@ class OrderController extends Controller
         }
         $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
             if($customerMembership != null){
-                $customerMembership = json_decode($customerMembership, true);                             
-            }     
+                $customerMembership = json_decode($customerMembership, true);
+            }
 
         $order->status = 'OPEN';
         $order->total_price = $total_price;
         $order->total_quantity = $total_quantity;
         $order->customer_id = Auth::guard('webcustomer')->user()->id;
-        if($customerMembership != null){
+        if($customerMembership != null && $customerMembership['status'] == 'ACTIVE'){
             $order->membership_discount = (double)$customerMembership['discount'] /100;
         }
         $order->vendor_id = $vendor_id;
@@ -105,12 +108,12 @@ class OrderController extends Controller
             $order_detail->save();
         }
         $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
-        $this->sendEmail($most_recent_order,$orderDetails);
+        // $this->sendEmail($most_recent_order,$orderDetails);
         session()->put('cart', []);
         return view('succesfulPage');
      }
 
      public function sendEmail($order,$orderDetails){
-        Mail::to('nathanieltobing@gmail.com')->send(new Email($order,$orderDetails));
+        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails));
      }
 }

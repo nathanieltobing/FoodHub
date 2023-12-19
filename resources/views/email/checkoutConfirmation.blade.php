@@ -22,8 +22,9 @@
 </head>
 
 <body>
-    <p>We send this email to inform you your order has been successfully processed.</p>
+    <p>We send this email to inform you that your order has been successfully processed.</p>
     <p>
+        Vendor : {{$order->vendors->name}}
         Order No : ODR-{{$order->id}}
     </p>
     <?php
@@ -48,6 +49,7 @@
     <br>
     <p>Service Fee : Rp2.000,00</p>
     @if ($order->membership_discount != null)   
+        <p>Membership Discount : Rp{{number_format((int)($totalPrice * $order->membership_discount),2,",",".")}}</p> 
         <p>Total Price : Rp{{number_format($totalPrice + 2000 - (int)($totalPrice * $order->membership_discount),2,",",".")}}</p>        
     @else
         <p>Total Price : Rp{{number_format($totalPrice + 2000 ,2,",",".")}}</p>         
