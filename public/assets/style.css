@@ -361,7 +361,7 @@ footer{
 .slider img {
 	flex: 1 0 100%;
 	scroll-snap-align: start;
-	object-fit: cover;
+	
 }
 
 .slider-nav {
@@ -550,7 +550,7 @@ footer{
                 width: 1300px;
                 max-width: 100vw;
                 height: 100%;
-                object-fit: cover;
+              
             }
             .slider .buttons{
                 position: absolute;
