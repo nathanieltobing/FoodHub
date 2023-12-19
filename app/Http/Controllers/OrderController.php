@@ -44,7 +44,7 @@ class OrderController extends Controller
             ])->update([
             'status' => $status
         ]);
-        return redirect()->back()->with('message','Order #'.$o->id.' status edited successfully!');
+        return redirect()->back()->with('message','Order status edited successfully!');
     }
 
     public function checkout(Request $req){
