@@ -97,7 +97,7 @@
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a href="/finishwithoutreview/{{$o->id}}" class="btn btn-secondary">Finish without review</a>
                                             <button type="submit" class="btn btn-success">Submit and finish order</button>
                                             </form>
                                         </div>
