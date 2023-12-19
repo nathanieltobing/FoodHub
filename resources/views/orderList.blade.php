@@ -23,12 +23,21 @@
                 <div class="card card-body"style=" border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A;">
 
 
-                    <div class="card-title d-flex pb-1">
+                    <div class="card-title d-flex pb-1" style="margin-bottom:-10px">
                         <i style="font-size:30px; margin-top:20px;margin-right:20px;margin-left:9px" class="fa">&#xf290;</i>
                         <div class="" style="margin-top:10px">
                             <p class="payment-summary-price justify-content-start" style="font-size:18px;font-weight: 700;margin-bottom:0;"> Belanja</p>
                             <p class="payment-summary-name justify-content-start">{{ \Carbon\Carbon::parse($o->transaction_date)->format('d M Y')}}</p>
+
                         </div>
+                        {{-- <div class="actionBtn">
+                            <a href="/orderdetail/{{$o->id}}" style="text-decoration: none"> <button>View Detail</button></a>
+
+                        </div> --}}
+                    </div>
+                    <div class="actionBtn">
+                        <a href="/orderdetail/{{$o->id}}" style="text-decoration: none"> <button>View Detail</button></a>
+
                     </div>
 
                     <div class="d-flex justify-content-end" style="gap:10px;margin-right: 20px;margin-top: -70px">
@@ -44,16 +53,17 @@
                         <div class="d-flex align-items-center">
                             @foreach ($o->order_details as $index=>$od)
                             @if ($index == 0)
-                            <img class="img-thumbnail ms-2 me-3" src="{{Storage::url(Product::where('id',$od->product_id)->value('product_picture'))}}" alt="" style="width:80px">
+                            <img class="img-thumbnail ms-2 me-3" src="/storage/{{Product::where('id',$od->product_id)->value('product_picture')}}" alt="" style="width:80px">
+
                             <div>
                                 <ul class="list-unstyled">
                                             <li class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;" >{{ $od->product_name }}</li>
                                             <span style="font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name">x{{ $od->quantity }}</span>
                                 </ul>
-                                <div class="actionBtn">
+                                {{-- <div class="actionBtn">
                                     <a href="/orderdetail/{{$o->id}}" style="text-decoration: none;"> <button>View Detail</button></a>
 
-                                </div>
+                                </div> --}}
 
                             </div>
                             @endif
@@ -97,7 +107,7 @@
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a href="/finishwithoutreview/{{$o->id}}" class="btn btn-secondary">Finish without review</a>
                                             <button type="submit" class="btn btn-success">Submit and finish order</button>
                                             </form>
                                         </div>

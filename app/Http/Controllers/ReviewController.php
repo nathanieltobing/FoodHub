@@ -52,4 +52,13 @@ class ReviewController extends Controller
         $vendor->save();
 
     }
+
+    public function finishWithoutReview(Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'status' => 'FINISHED'
+        ]);
+        return redirect('orderlist')->with('message','Order #'.$o->id.' status edited successfully!');
+    }
 }

@@ -61,7 +61,7 @@ Route::middleware(['checkIfAdmin','checkIfVendor'])->group(function(){
     Route::get('/vendorList/search', [VendorController::class, 'search'])->name('vendor.search');
     Route::get('/',[VendorController::class, 'indexHomepage']);
     Route::get('/homepage',[VendorController::class, 'indexHomepage']);
-}); 
+});
 
 Route::middleware(['checkauth'])->group(function(){
     Route::get('/cancelmembership',[MembershipController::class, 'viewCancelMembership']);
@@ -75,9 +75,9 @@ Route::middleware(['checkauth'])->group(function(){
     });
     Route::middleware(['checkCustOrVend'])->group(function(){
         Route::get('/orderlist',[OrderController::class, 'viewOrderList']);
-        Route::get('/orderdetail/{id}', [OrderDetailController::class, 'index']);   
-        Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');    
-    }); 
+        Route::get('/orderdetail/{id}', [OrderDetailController::class, 'index']);
+        Route::get('/products/search/{v:id}', [ProductController::class, 'search'])->name('products.search');
+    });
     Route::middleware(['customer'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         Route::post('/checkout',[OrderController::class, 'checkout']);
@@ -94,7 +94,7 @@ Route::middleware(['checkauth'])->group(function(){
         Route::get('/customer/removeprofpic', [CustomerController::class, 'removePicture']);
         Route::post('/customer/registermembership', [CustomerMembershipController::class, 'registerMembership']);
         Route::post('/customer/cancelmembership', [CustomerMembershipController::class, 'cancelMembership']);
-        Route::get('/finishorder/{o:id}', [OrderController::class, 'finishOrder']);
+        Route::get('/finishwithoutreview/{o:id}', [ReviewController::class, 'finishWithoutReview']);
         Route::post('/addreview/{o:id}', [ReviewController::class, 'addReview']);
     });
 
