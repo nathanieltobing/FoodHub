@@ -76,6 +76,7 @@
                     $vendorHasDiscountedProduct = $countDiscountedProducts >= 3;
                 @endphp
             @else
+                <p>You will get a 10% discount for your every transaction until your membership expires</p>
                 <p>You will be charged <strong>Rp50.000,-</strong> per month</p>
                 <div class="container pb-3">
                         <div class="payment-right">

@@ -79,9 +79,7 @@
         </div>
         <div class="footerNav nav_links">
             <ul>
-                <li><a href="">HOME</a></li>
-                <li><a href="">FEEDBACK</a></li>
-                <li><a href="">CONTACT US</a></li>
+                <li><a href="/">HOME</a></li>
             </ul>
         </div>
         <div class="footerBottom">

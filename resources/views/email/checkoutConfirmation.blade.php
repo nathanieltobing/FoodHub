@@ -24,7 +24,7 @@
 <body>
     <p>We send this email to inform you that your order has been successfully processed.</p>
     <p>
-        Vendor : {{$order->vendors->name}}
+        Vendor : {{$vendor->name}}
         Order No : ODR-{{$order->id}}
     </p>
     <?php

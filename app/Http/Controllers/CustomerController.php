@@ -109,9 +109,12 @@ class CustomerController extends UserController
             'phone' => 'nullable',
             'password' => 'nullable'
         ]);
-
+    
         if(empty($validated['password'])){
             unset($validated['password']);
+        }
+        else{
+            $validated['password'] = bcrypt($validated['password']);
         }
 
         DB::table('customers')->where('id', $c->id)->update($validated);
