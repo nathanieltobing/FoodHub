@@ -68,10 +68,8 @@ Route::middleware(['checkauth'])->group(function(){
     Route::get('/registermembership',[MembershipController::class, 'ViewRegisterMembership']);
     Route::middleware(['admin'])->group(function(){
         Route::get('/manageUser',[AdminController::class, 'index']);
-        Route::put('/activate/customer/{id}',[AdminController::class, 'activateCustomer']);
-        Route::put('/deactivate/customer/{id}',[AdminController::class, 'deActivateCustomer']);
-        Route::put('/activate/vendor/{id}',[AdminController::class, 'activateVendor']);
-        Route::put('/deactivate/vendor/{id}',[AdminController::class, 'deActivateVendor']);
+        Route::put('/activate/{id}',[AdminController::class, 'activateUser']);
+        Route::put('/deactivate/{id}',[AdminController::class, 'deActivateUser']);
     });
     Route::middleware(['checkCustOrVend'])->group(function(){
         Route::get('/orderlist',[OrderController::class, 'viewOrderList']);

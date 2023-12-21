@@ -19,31 +19,37 @@ class AdminController extends UserController
         return view('adminPage', ['customers'=> $customers , 'vendors' => $vendors , 'totalCustomer' => $totalCustomer, 'totalVendor' => $totalVendor]);
     }
 
-    public function deActivateCustomer(Customer $id){
-        $id->status = 'INACTIVE';
-        $id->status_updated_by = Auth::guard('webadmin')->user()->id;
-        $id->save();
-        return redirect()->back();
+    public function deActivateUser($id, Request $req){
+        if($req->role == "CUSTOMER"){
+            $customer = Customer::find($id);
+            $customer->status = 'INACTIVE';
+            $customer->status_updated_by = Auth::guard('webadmin')->user()->id;
+            $customer->save();
+            return redirect()->back();
+        }
+        else if($req->role == "VENDOR"){
+            $vendor = Vendor::find($id);
+            $vendor->status = 'INACTIVE';
+            $vendor->status_updated_by = Auth::guard('webadmin')->user()->id;
+            $vendor->save();
+            return redirect()->back();
+        }
     }
 
-    public function activateCustomer(Customer $id){
-        $id->status = 'ACTIVE';
-        $id->status_updated_by = Auth::guard('webadmin')->user()->id;
-        $id->save();
-        return redirect()->back();
-    }
-
-    public function deActivateVendor(Vendor $id){
-        $id->status = 'INACTIVE';
-        $id->status_updated_by = Auth::guard('webadmin')->user()->id;
-        $id->save();
-        return redirect()->back();
-    }
-
-    public function activateVendor(Vendor $id){
-        $id->status = 'ACTIVE';
-        $id->status_updated_by = Auth::guard('webadmin')->user()->id;
-        $id->save();
-        return redirect()->back();
+    public function activateUser($id, Request $req){
+        if($req->role == "CUSTOMER"){
+            $customer = Customer::find($id);
+            $customer->status = 'ACTIVE';
+            $customer->status_updated_by = Auth::guard('webadmin')->user()->id;
+            $customer->save();
+            return redirect()->back();
+        }
+        else if($req->role == "VENDOR"){
+            $vendor = Vendor::find($id);
+            $vendor->status = 'ACTIVE';
+            $vendor->status_updated_by = Auth::guard('webadmin')->user()->id;
+            $vendor->save();
+            return redirect()->back();
+        }
     }
 }
