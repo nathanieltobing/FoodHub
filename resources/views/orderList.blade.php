@@ -53,7 +53,7 @@
                         <div class="d-flex align-items-center">
                             @foreach ($o->order_details as $index=>$od)
                             @if ($index == 0)
-                            <img class="img-thumbnail ms-2 me-3" src="/storage/{{Product::where('id',$od->product_id)->value('product_picture')}}" alt="" style="width:80px">
+                            <img class="img-thumbnail ms-2 me-3" src="/storage/{{Product::where('id',$od->product_id)->value('image')}}" alt="" style="width:80px">
 
                             <div>
                                 <ul class="list-unstyled">

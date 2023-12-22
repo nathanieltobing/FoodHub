@@ -23,10 +23,10 @@
                     {{method_field('PUT')}}
                     @csrf
                     <div class="d-flex justify-content-center">
-                      <img src="{{Storage::url($product->product_picture)}}" class="card-img-top" alt="..." style="height:300px; margin-bottom:3%; width:40%">
+                      <img src="{{Storage::url($product->image)}}" class="card-img-top" alt="..." style="height:300px; margin-bottom:3%; width:40%">
                     </div>
                     {{-- <div class="d-flex flex-row align-items-center mb-4">
-                      <img src="{{url($product->product_picture)}}" class="card-img-top" alt="..." style="height:500px">
+                      <img src="{{url($product->image)}}" class="card-img-top" alt="..." style="height:500px">
                       </div>
 
                     </div> --}}

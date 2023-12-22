@@ -65,7 +65,7 @@
             @forelse($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card shadow text-center" style="border-radius: 15px;" >
-                        <img src="{{Storage::url($product->product_picture)}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
+                        <img src="{{Storage::url($product->image)}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
                         <div class="card-body" style="height: 17.5rem; overflow: hidden;">
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <h6 class="card-title text-secondary">{{ $product->categories->name }}</h6>
