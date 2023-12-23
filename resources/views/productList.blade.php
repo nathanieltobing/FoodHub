@@ -56,8 +56,11 @@
         @endif
         <hr class="bg-dark">
         <form action="/products/search/{{$vendor->id}}" class="row justify-content-start mb-4" role="search">
-            <div class="col-md-4">
+            <div class="col-md-4 input-group">
                 <input class="form-control me-2"  name="search" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <a href="/products/{{$vendor->id}}" class="btn btn-outline-primary">Reset</a>
+                </div>
             </div>
         </form>
 
