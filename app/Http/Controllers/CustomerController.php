@@ -107,9 +107,9 @@ class CustomerController extends UserController
             'email' => 'required|email',
             'dob' => 'nullable|date',
             'phone' => 'nullable',
-            'password' => 'nullable'
+            'password' => 'nullable| min:8 | alpha_num'
         ]);
-    
+
         if(empty($validated['password'])){
             unset($validated['password']);
         }
