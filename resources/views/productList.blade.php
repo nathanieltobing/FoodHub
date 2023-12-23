@@ -13,46 +13,39 @@
     <div class="progress"></div>
 </div> --}}
 
-    <div class="covering mt-5" style="padding-top:7rem">
-        <div class="cards">
-            <div class="imgBx">
-                @if(!$vendor->image)
-                    <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
-                @endif
-                @if ($vendor->image)
-                    <img src="{{Storage::url($vendor->image)}}">
-                @endif
-                {{-- <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""> --}}
-            </div>
-            <div class="content" style="margin-left: -80%;">
-                <div class="details" style="height: 250px">
-                     <h2>{{$vendor->name}}</h2>      <span> {{$vendor->description}}</span>
-
-                    <div class="data">
-                        {{-- <span> {{$vendor->description}}</span> --}}
-
-                    </div>
-                    <div class="actionBtn" style="width: 100%">
-                        {{-- <button style="height: 40px">Message</button> --}}
-                        <button style="margin-top: 10px">{{$vendor->phone}}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
 
    <div class="container mt-5">
-        @if (Auth::guard('webcustomer')->check())
-            <h1>Product List</h1>
-        @elseif(Auth::guard('webvendor')->check())
-            <div class="d-flex">
-                <h1 style="padding-top :0%" class="align-self-end">Product List</h1>
+        <div class="mt-5" style="padding-top:7rem">
+                <div class="cards">
+                    <div class="imgBx">
+                        @if(!$vendor->image)
+                            <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
+                        @endif
+                        @if ($vendor->image)
+                            <img src="{{Storage::url($vendor->image)}}">
+                        @endif
+                    </div>
+                    <div class="content" style="margin-left: -80%;">
+                        <div class="details" style="height: 250px">
+                            <h2>{{$vendor->name}}</h2>      <span> {{$vendor->description}}</span>
+
+                            <div class="data">
+
+                            </div>
+                            <div class="actionBtn" style="width: 100%">
+                                <button style="margin-top: 10px">{{$vendor->phone}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        @if(Auth::guard('webvendor')->check())
+            <div class="d-flex mt-5">
+                <h3 style="padding-top :0%" class="align-self-end">Product List</h3>
             <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:green;text-decoration:none;color:white"id="editProduct">Add Product</a>
             </div>
         @else
-            <h1>Product List</h1>
+            <h3 class="mt-5">Product List</h3>
         @endif
         <hr class="bg-dark">
         <form action="/products/search/{{$vendor->id}}" class="row justify-content-start mb-4" role="search">
@@ -120,6 +113,24 @@
 
               @endif
               <script src="{{ asset('assets/popup.js') }}"></script>
+              <h3>Reviews</h3>
+
+                <div class="review-section my-4" style=" flex: 1; overflow-x: auto; white-space: nowrap;">
+                    <div class="review-container">
+                    @foreach ($vendor->reviews as $review)
+                        <div class="card shadow" style="display: inline-block; margin-right: 10px; max-width: 300px; height: 160px; overflow:hidden">
+                            <div class="card-body">
+                                <div class="stars">
+                                    @for ($i = 0; $i < $review->rating ; $i++)
+                                      <i class="fas fa-star"></i>
+                                    @endfor
+                                </div>
+                                <p class="card-text" style="white-space: pre-line;">asdasd asdasd asd asdasd asd as d{{$review->comment}}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                    </div>
+                </div>
         </div>
     </div>
 @endsection
