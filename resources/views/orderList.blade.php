@@ -4,7 +4,7 @@
 @php
     use App\Models\Product;
 @endphp
-<div class="container pt-5" style="margin-top: 3rem">
+<div class="container pt-5" style="margin-top: 4rem">
     @if(session('message'))
     <div class="container">
         <div class="d-grid gap-2 mt-3">
@@ -12,9 +12,13 @@
         </div>
     </div>
     @endif
-    <div class="p-5" style="background-color: #black">
-    <h1>Order List</h1>
-    <hr>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <p style="font-size: 35px">Order List</p>
+        </div>
+        <hr class="bg-dark">
+    </div>
+
     <br>
       @if ($order != null && $order->count() != 0)
         @foreach ($order as  $o)
