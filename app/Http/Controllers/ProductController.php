@@ -46,14 +46,14 @@ class ProductController extends Controller
 
         $product->stock = $req->quantity;
         $product->description = $req->desc;
-        $product->product_picture = $imageName;
+        $product->image = $imageName;
         // dd($req->category);
         $category = Category::where('name', $req->category)->first();
         $product->category_id = $category->id;
 
         $product->vendor_id = Auth::guard('webvendor')->user()->id;
 
-        
+
         $product->save();
 
         return redirect('/product/vendor');
@@ -71,7 +71,7 @@ class ProductController extends Controller
     public function editProduct(Product $id, Request $req){
 
         $rules = [
-            'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',        
+            'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
             'quantity' => 'required',
             'price' => 'required',
             'category' => 'required', Rule::in(['Main Course', 'Appetizer', 'Desserts']),
@@ -93,7 +93,7 @@ class ProductController extends Controller
             $imageName = 'images/'.$imageName;
         }
         else{
-            $imageName = $id->product_picture;
+            $imageName = $id->image;
         }
 
         $id->name = $req->name;
@@ -101,7 +101,7 @@ class ProductController extends Controller
 
         $id->stock = $req->quantity;
         $id->description = $req->desc;
-        $id->product_picture = $imageName;
+        $id->image = $imageName;
         // dd($req->category);
         $category = Category::where('name', $req->category)->first();
         $id->category_id = $category->id;
@@ -126,7 +126,7 @@ class ProductController extends Controller
     }
 
      public function search(Vendor $v, Request $request)
-     {  
+     {
         $vc = new VendorController();
         $error = $vc->checkInAnotherVendorPage($v->id);
          return view('productList',[
