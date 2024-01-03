@@ -17,6 +17,20 @@ use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
+    public function checkProductFromOtherVendor(Product $product){
+        $carts = session()->get('cart');
+        if(empty($carts)){
+            return true;
+        }
+        else{
+            $cart = reset($carts);
+            if($product->vendor_id == $cart['vendor_id']){
+                return true;
+            }
+            return false;
+        }
+    }
+
     public function addToCart($id){
         $product = Product::find($id);
         $cart = session()-> get('cart',[]);
