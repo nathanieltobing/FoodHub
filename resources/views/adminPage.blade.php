@@ -71,18 +71,20 @@
                   </td>
                   <td>{{\Carbon\Carbon::parse($c->created_at)->format('d-m-Y')}}</td>
                   @if ($c->status == 'ACTIVE')
-                  <form action="/deactivate/customer/{{$c->id}}" method="POST">
+                  <form action="/deactivate/{{$c->id}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
+                    <input type="hidden" id="hidden1" name="role" value="CUSTOMER">
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
                     <td><button class="status complete" style="border:none">Active</button></td>
                   </form>    
 
               
                   @else
-                  <form action="/activate/customer/{{$c->id}}" method="POST">
+                  <form action="/activate/{{$c->id}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
+                    <input type="hidden" id="hidden1" name="role" value="CUSTOMER">
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
                     <td><button class="status pending" style="border:none;">Inactive</button></td>
                   </form>    
@@ -123,16 +125,18 @@
                   </td>
                   <td>{{\Carbon\Carbon::parse($v->created_at)->format('d-m-Y')}}</td>
                   @if ($v->status == 'ACTIVE')
-                  <form action="/deactivate/vendor/{{$v->id}}" method="POST">
+                  <form action="/deactivate/{{$v->id}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
+                    <input type="hidden" id="hidden1" name="role" value="VENDOR">
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
                     <td><button class="status complete" style="border:none">Active</button></td>
                   </form>    
                   @else
-                  <form action="/activate/vendor/{{$v->id}}" method="POST">
+                  <form action="/activate/{{$v->id}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
+                    <input type="hidden" id="hidden1" name="role" value="VENDOR">
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
                     <td><button class="status pending" style="border:none;">Inactive</button></td>
                   </form>    

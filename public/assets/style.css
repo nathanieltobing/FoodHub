@@ -14,6 +14,23 @@
     padding-top: 6rem;
 }
  */
+
+ body{ min-height:100vh; margin:0; position:relative; }
+header{ min-height:50px;}
+
+
+/* Trick: */
+body {
+  position: relative;
+}
+
+body::after {
+  content: '';
+  display: block;
+  height: 50px; /* Set same as footer's height */
+}
+
+
 .h2-text{
     font-family: "Montserrat",sans-serif;
     font-weight: 700;
@@ -181,11 +198,13 @@ button:hover
 footer{
     background-color: #24252A;
     /* position: fixed; */
-    left: 0;
+    position: absolute;
     bottom: 0;
+    height: 50px;
     width: 100%;
 }
 .footerContainer{
+    background-color: #24252A;
     width:100%;
     padding: 10px 10%;
 }
