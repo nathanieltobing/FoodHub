@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerProfileController extends Controller
@@ -67,7 +71,7 @@ class CustomerProfileController extends Controller
             'phone' => 'nullable',
             'password' => 'nullable'
         ]);
-    
+
         if(empty($validated['password'])){
             unset($validated['password']);
         }

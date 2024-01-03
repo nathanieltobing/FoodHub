@@ -15,8 +15,10 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\PublisherController;
-use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\VendorProfileController;
+use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\VendorMembershipController;
 use App\Http\Controllers\CustomerMembershipController;
 /*
