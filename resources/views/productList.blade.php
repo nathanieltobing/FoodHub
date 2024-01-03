@@ -116,19 +116,22 @@
               <h3>Reviews</h3>
 
                 <div class="review-section my-4" style=" flex: 1; overflow-x: auto; white-space: nowrap;">
-                    <div class="review-container">
-                    @foreach ($vendor->reviews as $review)
+                    <div class="review-container mb-5">
+                    @forelse ($vendor->reviews as $review)
                         <div class="card shadow" style="display: inline-block; margin-right: 10px; max-width: 300px; height: 160px; overflow:hidden">
                             <div class="card-body">
+                                <h5 class="card-title">{{$review->order->customers->name}}</h5>
                                 <div class="stars">
                                     @for ($i = 0; $i < $review->rating ; $i++)
                                       <i class="fas fa-star"></i>
                                     @endfor
                                 </div>
-                                <p class="card-text" style="white-space: pre-line;">asdasd asdasd asd asdasd asd as d{{$review->comment}}</p>
+                                <p class="card-text" style="white-space: pre-line;">{{$review->comment}}</p>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                    <p>There is no review yet!</p>
+                    @endforelse
                     </div>
                 </div>
         </div>
