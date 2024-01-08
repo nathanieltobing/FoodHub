@@ -14,8 +14,8 @@
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 " style=" font-weight: 700; color:#222; font-family: Poppins;">FH</p>
 
-                    <h2 class="text-center  fw-bold  mx-1 mx-md-4 " style=" font-size:18px; font-weight: 700; color:#222; font-family: Poppins;">WELCOME TO FOODHUB</h2>
-                    <h2 class="text-center  fw-bold mb-5 mx-1 mx-md-4 " style="font-size:18px; font-weight: 700; color:#222; font-family: Poppins;">LET'S GET STARTED</h2>
+                    <h2 class="text-center  fw-bold  mx-1 mx-md-4 " style=" font-size:20px; font-weight: 700; color:#222; font-family: Poppins;">WELCOME TO FOODHUB</h2>
+                    <h2 class="text-center  fw-bold mb-5 mx-1 mx-md-4 " style="font-size:20px; font-weight: 700; color:#222; font-family: Poppins;">LET'S GET STARTED</h2>
 
                   {{-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up</p> --}}
 

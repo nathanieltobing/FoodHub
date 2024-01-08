@@ -13,7 +13,7 @@
     </div>
     @endif
     <div class="p-5" style="background-color: #black">
-    <h1>Order List</h1>
+    <h1 style="font-size :30px;font-family: Poppins;font-weight:700">Order List</h1>
     <hr>
     <br>
       @if ($order != null && $order->count() != 0)
@@ -26,7 +26,7 @@
                     <div class="card-title d-flex pb-1" style="margin-bottom:-10px">
                         <i style="font-size:30px; margin-top:20px;margin-right:20px;margin-left:9px" class="fa">&#xf290;</i>
                         <div class="" style="margin-top:10px">
-                            <p class="payment-summary-price justify-content-start" style="font-size:18px;font-weight: 700;margin-bottom:0;"> Belanja</p>
+                            <p class="payment-summary-price justify-content-start" style="font-size:16px;font-weight: 700;margin-bottom:0;"> Belanja</p>
                             <p class="payment-summary-name justify-content-start">{{ \Carbon\Carbon::parse($o->transaction_date)->format('d M Y')}}</p>
 
                         </div>
@@ -57,7 +57,7 @@
 
                             <div>
                                 <ul class="list-unstyled">
-                                            <li class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;" >{{ $od->product_name }}</li>
+                                            <li class="card-text payment-summary-price" style="font-size:16px;font-weight: 700;" >{{ $od->product_name }}</li>
                                             <span style="font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name">x{{ $od->quantity }}</span>
                                 </ul>
                                 {{-- <div class="actionBtn">
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="card-text d-flex flex-column">
-                        <span class="payment-summary-price" style="font-size:18px;font-weight: 700;margin-left:8px;margin-top:10px;justify-content-start">Total Belanja</span>
+                        <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-left:8px;margin-top:10px;justify-content-start">Total Belanja</span>
                         <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->total_price,2,",",".")}}</p>
                             @if($o->status == 'ON GOING' && Auth::guard('webcustomer')->check())
                             <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
@@ -133,7 +133,7 @@
       @else
       <div class="justify-content-center" style="align-items: center;text-align:center">
         <img src="{{ asset('assets/images/emptyorder.png') }}" alt="" style="  max-width: 150%;   height: auto;">
-        <p class ="payment-summary-price" style="font-size :45px;" >Your Order is empty</i></p>
+        <p class ="payment-summary-price" style="font-size :30px;font-family: Poppins;font-weight:700" >Your Order is empty</i></p>
         <p class ="payment-summary-name" style="font-size :20px;" >Order Something to Fill it Up<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:225px"></i></p>
      </div>
 

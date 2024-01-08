@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-
+.fontstyle{
+    font-family: "Poppins";
+}
 *
 {
     /* box-sizing: border-box; */
@@ -32,7 +34,8 @@ body::after {
 
 
 .h2-text{
-    font-family: "Montserrat",sans-serif;
+    /* font-family: "Montserrat",sans-serif; */
+    font-family: "Poppins";
     font-weight: 700;
     font-size: 30px;
     color: #2B2B2B;
@@ -40,7 +43,8 @@ body::after {
 }
 
 li,a,button,h1{
-    font-family: "Montserrat",sans-serif;
+    /* font-family: "Montserrat",sans-serif; */
+    font-family: "Poppins";
     font-weight: 500;
     font-size: 16px;
     color: #2B2B2B;
@@ -97,7 +101,7 @@ li,a,button,h1{
     font-weight: 700;
 }
 .navbar a{
-font-size: 1.15rem;
+font-size:20px;
 color: #2B2B2B;
 text-decoration: none;
 font-weight: 500;
@@ -247,7 +251,8 @@ footer{
     list-style-type: nonedisc;
 }
 .footerNav ul li a{
-    font-family: "Montserrat",sans-serif;
+    /* font-family: "Montserrat",sans-serif; */
+    font-family: "Poppins";
     color : #FFE3BB;
     margin: 20px;
     text-decoration: none;
@@ -336,17 +341,19 @@ footer{
     font-weight: 900;
 }
 .text{
-    font-size: 13px;
+    font-size: 16px;
     color: #545454;
     line-height: 30px;
     text-align: justify;
     margin-bottom: 40px;
+    /* font-family: "Montserrat",sans-serif; */
+    font-family: "Poppins";
 }
 .skills{
     display: flex;
     justify-content: space-between;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 16px;
 }
 .cover{
     background-color: #FFE3BB;
@@ -494,7 +501,8 @@ footer{
     /* border-radius: 50%; */
   }
   .name{
-    font-family: "Montserrat",sans-serif;
+    /* font-family: "Montserrat",sans-serif; */
+    font-family: "Poppins";
     font-weight: 700;
     font-size: 20px;
     color: #2B2B2B;
@@ -587,7 +595,8 @@ footer{
                 background-color: #fff5;
                 color: #fff;
                 border: none;
-                font-family: monospace;
+                /* font-family: "Montserrat",sans-serif; */
+                font-family: "Poppins";
                 font-weight: bold;
             }
             .slider .dots{
@@ -658,8 +667,8 @@ footer{
     border: none;
     padding: 6px 0;
 
-
-    font-size: 18px;
+    font-family: Poppins;
+    font-size: 16px;
     font-weight: 700;
     color: var(--white);
 }
@@ -789,7 +798,8 @@ footer{
     margin-bottom: 4px;
 }
 .payment-header-description {
-    font-size: 15px;
+    font-family: Poppins;
+    font-size: 16px;
     color: var(--gray-200);
     line-height: 1.5;
 }
@@ -823,11 +833,12 @@ footer{
     padding: 12px;
 }
 .payment-plan-type {
+    font-family: Poppins;
     width: 40px;
     height: 40px;
     background-color: var(--indigo-500);
     color: var(--white);
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
     flex-shrink: 0;
     display: flex;
@@ -842,7 +853,8 @@ footer{
     display: grid;
 }
 .payment-plan-info-name {
-    font-size: 13px;
+    font-family: Poppins;
+    font-size: 16px;
     color: var(--gray-400);
     margin-bottom: 2px;
     white-space: nowrap;
@@ -856,8 +868,9 @@ footer{
     overflow: hidden;
 }
 .payment-plan-change {
+    font-family: Poppins;
     color: var(--blue-500);
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
     text-underline-offset: 2px;
 }
@@ -865,18 +878,21 @@ footer{
     color: var(--blue-600);
 }
 .payment-summary-item {
+    font-family: Poppins;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 6px 12px;
 }
 .payment-summary-name {
-    font-size: 14px;
+    font-family: Poppins;
+    font-size: 16px;
     color: var(--gray-500);
 }
 .payment-summary-price {
     font-weight: 500;
-    font-size: 15px;
+    font-family: Poppins;
+    font-size: 16px;
 }
 .payment-summary-divider {
     width: calc(100% - 16px);
@@ -916,6 +932,7 @@ footer{
     color: var(--gray-900);
 }
 .payment-summary-total .payment-summary-price {
+    font-family: Poppins;
     font-size: 16px;
     color: var(--indigo-500);
     font-weight: 600;
@@ -930,7 +947,8 @@ footer{
     box-shadow: 0 4px 24px rgba(0, 0, 0, .05);
 }
 .payment-title {
-    font-size: 22px;
+    font-family: Poppins;
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: 12px;
     line-height: 1.3;
@@ -1673,7 +1691,9 @@ color: orange;
     height: 100%;
     width: 280px;
     z-index: 2000;
-    font-family: var(--lato);
+    /* font-family: var(--lato); */
+    /* font-family: "Montserrat",sans-serif; */
+    font-family: "Poppins";
     transition: 0.3s ease;
     overflow-x: hidden;
     scrollbar-width: none;
@@ -1806,7 +1826,9 @@ color: orange;
     display: flex;
     align-items: center;
     gap: 24px;
-    font-family: var(--lato);
+    /* font-family: var(--lato); */
+     /* font-family: "Montserrat",sans-serif; */
+     font-family: "Poppins";
     position: sticky;
     top: 0;
     left: 0;
@@ -2352,7 +2374,8 @@ select {
     color:#2B2B2B;
     cursor:pointer;
     font-size: 1em;
-    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif; */
+    font-family: "Poppins";
  }
  select::-ms-expand {
     display: none;
@@ -2392,7 +2415,8 @@ select {
     color:#2B2B2B;
     cursor:pointer;
     font-size: 1em;
-    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif; */
+    font-family: "Poppins";
  }
 
  .trigger_popup{
@@ -2453,8 +2477,8 @@ select {
     letter-spacing: 0.05em;
     text-align: center;
     margin: auto;
-    font-family: "Montserrat",sans-serif;
-
+    /* font-family: "Montserrat",sans-serif; */
+    font-family: "Poppins";
 
 }
 .buttons{

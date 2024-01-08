@@ -6,13 +6,13 @@
     <div class ="row w-100" style="padding : 0">
       <div class="col d-flex justify-content-center w-100">
          {{-- <h1 style="color: white"><b>Book List</b></h2>   --}}
-            <p style="font-size: 30px; line-height :1.66; font-weight: 500; font-family: Poppins; margin-top:100px;">CHECKOUT</p>
+            <p style="font-size: 30px; line-height :1.66; font-weight: 700; font-family: Poppins; margin-top:100px;">CHECKOUT</p>
       </div>
     </div>
     <div class ="row w-100">
         <div class="col-8 d-flex">
            {{-- <h1 style="color: white"><b>Book List</b></h2>   --}}
-              <p style="font-size: 30px; line-height :1.66; font-weight: 500; font-family: Poppins; margin-bottom : 0;">ITEMS</p>
+              <p style="font-size: 30px; line-height :1.66; font-weight: 700; font-family: Poppins; margin-bottom : 0;">ITEMS</p>
         </div>
         <div class="line"></div>
     </div>
@@ -219,9 +219,9 @@
     @else
              <div class="justify-content-center" style="align-items: center;text-align:center">
 
-                
+
             <img src="{{ asset('assets/images/emptycart.png') }}" alt="" style="  max-width: 150%;   height: auto;">
-            <p class ="payment-summary-price" style="font-size :45px;" >Your cart is empty<i class="fa-regular fa-face-frown" style="margin-left:1%; margin-top:14px;"></i></p>
+            <p class ="payment-summary-price" style="font-size :30px;font-family: Poppins;font-weight:700" >Your cart is empty<i class="fa-regular fa-face-frown" style="margin-left:1%; margin-top:14px;"></i></p>
             <p class ="payment-summary-name" style="font-size :20px;" >Add Something to make me happy<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:144px"></i></p>
             </div>
     @endif

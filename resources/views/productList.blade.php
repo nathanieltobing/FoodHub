@@ -25,8 +25,8 @@
                 {{-- <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""> --}}
             </div>
             <div class="content" style="margin-left: -80%;">
-                <div class="details" style="height: 250px">
-                     <h2>{{$vendor->name}}</h2>      <span> {{$vendor->description}}</span>
+                <div class="details fontstyle" style="height: 250px">
+                     <h2 >{{$vendor->name}}</h2>      <span> {{$vendor->description}}</span>
 
                     <div class="data">
                         {{-- <span> {{$vendor->description}}</span> --}}
@@ -34,7 +34,7 @@
                     </div>
                     <div class="actionBtn" style="width: 100%">
                         {{-- <button style="height: 40px">Message</button> --}}
-                        <button style="margin-top: 10px">{{$vendor->phone}}</button>
+                        <button style="margin-top: 10px;font-family:Poppins">{{$vendor->phone}}</button>
                     </div>
                 </div>
             </div>
@@ -45,11 +45,11 @@
 
    <div class="container mt-5">
         @if (Auth::guard('webcustomer')->check())
-            <h1>Product List</h1>
+            <h1 class="fontstyle" style="font-size:30px;font-weight:700">Product List</h1>
         @elseif(Auth::guard('webvendor')->check())
             <div class="d-flex">
-                <h1 style="padding-top :0%" class="align-self-end">Product List</h1>
-            <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:green;text-decoration:none;color:white"id="editProduct">Add Product</a>
+                <h1 style="padding-top :0%;font-size:30px;font-weight:700" class="align-self-end fontstyle">Product List</h1>
+            <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:var(--indigo-500);;text-decoration:none;color:white"id="editProduct">Add Product</a>
             </div>
         @else
             <h1>Product List</h1>
@@ -67,29 +67,29 @@
                     <div class="card shadow text-center" style="border-radius: 15px;" >
                         <img src="{{Storage::url($product->product_picture)}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
                         <div class="card-body" style="height: 17.5rem; overflow: hidden;">
-                            <h5 class="card-title">{{ $product->name }}</h5>
-                            <h6 class="card-title text-secondary">{{ $product->categories->name }}</h6>
-                            <p class="card-text" style="height:5rem; overflow:hidden;" >{{ $product->description }}</p>
+                            <h5 class="card-title fontstyle">{{ $product->name }}</h5>
+                            <h6 class="card-title text-secondary fontstyle">{{ $product->categories->name }}</h6>
+                            <p class="card-text fontstyle" style="height:5rem; overflow:hidden;" >{{ $product->description }}</p>
                             @if(!$product->promotions)
-                                <h6 class="card-text mb-4">Rp{{number_format($product->price,2,",",".")}}</h6>
+                                <h6 class="card-text mb-4 fontstyle">Rp{{number_format($product->price,2,",",".")}}</h6>
                             @else
-                                <h6 class="card-text" style="margin-top:-0.9rem">Rp{{number_format($product->promotions->discount,2,",",".")}}</h6>
-                                <small><p class="card-text mb-2" style="text-decoration: line-through">Rp{{number_format($product->price,2,",",".")}}</p></small>
+                                <h6 class="card-text fontstyle" style="margin-top:-0.9rem">Rp{{number_format($product->promotions->discount,2,",",".")}}</h6>
+                                <small><p class="card-text mb-2 fontstyle" style="text-decoration: line-through">Rp{{number_format($product->price,2,",",".")}}</p></small>
                             @endif
                             @if (Auth::guard('webcustomer')->check())
                                 @if ($error == '-1')
                                     <form action="/products/add/{{$product->id}}" method="POST">
                                         @csrf
 
-                                        <button class="submit-button" style="margin-left:5em;" type="submit" id="error_trigger">Add to Cart</button>
+                                        <button class="submit-button fontstyle" style="margin-left:5em;" type="submit" id="error_trigger">Add to Cart</button>
                                     </form>
                                 @else
-                                    <button class="submit-button" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button>
+                                    <button class="submit-button fontstyle" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button>
                                 @endif
                             @elseif(Auth::guard('webvendor')->check())
-                                <a href="/product/vendor/edit/{{$product->id}}" class="submit-button" style="margin-left:5em;text-decoration:none;color:white">Edit</a>
+                                <a href="/product/vendor/edit/{{$product->id}}" class="submit-button fontstyle" style="margin-left:5em;text-decoration:none;color:white">Edit</a>
                             @else
-                                <a href="/login" class="submit-button" style="margin-left:3em;text-decoration:none;color:white;width:70%;margin-top:1.3em">Login to add to cart</a>
+                                <a href="/login" class="submit-button fontstyle" style="margin-left:3em;text-decoration:none;color:white;width:70%;margin-top:1.3em">Login to add to cart</a>
                             @endif
 
                         </div>
@@ -108,7 +108,7 @@
                         <div class="imgbox">
                         <img src="{{ asset('assets/images/cancel.png') }}" alt="" class="img">
                         </div>
-                        <p class="para">YOU CAN'T ADD PRODUCTS FROM TWO DIFFERENT VENDORS</p>
+                        <p class="para fontstyle">YOU CAN'T ADD PRODUCTS FROM TWO DIFFERENT VENDORS</p>
                         <form action="">
                         <a href="#" class="buttons" id="e_button">EXIT</a>
                         </form>

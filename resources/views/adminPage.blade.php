@@ -5,6 +5,10 @@
 
   <section class="content">
     <main>
+        <div class="" style="margin-top: 5%">
+
+            <p style="font-size: 30px;font-family: Poppins; font-weight:700;text-align:center;margin-right:100px">Admin </p>
+      </div>
       {{-- <div class="head-title">
         <div class="left">
           <h1>Dashboard</h1>
@@ -27,7 +31,7 @@
             <i class="fas fa-people-group"></i>
             <span class="texts" style="line-height: 1.0;
             margin-bottom: -25px">
-              <h3>{{$totalCustomer}}</h3>
+              <h3 style="font-size: 30px">{{$totalCustomer}}</h3>
               <p>Customers</p>
             </span>
           </li>
@@ -35,7 +39,7 @@
           <i class="fas fa-people-group"></i>
           <span class="texts" style="line-height: 1.0;
           margin-bottom: -25px">
-            <h3>{{$totalVendor}}</h3>
+            <h3 style="font-size: 30px">{{$totalVendor}}</h3>
             <p>Vendors</p>
           </span>
         </li>
@@ -45,17 +49,17 @@
       <div class="table-data">
         <div class="order">
           <div class="head">
-            <h3>Customers</h3>
+            <h3 style="font-size: 20px">Customers</h3>
             {{-- <i class="fas fa-search"></i>
             <i class="fas fa-filter"></i> --}}
           </div>
 
           <table>
             <thead>
-              <tr>
-                <th>User</th>
-                <th>Created Date</th>
-                <th>Status</th>
+              <tr class="fontstyle">
+                <th style="font-size: 16px">User</th>
+                <th style="font-size: 16px">Created Date</th>
+                <th style="font-size: 16px">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -63,55 +67,55 @@
                 <tr>
                   <td>
                     @if ($c->image !=null)
-                      <img src="{{Storage::url($c->image)}}" alt="" />                 
+                      <img src="{{Storage::url($c->image)}}" alt="" />
                     @else
                       <i class="bx bx-user-circle text-center mb-2" role="button" aria-expanded="false" style="font-size:2rem"> </i>
                     @endif
-                    <p>{{$c->name}}</p>
+                    <p class="fontstyle">{{$c->name}}</p>
                   </td>
-                  <td>{{\Carbon\Carbon::parse($c->created_at)->format('d-m-Y')}}</td>
+                  <td class="fontstyle">{{\Carbon\Carbon::parse($c->created_at)->format('d-m-Y')}}</td>
                   @if ($c->status == 'ACTIVE')
                   <form action="/deactivate/customer/{{$c->id}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
                     <td><button class="status complete" style="border:none">Active</button></td>
-                  </form>    
+                  </form>
 
-              
+
                   @else
                   <form action="/activate/customer/{{$c->id}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
                     <td><button class="status pending" style="border:none;">Inactive</button></td>
-                  </form>    
+                  </form>
                   @endif
-                  
-                </tr>     
+
+                </tr>
               @empty
-                
+
               @endforelse
-            </tbody> 
+            </tbody>
           </table>
             <div class = "d-flex justify-content-center mt-4">
               {{$customers->appends(['vendors' => $vendors->currentPage()])->links()}}
-            </div> 
+            </div>
         </div>
 
         <div class="order" style="margin-right: 3%">
             <div class="head">
-              <h3>Vendors</h3>
+              <h3 style="font-size: 20px">Vendors</h3>
               {{-- <i class="fas fa-search"></i>
               <i class="fas fa-filter"></i> --}}
             </div>
 
             <table>
               <thead>
-                <tr>
-                  <th>User</th>
-                  <th>Created Date</th>
-                  <th>Status</th>
+                <tr class="fontstyle">
+                  <th style="font-size: 16px">User</th>
+                  <th style="font-size: 16px">Created Date</th>
+                  <th style="font-size: 16px">Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -119,25 +123,25 @@
                 <tr>
                   <td>
                     <img src="{{Storage::url($v->image)}}" alt="" />
-                    <p>{{$v->name}}</p>
+                    <p class="fontstyle">{{$v->name}}</p>
                   </td>
-                  <td>{{\Carbon\Carbon::parse($v->created_at)->format('d-m-Y')}}</td>
+                  <td class="fontstyle">{{\Carbon\Carbon::parse($v->created_at)->format('d-m-Y')}}</td>
                   @if ($v->status == 'ACTIVE')
                   <form action="/deactivate/vendor/{{$v->id}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
-                    <td><button class="status complete" style="border:none">Active</button></td>
-                  </form>    
+                    <td><button class="status complete " style="border:none">Active</button></td>
+                  </form>
                   @else
                   <form action="/activate/vendor/{{$v->id}}" method="POST">
                     {{method_field('PUT')}}
                     @csrf
                     {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
                     <td><button class="status pending" style="border:none;">Inactive</button></td>
-                  </form>    
+                  </form>
                   @endif
-                </tr>     
+                </tr>
               @empty
 
               @endforelse
@@ -145,7 +149,7 @@
             </table>
             <div class = "d-flex justify-content-center mt-4">
               {{$vendors->appends(['customers' => $customers->currentPage()])->links()}}
-            </div>  
+            </div>
 
             {{-- <div class="modal fade" id="deactivateCustomer" tabindex="-1" role="dialog" aria-labelledby="deactivateCustomerModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -161,9 +165,9 @@
                           <form action="/deactivate/customer/{{$c->id}}" method="POST">
                             {{method_field('PUT')}}
                             @csrf
-                            <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button> 
+                            <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>
                             <td><button class="btn btn-danger">Deactivate</button></td>
-                          </form>    
+                          </form>
                       </div>
                   </div>
               </div>

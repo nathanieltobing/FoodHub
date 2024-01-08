@@ -34,7 +34,7 @@
                       <i class="fa-solid fa-pen-to-square fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="text" id="form3Example1c" name="name" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500" value="{{$product->name}}">
-                        <label class="form-label" for="form3Example1c" style="font-size:16 px;font-weight:700">Product Name</label>
+                        <label class="form-label fontstyle" for="form3Example1c" style="font-size:16 px;font-weight:700">Product Name</label>
                       </div>
 
 
@@ -45,7 +45,7 @@
                       <i class="fa-solid fa-square-poll-vertical fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="number" id="form3Example3c" name="quantity" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500"" value={{$product->stock}}>
-                        <label class="form-label" for="form3Example3c" style="font-size:16 px;font-weight:700">Quantity</label>
+                        <label class="form-label fontstyle" for="form3Example3c" style="font-size:16 px;font-weight:700">Quantity</label>
                       </div>
                     </div>
 
@@ -54,7 +54,7 @@
                       <i class="fa-solid fa-tags fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="text" id="form3Example4c" name="price" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500"" value={{$product->price}}>
-                        <label class="form-label" for="form3Example4c" style="font-size:16 px;font-weight:700">Price</label>
+                        <label class="form-label fontstyle" for="form3Example4c" style="font-size:16 px;font-weight:700">Price</label>
                       </div>
 
                     </div>
@@ -67,7 +67,7 @@
                           <option value="Appetizer" {{strcmp($product->categories->name,"Appetizer") == 0 ? 'selected' : ''}}>Appetizer</option>
                           <option value="Desserts" {{strcmp($product->categories->name,"Desserts") == 0 ? 'selected' : ''}}>Desserts</option>
                         </select>
-                        <label class="form-label" style="display: flex;font-size:16 px;font-weight:700" for="form3Example3c">Category</label>
+                        <label class="form-label fontstyle" style="display: flex;font-size:16 px;font-weight:700" for="form3Example3c">Category</label>
                       </div>
                     </div>
 
@@ -75,14 +75,14 @@
                       <i class="fa-solid fa-square-pen fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
                       <div class="form-outline flex-fill mb-0">
                         <textarea rows="3" cols="22" name="desc" placeholder="" class="form-control" style="border: 1px solid ;font-size:16 px;font-weight:500"">{{$product->description}}</textarea>
-                        <label class="form-label" for="form3Example1c" style="font-size:16 px;font-weight:700">Description</label>
+                        <label class="form-label fontstyle" for="form3Example1c" style="font-size:16 px;font-weight:700">Description</label>
                       </div>
                     </div>
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-image fa-lg me-3 fa-fw" style="margin-bottom: 30px;"></i>
                         <div class="form-outline flex-fill mb-0" style="font-size:16 px;font-weight:700">
                             <input class="form-control" name="dp" type="file" id="formFile"  style="border: 1px solid;font-size:16 px;font-weight:500">
-                          <label class="form-label" for="form3Example1c" style="font-size:16 px;font-weight:700">Upload your product's picture</label>
+                          <label class="form-label fontstyle" for="form3Example1c" style="font-size:16 px;font-weight:700">Upload your product's picture</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

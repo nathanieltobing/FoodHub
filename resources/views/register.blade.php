@@ -14,8 +14,8 @@
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 " style=" font-weight: 700; color:#222; font-family: Poppins;">FH</p>
 
-                    <h2 class="text-center  fw-bold  mx-1 mx-md-4 " style=" font-size:18px; font-weight: 700; color:#222; font-family: Poppins;">WELCOME TO FOODHUB</h2>
-                    <h2 class="text-center  fw-bold mb-5 mx-1 mx-md-4 " style="font-size:18px; font-weight: 700; color:#222; font-family: Poppins;">LET'S GET STARTED</h2>
+                    <h2 class="text-center  fw-bold  mx-1 mx-md-4 " style=" font-size:20px; font-weight: 700; color:#222; font-family: Poppins;">WELCOME TO FOODHUB</h2>
+                    <h2 class="text-center  fw-bold mb-5 mx-1 mx-md-4 " style="font-size:20px; font-weight: 700; color:#222; font-family: Poppins;">LET'S GET STARTED</h2>
 
                   {{-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up</p> --}}
 
@@ -25,7 +25,7 @@
                       <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="text" id="form3Example1c" name="name" class="form-control" />
-                        <label class="form-label" for="form3Example1c">Your Name</label>
+                        <label class="form-label" for="form3Example1c" style="font-family: Poppins">Your Name</label>
                       </div>
                     </div>
 
@@ -33,7 +33,7 @@
                       <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="email" id="form3Example3c" name="email" class="form-control" />
-                        <label class="form-label" for="form3Example3c">Your Email</label>
+                        <label class="form-label" for="form3Example3c" style="font-family: Poppins">Your Email</label>
                       </div>
                     </div>
                     <input type="hidden" name="role" value="CUSTOMER">
@@ -41,7 +41,7 @@
                       <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="password" id="form3Example4c" name="password" class="form-control" />
-                        <label class="form-label" for="form3Example4c">Password</label>
+                        <label class="form-label" for="form3Example4c" style="font-family: Poppins">Password</label>
                       </div>
                     </div>
 
@@ -49,7 +49,7 @@
                       <i class="fas fa-key fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
                         <input type="password" id="form3Example4cd" name="password_confirmation" class="form-control" />
-                        <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                        <label class="form-label" for="form3Example4cd" style="font-family: Poppins">Repeat your password</label>
                       </div>
                     </div>
 
