@@ -8,7 +8,7 @@
 
       <div class="col d-flex justify-content-center" style="margin-top: 10%">
 
-            <p style="font-size: 35px">Vendor List</p>
+            <p style="font-size: 30px;font-family: Poppins; font-weight:700">Vendor List</p>
       </div>
       <hr class="bg-dark">
       <form action="/vendorList/search" class="row justify-content-start mb-4" role="search">
