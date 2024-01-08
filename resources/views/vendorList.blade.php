@@ -12,8 +12,11 @@
       </div>
       <hr class="bg-dark">
       <form action="/vendorList/search" class="row justify-content-start mb-4" role="search">
-          <div class="col-md-4">
+          <div class="col-md-4 input-group">
               <input class="form-control me-2"  name="search" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <a href="/vendorList" class="btn btn-outline-primary">Reset</a>
+            </div>
           </div>
       </form>
     </div>
@@ -38,14 +41,14 @@
             </div>
         </div>
 
-        <p class="card-text" style="font-weight: 600; font-family: Poppins;margin-bottom:20px">"Salama catering menyediakan berbagai menu nasi kotak untuk acara besar maupun kecil dengan rasa yang terpecaya test test test test test test test test test test test"</p>
+        {{-- <p class="card-text" style="font-weight: 600; font-family: Poppins;margin-bottom:20px">"Salama catering menyediakan berbagai menu nasi kotak untuk acara besar maupun kecil dengan rasa yang terpecaya test test test test test test test test test test test"</p> --}}
         {{-- <h5 class="card-text">Category : {{$vendor->category}}</h5>
         <h5 class="card-text">Price : Rp {{$vendor->price}}</h5>
         <h5 class="card-text">Description : {{$vendor->description}}</h5> --}}
-        <div class="row">
+        {{-- <div class="row">
           <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg vendor-listbtn" style="margin-top:10px;line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Detail</a>
 
-        </div>
+        </div> --}}
       @endforeach
     @else
       @foreach ($vendors as $vendor)

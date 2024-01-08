@@ -2,17 +2,6 @@
 
 @section('content')
     <div class="container my-5" style="padding-top: 7rem">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    <p>Error!</p>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         @if(session('message'))
             <div class="alert alert-success" role="alert">
                 {{ session('message') }}
@@ -129,6 +118,16 @@
                                     </div>
                                 </div>
                         @endif
+                        @if ($errors->any())
+                        <div class="alert alert-danger mt-3">
+                            <ul>
+                                <p>Edit profile failed</p>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                             @csrf
                                 <div class="mt-4 px-5">
                                     @if(!$editMode)

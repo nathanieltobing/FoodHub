@@ -24,12 +24,6 @@ class ReviewController extends Controller
             return back()->withErrors($validator);
         }
 
-        DB::table('orders')->where([
-            ['id',$o->id]
-            ])->update([
-            'status' => 'FINISHED'
-        ]);
-
         DB::table('reviews')->insert(array_merge(
             [
                 'rating' => $request->rating,
@@ -39,8 +33,6 @@ class ReviewController extends Controller
             ]
         ));
         $this->calculcateAndSaveNewRating($o);
-
-        return redirect('orderlist')->with('message','Order #'.$o->id.' status edited successfully!');
     }
 
     public function calculcateAndSaveNewRating(Order $o){

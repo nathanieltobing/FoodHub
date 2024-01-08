@@ -25,7 +25,7 @@
                     <tbody>
                         @forelse($vendor->products as $product)
                             <tr>
-                                <td><img src="{{Storage::url($product->product_picture)}}" alt="" style="height: 5rem"></td>
+                                <td><img src="{{Storage::url($product->image)}}" alt="" style="height: 5rem"></td>
                                 <td>{{ $product->name }}</td>
                                 <td>Rp{{number_format($product->price,2,",",".")}}</td>
                                 @php
@@ -76,6 +76,7 @@
                     $vendorHasDiscountedProduct = $countDiscountedProducts >= 3;
                 @endphp
             @else
+                <p>You will get a 10% discount for your every transaction until your membership expires</p>
                 <p>You will be charged <strong>Rp50.000,-</strong> per month</p>
                 <div class="container pb-3">
                         <div class="payment-right">

@@ -4,7 +4,7 @@
 @php
     use App\Models\Product;
 @endphp
-<div class="container pt-5" style="margin-top: 3rem">
+<div class="container pt-5" style="margin-top: 4rem">
     @if(session('message'))
     <div class="container">
         <div class="d-grid gap-2 mt-3">
@@ -12,9 +12,11 @@
         </div>
     </div>
     @endif
+
     <div class="p-5" style="background-color: #black">
     <h1 style="font-size :30px;font-family: Poppins;font-weight:700">Order List</h1>
     <hr>
+
     <br>
       @if ($order != null && $order->count() != 0)
         @foreach ($order as  $o)
@@ -53,7 +55,7 @@
                         <div class="d-flex align-items-center">
                             @foreach ($o->order_details as $index=>$od)
                             @if ($index == 0)
-                            <img class="img-thumbnail ms-2 me-3" src="/storage/{{Product::where('id',$od->product_id)->value('product_picture')}}" alt="" style="width:80px">
+                            <img class="img-thumbnail ms-2 me-3" src="/storage/{{Product::where('id',$od->product_id)->value('image')}}" alt="" style="width:80px">
 
                             <div>
                                 <ul class="list-unstyled">
@@ -107,7 +109,7 @@
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <a href="/finishwithoutreview/{{$o->id}}" class="btn btn-secondary">Finish without review</a>
                                             <button type="submit" class="btn btn-success">Submit and finish order</button>
                                             </form>
                                         </div>

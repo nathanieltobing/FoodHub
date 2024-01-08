@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+
 class OrderController extends Controller
 {
+
     public function viewOrderList()
     {
         if(Auth::guard('webvendor')->check()){
@@ -26,7 +28,7 @@ class OrderController extends Controller
             $user = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
             $order = Order::where('customer_id',$user->id)->orderBy('created_at', 'DESC')->get();
         }
-        // dd($user->orders);
+        //  dd(Auth::guard('webcustomer')->user()->email);
 
         return view('orderList',[
             'order' => $order,
@@ -63,7 +65,6 @@ class OrderController extends Controller
         if($validator->fails()){
             return back()->withErrors($validator);
         }
-
         $order = new Order();
         $order_detail = new OrderDetail();
         $carts = session()->get('cart');
@@ -108,12 +109,35 @@ class OrderController extends Controller
             $order_detail->save();
         }
         $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
-        // $this->sendEmail($most_recent_order,$orderDetails);
+        // $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id);
         session()->put('cart', []);
         return view('succesfulPage');
      }
 
-     public function sendEmail($order,$orderDetails){
-        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails));
+     public function sendEmail($order,$orderDetails,$vendor_id){
+        $vendor = Vendor::find($vendor_id);
+        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor));
      }
+
+     public function finishWithoutReview(Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'status' => 'FINISHED'
+        ]);
+        return redirect('orderlist')->with('message','Order status edited successfully!');
+    }
+
+    public function finishWithReview(Request $request, Order $o){
+        $reviewController = new ReviewController();
+        $reviewController->addReview($request,$o);
+
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'status' => 'FINISHED'
+        ]);
+
+        return redirect('orderlist')->with('message','Order status edited successfully!');
+    }
 }

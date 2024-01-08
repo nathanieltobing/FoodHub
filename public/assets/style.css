@@ -388,7 +388,7 @@ footer{
 .slider img {
 	flex: 1 0 100%;
 	scroll-snap-align: start;
-	object-fit: cover;
+
 }
 
 .slider-nav {
@@ -578,7 +578,7 @@ footer{
                 width: 1300px;
                 max-width: 100vw;
                 height: 100%;
-                object-fit: cover;
+
             }
             .slider .buttons{
                 position: absolute;
@@ -1200,14 +1200,6 @@ input:checked + .payment-method-item::before {
   transform: translate(-150px);
   transition-property: transform;
   transition-delay: calc(.1s * var(--i)) ;
-}
-
-.covering{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
 }
 
 
@@ -2290,10 +2282,6 @@ color: orange;
     border-left: 2px solid rgba(0, 0, 0,0.2);
     pointer-events: none;
   }
-/*
-  .covering{
-    background-color: #2B2B2B;
-  } */
 
 .center{
     position: absolute;

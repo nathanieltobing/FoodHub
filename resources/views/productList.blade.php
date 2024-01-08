@@ -13,6 +13,7 @@
     <div class="progress"></div>
 </div> --}}
 
+
     <div class="covering mt-5" style="padding-top:7rem">
         <div class="cards">
             <div class="imgBx">
@@ -31,14 +32,35 @@
                     <div class="data">
                         {{-- <span> {{$vendor->description}}</span> --}}
 
+
+   <div class="container mt-5">
+        <div class="mt-5" style="padding-top:7rem">
+                <div class="cards">
+                    <div class="imgBx">
+                        @if(!$vendor->image)
+                            <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
+                        @endif
+                        @if ($vendor->image)
+                            <img src="{{Storage::url($vendor->image)}}">
+                        @endif
                     </div>
-                    <div class="actionBtn" style="width: 100%">
-                        {{-- <button style="height: 40px">Message</button> --}}
-                        <button style="margin-top: 10px;font-family:Poppins">{{$vendor->phone}}</button>
+
+                    <div class="content" style="margin-left: -80%;">
+                        <div class="details" style="height: 250px">
+                            <h2>{{$vendor->name}}</h2>      <span> {{$vendor->description}}</span>
+
+                            <div class="data">
+
+                            </div>
+                            <div class="actionBtn" style="width: 100%">
+                                <button style="margin-top: 10px">{{$vendor->phone}}</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
         </div>
+
 
     </div>
 
@@ -50,14 +72,18 @@
             <div class="d-flex">
                 <h1 style="padding-top :0%;font-size:30px;font-weight:700" class="align-self-end fontstyle">Product List</h1>
             <a href="/product/vendor/add" class="submit-button ms-auto" style="width: 20%;background-color:var(--indigo-500);;text-decoration:none;color:white"id="editProduct">Add Product</a>
+
             </div>
         @else
-            <h1>Product List</h1>
+            <h3 class="mt-5">Product List</h3>
         @endif
         <hr class="bg-dark">
         <form action="/products/search/{{$vendor->id}}" class="row justify-content-start mb-4" role="search">
-            <div class="col-md-4">
+            <div class="col-md-4 input-group">
                 <input class="form-control me-2"  name="search" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <a href="/products/{{$vendor->id}}" class="btn btn-outline-primary">Reset</a>
+                </div>
             </div>
         </form>
 
@@ -65,7 +91,7 @@
             @forelse($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card shadow text-center" style="border-radius: 15px;" >
-                        <img src="{{Storage::url($product->product_picture)}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
+                        <img src="{{Storage::url($product->image)}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
                         <div class="card-body" style="height: 17.5rem; overflow: hidden;">
                             <h5 class="card-title fontstyle">{{ $product->name }}</h5>
                             <h6 class="card-title text-secondary fontstyle">{{ $product->categories->name }}</h6>
@@ -117,6 +143,27 @@
 
               @endif
               <script src="{{ asset('assets/popup.js') }}"></script>
+              <h3>Reviews</h3>
+
+                <div class="review-section my-4" style=" flex: 1; overflow-x: auto; white-space: nowrap;">
+                    <div class="review-container mb-5">
+                    @forelse ($vendor->reviews as $review)
+                        <div class="card shadow" style="display: inline-block; margin-right: 10px; max-width: 300px; height: 160px; overflow:hidden">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$review->order->customers->name}}</h5>
+                                <div class="stars">
+                                    @for ($i = 0; $i < $review->rating ; $i++)
+                                      <i class="fas fa-star"></i>
+                                    @endfor
+                                </div>
+                                <p class="card-text" style="white-space: pre-line;">{{$review->comment}}</p>
+                            </div>
+                        </div>
+                    @empty
+                    <p>There is no review yet!</p>
+                    @endforelse
+                    </div>
+                </div>
         </div>
     </div>
 @endsection
