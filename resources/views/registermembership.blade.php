@@ -8,7 +8,7 @@
             <h3 class="card-title">Register Membership</h3>
             <p>Your membership will start as you register and ends in {{\Carbon\Carbon::now()->addDays(30)->format('d M Y')}}</p>
             @if (Auth::guard('webvendor')->check())
-            <p>to become member, you have to set at least 3 products with discounted price</p>
+            <p>To become member, you have to set at least 3 products with discounted price</p>
             @php
                 $countDiscountedProducts = 0;
             @endphp
@@ -25,7 +25,7 @@
                     <tbody>
                         @forelse($vendor->products as $product)
                             <tr>
-                                <td><img src="{{Storage::url($product->image)}}" alt="" style="height: 5rem"></td>
+                                <td><img src="/storage/{{$product->image}}" alt="" style="height: 5rem"></td>
                                 <td>{{ $product->name }}</td>
                                 <td>Rp{{number_format($product->price,2,",",".")}}</td>
                                 @php

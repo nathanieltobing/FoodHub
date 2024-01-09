@@ -8,7 +8,7 @@ use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminController extends UserController
+class AdminController extends Controller
 {
     public function index(){
         $customers = Customer::paginate(5, ['*'], 'customers');

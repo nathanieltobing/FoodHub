@@ -27,11 +27,17 @@
 
                     <div class="card-title d-flex pb-1" style="margin-bottom:-10px">
                         <i style="font-size:30px; margin-top:20px;margin-right:20px;margin-left:9px" class="fa">&#xf290;</i>
+
                         <div class="" style="margin-top:10px">
-                            <p class="payment-summary-price justify-content-start" style="font-size:16px;font-weight: 700;margin-bottom:0;"> Belanja</p>
+
+
+                            <span class="payment-summary-price justify-content-start" style="font-size:16px;font-weight: 700;margin-bottom:0;"> Belanja</span>
+                            <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-bottom:0;justify-content: end;margin-left: 32em;color:var(--indigo-500)"> 0812-0557-4059</span>
+
                             <p class="payment-summary-name justify-content-start">{{ \Carbon\Carbon::parse($o->transaction_date)->format('d M Y')}}</p>
 
                         </div>
+
                         {{-- <div class="actionBtn">
                             <a href="/orderdetail/{{$o->id}}" style="text-decoration: none"> <button>View Detail</button></a>
 
@@ -47,9 +53,8 @@
                             : ($o->status=='ON GOING'? 'btn-warning'
                             : ($o->status=='REJECTED'? 'btn-danger'
                             : 'btn-success'))}} mx-3 btn active">{{$o->status}}</span>
-
-
                     </div>
+
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex align-items-center">

@@ -14,24 +14,6 @@
 </div> --}}
 
 
-    <div class="covering mt-5" style="padding-top:7rem">
-        <div class="cards">
-            <div class="imgBx">
-                @if(!$vendor->image)
-                    <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
-                @endif
-                @if ($vendor->image)
-                    <img src="{{Storage::url($vendor->image)}}">
-                @endif
-                {{-- <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""> --}}
-            </div>
-            <div class="content" style="margin-left: -80%;">
-                <div class="details fontstyle" style="height: 250px">
-                     <h2 >{{$vendor->name}}</h2>      <span> {{$vendor->description}}</span>
-
-                    <div class="data">
-                        {{-- <span> {{$vendor->description}}</span> --}}
-
 
    <div class="container mt-5">
         <div class="mt-5" style="padding-top:7rem">
@@ -41,7 +23,7 @@
                             <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
                         @endif
                         @if ($vendor->image)
-                            <img src="{{Storage::url($vendor->image)}}">
+                            <img src="/storage/{{$vendor->image}}">
                         @endif
                     </div>
 
@@ -91,7 +73,7 @@
             @forelse($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card shadow text-center" style="border-radius: 15px;" >
-                        <img src="{{Storage::url($product->image)}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
+                        <img src="/storage/{{$product->image}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
                         <div class="card-body" style="height: 17.5rem; overflow: hidden;">
                             <h5 class="card-title fontstyle">{{ $product->name }}</h5>
                             <h6 class="card-title text-secondary fontstyle">{{ $product->categories->name }}</h6>
@@ -143,27 +125,26 @@
 
               @endif
               <script src="{{ asset('assets/popup.js') }}"></script>
+              @if (count($vendor->reviews) != 0)
               <h3>Reviews</h3>
-
                 <div class="review-section my-4" style=" flex: 1; overflow-x: auto; white-space: nowrap;">
-                    <div class="review-container mb-5">
-                    @forelse ($vendor->reviews as $review)
-                        <div class="card shadow" style="display: inline-block; margin-right: 10px; max-width: 300px; height: 160px; overflow:hidden">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$review->order->customers->name}}</h5>
-                                <div class="stars">
-                                    @for ($i = 0; $i < $review->rating ; $i++)
-                                      <i class="fas fa-star"></i>
-                                    @endfor
+                   <div class="review-container mb-5">
+                        @foreach ($vendor->reviews as $review)
+                            <div class="card shadow" style="display: inline-block; margin-right: 10px; max-width: 300px; height: 160px; overflow:hidden">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$review->order->customers->name}}</h5>
+                                    <div class="stars">
+                                        @for ($i = 0; $i < $review->rating ; $i++)
+                                        <i class="fas fa-star"></i>
+                                        @endfor
+                                    </div>
+                                    <p class="card-text" style="white-space: pre-line;">{{$review->comment}}</p>
                                 </div>
-                                <p class="card-text" style="white-space: pre-line;">{{$review->comment}}</p>
-                            </div>
-                        </div>
-                    @empty
-                    <p>There is no review yet!</p>
-                    @endforelse
+                            </div>      
+                        @endforeach                    
                     </div>
-                </div>
+                </div>        
+              @endif
         </div>
     </div>
 @endsection

@@ -55,7 +55,7 @@
                             </form>
                         </td>
 
-                        <td ><img src="{{Storage::url($cart['image'])}}" alt="" style="margin-top:4px;margin-bottom:4px"></td>
+                        <td ><img src="/storage/{{$cart['image']}}" alt="" style="margin-top:4px;margin-bottom:4px"></td>
 
                     <td>
                         <div class="payment-summary-price">{{$cart['name']}}</div>
@@ -157,64 +157,77 @@
             </div>
 
     </div>
-    <section class="payment-section">
-        <div class="container">
-                <div class="payment-right">
-                    <form action="/checkout" class="payment-form" method="POST">
-                        @csrf
-                        <h1 class="payment-title">Payment Details</h1>
-                        <div class="payment-method">
-                            <input type="radio" name="payment-method" id="method-1" checked>
-                            <label for="method-1" class="payment-method-item">
-                                <img src="{{ asset('assets/images/visa.png') }}" alt="">
-                            </label>
-                            <input type="radio" name="payment-method" id="method-2">
-                            <label for="method-2" class="payment-method-item">
-                                <img src="{{ asset('assets/images/mastercard.png') }}" alt="">
-                            </label>
-                            <input type="radio" name="payment-method" id="method-3">
-                            <label for="method-3" class="payment-method-item">
-                                <img src="{{ asset('assets/images/bca.jpg') }}" alt="">
-                            </label>
-                            <input type="radio" name="payment-method" id="method-4">
-                            <label for="method-4" class="payment-method-item">
-                                <img src="{{ asset('assets/images/bri.png') }}" alt="">
-                            </label>
-                        </div>
-                        <div class="payment-form-group">
-                            <input type="email" placeholder=" " class="payment-form-control" name="email">
-                            <label for="email" class="payment-form-label payment-form-label-required">Email Address</label>
-                        </div>
-                        <div class="payment-form-group">
-                            <input type="text" placeholder=" " maxlength="16" class="payment-form-control" name="cardNumber">
-                            <label for="card-number" class="payment-form-label payment-form-label-required">Card Number</label>
-                        </div>
-                        <div class="payment-form-group-flex">
-                            <div class="payment-form-group">
-                                <input type="date" placeholder=" " class="payment-form-control" name="expiryDate">
-                                <label for="expiry-date" class="payment-form-label payment-form-label-required">Expiry Date</label>
+
+    <form action="/checkout" class="payment-form" method="POST">
+        @csrf
+        <div class="payment-form">
+            <h1 class="payment-title">Address</h1>
+
+            <textarea  rows="7" cols="163" name="address" maxlength="80"></textarea>
+        </div>
+
+
+
+        <section class="payment-section">
+            <div class="container">
+                    <div class="payment-right">
+                        
+                            
+                            <h1 class="payment-title">Payment Details</h1>
+                            <div class="payment-method">
+                                <input type="radio" name="payment-method" id="method-1" checked>
+                                <label for="method-1" class="payment-method-item">
+                                    <img src="{{ asset('assets/images/visa.png') }}" alt="">
+                                </label>
+                                <input type="radio" name="payment-method" id="method-2">
+                                <label for="method-2" class="payment-method-item">
+                                    <img src="{{ asset('assets/images/mastercard.png') }}" alt="">
+                                </label>
+                                <input type="radio" name="payment-method" id="method-3">
+                                <label for="method-3" class="payment-method-item">
+                                    <img src="{{ asset('assets/images/bca.jpg') }}" alt="">
+                                </label>
+                                <input type="radio" name="payment-method" id="method-4">
+                                <label for="method-4" class="payment-method-item">
+                                    <img src="{{ asset('assets/images/bri.png') }}" alt="">
+                                </label>
                             </div>
                             <div class="payment-form-group">
-                                <input type="text" placeholder=" " maxlength="3" class="payment-form-control" name="cvv">
-                                <label for="cvv" class="payment-form-label payment-form-label-required">CVV</label>
+                                <input type="email" placeholder=" " class="payment-form-control" name="email">
+                                <label for="email" class="payment-form-label payment-form-label-required">Email Address</label>
                             </div>
-                        </div>
-                        <button type="submit" class="payment-form-submit-button"><i class="ri-wallet-line"></i> Pay</button>
-                        <div class="row text-danger">
-                            @if(session()->has('error'))
-                                    <p>{{ session()->get('error') }}</p>
-                                @endif
-                                @if ($errors->any())
-                                <ul class="ps-5">
-                                    @foreach ($errors->all() as $error)
-                                        <li class="text-danger">{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                                @endif
-                        </div>
-                    </form>
+                            <div class="payment-form-group">
+                                <input type="text" placeholder=" " maxlength="16" class="payment-form-control" name="cardNumber">
+                                <label for="card-number" class="payment-form-label payment-form-label-required">Card Number</label>
+                            </div>
+                            <div class="payment-form-group-flex">
+                                <div class="payment-form-group">
+                                    <input type="date" placeholder=" " class="payment-form-control" name="expiryDate">
+                                    <label for="expiry-date" class="payment-form-label payment-form-label-required">Expiry Date</label>
+                                </div>
+                                <div class="payment-form-group">
+                                    <input type="text" placeholder=" " maxlength="3" class="payment-form-control" name="cvv">
+                                    <label for="cvv" class="payment-form-label payment-form-label-required">CVV</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="payment-form-submit-button"><i class="ri-wallet-line"></i> Pay</button>
+                            <div class="row text-danger">
+                                @if(session()->has('error'))
+                                        <p>{{ session()->get('error') }}</p>
+                                    @endif
+                                    @if ($errors->any())
+                                    <ul class="ps-5">
+                                        @foreach ($errors->all() as $error)
+                                            <li class="text-danger">{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
+                            </div>
+                        
+                    </div>
                 </div>
-            </div>
+            </section>
+        </form>
 
     @else
              <div class="justify-content-center" style="align-items: center;text-align:center">
@@ -227,7 +240,6 @@
     @endif
 
   </div>
-</section>
 
 
 @endsection

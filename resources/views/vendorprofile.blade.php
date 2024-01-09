@@ -27,7 +27,7 @@
                             <i class="bx bx-user-circle" style="font-size: 10rem;"></i>
                         @endif
                         @if ($user->image)
-                            <img class="rounded-circle border" src="{{Storage::url($user->image)}}" alt="" style="width: 10rem; height:10rem;">
+                            <img class="rounded-circle border" src="/storage/{{$user->image}}" alt="" style="width: 10rem; height:10rem;">
                         @endif
                         <h5 class="my-3">{{$user->name}}</h5>
                         @if ($editMode)

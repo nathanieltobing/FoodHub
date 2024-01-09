@@ -51,7 +51,7 @@ class CartController extends Controller
                     "product_id"=> $id,
                     "vendor_id"=>$product->vendor_id,
                     "discounted_price"=>$discount,
-                    "image"=>$product->product_picture
+                    "image"=>$product->image
                 ];
             }
             session()->put('cart', $cart);
