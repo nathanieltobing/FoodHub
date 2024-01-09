@@ -59,7 +59,7 @@ class OrderController extends Controller
             'expiryDate' => 'required',
             'cvv' => 'required | numeric'
         ];
-
+        
         $validator = Validator::make($req->all(), $rules);
 
         if($validator->fails()){
@@ -93,6 +93,7 @@ class OrderController extends Controller
             $order->membership_discount = (double)$customerMembership['discount'] /100;
         }
         $order->vendor_id = $vendor_id;
+        $order->address = $req->address;
         $order->save();
 
         $most_recent_order = DB::table('orders')->latest()->first();

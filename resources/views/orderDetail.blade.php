@@ -25,7 +25,12 @@
                   <p class="fontstyle">ODR-{{$order->id}}</p>
                 </div>
               </div>
-
+              <div class="row d-flex justify-content-start">
+                <div class="col-12 mb-3">
+                  <p class="small text-muted mb-1 fontstyle">Address</p>
+                  <p class="fontstyle">{{$order->address}}</p>
+                </div>
+              </div>
               <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2; margin-right: -3rem;
                margin-left: -3rem;">
                 <?php
