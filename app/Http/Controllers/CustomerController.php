@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class CustomerController extends UserController
+class CustomerController extends Controller
 {
     public function register(Request $req){
 

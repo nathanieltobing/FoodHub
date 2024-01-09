@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class VendorController extends UserController
+class VendorController extends Controller
 {
     public function index(){
 

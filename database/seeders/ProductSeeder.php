@@ -166,7 +166,7 @@ class ProductSeeder extends Seeder
             'price' => 2200000.00,
             'stock' => 100,
             'description' => 'Nasi Liwet untuk acara ukuran menengah untuk jumlah orang 100-150',
-            'product_picture' => '/images/nasiliwet.jpg',
+            'product_picture' => '/images/nasiliwet.jpeg',
             'category_id' => 2,
             'vendor_id' => 4,
             'created_at' => Carbon::now(),
