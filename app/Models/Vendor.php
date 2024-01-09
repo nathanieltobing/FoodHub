@@ -24,4 +24,8 @@ class Vendor extends User
     public function promotions(){
         return $this->hasMany(Promotion::class, 'vendor_id', 'id');
     }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
 }

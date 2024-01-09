@@ -25,7 +25,7 @@
                     <tbody>
                         @forelse($vendor->products as $product)
                             <tr>
-                                <td><img src="{{Storage::url($product->product_picture)}}" alt="" style="height: 5rem"></td>
+                                <td><img src="{{Storage::url($product->image)}}" alt="" style="height: 5rem"></td>
                                 <td>{{ $product->name }}</td>
                                 <td>Rp{{number_format($product->price,2,",",".")}}</td>
                                 @php
