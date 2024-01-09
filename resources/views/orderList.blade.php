@@ -30,9 +30,12 @@
 
                         <div class="" style="margin-top:10px">
 
-
                             <span class="payment-summary-price justify-content-start" style="font-size:16px;font-weight: 700;margin-bottom:0;"> Belanja</span>
-                            <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-bottom:0;justify-content: end;margin-left: 32em;color:var(--indigo-500)"> 0812-0557-4059</span>
+                            @if(Auth::guard('webcustomer')->check())
+                            <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-bottom:0;justify-content: end;margin-left: 32em;color:var(--indigo-500)">{{$o->vendors->phone}}</span>
+                            @else
+                            <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-bottom:0;justify-content: end;margin-left: 32em;color:var(--indigo-500)">{{$o->customers->phone}}</span>
+                            @endif
 
                             <p class="payment-summary-name justify-content-start">{{ \Carbon\Carbon::parse($o->transaction_date)->format('d M Y')}}</p>
 
