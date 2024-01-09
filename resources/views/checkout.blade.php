@@ -157,6 +157,17 @@
             </div>
 
     </div>
+
+<div class="payment-form">
+    <h1 class="payment-title">Address</h1>
+
+    <textarea  rows="10" cols="163">
+    Enter Your Address
+    </textarea>
+</div>
+
+
+
     <section class="payment-section">
         <div class="container">
                 <div class="payment-right">
