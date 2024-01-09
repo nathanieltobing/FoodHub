@@ -7,16 +7,15 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\PublisherController;
-use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\OrderDetailController;
+use App\Http\Controllers\VendorProfileController;
+use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\VendorMembershipController;
 use App\Http\Controllers\CustomerMembershipController;
 /*
@@ -92,8 +91,8 @@ Route::middleware(['checkauth'])->group(function(){
         Route::get('/customer/removeprofpic', [CustomerProfileController::class, 'removePicture']);
         Route::post('/customer/registermembership', [CustomerMembershipController::class, 'registerMembership']);
         Route::post('/customer/cancelmembership', [CustomerMembershipController::class, 'cancelMembership']);
-        Route::get('/finishwithoutreview/{o:id}', [ReviewController::class, 'finishWithoutReview']);
-        Route::post('/addreview/{o:id}', [ReviewController::class, 'addReview']);
+        Route::get('/finishwithoutreview/{o:id}', [OrderController::class, 'finishWithoutReview']);
+        Route::post('/addreview/{o:id}', [OrderController::class, 'finishWithReview']);
     });
 
     Route::middleware(['vendor'])->group(function(){

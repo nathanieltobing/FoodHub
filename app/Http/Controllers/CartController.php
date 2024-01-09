@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Product;
 use App\Models\Customer;
+use App\Models\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +17,20 @@ use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
+    public function checkProductFromOtherVendor(Product $product){
+        $carts = session()->get('cart');
+        if(empty($carts)){
+            return true;
+        }
+        else{
+            $cart = reset($carts);
+            if($product->vendor_id == $cart['vendor_id']){
+                return true;
+            }
+            return false;
+        }
+    }
+
     public function addToCart($id){
         $product = Product::find($id);
         $cart = session()-> get('cart',[]);
@@ -28,7 +44,7 @@ class CartController extends Controller
                 $cart[$id]['quantity']++;
             }
             else{
-                $cart[$id] = [          
+                $cart[$id] = [
                     "name" => $product->name,
                     "quantity" => 1,
                     "price" => $product->price,
@@ -39,7 +55,7 @@ class CartController extends Controller
                 ];
             }
             session()->put('cart', $cart);
-    
+
             return redirect('/checkout');
         }
      }
@@ -52,7 +68,7 @@ class CartController extends Controller
      }
 
      public function deleteItem($id){
-    
+
         $cart = session()->get('cart');
         // dd($cart);
         if(isset($cart[$id])){
@@ -65,20 +81,20 @@ class CartController extends Controller
 
      public function addQuantity($id){
         $cart = session()->get('cart');
-        if(isset($cart[$id])){          
+        if(isset($cart[$id])){
             $cart[$id]['quantity']++;
             session()->put('cart', $cart);
-            
+
         }
         return redirect('/checkout');
      }
 
      public function decreaseQuantity($id){
         $cart = session()->get('cart');
-        if(isset($cart[$id])){  
+        if(isset($cart[$id])){
             if($cart[$id]['quantity'] > 1){
                 $cart[$id]['quantity']--;
-            }        
+            }
             session()->put('cart', $cart);
         }
         return redirect('/checkout');

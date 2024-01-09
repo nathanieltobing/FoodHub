@@ -88,10 +88,10 @@
 <body>
     <div class="container">
         <h1 >Thank You for Your Purchase!</h1>
-        <p class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;margin-top:30px;">Your order has been successfully processed.</p>
-        <p class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;">An order successful notice has been sent to your email.</p>
-        <p class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;">We appreciate your business and hope you enjoy your new purchase.</p>
-        <p class="card-text payment-summary-price" style="font-size:18px;font-weight: 700;">For any inquiries or assistance, please <a class="card-text payment-summary-price" style="font-size:18px;font-weight: 700; href="#">contact us</a>.</p>
+        <p class="card-text payment-summary-price" style="font-size:16px;font-weight: 700;margin-top:30px;">Your order has been successfully processed.</p>
+        <p class="card-text payment-summary-price" style="font-size:16px;font-weight: 700;">An order successful notice has been sent to your email.</p>
+        <p class="card-text payment-summary-price" style="font-size:16px;font-weight: 700;">We appreciate your business and hope you enjoy your new purchase.</p>
+        <p class="card-text payment-summary-price" style="font-size:16px;font-weight: 700;">For any inquiries or assistance, please <a class="card-text payment-summary-price" style="font-size:18px;font-weight: 700; href="#">contact us</a>.</p>
         <a class="submit-button" href="/vendorList" style="--i:3;margin-left: 23%;    margin-top: 40px">Dismiss</a>
     </div>
 </body>

@@ -111,20 +111,6 @@ class ProductController extends Controller
         return redirect('/product/vendor');
     }
 
-    public function checkProductFromOtherVendor(Product $product){
-        $carts = session()->get('cart');
-        if(empty($carts)){
-            return true;
-        }
-        else{
-            $cart = reset($carts);
-            if($product->vendor_id == $cart['vendor_id']){
-                return true;
-            }
-            return false;
-        }
-    }
-
      public function search(Vendor $v, Request $request)
      {
         $vc = new VendorController();

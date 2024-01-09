@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+
 class OrderController extends Controller
 {
+
     public function viewOrderList()
     {
         if(Auth::guard('webvendor')->check()){
@@ -116,4 +118,26 @@ class OrderController extends Controller
         $vendor = Vendor::find($vendor_id);
         Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor));
      }
+
+     public function finishWithoutReview(Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'status' => 'FINISHED'
+        ]);
+        return redirect('orderlist')->with('message','Order status edited successfully!');
+    }
+
+    public function finishWithReview(Request $request, Order $o){
+        $reviewController = new ReviewController();
+        $reviewController->addReview($request,$o);
+
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'status' => 'FINISHED'
+        ]);
+
+        return redirect('orderlist')->with('message','Order status edited successfully!');
+    }
 }
