@@ -14,24 +14,6 @@
 </div> --}}
 
 
-    <div class="covering mt-5" style="padding-top:7rem">
-        <div class="cards">
-            <div class="imgBx">
-                @if(!$vendor->image)
-                    <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
-                @endif
-                @if ($vendor->image)
-                    <img src="{{Storage::url($vendor->image)}}">
-                @endif
-                {{-- <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt=""> --}}
-            </div>
-            <div class="content" style="margin-left: -80%;">
-                <div class="details fontstyle" style="height: 250px">
-                     <h2 >{{$vendor->name}}</h2>      <span> {{$vendor->description}}</span>
-
-                    <div class="data">
-                        {{-- <span> {{$vendor->description}}</span> --}}
-
 
    <div class="container mt-5">
         <div class="mt-5" style="padding-top:7rem">
