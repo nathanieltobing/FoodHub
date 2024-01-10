@@ -14,8 +14,14 @@
 </div> --}}
 
 
-
    <div class="container mt-5">
+    @if(session('message'))
+    <div class="container pt-5">
+        <div class="d-grid gap-2 mt-3">
+            <div class="alert alert-danger fontstyle" type="">{{session('message')}}</div>
+        </div>
+    </div>
+    @endif
         <div class="mt-5" style="padding-top:7rem">
                 <div class="cards">
                     <div class="imgBx">
@@ -23,7 +29,7 @@
                             <i class="bx bx-user-circle" style="font-size: 10rem;margin-right:10px"></i>
                         @endif
                         @if ($vendor->image)
-                            <img src="{{Storage::url($vendor->image)}}">
+                            <img src="/storage/{{$vendor->image}}">
                         @endif
                     </div>
 
@@ -73,7 +79,7 @@
             @forelse($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card shadow text-center" style="border-radius: 15px;" >
-                        <img src="{{Storage::url($product->image)}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
+                        <img src="/storage/{{$product->image}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
                         <div class="card-body" style="height: 17.5rem; overflow: hidden;">
                             <h5 class="card-title fontstyle">{{ $product->name }}</h5>
                             <h6 class="card-title text-secondary fontstyle">{{ $product->categories->name }}</h6>
@@ -95,7 +101,33 @@
                                     <button class="submit-button fontstyle" style="margin-left:5em;" class="btnAdd" name="btnAdd" type="submit" id="error_trigger">Add to Cart</button>
                                 @endif
                             @elseif(Auth::guard('webvendor')->check())
-                                <a href="/product/vendor/edit/{{$product->id}}" class="submit-button fontstyle" style="margin-left:5em;text-decoration:none;color:white">Edit</a>
+                            <div class="d-flex justify-content-center">
+                                <a href="#" class="submit-button fontstyle mx-1" style="background-color:#d9534f; text-decoration:none;color:white" onmouseover="this.style.backgroundColor='#c9302c'"
+                                    onmouseout="this.style.backgroundColor='#d9534f'" data-toggle="modal" data-target="#RemoveProductModal{{$product->id}}">Remove</a>
+                                <a href="/product/vendor/edit/{{$product->id}}" class="submit-button fontstyle mx-1" style="text-decoration:none;color:white">Edit</a>
+                            </div>
+                            <div class="modal fade" id="RemoveProductModal{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="RemoveProductModal{{$product->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fontstyle" id="cancelMembershipModalLabel">Remove Product Confirmation</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body fontstyle">
+                                            <p>Are you sure you want to remove this product?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="/removeProduct/{{$product->id}}" method="post">
+                                                @csrf
+                                            <button type="button" class="btn btn-secondary fontstyle" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-danger fontstyle">Yes, remove product</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @else
                                 <a href="/login" class="submit-button fontstyle" style="margin-left:3em;text-decoration:none;color:white;width:70%;margin-top:1.3em">Login to add to cart</a>
                             @endif
@@ -125,27 +157,26 @@
 
               @endif
               <script src="{{ asset('assets/popup.js') }}"></script>
+              @if (count($vendor->reviews) != 0)
               <h3>Reviews</h3>
-
                 <div class="review-section my-4" style=" flex: 1; overflow-x: auto; white-space: nowrap;">
-                    <div class="review-container mb-5">
-                    @forelse ($vendor->reviews as $review)
-                        <div class="card shadow" style="display: inline-block; margin-right: 10px; max-width: 300px; height: 160px; overflow:hidden">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$review->order->customers->name}}</h5>
-                                <div class="stars">
-                                    @for ($i = 0; $i < $review->rating ; $i++)
-                                      <i class="fas fa-star"></i>
-                                    @endfor
+                   <div class="review-container mb-5">
+                        @foreach ($vendor->reviews as $review)
+                            <div class="card shadow" style="display: inline-block; margin-right: 10px; max-width: 300px; height: 160px; overflow:hidden">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$review->order->customers->name}}</h5>
+                                    <div class="stars">
+                                        @for ($i = 0; $i < $review->rating ; $i++)
+                                        <i class="fas fa-star"></i>
+                                        @endfor
+                                    </div>
+                                    <p class="card-text" style="white-space: pre-line;">{{$review->comment}}</p>
                                 </div>
-                                <p class="card-text" style="white-space: pre-line;">{{$review->comment}}</p>
                             </div>
-                        </div>
-                    @empty
-                    <p>There is no review yet!</p>
-                    @endforelse
+                        @endforeach
                     </div>
                 </div>
+              @endif
         </div>
     </div>
 @endsection

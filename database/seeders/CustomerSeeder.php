@@ -24,7 +24,6 @@ class CustomerSeeder extends Seeder
             'email' => 'customer1@gmail.com',
             'password' => bcrypt('12345678'),
             'customer_membership' => json_encode([
-                'id' => 1,
                 'status'=> 'ACTIVE',
                 'startPeriod'=> $startPeriod,
                 'endPeriod' => $endPeriod,
@@ -79,7 +78,6 @@ class CustomerSeeder extends Seeder
             'email' => 'customer5@gmail.com',
             'password' => bcrypt('12345678'),
             'customer_membership' => json_encode([
-                'id' => 1,
                 'status'=> 'ACTIVE',
                 'startPeriod'=> $startPeriod,
                 'endPeriod' => $endPeriod,
