@@ -1,7 +1,7 @@
 @extends('master-clean')
 
 @section('content')
-<section class="vh-107" style="background-color: #eee;">
+<section class="vh-107" style="background-color: #eee;margin-bottom: -50px;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-12 col-xl-11">
