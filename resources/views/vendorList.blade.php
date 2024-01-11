@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container pt-5">
-    <div class ="row p-5" style="margin-top: 4rem">
+    <div class ="row pt-5" style="margin-top: 4rem">
 
             <h1 class="text-center" style="font-size: 30px;font-family: Poppins; font-weight:700;">Vendor List</h1>
             <div class="border"></div>

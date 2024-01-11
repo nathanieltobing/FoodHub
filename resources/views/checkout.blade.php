@@ -2,23 +2,18 @@
 
 @section('content')
 <link href="{{ asset('assets/style.css') }}" rel="stylesheet">
-<div class="container-fluid" style="padding : 0">
-    <div class ="row w-100" style="padding : 0">
-      <div class="col d-flex justify-content-center w-100">
-         {{-- <h1 style="color: white"><b>Book List</b></h2>   --}}
-            <p style="font-size: 30px; line-height :1.66; font-weight: 700; font-family: Poppins; margin-top:100px;">CHECKOUT</p>
-      </div>
-    </div>
+<div class="container-fluid pt-5" style="padding : 0">
+    <p class="text-center pt-5" style="font-size: 30px;font-weight: 700; font-family: Poppins; margin-top:4rem; margin-bottom:-8px">Checkout</p>
+    <div class="border"></div>
+
     <div class ="row w-100">
         <div class="col-8 d-flex">
-           {{-- <h1 style="color: white"><b>Book List</b></h2>   --}}
               <p style="font-size: 30px; line-height :1.66; font-weight: 700; font-family: Poppins; margin-bottom : 0;">ITEMS</p>
         </div>
         <div class="line"></div>
     </div>
-
-
 </div>
+
     @if (!empty($carts) || $carts != null)
     <div id="cart-container" class="container my-5">
         <table width= "120%" style="font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol">
@@ -181,8 +176,8 @@
         <section class="payment-section">
             <div class="container">
                     <div class="payment-right">
-                        
-                            
+
+
                             <h1 class="payment-title">Payment Details</h1>
                             <div class="payment-method">
                                 <input type="radio" name="payment-method" id="method-1" checked>
@@ -233,7 +228,7 @@
                                     </ul>
                                     @endif
                             </div>
-                        
+
                     </div>
                 </div>
             </section>
