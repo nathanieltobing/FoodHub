@@ -14,8 +14,8 @@
     @endif
 
     <div class="p-5" style="background-color: #black">
-    <h1 style="font-size :30px;font-family: Poppins;font-weight:700">Order List</h1>
-    <hr>
+    <h1 class="text-center" style="font-size :30px;font-family: Poppins;font-weight:700">Order List</h1>
+    <div class="border"></div>
 
     <br>
       @if ($order != null && $order->count() != 0)
