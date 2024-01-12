@@ -18,7 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    
+
 </head>
 <body>
 <header class="header">
@@ -35,18 +35,55 @@
 
             <a href="/vendorList" style="--i:3"><img src="{{ asset('assets/images/vendoricon.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
             <a href="/orderlist" style="--i:3"><img src="{{ asset('assets/images/orderlist.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
+
             {{-- <a href="/profile/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Membership</a> --}}
-            <a href="/customer/profile" style="--i:3"><i class="fa-solid fa-user"></i></a>
+         {{-- <div class="action">
+            <div class="profile" onclick="menuToggle();">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="menu">
+                <h3> Nama User </h3>
+                <ul>
+                    <li>   <a href="/customer/profile" style="--i:3"><i class="fa-solid fa-user"></i></a>My Profile</li>
+                    <li>  <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a>Logout</li>
+                </ul>
+            </div>
+        </div> --}}
+            {{-- <a href="/customer/profile" style="--i:3"><i class="fa-solid fa-user"></i></a> --}}
             <a href="/checkout" style="--i:3"><i class="fa-solid fa-cart-shopping"></i></a>
-            <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a>
+            <div class="action">
+                <div class="profile" onclick="menuToggle();">
+                    <img src="{{ asset('assets/images/user.png') }}" alt="">
+                </div>
+                <div class="menu">
+                    <h3>Danang Prasetyo </h3>
+                    <ul>
+                        <li><img src="{{ asset('assets/images/user.png') }}"><a href="/customer/profile"  style="margin-left:10px">Profile</a></li>
+                        <li><img src="{{ asset('assets/images/log-out.png') }}"><a href="/logout" style="margin-left:10px">Logout</a></li>
+                        {{-- <li>  <a href="/logout" style="--i:3"> <img src="{{ asset('assets/images/log-out.png') }}" alt="" ></i></a>Logout</li> --}}
+                    </ul>
+                </div>
+            </div>
+            {{-- <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a> --}}
           </div>
           @elseif (Auth::guard('webvendor')->check())
           <div class="justify-content-center" style="gap: 50px">
             <a href="/orderlist" style="--i:3"><img src="{{ asset('assets/images/orderlist.png') }}" style="height:1.3rem"></a>
             <a href="/product/vendor" style="--i:3"><img src="{{ asset('assets/images/producticon.png') }}" style="height:1.4rem"></a>
             {{-- <a href="/homepage" style="--i:3">Membership</a> --}}
-            <a href="/vendor/profile" style="--i:3"><i class="fa-solid fa-user"></i></a>
-            <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a>
+            <div class="action">
+                <div class="profile" onclick="menuToggle();">
+                    <img src="{{ asset('assets/images/user.png') }}" alt="">
+                </div>
+                <div class="menu">
+                    <h3>Aneka Snack </h3>
+                    <ul>
+                        <li><img src="{{ asset('assets/images/user.png') }}"><a href="/vendor/profile"  style="margin-left:10px">Profile</a></li>
+                        <li><img src="{{ asset('assets/images/log-out.png') }}"><a href="/logout" style="margin-left:10px">Logout</a></li>
+                        {{-- <li>  <a href="/logout" style="--i:3"> <img src="{{ asset('assets/images/log-out.png') }}" alt="" ></i></a>Logout</li> --}}
+                    </ul>
+                </div>
+            </div>
           </div>
           @elseif(Auth::guard('webadmin')->check())
             {{-- Button khusus Admin --}}
@@ -56,6 +93,12 @@
             <a href="/login" style="--i:3">Login</a>
             <a href="/register/customer" style="--i:3">Register</a>
           @endif
+          <script>
+            function menuToggle(){
+                const toggleMenu = document.querySelector('.menu');
+                toggleMenu.classList.toggle('active')
+            }
+          </script>
     </nav>
 
 </header>

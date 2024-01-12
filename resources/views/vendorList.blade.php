@@ -3,14 +3,11 @@
 
 @section('content')
 
-<div class="container">
-    <div class ="row">
+<div class="container pt-5">
+    <div class ="row pt-5" style="margin-top: 4rem">
 
-      <div class="col d-flex justify-content-center" style="margin-top: 10%">
-
-            <p style="font-size: 30px;font-family: Poppins; font-weight:700">Vendor List</p>
-      </div>
-      <hr class="bg-dark">
+            <h1 class="text-center" style="font-size: 30px;font-family: Poppins; font-weight:700;">Vendor List</h1>
+            <div class="border"></div>
       <form action="/vendorList/search" class="row justify-content-start mb-4" role="search">
           <div class="col-md-4 input-group">
               <input class="form-control me-2"  name="search" type="search" placeholder="Search" aria-label="Search">
