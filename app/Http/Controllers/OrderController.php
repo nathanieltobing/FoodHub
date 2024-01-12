@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Email;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Review;
 use App\Models\Vendor;
 use App\Models\Customer;
@@ -57,7 +58,8 @@ class OrderController extends Controller
             'email' => 'required|email:rfc,dns',
             'cardNumber' => 'required|numeric',
             'expiryDate' => 'required',
-            'cvv' => 'required | numeric'
+            'cvv' => 'required | numeric',
+            'address' =>'required'
         ];
         
         $validator = Validator::make($req->all(), $rules);
@@ -65,6 +67,7 @@ class OrderController extends Controller
         if($validator->fails()){
             return back()->withErrors($validator);
         }
+
         $order = new Order();
         $order_detail = new OrderDetail();
         $carts = session()->get('cart');
@@ -79,6 +82,9 @@ class OrderController extends Controller
                 $total_price+=$cart['price'] * $cart['quantity'];
             }
             $vendor_id = $cart['vendor_id'];
+            $product = Product::where('id',$cart['product_id'])->first();
+            $product->stock = $product->stock - $cart['quantity'];
+            $product->save();
         }
         $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
             if($customerMembership != null){

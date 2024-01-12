@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Customer;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -30,9 +31,15 @@ class UserController extends Controller
             Cookie::queue(Cookie::forget("email"));
             Cookie::queue(Cookie::forget("password"));
         }
+    
         switch($request->role) {
             case "CUSTOMER" :
                 if(Auth::guard('webcustomer')->attempt($credential,true)){
+                    $customer = Customer::where('id',Auth::guard('webcustomer')->user()->id)->first();
+                    if($customer->status == 'INACTIVE'){
+                        Auth::guard('webcustomer')->logout();
+                        return redirect()->back()->withErrors('Your account is suspended !');
+                    }
                     Session::put('mysession',Auth::guard('webcustomer')->user()->name);
                     return redirect('/');
                 }
@@ -43,6 +50,11 @@ class UserController extends Controller
                 break;
             case "VENDOR" :
                 if(Auth::guard('webvendor')->attempt($credential,true)){
+                    $vendor = Vendor::where('id',Auth::guard('webvendor')->user()->id)->first();
+                    if($vendor->status == 'INACTIVE'){
+                        Auth::guard('webvendor')->logout();
+                        return redirect()->back()->withErrors('Your account is suspended !');
+                    }
                     Session::put('mysession',Auth::guard('webvendor')->user()->name);
                     return redirect('/');
                 }
