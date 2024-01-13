@@ -158,18 +158,18 @@
         <div class="payment-form">
             <h1 class="payment-title">Address</h1>
 
-    <textarea  rows="10" cols="163"></textarea>
+        <textarea  rows="10" cols="163"></textarea>
 
 
-</div>
+        </div>
 
-<div class="payment-form">
-    <h1 class="payment-title">Due Date</h1>
-    <div class="payment-form-group">
-        <input type="date" placeholder=" " class="payment-form-control" name="dueDate">
-        <label for="expiry-date" class="payment-form-label payment-form-label-required">Due Date</label>
-    </div>
-</div>
+        <div class="payment-form">
+            <h1 class="payment-title">Due Date</h1>
+            <div class="payment-form-group">
+                <input type="date" placeholder=" " class="payment-form-control" name="dueDate">
+                <label for="expiry-date" class="payment-form-label payment-form-label-required">Due Date</label>
+            </div>
+        </div>
 
 
 
