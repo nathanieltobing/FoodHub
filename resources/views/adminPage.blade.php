@@ -67,7 +67,7 @@
                 <tr>
                   <td>
                     @if ($c->image !=null)
-                      <img src="{{Storage::url($c->image)}}" alt="" />
+                      <img src="/storage/{{$c->image}}" alt="" />
                     @else
                       <i class="bx bx-user-circle text-center mb-2" role="button" aria-expanded="false" style="font-size:2rem"> </i>
                     @endif
@@ -124,7 +124,7 @@
                 @forelse ($vendors as $v)
                 <tr>
                   <td>
-                    <img src="{{Storage::url($v->image)}}" alt="" />
+                    <img src="/storage/{{$v->image}}" alt="" />
                     <p class="fontstyle">{{$v->name}}</p>
                   </td>
                   <td class="fontstyle">{{\Carbon\Carbon::parse($v->created_at)->format('d-m-Y')}}</td>

@@ -121,4 +121,9 @@ class ProductController extends Controller
              'error' => $error
          ]);
      }
+
+     public function removeProduct(Product $p){
+        DB::table('products')->where('id', $p->id)->delete();
+        return redirect('product/vendor')->with('message','Product successfuly removed!');
+     }
 }
