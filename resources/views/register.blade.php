@@ -1,8 +1,8 @@
 @extends('master-clean')
 
 @section('content')
-<section class="vh-100" style="background-color: #eee;margin-bottom: -50px;">
-    <div class="container h-100">
+<section class="vh-100" style="background-color: #eee;margin-bottom: -50px; overflow: hidden; ">
+    <div class="container h-100 ">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-12 col-xl-11">
           <div class="card text-black mb-5" style="border-radius: 25px;">
