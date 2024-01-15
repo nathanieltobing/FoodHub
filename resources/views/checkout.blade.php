@@ -158,7 +158,7 @@
         <div class="payment-form">
             <h1 class="payment-title">Address</h1>
 
-        <textarea  rows="10" cols="163"></textarea>
+        <textarea  rows="10" cols="163" name="address"></textarea>
 
 
         </div>
