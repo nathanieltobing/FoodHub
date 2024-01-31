@@ -143,9 +143,14 @@
       @else
       <div class="justify-content-center" style="align-items: center;text-align:center">
         <img src="{{ asset('assets/images/emptyorder.png') }}" alt="" style="  max-width: 150%;   height: auto;">
+        @if(Auth::guard('webcustomer')->check())
         <p class ="payment-summary-price" style="font-size :30px;font-family: Poppins;font-weight:700" >Your Order is empty</i></p>
-        <p class ="payment-summary-name" style="font-size :20px;" >Order Something to Fill it Up<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:225px"></i></p>
-     </div>
+            <p class ="payment-summary-name" style="font-size :20px;" >Order Something to Fill it Up<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:225px"></i></p>
+        @elseif (Auth::guard('webvendor')->check())
+        <p class ="payment-summary-price" style="font-size :30px;font-family: Poppins;font-weight:700" >You have no orders coming</i></p>
+            <p class ="payment-summary-name" style="font-size :20px;" >Add more products to attract more customers<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:225px"></i></p>
+        @endif
+     </div> 
 
       @endif
     </div>

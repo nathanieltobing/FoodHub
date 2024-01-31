@@ -100,6 +100,7 @@ class OrderController extends Controller
         }
         $order->vendor_id = $vendor_id;
         $order->address = $req->address;
+        $order->due_date = $req->dueDate;
         $order->save();
 
         $most_recent_order = DB::table('orders')->latest()->first();

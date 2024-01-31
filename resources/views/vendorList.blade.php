@@ -23,29 +23,22 @@
 
     @if ($vendors->count()==1)
       @foreach ($vendors as $vendor)
-        <div class="card text-center mx-2 mt-4" style="width: 70%;border: 1px solid rgba(0, 0, 0, .05);     border-radius: 15px;     box-shadow: 0 4px 24px rgba(0, 0, 0, .10);">
-          <img src="/storage/{{$vendor->image}}" class="card-img-top" alt="..." style="height:500px;">
-          <div class="card-body">
-            <h5 class="card-title" style="font-weight: 600; font-family: Poppins;">{{$vendor->name}}</h5>
-            <div class="stars">
-                @for ($i = 0; $i < $vendor->rating ; $i++)
-                  <i class="fas fa-star"></i>
-                @endfor
-            </div>
-            <p class="card-text" style="height:80px;font-weight: 600; font-family: Poppins;">{{$vendor->description}}</p>
-            <div class="row">
-              <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg vendor-listbtn" style="margin-top:10px;line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Detail</a>
-            </div>
-        </div>
+      <div class="card text-center mx-2 mt-4" style="width: 60%;border: 1px solid rgba(0, 0, 0, .05);     border-radius: 15px;     box-shadow: 0 4px 24px rgba(0, 0, 0, .10);">
+        <img src="/storage/{{$vendor->image}}" class="card-img-top" alt="..." style="height:500px;">
+        <div class="card-body">
+          <h5 class="card-title" style="font-weight: 600; font-family: Poppins;">{{$vendor->name}}</h5>
+          <div class="stars">
+              @for ($i = 0; $i < $vendor->rating ; $i++)
+                <i class="fas fa-star"></i>
+              @endfor
+          </div>
+          <p class="card-text" style="height:80px;font-weight: 600; font-family: Poppins;">{{$vendor->description}}</p>
+          <div class="row">
+            <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg vendor-listbtn" style="margin-top:10px;line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Detail</a>
+          </div>
+      </div>
+      </div>
 
-        {{-- <p class="card-text" style="font-weight: 600; font-family: Poppins;margin-bottom:20px">"Salama catering menyediakan berbagai menu nasi kotak untuk acara besar maupun kecil dengan rasa yang terpecaya test test test test test test test test test test test"</p> --}}
-        {{-- <h5 class="card-text">Category : {{$vendor->category}}</h5>
-        <h5 class="card-text">Price : Rp {{$vendor->price}}</h5>
-        <h5 class="card-text">Description : {{$vendor->description}}</h5> --}}
-        {{-- <div class="row">
-          <a href="/products/{{$vendor->id}}" class="btn btn-primary btn-lg vendor-listbtn" style="margin-top:10px;line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Detail</a>
-
-        </div> --}}
       @endforeach
     @else
       @foreach ($vendors as $vendor)
