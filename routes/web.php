@@ -116,6 +116,7 @@ Route::middleware(['checkauth'])->group(function(){
         Route::post('/vendor/registermembership', [VendorMembershipController::class, 'registerMembership']);
         Route::post('/vendor/cancelmembership', [VendorMembershipController::class, 'cancelMembership']);
         Route::post('/promotion/add/{p:id}', [PromotionController::class, 'addPromotion']);
+        Route::post('/promotion/remove/{p:id}', [PromotionController::class, 'removePromotion']);
         Route::post('/removeProduct/{p:id}', [ProductController::class, 'removeProduct']);
     });
      Route::get('/logout', [UserController::class, 'logout']);
