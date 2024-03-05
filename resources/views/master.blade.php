@@ -43,7 +43,7 @@
                     <img src="{{ asset('assets/images/user.png') }}" alt="">
                 </div>
                 <div class="menu">
-                    <h3>Danang Prasetyo </h3>
+                    <h3>{{Auth::guard('webcustomer')->user()->name}} </h3>
                     <ul>
                         <li><img src="{{ asset('assets/images/user.png') }}"><a href="/customer/profile"  style="margin-left:10px">Profile</a></li>
                         <li><img src="{{ asset('assets/images/log-out.png') }}"><a href="/logout" style="margin-left:10px">Logout</a></li>
@@ -63,7 +63,7 @@
                     <img src="{{ asset('assets/images/user.png') }}" alt="">
                 </div>
                 <div class="menu">
-                    <h3>Aneka Snack </h3>
+                    <h3>{{Auth::guard('webvendor')->user()->name}} </h3>
                     <ul>
                         <li><img src="{{ asset('assets/images/user.png') }}"><a href="/vendor/profile"  style="margin-left:10px">Profile</a></li>
                         <li><img src="{{ asset('assets/images/log-out.png') }}"><a href="/logout" style="margin-left:10px">Logout</a></li>

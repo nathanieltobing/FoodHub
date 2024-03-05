@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container my-5" style="padding-top: 7rem">
+    @if(session('message'))
+    <div class="container">
+        <div class="d-grid gap-2">
+            <div class="alert alert-danger fontstyle" type="">{{session('message')}}</div>
+        </div>
+    </div>
+    @endif
     <div class="card">
         <div class="card-body">
             <a href="{{url()->previous()}}"> <i class="fa-solid fa-arrow-left fa-xl fa-fw mb-4"></i></a>
@@ -32,7 +39,13 @@
                                     $storedPromotion = session('promotion_'.$product->id);
                                 @endphp
                                 @if ($storedPromotion)
-                                    <td>Rp{{number_format($storedPromotion,2,",",".")}}</td>
+                                    <td>
+                                        <span>Rp{{number_format($storedPromotion,2,",",".")}}</span>
+                                        <div class="mt-1">
+                                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#EditDiscount{{$product->id}}">edit</a>
+                                            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#RemoveDiscount{{$product->id}}">remove</a>
+                                        </div>
+                                    </td>
                                     @php
                                         $countDiscountedProducts++;
                                     @endphp
@@ -44,7 +57,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="cancelMembershipModalLabel">Input discount for {{$product->name}}</h5>
+                                            <h5 class="modal-title">Input discount for {{$product->name}}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -59,6 +72,53 @@
                                                         <input type="number" class="form-control" id="discount" name="discount" placeholder="" required>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">Set new price</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="EditDiscount{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="EditDiscount{{$product->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit discount for {{$product->name}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <p>Current discount price : Rp{{number_format($storedPromotion,2,",",".")}}</p>
+                                                <form method="post" action="/promotion/add/{{$product->id}}">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label for="name">New discounted price:</label>
+                                                        <input type="number" class="form-control" id="discount" name="discount" placeholder="" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Set new price</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="RemoveDiscount{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="RemoveDiscount{{$product->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Remove discount for {{$product->name}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <p>You sure want to remove the discount for {{$product->name}} {{session('promotion_'.$product->id)}}?</p>
+                                                <form method="post" action="/promotion/remove/{{$product->id}}">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                                    <button type="submit" class="btn btn-danger">Remove</button>
                                                 </form>
                                             </div>
                                         </div>

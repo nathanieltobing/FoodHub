@@ -26,4 +26,9 @@ class PromotionController extends Controller
         Session::put($promotionKey, $discount);
         return redirect('/registermembership');
     }
+
+    public function removePromotion(Product $p){
+        Session::forget('promotion_'.$p->id);
+        return redirect('/registermembership')->with('message','Discount successfuly removed!');
+    }
 }

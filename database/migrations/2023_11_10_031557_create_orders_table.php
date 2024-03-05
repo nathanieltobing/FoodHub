@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->double('total_price');
             $table->integer('total_quantity');
             $table->text('address');
+            $table->dateTime('due_date');
             $table->foreignId('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('vendor_id');

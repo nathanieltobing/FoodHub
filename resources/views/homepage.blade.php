@@ -2,10 +2,8 @@
 
 
 @section('content')
-<div >
-
-
-        <div class="inner" style="margin-top: 100px;text-align: center;">
+<div class="pt-5" >
+        <div class="inner pt-5" style="text-align: center; margin-top:4rem;">
             <h2 class="h2-text">Promotion</h2>
             <div class="border"></div>
         </div>

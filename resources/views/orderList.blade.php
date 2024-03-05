@@ -14,8 +14,8 @@
     @endif
 
     <div class="p-5" style="background-color: #black">
-    <h1 style="font-size :30px;font-family: Poppins;font-weight:700">Order List</h1>
-    <hr>
+    <h1 class="text-center" style="font-size :30px;font-family: Poppins;font-weight:700">Order List</h1>
+    <div class="border"></div>
 
     <br>
       @if ($order != null && $order->count() != 0)
@@ -30,9 +30,12 @@
 
                         <div class="" style="margin-top:10px">
 
-
                             <span class="payment-summary-price justify-content-start" style="font-size:16px;font-weight: 700;margin-bottom:0;"> Belanja</span>
-                            <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-bottom:0;justify-content: end;margin-left: 32em;color:var(--indigo-500)"> 0812-0557-4059</span>
+                            @if(Auth::guard('webcustomer')->check())
+                            <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-bottom:0;justify-content: end;margin-left: 32em;color:var(--indigo-500)">{{$o->vendors->phone}}</span>
+                            @else
+                            <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-bottom:0;justify-content: end;margin-left: 32em;color:var(--indigo-500)">{{$o->customers->phone}}</span>
+                            @endif
 
                             <p class="payment-summary-name justify-content-start">{{ \Carbon\Carbon::parse($o->transaction_date)->format('d M Y')}}</p>
 
@@ -140,9 +143,14 @@
       @else
       <div class="justify-content-center" style="align-items: center;text-align:center">
         <img src="{{ asset('assets/images/emptyorder.png') }}" alt="" style="  max-width: 150%;   height: auto;">
+        @if(Auth::guard('webcustomer')->check())
         <p class ="payment-summary-price" style="font-size :30px;font-family: Poppins;font-weight:700" >Your Order is empty</i></p>
-        <p class ="payment-summary-name" style="font-size :20px;" >Order Something to Fill it Up<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:225px"></i></p>
-     </div>
+            <p class ="payment-summary-name" style="font-size :20px;" >Order Something to Fill it Up<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:225px"></i></p>
+        @elseif (Auth::guard('webvendor')->check())
+        <p class ="payment-summary-price" style="font-size :30px;font-family: Poppins;font-weight:700" >You have no orders coming</i></p>
+            <p class ="payment-summary-name" style="font-size :20px;" >Add more products to attract more customers<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:225px"></i></p>
+        @endif
+     </div> 
 
       @endif
     </div>
