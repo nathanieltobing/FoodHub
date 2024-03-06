@@ -35,16 +35,7 @@
                         <label class="form-label" for="form3Example1c">Phone Number</label>
                       </div>
                     </div>
-                    {{-- <div class="d-flex flex-row align-items-center mb-4">
-                        <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
-                        <div class="form-outline flex-fill mb-0">
-                            <select class="form-select" name="category" aria-label="Default select example">
-                                <option selected value=1>Food</option>
-                                <option value=2>Beverages</option>
-                              </select>
-                              <label class="form-label" for="form3Example1c">Category</label>
-                        </div>
-                      </div> --}}
+
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-image fa-lg me-3 fa-fw"aria-hidden="true" style="margin-bottom: 30px"></i>
                         <div class="form-outline flex-fill mb-0">
@@ -76,12 +67,6 @@
                       </div>
                     </div>
 
-                    {{-- <div class="form-check d-flex justify-content-center mb-5">
-                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                      <label class="form-check-label" for="form2Example3">
-                        I agree all statements in <a href="#!">Terms of service</a>
-                      </label>
-                    </div> --}}
 
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins; background-color:var(--indigo-500)">Register</button>
@@ -122,15 +107,7 @@
 
 
 
-                        {{-- <div class="testimonial" style="width: 10rem;">
-                          <img src="..." class="card-img-top" alt="...">
-                          <div class="card-body">
-
-                            <a href="" class="card-title">ADMIN</a>
-
-                          </div>
-
-                        </div> --}}
+                
                     </div>
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                     class="img-fluid" alt="Sample image">

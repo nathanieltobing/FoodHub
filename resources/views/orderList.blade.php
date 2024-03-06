@@ -41,10 +41,7 @@
 
                         </div>
 
-                        {{-- <div class="actionBtn">
-                            <a href="/orderdetail/{{$o->id}}" style="text-decoration: none"> <button>View Detail</button></a>
 
-                        </div> --}}
                     </div>
                     <div class="actionBtn">
                         <a href="/orderdetail/{{$o->id}}" style="text-decoration: none"> <button>View Detail</button></a>
@@ -70,10 +67,7 @@
                                             <li class="card-text payment-summary-price" style="font-size:16px;font-weight: 700;" >{{ $od->product_name }}</li>
                                             <span style="font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name">x{{ $od->quantity }}</span>
                                 </ul>
-                                {{-- <div class="actionBtn">
-                                    <a href="/orderdetail/{{$o->id}}" style="text-decoration: none;"> <button>View Detail</button></a>
-
-                                </div> --}}
+                      
 
                             </div>
                             @endif
@@ -150,7 +144,7 @@
         <p class ="payment-summary-price" style="font-size :30px;font-family: Poppins;font-weight:700" >You have no orders coming</i></p>
             <p class ="payment-summary-name" style="font-size :20px;" >Add more products to attract more customers<i  class="fa-solid fa-face-smile" style="margin-left:1%;margin-bottom:225px"></i></p>
         @endif
-     </div> 
+     </div>
 
       @endif
     </div>

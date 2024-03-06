@@ -61,7 +61,7 @@ class OrderController extends Controller
             'cvv' => 'required | numeric',
             'address' =>'required'
         ];
-        
+
         $validator = Validator::make($req->all(), $rules);
 
         if($validator->fails()){
@@ -117,7 +117,7 @@ class OrderController extends Controller
             $order_detail->save();
         }
         $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
-        // $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id);
+        $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id);
         session()->put('cart', []);
         return view('succesfulPage');
      }

@@ -38,19 +38,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
       role.value = "ADMIN";
     }
   }
-//  console.log("test");
-//   let role = document.getElementById("hidden1");
-//   let button = document.getElementById("btn123");
-//   console.log(role);
 
-//   button.addEventListener("click", updateButton);
-
-//   function updateButton(){
-//     console.log("test");
-//     if(button.value === "CUSTOMER"){
-//         role.value = "CUSTOMER";
-//     }
-//   }
 
 });
 
@@ -101,16 +89,12 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                     </div>
 
 
-                     {{-- <div class="btn-group mb-3" role="group">
-                      <button type="button" class="btn btn-light btn-lg" style="line-height :1.66; font-weight: 600; font-family: Poppins; font-size: 16px;">Customer</button>
-                      <button type="button" class="btn btn-light btn-lg" style="line-height :1.66; font-weight: 600; font-family: Poppins; font-size: 16px;">Vendor</button>
-                      <button type="button" class="btn btn-light btn-lg" style="line-height :1.66; font-weight: 600; font-family: Poppins; font-size: 16px;">Admin</button>
-                      </div> --}}
+
 
                     <div class="d-grid gap-2 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 500; font-family: Poppins;background-color:var(--indigo-500)">Login</button>
                     </div>
-                    {{-- <div class="row text-danger"> --}}
+
                       @if(session()->has('error'))
                               <p>{{ session()->get('error') }}</p>
                           @endif
@@ -122,9 +106,6 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                           </ul>
                           @endif
 
-                   {{-- <div class="row"> --}}
-
-
 
                 </div>
 
@@ -135,40 +116,21 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                       </div>
 
                         <div class="d-flex flex-row align-items-center mb-4" style="gap: 10px;">
-                          {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                            {{-- <div class="card-body"> --}}
-                             <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
+
                              <input style="border: 1px solid gray ;width: 10rem;" type="button" id="customerBtn" name="role_button" value="CUSTOMER">
-                             <!-- <label for="html">CUSTOMER</label><br> -->
-                             {{-- </div> --}}
 
-                            <!-- <a href="/login" class="card-title" style="text-align: center">CUSTOMER</a> -->
-
-                            <!-- <label for="html">CUSTOMER</label><br> -->
-
-
-                            {{-- <div class="testimonial" style="width: 10rem;"> --}}
-                                     {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                                {{-- <div class="card-body"> --}}
 
                                     <input style="border: none ;width: 10rem;" type="button" id="vendorBtn" name="role_button" value="VENDOR">
 
 
 
-                                {{-- </div> --}}
 
-                             {{-- </div> --}}
-                            {{-- <div class="testimonial" style="width: 10rem;"> --}}
-                                 {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                                {{-- <div class="card-body"> --}}
 
                                     <input style="border: none ;width: 10rem;" type="button" id="adminBtn" name="role_button" value="ADMIN">
 
 
 
-                                {{-- </div> --}}
-
-                            {{-- </div> --}}
+                            
                     </div>
 
                   </form>
