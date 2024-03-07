@@ -123,7 +123,7 @@ class ProductController extends Controller
      }
 
      public function removeProduct(Product $p){
-        DB::table('products')->where('id', $p->id)->delete();
+        $p->delete();
         return redirect('product/vendor')->with('message','Product successfuly removed!');
      }
 }
