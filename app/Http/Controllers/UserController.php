@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Socialite;
 
 class UserController extends Controller
 {
@@ -79,6 +80,46 @@ class UserController extends Controller
         }
 
 
+    }
+    
+    public function authGoogle() {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function googleCallback() {
+        try {
+            $user = Socialite::driver('google')->user();
+            $customer = Customer::where('email', $user->email)->first();
+            $vendor = Vendor::where('email', $user->email)->first();
+            if($customer == null && $vendor == null) { // if there was no customer or vendor with this email
+                // we could create the user as customer based on the email instead
+                return redirect('/login')->withErrors('You are not registered !');
+            }
+
+            if($customer != null) {
+                if($customer->status == 'INACTIVE'){
+                    Auth::guard('webcustomer')->logout();
+                    return redirect()->back()->withErrors('Your account is suspended !');
+                }
+                Auth::guard('webcustomer')->login($customer);
+                Session::put('mysession',Auth::guard('webcustomer')->user()->name);
+                return redirect('/');
+            }
+            else if($vendor != null) {
+                if($vendor->status == 'INACTIVE'){
+                    Auth::guard('webvendor')->logout();
+                    return redirect()->back()->withErrors('Your account is suspended !');
+                }
+                Auth::guard('webvendor')->login($vendor);
+                Session::put('mysession',Auth::guard('webvendor')->user()->name);
+                return redirect('/');
+            } else {
+                return redirect()->back()->withErrors('Username or Password is incorrect !');
+            }
+
+        } catch (Exception $e) {
+            return redirect('/login');
+        }
     }
 
     public function logout(){
