@@ -14,30 +14,16 @@
                 <div class="col-md-12 col-lg-12 col-xl-12 order-2 order-lg-1">
                     <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 " style=" font-weight: 700; color:#222; font-family: Poppins;">Add Product</p>
 
-                    {{-- <h2 class="text-center  fw-bold  mx-1 mx-md-4 " style=" font-size:18px; font-weight: 700; color:#222; font-family: Poppins;">WELCOME TO FOODHUB</h2>
-                    <h2 class="text-center  fw-bold mb-5 mx-1 mx-md-4 " style="font-size:18px; font-weight: 700; color:#222; font-family: Poppins;">LET'S GET STARTED</h2> --}}
-
-                  {{-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up</p> --}}
-
                   <form action="/addProduct" method="POST" enctype="multipart/form-data" class="mx-1 mx-md-4">
                     @csrf
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fa-solid fa-pen-to-square fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
-                      {{-- "fa-regular fa-pen fa-lg me-3 fa-fw" --}}
-                      {{-- fa-solid fa-pen-to-square --}}
+                     
                       <div class="form-outline flex-fill mb-0">
                         <input type="text" id="form3Example1c" name="name" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500" />
                         <label class="form-label fontstyle" for="form3Example1c" style="font-size:16 px;font-weight:700">Product Name</label>
                       </div>
 
-                    </div>
-
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fa-solid fa-square-poll-vertical fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
-                      <div class="form-outline flex-fill mb-0">
-                        <input type="number" id="form3Example3c" name="quantity" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500"/>
-                        <label class="form-label fontstyle" for="form3Example3c" style="font-size:16 px;font-weight:700">Quantity</label>
-                      </div>
                     </div>
 
                     <input type="hidden" name="role" value="CUSTOMER">
@@ -94,11 +80,7 @@
                   </form>
 
                 </div>
-                {{-- <div class="col-md-2 col-lg-2 col-xl-7 d-flex flex-column align-items-center order-1 order-lg-2" style="margin-top: -5px">
-                    <div class="d-flex flex-row align-items-center mb-4 text-center h1 fw-bold">
-
-                    </div>
-                </div> --}}
+                
               </div>
             </div>
           </div>

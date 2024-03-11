@@ -50,6 +50,12 @@ class CustomerController extends Controller
 
         $customer->save();
 
+        $this->sendEmail("registration");
+
         return redirect('/login');
     }
+
+    public function sendEmail($type){
+        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email(null,null,null,$type));
+     }
 }

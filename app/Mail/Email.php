@@ -18,11 +18,12 @@ class Email extends Mailable
      *
      * @return void
      */
-    public function __construct($order,$orderDetails,$vendor)
+    public function __construct($order,$orderDetails,$vendor,$type)
     {
         $this->order = $order;
         $this->orderDetails = $orderDetails;
         $this->vendor = $vendor;
+        $this->type = $type;
     }
 
     /**
@@ -32,7 +33,22 @@ class Email extends Mailable
      */
     public function build()
     {
-        $id = $this->order->id;
-        return $this->subject("Order ODR-$id Checkout Success")->view('email.checkoutConfirmation');
+        if(strcmp($this->type,"checkout") == 0){
+            $id = $this->order->id;
+            return $this->subject("Order ODR-$id Checkout Success")->view('email.checkoutConfirmation');
+        }
+        else if(strcmp($this->type,"registration") == 0){
+            return $this->subject("Foodhub Registration Success")->view('email.registerSuccess');
+        }
+        else if(strcmp($this->type,"incoming order") == 0){
+            
+        }
+        else if(strcmp($this->type,"order on going") == 0){
+            
+        }
+        else if(strcmp($this->type,"order finished") == 0){
+            
+        }
+
     }
 }

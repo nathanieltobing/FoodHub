@@ -33,7 +33,7 @@ class CartController extends Controller
 
     public function addToCart($id){
         $product = Product::find($id);
-        $cart = session()-> get('cart',[]);
+        $cart = session()->get('cart',[]);
         $discount = null;
         if($product->promotion_id != null){
             $promotion = Promotion::where('id',$product->promotion_id)->first();
