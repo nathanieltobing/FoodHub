@@ -137,4 +137,10 @@ class VendorController extends Controller
         ]);
     }
 
+    public function registerWithGoogle(){
+        Session::put('registerAs','VENDOR');
+
+        return redirect('/auth/google');
+    }
+
 }

@@ -86,14 +86,42 @@ class UserController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+    public static function quickRandom($length = 16)
+{
+    $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+}
+
     public function googleCallback() {
         try {
             $user = Socialite::driver('google')->user();
             $customer = Customer::where('email', $user->email)->first();
             $vendor = Vendor::where('email', $user->email)->first();
-            if($customer == null && $vendor == null) { // if there was no customer or vendor with this email
-                // we could create the user as customer based on the email instead
-                return redirect('/login')->withErrors('You are not registered !');
+            if($customer == null && $vendor == null) {
+                if(session()->get('registerAs') == 'CUSTOMER') {
+                    $newCustomer = new Customer();
+                    $newCustomer->role = 'CUSTOMER';
+                    $newCustomer->name = $user->name;
+                    $newCustomer->email = $user->email;
+                    $newCustomer->status = 'ACTIVE';
+                    $newCustomer->password = bcrypt('12343213123'); // temporary password
+                    $newCustomer->save();
+                }
+                else if(session()->get('registerAs') == 'VENDOR'){
+                    $newVendor = new Vendor();
+                    $newVendor->role = 'VENDOR';
+                    $newVendor->name = $user->name;
+                    $newVendor->email = $user->email;
+                    $newVendor->status = 'ACTIVE';
+                    $newVendor->password = bcrypt('asdasdsad'); // temporary password
+                    $newVendor->description = 'default description'; // temporary description
+                    $newVendor->rating = 3; // temporary rating
+                    $newVendor->save();
+                } else {
+                    return redirect('/login')->withErrors('You are not registered !');
+                }
+                
             }
 
             if($customer != null) {

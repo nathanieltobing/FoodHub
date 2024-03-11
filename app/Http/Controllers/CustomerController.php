@@ -52,4 +52,10 @@ class CustomerController extends Controller
 
         return redirect('/login');
     }
+
+    public function registerWithGoogle(){
+        Session::put('registerAs','CUSTOMER');
+
+        return redirect('/auth/google');
+    }
 }
