@@ -93,8 +93,14 @@ class VendorController extends Controller
 
         $vendor->save();
 
+        $this->sendEmail('registration');
+
         return redirect('/login');
     }
+
+    public function sendEmail($type){
+        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email(null,null,null,$type));
+     }
 
     public function checkInAnotherVendorPage($id){
         $carts = session()->get('cart');

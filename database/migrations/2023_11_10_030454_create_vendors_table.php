@@ -21,7 +21,7 @@ class CreateVendorsTable extends Migration
             $table->string('password');
             $table->text('description');
             $table->integer('rating');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('image')->nullable();
             $table->json('vendor_membership')->nullable();
             $table->rememberToken()->NULL;

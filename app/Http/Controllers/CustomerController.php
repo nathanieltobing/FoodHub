@@ -55,7 +55,7 @@ class CustomerController extends Controller
         return redirect('/login');
     }
 
-    public function sendEmail($type){
+    public function sendEmail($type, $email){
         Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email(null,null,null,$type));
      }
 }

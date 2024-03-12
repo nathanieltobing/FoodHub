@@ -18,14 +18,11 @@
 </style>
 
 <head>
-    <title>Incoming Order FoodHub</title>
+    <title>Order is <I/title>
 </head>
 
 <body>
-    <p>We send this email to inform you that you have an incoming order</p>
-    <p>
-        Order No : ODR-{{$order->id}}
-    </p>
+    <p>Your order is updated to {{$order->status}}</p>
 
 </body>
 

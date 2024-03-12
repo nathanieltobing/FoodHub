@@ -50,6 +50,8 @@ class OrderController extends Controller
             ])->update([
             'status' => $status
         ]);
+        $order = DB::table('orders')->where('id', $o->id)->first();
+
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
@@ -121,9 +123,15 @@ class OrderController extends Controller
         session()->put('cart', []);
         return view('succesfulPage');
      }
-
+     
      public function sendEmail($order,$orderDetails,$vendor_id,$type){
         $vendor = Vendor::find($vendor_id);
+        if(strcmp($type,"checkout")==0){
+            Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+        }
+        else if(strcmp($type,"order status updated")==0){
+            Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+        }
         Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
      }
 
