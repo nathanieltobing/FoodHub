@@ -32,14 +32,7 @@
 
 
                     </div>
-
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <i class="fa-solid fa-square-poll-vertical fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
-                      <div class="form-outline flex-fill mb-0">
-                        <input type="number" id="form3Example3c" name="quantity" class="form-control" style="border: 1px solid;font-size:16 px;font-weight:500"" value={{$product->stock}}>
-                        <label class="form-label fontstyle" for="form3Example3c" style="font-size:16 px;font-weight:700">Quantity</label>
-                      </div>
-                    </div>
+             
 
                     <input type="hidden" name="role" value="CUSTOMER">
                     <div class="d-flex flex-row align-items-center mb-4">

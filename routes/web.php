@@ -54,6 +54,13 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
 
+Route::get('/register/google-customer', [CustomerController::class, 'registerWithGoogle']);
+Route::get('/register/google-vendor', [VendorController::class, 'registerWithGoogle']);
+
+// google auth
+Route::get('/auth/google', [UserController::class, 'authGoogle']);
+Route::get('/auth/google/callback', [UserController::class, 'googleCallback']);
+
 Route::middleware(['checkIfAdmin','checkIfVendor'])->group(function(){
     Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
     Route::get('/vendorList',[VendorController::class, 'index']);
@@ -77,7 +84,13 @@ Route::middleware(['checkauth'])->group(function(){
     });
     Route::middleware(['customer'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
+        Route::get('/acceptVendorPrice/{o:id}', [OrderController::class, 'acceptVendorPrice']);
+        Route::get('/rejectVendorPrice/{o:id}', [OrderController::class, 'rejectVendorPrice']);
+        Route::get('/finishPayment/{o:id}', [OrderController::class, 'finishPayment']);
+        Route::get('/confirmPayment/{o:id}', [OrderController::class, 'viewConfirmPayment']);
+        Route::post('/confirmPayment/{o:id}', [OrderController::class, 'confirmPayment']);
         Route::post('/checkout',[OrderController::class, 'checkout']);
+        Route::post('/sendOrderToVendor',[OrderController::class, 'sendOrderToVendor']);
         Route::post('/minQuantity/{id}',[CartController::class, 'decreaseQuantity']);
         Route::post('/addQuantity/{id}',[CartController::class, 'addQuantity']);
         Route::post('/products/add/{id}', [CartController::class, 'addToCart']);
@@ -97,6 +110,8 @@ Route::middleware(['checkauth'])->group(function(){
 
     Route::middleware(['vendor'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
+        Route::get('/acceptNegoPrice/{o:id}', [OrderController::class, 'editNegoStatus']);
+        Route::post('/rejectNegoPrice/{o:id}', [OrderController::class, 'rejectNegoPriceVendor']);
         Route::get('/addProduct', function () {
             return view('addProduct');
         });
