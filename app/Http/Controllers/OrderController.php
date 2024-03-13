@@ -40,7 +40,7 @@ class OrderController extends Controller
     public function editStatus(Request $request, Order $o)
     {
         if($request->status == '1'){
-            $status = 'ON GOING';
+            $status = 'AWAITING PAYMENT';
         } else if ($request->status == '2'){
             $status = 'REJECTED';
         }
@@ -55,6 +55,60 @@ class OrderController extends Controller
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
+    public function editNegoStatus(Request $request, Order $o)
+    {
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'nego_status' => 'ACCEPTED'
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function acceptNegoPrice(Request $req, Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'nego_status' => 'ACCEPTED',
+            'status' => 'ON GOING'
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function rejectNegoPriceVendor(Request $req, Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'nego_status' => 'REJECTED',
+            'nego_price' => $req->price
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function acceptVendorPrice(Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'nego_status' => 'ACCEPTED'
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function rejectVendorPrice(Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'status' => 'REJECTED'
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function finishPayment(Order $o){
+        $o->status = "ON GOING";
+        $o->save();
+        return redirect('orderlist');
+    }
+
     public function checkout(Request $req){
         $rules = [
             'email' => 'required|email:rfc,dns',
@@ -63,7 +117,73 @@ class OrderController extends Controller
             'cvv' => 'required | numeric',
             'address' =>'required'
         ];
-        
+
+        $validator = Validator::make($req->all(), $rules);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $order = new Order();
+        $order_detail = new OrderDetail();
+        $carts = session()->get('cart');
+
+        $total_quantity = 0; $total_price = 0;
+        foreach ($carts as $cart) {
+            $total_quantity+=$cart['quantity'];
+            if($cart['discounted_price'] != null){
+                $total_price+=$cart['discounted_price'] * $cart['quantity'];
+            }
+            else{
+                $total_price+=$cart['price'] * $cart['quantity'];
+            }
+            $vendor_id = $cart['vendor_id'];
+            $product = Product::where('id',$cart['product_id'])->first();
+            $product->stock = $product->stock - $cart['quantity'];
+            $product->save();
+        }
+        $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
+            if($customerMembership != null){
+                $customerMembership = json_decode($customerMembership, true);
+            }
+
+        $order->status = 'OPEN';
+        $order->total_price = $total_price;
+        $order->total_quantity = $total_quantity;
+        $order->customer_id = Auth::guard('webcustomer')->user()->id;
+        if($customerMembership != null && $customerMembership['status'] == 'ACTIVE'){
+            $order->membership_discount = (double)$customerMembership['discount'] /100;
+        }
+        $order->vendor_id = $vendor_id;
+        $order->address = $req->address;
+        $order->due_date = $req->dueDate;
+        $order->save();
+
+        $most_recent_order = DB::table('orders')->latest()->first();
+        foreach ($carts as $cart) {
+            $order_detail = new OrderDetail();
+            $order_detail->quantity = $cart['quantity'];
+            $order_detail->price = $cart['price'];
+            $order_detail->product_name = $cart['name'];
+            $order_detail->order_id = $most_recent_order->id;
+            $order_detail->product_id = $cart['product_id'];
+            if($cart['discounted_price'] != null){
+                $order_detail->discount_price = $cart['discounted_price'];
+            }
+            $order_detail->save();
+        }
+        $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
+        // $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id);
+        session()->put('cart', []);
+        return view('succesfulPage');
+     }
+
+     public function sendOrderToVendor(Request $req){
+        $rules = [
+            'address' =>'required',
+            'dueDate' => 'required'
+        ];
+
         $validator = Validator::make($req->all(), $rules);
 
         if($validator->fails()){
@@ -102,6 +222,9 @@ class OrderController extends Controller
         $order->vendor_id = $vendor_id;
         $order->address = $req->address;
         $order->due_date = $req->dueDate;
+        if($req->negoPrice){
+            $order->nego_price = $req->negoPrice;
+        }
         $order->save();
 
         $most_recent_order = DB::table('orders')->latest()->first();
@@ -122,6 +245,7 @@ class OrderController extends Controller
         $this->sendEmailVendor($most_recent_order,$order->vendor_id,"incoming order");
         session()->put('cart', []);
         return view('succesfulPage');
+
      }
      
      public function sendEmail($order,$orderDetails,$vendor_id,$type){

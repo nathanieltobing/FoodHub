@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('promotion_id')->nullable();
             $table->foreign('promotion_id')->references('id')->on('promotions')->onUpdate('cascade')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 
