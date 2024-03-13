@@ -107,6 +107,9 @@ class UserController extends Controller
                     $newCustomer->status = 'ACTIVE';
                     $newCustomer->password = bcrypt('12343213123'); // temporary password
                     $newCustomer->save();
+                    Auth::guard('webcustomer')->login($customer);
+                    Session::put('mysession',Auth::guard('webcustomer')->user()->name);
+                    return redirect('/');
                 }
                 else if(session()->get('registerAs') == 'VENDOR'){
                     $newVendor = new Vendor();
@@ -118,6 +121,9 @@ class UserController extends Controller
                     $newVendor->description = 'default description'; // temporary description
                     $newVendor->rating = 3; // temporary rating
                     $newVendor->save();
+                    Auth::guard('webvendor')->login($vendor);
+                    Session::put('mysession',Auth::guard('webvendor')->user()->name);
+                    return redirect('/');
                 } else {
                     return redirect('/login')->withErrors('You are not registered !');
                 }
@@ -128,7 +134,7 @@ class UserController extends Controller
                 if($customer->status == 'INACTIVE'){
                     Auth::guard('webcustomer')->logout();
                     return redirect()->back()->withErrors('Your account is suspended !');
-                }
+                } 
                 Auth::guard('webcustomer')->login($customer);
                 Session::put('mysession',Auth::guard('webcustomer')->user()->name);
                 return redirect('/');
@@ -141,8 +147,6 @@ class UserController extends Controller
                 Auth::guard('webvendor')->login($vendor);
                 Session::put('mysession',Auth::guard('webvendor')->user()->name);
                 return redirect('/');
-            } else {
-                return redirect()->back()->withErrors('Username or Password is incorrect !');
             }
 
         } catch (Exception $e) {

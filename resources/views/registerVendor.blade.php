@@ -83,7 +83,7 @@
                       </label>
                     </div> --}}
 
-                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <div class="d-grid gap-2 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins; background-color:var(--indigo-500)">Register</button>
                     </div>
 

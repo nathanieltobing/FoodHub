@@ -20,7 +20,7 @@ class CustomerController extends Controller
         $rules = [
             'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
             'phoneNumber' => 'required|regex:/^(0)[0-9]{11}/',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email:rfc,dns|unique:customers',
             'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
             'password' => 'required | min:8 | alpha_num |confirmed'
         ];
