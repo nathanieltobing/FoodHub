@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Socialite;
 
 class UserController extends Controller
 {
@@ -79,6 +80,74 @@ class UserController extends Controller
         }
 
 
+    }
+    
+    public function authGoogle() {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public static function quickRandom($length = 16)
+{
+    $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+}
+
+    public function googleCallback() {
+        try {
+            $user = Socialite::driver('google')->user();
+            $customer = Customer::where('email', $user->email)->first();
+            $vendor = Vendor::where('email', $user->email)->first();
+            if($customer == null && $vendor == null) {
+                if(session()->get('registerAs') == 'CUSTOMER') {
+                    $newCustomer = new Customer();
+                    $newCustomer->role = 'CUSTOMER';
+                    $newCustomer->name = $user->name;
+                    $newCustomer->email = $user->email;
+                    $newCustomer->status = 'ACTIVE';
+                    $newCustomer->password = bcrypt('12343213123'); // temporary password
+                    $newCustomer->save();
+                }
+                else if(session()->get('registerAs') == 'VENDOR'){
+                    $newVendor = new Vendor();
+                    $newVendor->role = 'VENDOR';
+                    $newVendor->name = $user->name;
+                    $newVendor->email = $user->email;
+                    $newVendor->status = 'ACTIVE';
+                    $newVendor->password = bcrypt('asdasdsad'); // temporary password
+                    $newVendor->description = 'default description'; // temporary description
+                    $newVendor->rating = 3; // temporary rating
+                    $newVendor->save();
+                } else {
+                    return redirect('/login')->withErrors('You are not registered !');
+                }
+                
+            }
+
+            if($customer != null) {
+                if($customer->status == 'INACTIVE'){
+                    Auth::guard('webcustomer')->logout();
+                    return redirect()->back()->withErrors('Your account is suspended !');
+                }
+                Auth::guard('webcustomer')->login($customer);
+                Session::put('mysession',Auth::guard('webcustomer')->user()->name);
+                return redirect('/');
+            }
+            else if($vendor != null) {
+                if($vendor->status == 'INACTIVE'){
+                    Auth::guard('webvendor')->logout();
+                    return redirect()->back()->withErrors('Your account is suspended !');
+                }
+                Auth::guard('webvendor')->login($vendor);
+                Session::put('mysession',Auth::guard('webvendor')->user()->name);
+                return redirect('/');
+            } else {
+                return redirect()->back()->withErrors('Username or Password is incorrect !');
+            }
+
+        } catch (Exception $e) {
+            return redirect('/login');
+        }
     }
 
     public function logout(){

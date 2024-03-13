@@ -55,7 +55,14 @@ class CustomerController extends Controller
         return redirect('/login');
     }
 
+    public function registerWithGoogle(){
+        Session::put('registerAs','CUSTOMER');
+
+        return redirect('/auth/google');
+    }
+
     public function sendEmail($type, $email){
         Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email(null,null,null,$type));
-     }
+    }
+
 }
