@@ -14,10 +14,6 @@
                 <div class="col-md-12 col-lg-12 col-xl-12 order-2 order-lg-1">
                     <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 " style=" font-weight: 700; color:#222; font-family: Poppins;">Edit Product</p>
 
-                    {{-- <h2 class="text-center  fw-bold  mx-1 mx-md-4 " style=" font-size:18px; font-weight: 700; color:#222; font-family: Poppins;">WELCOME TO FOODHUB</h2>
-                    <h2 class="text-center  fw-bold mb-5 mx-1 mx-md-4 " style="font-size:18px; font-weight: 700; color:#222; font-family: Poppins;">LET'S GET STARTED</h2> --}}
-
-                  {{-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="line-height :1.66; font-weight: 700; color:#222; font-family: Poppins;">Sign up</p> --}}
 
                   <form action="/product/vendor/{{$product->id}}" method="POST" enctype="multipart/form-data" class="mx-1 mx-md-4">
                     {{method_field('PUT')}}
@@ -25,11 +21,7 @@
                     <div class="d-flex justify-content-center">
                       <img src="/storage/{{$product->image}}" class="card-img-top" alt="..." style="height:300px; margin-bottom:3%; width:40%">
                     </div>
-                    {{-- <div class="d-flex flex-row align-items-center mb-4">
-                      <img src="{{url($product->image)}}" class="card-img-top" alt="..." style="height:500px">
-                      </div>
 
-                    </div> --}}
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fa-solid fa-pen-to-square fa-lg me-3 fa-fw" style="margin-bottom: 30px"></i>
                       <div class="form-outline flex-fill mb-0">
@@ -97,11 +89,7 @@
                   </form>
 
                 </div>
-                {{-- <div class="col-md-2 col-lg-2 col-xl-7 d-flex flex-column align-items-center order-1 order-lg-2" style="margin-top: -5px">
-                    <div class="d-flex flex-row align-items-center mb-4 text-center h1 fw-bold">
-
-                    </div>
-                </div> --}}
+          
               </div>
             </div>
           </div>

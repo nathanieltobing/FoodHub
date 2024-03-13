@@ -184,15 +184,17 @@ margin-left: 2.5rem;
         width: 100%;
         height: 17.7rem;
         background: rgba(0,0,0,.1);
-        backdrop-filter: blur(50px);
-        box-shadow:0 .5rem 1rem rgba(0,0,0,.1) ;
+        /* backdrop-filter: blur(50px);
+        box-shadow:0 .5rem 1rem rgba(0,0,0,.1) ; */
         overflow: hidden;
         transition: .3s ease;
     }
     #check:checked~.navbar{
        height: 17.7rem;
     }
-    .navbar a{
+    .navbar a {
+
+
         margin-top: -10px;
         display: block;
         font-size: 1.1rem;
@@ -216,20 +218,7 @@ margin-left: 2.5rem;
      }
 }
 
-/* button{
-    margin-left: 20px;
-    padding: 9px 25px;
-    background-color: #FFD28F;
-    background-color: rgba(0,136,169,1);
-    border: none;
-    border-radius: 50px;
-    cursor:pointer;
-    transition: all 0.3s ease 0s;
-}
-button:hover
-{
-    background-color: rgba(0,136,169,1);
-} */
+
 
 footer{
 
@@ -2701,5 +2690,9 @@ hr {
 
 
 
-
+@media(max-width:992px){
+    .action .profile img{
+        margin-bottom: 20px;
+    }
+}
 
