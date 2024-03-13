@@ -68,9 +68,15 @@
                       </label>
                     </div> --}}
 
-                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <div class="d-grid gap-2 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Register</button>
                     </div>
+
+                    <a href="{{url('/register/google-customer')}}" class="btn btn-primary btn-lg"
+                      style="display: flex;justify-content:start;gap:64px;line-height :1.66; font-weight: 500; font-family: Poppins;background-color:var(--white); color:#222;font-size: 18px;">
+                      <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"/>
+                      Continue with Google
+                    </a>
 
                     <div class="row text-danger">
                       @if(session()->has('error'))

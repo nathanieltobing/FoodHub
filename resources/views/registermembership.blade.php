@@ -42,8 +42,8 @@
                                     <td>
                                         <span>Rp{{number_format($storedPromotion,2,",",".")}}</span>
                                         <div class="mt-1">
-                                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#EditDiscount{{$product->id}}">edit</a>
-                                            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#RemoveDiscount{{$product->id}}">remove</a>
+                                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#EditDiscount{{$product->id}}">Edit</a>
+                                            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#RemoveDiscount{{$product->id}}">Remove</a>
                                         </div>
                                     </td>
                                     @php
@@ -179,7 +179,7 @@
                                     <label for="cvv" class="payment-form-label payment-form-label-required">CVV</label>
                                 </div>
                             </div>
-                        @endif
+            @endif
                 </div>
                 @if (Auth::guard('webcustomer')->check())
                         <button type="submit" class="payment-form-submit-button"><i class="ri-wallet-line"></i>Confirm Payment</button>

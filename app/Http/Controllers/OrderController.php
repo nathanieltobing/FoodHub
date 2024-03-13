@@ -30,7 +30,7 @@ class OrderController extends Controller
             $order = Order::where('customer_id',$user->id)->orderBy('created_at', 'DESC')->get();
         }
         //  dd(Auth::guard('webcustomer')->user()->email);
-
+        
         return view('orderList',[
             'order' => $order,
             'user' => $user
@@ -50,6 +50,8 @@ class OrderController extends Controller
             ])->update([
             'status' => $status
         ]);
+        $order = DB::table('orders')->where('id', $o->id)->first();
+
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
@@ -203,7 +205,6 @@ class OrderController extends Controller
             }
             $vendor_id = $cart['vendor_id'];
             $product = Product::where('id',$cart['product_id'])->first();
-            $product->stock = $product->stock - $cart['quantity'];
             $product->save();
         }
         $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
@@ -240,15 +241,27 @@ class OrderController extends Controller
             $order_detail->save();
         }
         $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
-        // $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id);
+        $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id,"checkout");
+        $this->sendEmailVendor($most_recent_order,$order->vendor_id,"incoming order");
         session()->put('cart', []);
         return view('succesfulPage');
 
      }
-
-     public function sendEmail($order,$orderDetails,$vendor_id){
+     
+     public function sendEmail($order,$orderDetails,$vendor_id,$type){
         $vendor = Vendor::find($vendor_id);
-        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor));
+        if(strcmp($type,"checkout")==0){
+            Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+        }
+        else if(strcmp($type,"order status updated")==0){
+            Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+        }
+        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+     }
+
+     public function sendEmailVendor($order,$vendor_id,$type){
+        $vendor = Vendor::find($vendor_id);
+        Mail::to($vendor->email)->send(new Email($order,null,$vendor,$type));
      }
 
      public function finishWithoutReview(Order $o){

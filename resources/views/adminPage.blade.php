@@ -9,22 +9,7 @@
 
             <p style="font-size: 30px;font-family: Poppins; font-weight:700;text-align:center;margin-right:100px">Admin </p>
       </div>
-      {{-- <div class="head-title">
-        <div class="left">
-          <h1>Dashboard</h1>
-          <ul class="breadcrumb">
-            <li>
-              <a href="#">Dashboard</a>
-            </li>
-            <i class="fas fa-chevron-right"></i>
-            <li>
-              <a href="#" class="active">Home</a>
-            </li>
-          </ul>
-        </div>
-
-
-      </div> --}}
+  
 
       <div class="box-info" style="margin-top: 5%; margin-right:3%">
         <li>
@@ -79,7 +64,6 @@
                     {{method_field('PUT')}}
                     @csrf
                     <input type="hidden" id="hidden1" name="role" value="CUSTOMER">
-                    {{-- <button type="submit" style="border:0; background:none;"><span class="plus">+ </span></i></button>  --}}
                     <td><button class="status complete" style="border:none">Active</button></td>
                   </form>
 

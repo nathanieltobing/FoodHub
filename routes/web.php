@@ -54,6 +54,13 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
 
+Route::get('/register/google-customer', [CustomerController::class, 'registerWithGoogle']);
+Route::get('/register/google-vendor', [VendorController::class, 'registerWithGoogle']);
+
+// google auth
+Route::get('/auth/google', [UserController::class, 'authGoogle']);
+Route::get('/auth/google/callback', [UserController::class, 'googleCallback']);
+
 Route::middleware(['checkIfAdmin','checkIfVendor'])->group(function(){
     Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
     Route::get('/vendorList',[VendorController::class, 'index']);
