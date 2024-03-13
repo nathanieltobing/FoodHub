@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Mail\Email;
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\Review;
 use App\Models\Vendor;
+use App\Models\Product;
 use App\Models\Customer;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 
 class OrderController extends Controller
@@ -55,7 +56,7 @@ class OrderController extends Controller
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
-    public function editNegoStatus(Request $request, Order $o)
+    public function acceptNegoPriceVendor(Request $request, Order $o)
     {
         DB::table('orders')->where([
             ['id',$o->id]
@@ -107,6 +108,34 @@ class OrderController extends Controller
         $o->status = "ON GOING";
         $o->save();
         return redirect('orderlist');
+    }
+
+    public function viewConfirmPayment(Order $o){
+        return view('confirmPayment',[
+            'order' => $o
+        ]);
+    }
+
+    public function ConfirmPayment(Request $request, Order $o){
+
+        $request->validate([
+            'paymentProof' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        if($request->hasFile('paymentProof')){
+            $fileImage = $request->file('paymentProof');
+            $imageName ='order-'.$o->id.'.'.$fileImage->getClientOriginalExtension();
+            Storage::putFileAs('public/images/paymentproof/', $fileImage, $imageName);
+            $imageName = 'images/paymentproof/'.$imageName;
+        }
+        else{
+            $imageName = $o->payment_proof;
+        }
+
+        $o->payment_proof = $imageName;
+        $o->save();
+
+        return redirect('orderlist')->with('message','Payment proof successfully uploaded and will be checked by our admin');
     }
 
     public function checkout(Request $req){

@@ -84,10 +84,11 @@ Route::middleware(['checkauth'])->group(function(){
     });
     Route::middleware(['customer'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
-        Route::post('/editNegostatus/{o:id}', [OrderController::class, 'editNegoStatus']);
         Route::get('/acceptVendorPrice/{o:id}', [OrderController::class, 'acceptVendorPrice']);
         Route::get('/rejectVendorPrice/{o:id}', [OrderController::class, 'rejectVendorPrice']);
         Route::get('/finishPayment/{o:id}', [OrderController::class, 'finishPayment']);
+        Route::get('/confirmPayment/{o:id}', [OrderController::class, 'viewConfirmPayment']);
+        Route::post('/confirmPayment/{o:id}', [OrderController::class, 'confirmPayment']);
         Route::post('/checkout',[OrderController::class, 'checkout']);
         Route::post('/sendOrderToVendor',[OrderController::class, 'sendOrderToVendor']);
         Route::post('/minQuantity/{id}',[CartController::class, 'decreaseQuantity']);

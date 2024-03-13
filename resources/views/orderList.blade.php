@@ -194,7 +194,11 @@
                                 @endif
                             @elseif($o->status == 'AWAITING PAYMENT' && Auth::guard('webcustomer')->check())
                                 <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
-                                    <a href="/finishPayment/{{$o->id}}" type="submit" class="btn btn-primary"value="2" name="status" id="status" style="width: 10rem;">Finish payment</a>
+                                    @if (!$o->payment_proof)
+                                        <a href="/confirmPayment/{{$o->id}}" class="btn btn-primary" style="width: 10rem;">Finish payment</a>
+                                    @else
+                                        <p class="btn btn-info active" style="width: 10rem;">Admin checking</p>
+                                    @endif
                                 </div>
                             @endif
                     </div>
