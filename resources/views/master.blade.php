@@ -67,14 +67,15 @@
                     <ul>
                         <li><img src="{{ asset('assets/images/user.png') }}"><a href="/vendor/profile"  style="margin-left:10px">Profile</a></li>
                         <li><img src="{{ asset('assets/images/log-out.png') }}"><a href="/logout" style="margin-left:10px">Logout</a></li>
-                  
+
                     </ul>
                 </div>
             </div>
           </div>
           @elseif(Auth::guard('webadmin')->check())
             {{-- Button khusus Admin --}}
-            <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a>
+            <a href="/admin-payment" style="--i:3"><img src="{{ asset('assets/images/transaction.png') }}" style="height:1.3rem"></a>
+            <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180" style="height:1.3rem; margin-bottom:0.3rem"></i></a>
           @else
             <a href="/vendorList" style="--i:3"><img src="{{ asset('assets/images/vendoricon.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
             <a href="/login" style="--i:3">Login</a>
