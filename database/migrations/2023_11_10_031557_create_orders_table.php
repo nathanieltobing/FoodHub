@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->enum('status', ['OPEN','REJECTED','ON GOING','FINISHED']);
+            $table->enum('status', ['OPEN','REJECTED', 'AWAITING PAYMENT', 'ON GOING','FINISHED']);
             $table->dateTime('transaction_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->double('membership_discount')->nullable();
             $table->double('total_price');
@@ -28,6 +28,9 @@ class CreateOrdersTable extends Migration
             $table->foreign('customer_id')->references('id')->on('customers')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('vendor_id');
             $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('cascade');
+            $table->double('nego_price')->nullable();
+            $table->enum('nego_status', ['REJECTED', 'ACCEPTED'])->nullable();
+            $table->string('payment_proof')->nullable();
         });
     }
 

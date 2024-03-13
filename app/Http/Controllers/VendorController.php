@@ -60,7 +60,7 @@ class VendorController extends Controller
         $rules = [
             'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
             'phoneNumber' => 'required|regex:/^(0)[0-9]{11}/',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email:rfc,dns|unique:customers',
             'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
             'dp' => 'image',
             'password' => 'required | min:8 | alpha_num |confirmed'
@@ -93,8 +93,14 @@ class VendorController extends Controller
 
         $vendor->save();
 
+        $this->sendEmail('registration');
+
         return redirect('/login');
     }
+
+    public function sendEmail($type){
+        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email(null,null,null,$type));
+     }
 
     public function checkInAnotherVendorPage($id){
         $carts = session()->get('cart');
@@ -135,6 +141,12 @@ class VendorController extends Controller
         return view('vendorList',[
             'vendors' => Vendor::where('name', 'LIKE', "%$request->search%")->paginate(2)
         ]);
+    }
+
+    public function registerWithGoogle(){
+        Session::put('registerAs','VENDOR');
+
+        return redirect('/auth/google');
     }
 
 }

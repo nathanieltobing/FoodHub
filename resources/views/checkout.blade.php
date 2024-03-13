@@ -153,27 +153,41 @@
 
     </div>
 
-    <form action="/checkout" class="payment-form" method="POST">
+    <form action="/sendOrderToVendor" class="payment-form" method="POST">
         @csrf
         <div class="payment-form">
             <h1 class="payment-title">Address</h1>
 
-        <textarea  rows="10" cols="163" name="address"></textarea>
+        <textarea  rows="2" cols="163" name="address"></textarea>
 
 
         </div>
 
         <div class="payment-form">
-            <h1 class="payment-title">Due Date</h1>
+            <h1 class="payment-title">Delivery Date</h1>
             <div class="payment-form-group">
                 <input type="date" placeholder=" " class="payment-form-control" name="dueDate">
                 <label for="expiry-date" class="payment-form-label payment-form-label-required">Due Date</label>
             </div>
         </div>
 
+        <div class="payment-form">
+            <h1 class="payment-title">Request for Quotation</h1>
+            <div class="payment-form-group">
+                <label for="nego-price"> Fill with price if you want to negotiate</label>
+                <input type="number" class="form-control" id="negoPrice" name="negoPrice" placeholder="1000000">
+            </div>
+        </div>
 
+        <button type="submit" class="payment-form-submit-button my-3"><i class="ri-wallet-line"></i> Send Order to Vendor</button>
 
-        <section class="payment-section">
+        <ul class="ps-5">
+            @foreach ($errors->all() as $error)
+                <li class="text-danger">{{ $error }}</li>
+            @endforeach
+        </ul>
+
+        {{-- <section class="payment-section">
             <div class="container">
                     <div class="payment-right">
 
@@ -232,7 +246,7 @@
                     </div>
                 </div>
             </section>
-        </form>
+        </form> --}}
 
     @else
              <div class="justify-content-center" style="align-items: center;text-align:center">

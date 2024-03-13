@@ -21,7 +21,6 @@ class ProductController extends Controller
 
         $rules = [
             'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
-            'quantity' => 'required',
             'price' => 'required',
             'category' => 'required', Rule::in(['Main Course', 'Appetizer', 'Desserts']),
             'dp' => 'required|image',
@@ -44,7 +43,6 @@ class ProductController extends Controller
         $product->name = $req->name;
         $product->price = $req->price;
 
-        $product->stock = $req->quantity;
         $product->description = $req->desc;
         $product->image = $imageName;
         // dd($req->category);
@@ -72,7 +70,6 @@ class ProductController extends Controller
 
         $rules = [
             'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
-            'quantity' => 'required',
             'price' => 'required',
             'category' => 'required', Rule::in(['Main Course', 'Appetizer', 'Desserts']),
             'dp' => 'image',
@@ -99,7 +96,6 @@ class ProductController extends Controller
         $id->name = $req->name;
         $id->price = $req->price;
 
-        $id->stock = $req->quantity;
         $id->description = $req->desc;
         $id->image = $imageName;
         // dd($req->category);
@@ -123,7 +119,7 @@ class ProductController extends Controller
      }
 
      public function removeProduct(Product $p){
-        DB::table('products')->where('id', $p->id)->delete();
+        $p->delete();
         return redirect('product/vendor')->with('message','Product successfuly removed!');
      }
 }

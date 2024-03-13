@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Mail\Email;
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\Review;
 use App\Models\Vendor;
+use App\Models\Product;
 use App\Models\Customer;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 
 class OrderController extends Controller
@@ -30,7 +31,7 @@ class OrderController extends Controller
             $order = Order::where('customer_id',$user->id)->orderBy('created_at', 'DESC')->get();
         }
         //  dd(Auth::guard('webcustomer')->user()->email);
-
+        
         return view('orderList',[
             'order' => $order,
             'user' => $user
@@ -40,7 +41,7 @@ class OrderController extends Controller
     public function editStatus(Request $request, Order $o)
     {
         if($request->status == '1'){
-            $status = 'ON GOING';
+            $status = 'AWAITING PAYMENT';
         } else if ($request->status == '2'){
             $status = 'REJECTED';
         }
@@ -50,7 +51,91 @@ class OrderController extends Controller
             ])->update([
             'status' => $status
         ]);
+        $order = DB::table('orders')->where('id', $o->id)->first();
+
         return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function acceptNegoPriceVendor(Request $request, Order $o)
+    {
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'nego_status' => 'ACCEPTED'
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function acceptNegoPrice(Request $req, Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'nego_status' => 'ACCEPTED',
+            'status' => 'ON GOING'
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function rejectNegoPriceVendor(Request $req, Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'nego_status' => 'REJECTED',
+            'nego_price' => $req->price
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function acceptVendorPrice(Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'nego_status' => 'ACCEPTED'
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function rejectVendorPrice(Order $o){
+        DB::table('orders')->where([
+            ['id',$o->id]
+            ])->update([
+            'status' => 'REJECTED'
+        ]);
+        return redirect()->back()->with('message','Order status edited successfully!');
+    }
+
+    public function finishPayment(Order $o){
+        $o->status = "ON GOING";
+        $o->save();
+        return redirect('orderlist');
+    }
+
+    public function viewConfirmPayment(Order $o){
+        return view('confirmPayment',[
+            'order' => $o
+        ]);
+    }
+
+    public function ConfirmPayment(Request $request, Order $o){
+
+        $request->validate([
+            'paymentProof' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        if($request->hasFile('paymentProof')){
+            $fileImage = $request->file('paymentProof');
+            $imageName ='order-'.$o->id.'.'.$fileImage->getClientOriginalExtension();
+            Storage::putFileAs('public/images/paymentproof/', $fileImage, $imageName);
+            $imageName = 'images/paymentproof/'.$imageName;
+        }
+        else{
+            $imageName = $o->payment_proof;
+        }
+
+        $o->payment_proof = $imageName;
+        $o->save();
+
+        return redirect('orderlist')->with('message','Payment proof successfully uploaded and will be checked by our admin');
     }
 
     public function checkout(Request $req){
@@ -122,9 +207,90 @@ class OrderController extends Controller
         return view('succesfulPage');
      }
 
-     public function sendEmail($order,$orderDetails,$vendor_id){
+     public function sendOrderToVendor(Request $req){
+        $rules = [
+            'address' =>'required',
+            'dueDate' => 'required'
+        ];
+
+        $validator = Validator::make($req->all(), $rules);
+
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $order = new Order();
+        $order_detail = new OrderDetail();
+        $carts = session()->get('cart');
+
+        $total_quantity = 0; $total_price = 0;
+        foreach ($carts as $cart) {
+            $total_quantity+=$cart['quantity'];
+            if($cart['discounted_price'] != null){
+                $total_price+=$cart['discounted_price'] * $cart['quantity'];
+            }
+            else{
+                $total_price+=$cart['price'] * $cart['quantity'];
+            }
+            $vendor_id = $cart['vendor_id'];
+            $product = Product::where('id',$cart['product_id'])->first();
+            $product->save();
+        }
+        $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
+            if($customerMembership != null){
+                $customerMembership = json_decode($customerMembership, true);
+            }
+
+        $order->status = 'OPEN';
+        $order->total_price = $total_price;
+        $order->total_quantity = $total_quantity;
+        $order->customer_id = Auth::guard('webcustomer')->user()->id;
+        if($customerMembership != null && $customerMembership['status'] == 'ACTIVE'){
+            $order->membership_discount = (double)$customerMembership['discount'] /100;
+        }
+        $order->vendor_id = $vendor_id;
+        $order->address = $req->address;
+        $order->due_date = $req->dueDate;
+        if($req->negoPrice){
+            $order->nego_price = $req->negoPrice;
+        }
+        $order->save();
+
+        $most_recent_order = DB::table('orders')->latest()->first();
+        foreach ($carts as $cart) {
+            $order_detail = new OrderDetail();
+            $order_detail->quantity = $cart['quantity'];
+            $order_detail->price = $cart['price'];
+            $order_detail->product_name = $cart['name'];
+            $order_detail->order_id = $most_recent_order->id;
+            $order_detail->product_id = $cart['product_id'];
+            if($cart['discounted_price'] != null){
+                $order_detail->discount_price = $cart['discounted_price'];
+            }
+            $order_detail->save();
+        }
+        $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
+        $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id,"checkout");
+        $this->sendEmailVendor($most_recent_order,$order->vendor_id,"incoming order");
+        session()->put('cart', []);
+        return view('succesfulPage');
+
+     }
+     
+     public function sendEmail($order,$orderDetails,$vendor_id,$type){
         $vendor = Vendor::find($vendor_id);
-        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor));
+        if(strcmp($type,"checkout")==0){
+            Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+        }
+        else if(strcmp($type,"order status updated")==0){
+            Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+        }
+        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+     }
+
+     public function sendEmailVendor($order,$vendor_id,$type){
+        $vendor = Vendor::find($vendor_id);
+        Mail::to($vendor->email)->send(new Email($order,null,$vendor,$type));
      }
 
      public function finishWithoutReview(Order $o){

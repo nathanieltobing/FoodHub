@@ -20,7 +20,7 @@ class CustomerController extends Controller
         $rules = [
             'name' => 'required|max:50|regex:/^[\pL\s\-]+$/u',
             'phoneNumber' => 'required|regex:/^(0)[0-9]{11}/',
-            'email' => 'required|email:rfc,dns',
+            'email' => 'required|email:rfc,dns|unique:customers',
             'role' => 'required', Rule::in(['CUSTOMER', 'VENDOR']),
             'password' => 'required | min:8 | alpha_num |confirmed'
         ];
@@ -50,6 +50,19 @@ class CustomerController extends Controller
 
         $customer->save();
 
+        $this->sendEmail("registration");
+
         return redirect('/login');
     }
+
+    public function registerWithGoogle(){
+        Session::put('registerAs','CUSTOMER');
+
+        return redirect('/auth/google');
+    }
+
+    public function sendEmail($type, $email){
+        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email(null,null,null,$type));
+    }
+
 }

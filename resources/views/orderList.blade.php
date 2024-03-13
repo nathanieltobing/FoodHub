@@ -52,7 +52,8 @@
                         <span style="justify-content: end" class="{{$o->status=='OPEN'? ''
                             : ($o->status=='ON GOING'? 'btn-warning'
                             : ($o->status=='REJECTED'? 'btn-danger'
-                            : 'btn-success'))}} mx-3 btn active">{{$o->status}}</span>
+                            : ($o->status=='AWAITING PAYMENT'? 'btn-secondary'
+                            : 'btn-success')))}} mx-3 btn active">{{$o->status}}</span>
                     </div>
 
                     <hr>
@@ -77,6 +78,13 @@
                     <div class="card-text d-flex flex-column">
                         <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-left:8px;margin-top:10px;justify-content-start">Total Belanja</span>
                         <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->total_price,2,",",".")}}</p>
+                        @if ($o->nego_price && $o->nego_status != 'REJECTED')
+                            <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-left:8px;margin-top:10px;justify-content-start">Harga Negosiasi</span>
+                            <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->nego_price,2,",",".")}}</p>
+                        @elseif($o->nego_status == 'REJECTED')
+                            <span class="payment-summary-price" style="font-size:16px;font-weight: 700;margin-left:8px;margin-top:10px;justify-content-start">Harga Tawaran dari vendor</span>
+                            <p class="payment-summary-name" style="font-weight : 700;margin-left:8px;justify-content-start">Rp{{number_format($o->nego_price,2,",",".")}}</p>
+                        @endif
                             @if($o->status == 'ON GOING' && Auth::guard('webcustomer')->check())
                             <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
                                 <span ><a href="#" class="btn btn-primary" style="width: 100%;margin-right:80px" data-toggle="modal" data-target="#FinishOrderModal{{$o->id}}">Finish Order</a> </span>
@@ -118,12 +126,74 @@
                                     </div>
                                 </div>
                             </div>
+                            @elseif($o->status == 'OPEN' && Auth::guard('webcustomer')->check())
+                                @if (!$o->nego_status || $o->nego_status == 'ACCEPTED')
+                                    <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
+                                        <span class="btn btn-secondary text-light" style="width: 12rem">Waiting confirmation</span>
+                                    </div>
+                                @elseif ($o->nego_status == 'REJECTED')
+                                <form class="d-flex justify-content-end" method="post" action="/editstatus/{{$o->id}}" style="gap:10px;margin-right: 35px;margin-top: -60px">
+                                    <a href="rejectVendorPrice/{{$o->id}}" onclick="return confirm('Are you sure? Order will be cancelled if you reject')"  class="btn btn-danger text-light" style="width: 10rem;">Reject price</a>
+                                    <a href="acceptVendorPrice/{{$o->id}}" class="btn btn-success text-light" style="width: 10rem;">Accept price</a>
+                                @endif
                             @elseif($o->status == 'OPEN' && Auth::guard('webvendor')->check())
-                            <form class="d-flex justify-content-end" method="post" action="/editstatus/{{$o->id}}" style="gap:10px;margin-right: 35px;margin-top: -60px">
-                            @csrf
-                                <button type="submit" class="btn btn-danger"value="2" name="status" id="status" style="width: 6rem;">Reject</button>
-                                <button type="submit" class="btn btn-success" value="1" name="status" id="status" style="width: 6rem;">Accept</button>
-                            </form>
+                                @if ($o->nego_price)
+                                    @if ($o->nego_status == 'REJECTED')
+                                        <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
+                                            <span class="btn btn-secondary text-light" style="width: 12rem">Waiting confirmation</span>
+                                        </div>
+                                    @elseif ($o->nego_status == 'ACCEPTED')
+                                    <form class="d-flex justify-content-end" method="post" action="/editstatus/{{$o->id}}" style="gap:10px;margin-right: 35px;margin-top: -60px">
+                                        @csrf
+                                            <button type="submit" class="btn btn-danger"value="2" name="status" id="status" style="width: 10rem;">Reject order</button>
+                                            <button type="submit" class="btn btn-success" value="1" name="status" id="status" style="width: 10rem;">Accept order</button>
+                                        </form>
+                                     @else
+                                        <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
+                                            <span ><a href="#" class="btn btn-danger" style="width: 8rem" data-toggle="modal" data-target="#RejectPrice{{$o->id}}">Reject Price</a> </span>
+                                            <a href="/acceptNegoPrice/{{$o->id}}" class="btn btn-success text-light" style="width: 8rem;">Accept Price</a>
+                                            <div class="modal fade" id="RejectPrice{{$o->id}}" tabindex="-1" role="dialog" aria-labelledby="RejectPrice{{$o->id}}" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="cancelMembershipModalLabel">Price Rejection</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="container">
+                                                                <p>Negotiated price : Rp{{number_format($o->nego_price,2,",",".")}}</p>
+                                                                <form method="post" action="/rejectNegoPrice/{{$o->id}}">
+                                                                    @csrf
+                                                                    <div class="form-group">
+                                                                        <label for="price">Your best price:</label>
+                                                                        <input type="number" class="form-control" id="price" name="price" placeholder="" required>
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-primary">Send to customer</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     @endif
+                                @else
+                                    <form class="d-flex justify-content-end" method="post" action="/editstatus/{{$o->id}}" style="gap:10px;margin-right: 35px;margin-top: -60px">
+                                    @csrf
+                                        <button type="submit" class="btn btn-danger"value="2" name="status" id="status" style="width: 6rem;">Reject</button>
+                                        <button type="submit" class="btn btn-success" value="1" name="status" id="status" style="width: 6rem;">Accept</button>
+                                    </form>
+                                @endif
+                            @elseif($o->status == 'AWAITING PAYMENT' && Auth::guard('webcustomer')->check())
+                                <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
+                                    @if (!$o->payment_proof)
+                                        <a href="/confirmPayment/{{$o->id}}" class="btn btn-primary" style="width: 10rem;">Finish payment</a>
+                                    @else
+                                        <p class="btn btn-info active" style="width: 10rem;">Admin checking</p>
+                                    @endif
+                                </div>
                             @endif
                     </div>
                 </div>
