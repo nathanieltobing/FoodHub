@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Email;
 use Socialite;
 
 class UserController extends Controller
@@ -112,6 +114,7 @@ class UserController extends Controller
                     $newCustomer->password = bcrypt('12343213123'); // temporary password
                     $newCustomer->save();
                     $this->sendEmail('registration',$user->email);
+                    $customer = Customer::where('email', $user->email)->first();
                     Auth::guard('webcustomer')->login($customer);
                     Session::put('mysession',Auth::guard('webcustomer')->user()->name);
                     return redirect('/');
@@ -127,6 +130,7 @@ class UserController extends Controller
                     $newVendor->rating = 3; // temporary rating
                     $newVendor->save();
                     $this->sendEmail('registration',$user->email);
+                    $vendor = Vendor::where('email', $user->email)->first();
                     Auth::guard('webvendor')->login($vendor);
                     Session::put('mysession',Auth::guard('webvendor')->user()->name);
                     return redirect('/');

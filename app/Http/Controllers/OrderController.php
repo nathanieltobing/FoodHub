@@ -316,6 +316,7 @@ class OrderController extends Controller
             ])->update([
             'status' => 'FINISHED'
         ]);
+        $this->addReporting($o);
         return redirect('orderlist')->with('message','Order status edited successfully!');
     }
 
@@ -328,7 +329,48 @@ class OrderController extends Controller
             ])->update([
             'status' => 'FINISHED'
         ]);
-
+        $this->addReporting($o);
         return redirect('orderlist')->with('message','Order status edited successfully!');
+    }
+
+    public function addReporting(Order $o){
+        $vendor = DB::table('vendor_reportings')->where('vendor_id', $o->vendor_id)->first();
+        if($vendor == null ){
+            DB::table('vendor_reportings')->insert([
+                'vendor_id' => $o->vendor_id,
+                'number_of_transaction' => 1
+            ]);
+        }
+        else{
+            $numTransaction = $vendor->number_of_transaction;
+            $numTransaction = $numTransaction + 1;
+            DB::table('vendor_reportings')->where([
+                ['vendor_id',$o->vendor_id]
+                ])->update([
+                'number_of_transaction' => $numTransaction
+            ]);
+        }
+        $orderDetails = OrderDetail::where('order_id', $o->id)->get();
+        foreach($orderDetails as $od){
+            $product = DB::table('product_reportings')->where('product_id', $od->product_id)->first();
+            
+            if($product == null){
+                DB::table('product_reportings')->insert([
+                    'vendor_id' => $o->vendor_id,
+                    'product_id' => $od->product_id,
+                    'number_of_transaction' => $od->quantity
+                ]);
+            }
+            else{
+                $numTransaction = $product->number_of_transaction;
+                $numTransaction = $numTransaction + $od->quantity;
+                DB::table('product_reportings')->where([
+                    ['product_id',$od->product_id]
+                    ])->update([
+                    'number_of_transaction' => $numTransaction
+                ]);
+            }
+        }
+
     }
 }

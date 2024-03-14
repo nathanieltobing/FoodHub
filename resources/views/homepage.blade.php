@@ -60,8 +60,9 @@
           <div class="row">
             <div class="col">
               <div class="testimonial">
-                <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
-                <div class="name">Tobing Catering</div>
+                <a href="/products/{{$topProduct->vendor_id}}"><img src="/storage/{{$topProduct->products->image}}" alt=""></a>
+                <div class="name">{{$topProduct->products->name}}</div>
+                <h1>Total Sold : {{$topProduct->number_of_transaction}}</h1>
               </div>
             </div>
 
@@ -77,8 +78,9 @@
           <div class="row">
             <div class="col">
               <div class="testimonial">
-                <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
-                <div class="name"> Tobing Catering</div>
+                <a href="/products/{{$topVendor->vendor_id}}"><img src="/storage/{{$topVendor->vendors->image}}" alt=""></a>
+                <div class="name">{{$topVendor->vendors->name}}</div>
+                <h1>Total Orders : {{$topVendor->number_of_transaction}}</h1>
               </div>
             </div>
 

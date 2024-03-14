@@ -16,9 +16,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Email;
+use App\Models\ProductReporting;
+use App\Models\VendorReporting;
 
 class VendorController extends Controller
 {
+
     public function index(){
 
         $vendors = Vendor::orderBy('rating','DESC')->paginate(2);
@@ -49,11 +52,26 @@ class VendorController extends Controller
         return $vendor;
     }
 
+    public function getTopVendor(){
+        $vendorReporting = VendorReporting::orderBy('number_of_transaction', 'DESC')->first();
+        // $vendor = Vendor::where('id',$vendorReporting->vendor_id)->first();
+        return $vendorReporting;
+    }
+
+    public function getTopProduct(){
+        $productReporting = ProductReporting::orderBy('number_of_transaction', 'DESC')->first();
+        // $product = Product::where('id',$productReporting->product_id)->first();
+        return $productReporting;
+    }
+
     public function indexHomepage(){
         $featuredVendors = $this->getFeaturedVendors();
         $topRatedVendors = $this->getTopRatedVendor();
+        $topVendor = $this->getTopVendor();
+        $topProduct = $this->getTopProduct();
 
-        return view('homepage', ['featuredVendors'=> $featuredVendors , 'topRatedVendors' => $topRatedVendors]);
+        return view('homepage', ['featuredVendors'=> $featuredVendors , 'topRatedVendors' => $topRatedVendors,
+         'topVendor'=> $topVendor, 'topProduct' => $topProduct]);
 
     }
 
