@@ -61,12 +61,7 @@
                       </div>
                     </div>
 
-                    {{-- <div class="form-check d-flex justify-content-center mb-5">
-                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                      <label class="form-check-label" for="form2Example3">
-                        I agree all statements in <a href="#!">Terms of service</a>
-                      </label>
-                    </div> --}}
+
 
                     <div class="d-grid gap-2 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 400; font-family: Poppins;background-color:var(--indigo-500)">Register</button>
@@ -111,18 +106,6 @@
 
                             <a href="/register/vendor" class="card-body fullwidth" style="width: 10rem; background: #fff; padding: 27px; border-radius: 15px; box-shadow: 0px 8px 15px #4F68C41A;">VENDOR</a>
 
-
-
-
-                        {{-- <div class="testimonial" style="width: 10rem;">
-                          <img src="..." class="card-img-top" alt="...">
-                          <div class="card-body">
-
-                            <a href="" class="card-title">ADMIN</a>
-
-                          </div>
-
-                        </div> --}}
                     </div>
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                     class="img-fluid" alt="Sample image">

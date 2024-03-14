@@ -41,10 +41,7 @@
 
                         </div>
 
-                        {{-- <div class="actionBtn">
-                            <a href="/orderdetail/{{$o->id}}" style="text-decoration: none"> <button>View Detail</button></a>
 
-                        </div> --}}
                     </div>
                     <div class="actionBtn">
                         <a href="/orderdetail/{{$o->id}}" style="text-decoration: none"> <button>View Detail</button></a>
@@ -71,10 +68,7 @@
                                             <li class="card-text payment-summary-price" style="font-size:16px;font-weight: 700;" >{{ $od->product_name }}</li>
                                             <span style="font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name">x{{ $od->quantity }}</span>
                                 </ul>
-                                {{-- <div class="actionBtn">
-                                    <a href="/orderdetail/{{$o->id}}" style="text-decoration: none;"> <button>View Detail</button></a>
-
-                                </div> --}}
+                      
 
                             </div>
                             @endif
@@ -194,7 +188,11 @@
                                 @endif
                             @elseif($o->status == 'AWAITING PAYMENT' && Auth::guard('webcustomer')->check())
                                 <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
-                                    <a href="/finishPayment/{{$o->id}}" type="submit" class="btn btn-primary"value="2" name="status" id="status" style="width: 10rem;">Finish payment</a>
+                                    @if (!$o->payment_proof)
+                                        <a href="/confirmPayment/{{$o->id}}" class="btn btn-primary" style="width: 10rem;">Finish payment</a>
+                                    @else
+                                        <p class="btn btn-info active" style="width: 10rem;">Admin checking</p>
+                                    @endif
                                 </div>
                             @endif
                     </div>

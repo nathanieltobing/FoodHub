@@ -25,32 +25,19 @@
        <a href="/" class="logo">FH</a>
         <input type="checkbox" id="check">
         <label for="check" class="icons">
-            <i class="bx bx-menu" id="menu-icon"></i>
-            <i class="bx bx-x" id="close-icon"></i>
+            <i class="bx bx-menu" id="menu-icon" style="margin-right: 20px"></i>
+            <i class="bx bx-x" id="close-icon" style="margin-right: 20px"></i>
         </label>
     <nav class="navbar" style="display: block">
 
         @if(Auth::guard('webcustomer')->check())
           <div class="justify-content-center" style="gap: 50px;display :block">
 
-            <a href="/vendorList" style="--i:3"><img src="{{ asset('assets/images/vendoricon.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
-            <a href="/orderlist" style="--i:3"><img src="{{ asset('assets/images/orderlist.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
+            <a  href="/vendorList" style="--i:3"><img src="{{ asset('assets/images/vendoricon.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
+            <a  href="/orderlist" style="--i:3"><img src="{{ asset('assets/images/orderlist.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
 
-            {{-- <a href="/profile/{{Auth::guard('webcustomer')->user()->id}}" style="--i:3">Membership</a> --}}
-         {{-- <div class="action">
-            <div class="profile" onclick="menuToggle();">
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="menu">
-                <h3> Nama User </h3>
-                <ul>
-                    <li>   <a href="/customer/profile" style="--i:3"><i class="fa-solid fa-user"></i></a>My Profile</li>
-                    <li>  <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a>Logout</li>
-                </ul>
-            </div>
-        </div> --}}
-            {{-- <a href="/customer/profile" style="--i:3"><i class="fa-solid fa-user"></i></a> --}}
             <a href="/checkout" style="--i:3"><i class="fa-solid fa-cart-shopping"></i></a>
+          </div>
             <div class="action">
                 <div class="profile" onclick="menuToggle();">
                     <img src="{{ asset('assets/images/user.png') }}" alt="">
@@ -60,17 +47,17 @@
                     <ul>
                         <li><img src="{{ asset('assets/images/user.png') }}"><a href="/customer/profile"  style="margin-left:10px">Profile</a></li>
                         <li><img src="{{ asset('assets/images/log-out.png') }}"><a href="/logout" style="margin-left:10px">Logout</a></li>
-                        {{-- <li>  <a href="/logout" style="--i:3"> <img src="{{ asset('assets/images/log-out.png') }}" alt="" ></i></a>Logout</li> --}}
+
                     </ul>
                 </div>
             </div>
-            {{-- <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a> --}}
+
           </div>
           @elseif (Auth::guard('webvendor')->check())
           <div class="justify-content-center" style="gap: 50px">
             <a href="/orderlist" style="--i:3"><img src="{{ asset('assets/images/orderlist.png') }}" style="height:1.3rem"></a>
             <a href="/product/vendor" style="--i:3"><img src="{{ asset('assets/images/producticon.png') }}" style="height:1.4rem"></a>
-            {{-- <a href="/homepage" style="--i:3">Membership</a> --}}
+
             <div class="action">
                 <div class="profile" onclick="menuToggle();">
                     <img src="{{ asset('assets/images/user.png') }}" alt="">
@@ -80,14 +67,15 @@
                     <ul>
                         <li><img src="{{ asset('assets/images/user.png') }}"><a href="/vendor/profile"  style="margin-left:10px">Profile</a></li>
                         <li><img src="{{ asset('assets/images/log-out.png') }}"><a href="/logout" style="margin-left:10px">Logout</a></li>
-                        {{-- <li>  <a href="/logout" style="--i:3"> <img src="{{ asset('assets/images/log-out.png') }}" alt="" ></i></a>Logout</li> --}}
+
                     </ul>
                 </div>
             </div>
           </div>
           @elseif(Auth::guard('webadmin')->check())
             {{-- Button khusus Admin --}}
-            <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180"></i></a>
+            <a href="/admin-payment" style="--i:3"><img src="{{ asset('assets/images/transaction.png') }}" style="height:1.3rem"></a>
+            <a href="/logout" style="--i:3"><i class="fa-solid fa-arrow-right-from-bracket fa-rotate-180" style="height:1.3rem; margin-bottom:0.3rem"></i></a>
           @else
             <a href="/vendorList" style="--i:3"><img src="{{ asset('assets/images/vendoricon.png') }}" style="height:1.3rem; margin-bottom:0.3rem"></a>
             <a href="/login" style="--i:3">Login</a>

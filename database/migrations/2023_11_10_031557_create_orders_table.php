@@ -30,6 +30,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('cascade');
             $table->double('nego_price')->nullable();
             $table->enum('nego_status', ['REJECTED', 'ACCEPTED'])->nullable();
+            $table->string('payment_proof')->nullable();
         });
     }
 

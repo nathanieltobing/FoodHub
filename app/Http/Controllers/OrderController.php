@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Mail\Email;
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\Review;
 use App\Models\Vendor;
+use App\Models\Product;
 use App\Models\Customer;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 
 class OrderController extends Controller
@@ -56,7 +57,10 @@ class OrderController extends Controller
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
+
     #Sisi vendor accept harga nego
+
+
     public function acceptNegoPriceVendor(Request $request, Order $o)
     {
         DB::table('orders')->where([
@@ -119,6 +123,34 @@ class OrderController extends Controller
         return redirect('orderlist');
     }
 
+    public function viewConfirmPayment(Order $o){
+        return view('confirmPayment',[
+            'order' => $o
+        ]);
+    }
+
+    public function ConfirmPayment(Request $request, Order $o){
+
+        $request->validate([
+            'paymentProof' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        if($request->hasFile('paymentProof')){
+            $fileImage = $request->file('paymentProof');
+            $imageName ='order-'.$o->id.'.'.$fileImage->getClientOriginalExtension();
+            Storage::putFileAs('public/images/paymentproof/', $fileImage, $imageName);
+            $imageName = 'images/paymentproof/'.$imageName;
+        }
+        else{
+            $imageName = $o->payment_proof;
+        }
+
+        $o->payment_proof = $imageName;
+        $o->save();
+
+        return redirect('orderlist')->with('message','Payment proof successfully uploaded and will be checked by our admin');
+    }
+
     public function checkout(Request $req){
         $rules = [
             'email' => 'required|email:rfc,dns',
@@ -149,6 +181,7 @@ class OrderController extends Controller
             }
             $vendor_id = $cart['vendor_id'];
             $product = Product::where('id',$cart['product_id'])->first();
+            $product->stock = $product->stock - $cart['quantity'];
             $product->save();
         }
         $customerMembership = Auth::guard('webcustomer')->user()->customer_membership;
@@ -182,6 +215,10 @@ class OrderController extends Controller
             $order_detail->save();
         }
         $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
+
+
+        $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id);
+
         session()->put('cart', []);
         return view('succesfulPage');
      }
@@ -279,7 +316,6 @@ class OrderController extends Controller
             ])->update([
             'status' => 'FINISHED'
         ]);
-        $this->addReporting($o);
         return redirect('orderlist')->with('message','Order status edited successfully!');
     }
 
@@ -292,48 +328,7 @@ class OrderController extends Controller
             ])->update([
             'status' => 'FINISHED'
         ]);
-        $this->addReporting($o);
+
         return redirect('orderlist')->with('message','Order status edited successfully!');
-    }
-
-    public function addReporting(Order $o){
-        $vendor = DB::table('vendor_reportings')->where('vendor_id', $o->vendor_id)->first();
-        if($vendor == null ){
-            DB::table('vendor_reportings')->insert([
-                'vendor_id' => $o->vendor_id,
-                'number_of_transaction' => 1
-            ]);
-        }
-        else{
-            $numTransaction = $vendor->number_of_transaction;
-            $numTransaction = $numTransaction + 1;
-            DB::table('vendor_reportings')->where([
-                ['vendor_id',$o->vendor_id]
-                ])->update([
-                'number_of_transaction' => $numTransaction
-            ]);
-        }
-        $orderDetails = OrderDetail::where('order_id', $o->id)->get();
-        foreach($orderDetails as $od){
-            $product = DB::table('product_reportings')->where('product_id', $od->product_id)->first();
-            
-            if($product == null){
-                DB::table('product_reportings')->insert([
-                    'vendor_id' => $o->vendor_id,
-                    'product_id' => $od->product_id,
-                    'number_of_transaction' => $od->quantity
-                ]);
-            }
-            else{
-                $numTransaction = $product->number_of_transaction;
-                $numTransaction = $numTransaction + $od->quantity;
-                DB::table('product_reportings')->where([
-                    ['product_id',$od->product_id]
-                    ])->update([
-                    'number_of_transaction' => $numTransaction
-                ]);
-            }
-        }
-
     }
 }
