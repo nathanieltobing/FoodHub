@@ -76,6 +76,10 @@ Route::middleware(['checkauth'])->group(function(){
         Route::get('/manageUser',[AdminController::class, 'index']);
         Route::put('/activate/{id}',[AdminController::class, 'activateUser']);
         Route::put('/deactivate/{id}',[AdminController::class, 'deActivateUser']);
+        Route::get('/admin-payment', [AdminController::class, 'viewOrders']);
+        Route::get('/transaction/{o:id}', [AdminController::class, 'viewTransaction']);
+        Route::get('/acceptPaymentProof/{o:id}', [AdminController::class, 'acceptPaymentProof']);
+        Route::get('/rejectPaymentProof/{o:id}', [AdminController::class, 'rejectPaymentProof']);
     });
     Route::middleware(['checkCustOrVend'])->group(function(){
         Route::get('/orderlist',[OrderController::class, 'viewOrderList']);
@@ -114,7 +118,7 @@ Route::middleware(['checkauth'])->group(function(){
 
     Route::middleware(['vendor'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
-        Route::get('/acceptNegoPrice/{o:id}', [OrderController::class, 'editNegoStatus']);
+        Route::get('/acceptNegoPrice/{o:id}', [OrderController::class, 'acceptNegoPriceVendor']);
         Route::post('/rejectNegoPrice/{o:id}', [OrderController::class, 'rejectNegoPriceVendor']);
         Route::get('/addProduct', function () {
             return view('addProduct');
