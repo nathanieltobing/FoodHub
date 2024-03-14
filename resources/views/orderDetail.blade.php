@@ -43,7 +43,10 @@
                 ?>
                 @foreach ($orderDetails as $od)
                 <?php
-                     if($od->discount_price != null){
+                     if($nego_price){
+                        $totalPrice += $nego_price;
+                     }
+                     else if($od->discount_price != null){
                         $totalPrice += $od->discount_price * $od->quantity;
                      }
                      else{
@@ -52,16 +55,19 @@
                  ?>
                     <div class="row">
                     <div class="col-md-6 col-lg-6">
-                        {{-- <p>{{$od->product_name}}</p> --}}
                         <p class="fontstyle">{{$od->product_name}}</p>
                     </div>
                     <div class="col-md-2 col-lg-2">
                         <p class="fontstyle">{{$od->quantity}} qty</p>
                     </div>
-                    @if ($od->discount_price != null)
+                    @if ($nego_price)
+                    <div class="col-md-4 col-lg-4">
+                        <p class="fontstyle">Rp{{number_format($nego_price,2,",",".")}}</p>
+                    </div>
+                    @elseif ($od->discount_price != null)
                     <div class="col-md-4 col-lg-4">
                       <p class="fontstyle">Rp{{number_format($od->discount_price,2,",",".")}}</p>
-                  </div>
+                    </div>
                     @else
                       <div class="col-md-4 col-lg-4">
                           <p class="fontstyle">Rp{{number_format($od->price,2,",",".")}}</p>

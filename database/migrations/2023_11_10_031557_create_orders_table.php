@@ -31,6 +31,7 @@ class CreateOrdersTable extends Migration
             $table->double('nego_price')->nullable();
             $table->enum('nego_status', ['REJECTED', 'ACCEPTED'])->nullable();
             $table->string('payment_proof')->nullable();
+            $table->enum('payment_proof_status', ['REJECTED', 'APPROVED'])->nullable();
         });
     }
 

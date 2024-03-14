@@ -31,7 +31,7 @@ class OrderController extends Controller
             $order = Order::where('customer_id',$user->id)->orderBy('created_at', 'DESC')->get();
         }
         //  dd(Auth::guard('webcustomer')->user()->email);
-        
+
         return view('orderList',[
             'order' => $order,
             'user' => $user
@@ -49,7 +49,7 @@ class OrderController extends Controller
 
         DB::table('orders')->where([
             ['id',$o->id]
-            ])->update([ 
+            ])->update([
             'status' => $status
         ]);
         $order = DB::table('orders')->where('id', $o->id)->first();
@@ -146,6 +146,7 @@ class OrderController extends Controller
         }
 
         $o->payment_proof = $imageName;
+        $o->payment_proof_status = NULL;
         $o->save();
 
         return redirect('orderlist')->with('message','Payment proof successfully uploaded and will be checked by our admin');
@@ -292,7 +293,7 @@ class OrderController extends Controller
         return view('succesfulPage');
 
      }
-     
+
      public function sendEmail($order,$orderDetails,$vendor_id,$type){
         $vendor = Vendor::find($vendor_id);
         $customer = Customer::find($order->customer_id);
