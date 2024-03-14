@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Email;
 
 class CustomerController extends Controller
 {
@@ -50,7 +52,7 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        $this->sendEmail("registration");
+        $this->sendEmail("registration",$req->email);
 
         return redirect('/login');
     }
@@ -62,7 +64,7 @@ class CustomerController extends Controller
     }
 
     public function sendEmail($type, $email){
-        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email(null,null,null,$type));
+        Mail::to($email)->send(new Email(null,null,null,$type));
     }
 
 }

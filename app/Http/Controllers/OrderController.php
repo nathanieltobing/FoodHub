@@ -37,6 +37,7 @@ class OrderController extends Controller
         ]);
     }
 
+    #Kalo vendor accept/reject order
     public function editStatus(Request $request, Order $o)
     {
         if($request->status == '1'){
@@ -47,24 +48,27 @@ class OrderController extends Controller
 
         DB::table('orders')->where([
             ['id',$o->id]
-            ])->update([
+            ])->update([ 
             'status' => $status
         ]);
         $order = DB::table('orders')->where('id', $o->id)->first();
-
+        $this->sendEmail($o,$orderDetails,$order->vendor_id,"order status updated");
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
-    public function editNegoStatus(Request $request, Order $o)
+    #Sisi vendor accept harga nego
+    public function acceptNegoPriceVendor(Request $request, Order $o)
     {
         DB::table('orders')->where([
             ['id',$o->id]
             ])->update([
             'nego_status' => 'ACCEPTED'
         ]);
+        $this->sendEmail($o,$orderDetails,$order->vendor_id,"order status updated");
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
+    #Ga di pake
     public function acceptNegoPrice(Request $req, Order $o){
         DB::table('orders')->where([
             ['id',$o->id]
@@ -82,15 +86,17 @@ class OrderController extends Controller
             'nego_status' => 'REJECTED',
             'nego_price' => $req->price
         ]);
+        $this->sendEmail($o,$orderDetails,$order->vendor_id,"order status updated");
         return redirect()->back()->with('message','Order status edited successfully!');
     }
-
+    #Customer terima harga nego
     public function acceptVendorPrice(Order $o){
         DB::table('orders')->where([
             ['id',$o->id]
             ])->update([
             'nego_status' => 'ACCEPTED'
         ]);
+        $this->sendEmailVendor($o,$o->vendor_id,"order status updated");
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
@@ -100,12 +106,16 @@ class OrderController extends Controller
             ])->update([
             'status' => 'REJECTED'
         ]);
+        $this->sendEmailVendor($o,$o->vendor_id,"order status updated");
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
     public function finishPayment(Order $o){
         $o->status = "ON GOING";
         $o->save();
+        $orderDetails = OrderDetail::where('order_id', $o->id)->get();
+        $this->sendEmail($o,$orderDetails,$order->vendor_id,"checkout");
+        $this->sendEmailVendor($o,$order->vendor_id,"order status updated");
         return redirect('orderlist');
     }
 
@@ -172,7 +182,6 @@ class OrderController extends Controller
             $order_detail->save();
         }
         $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
-        // $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id);
         session()->put('cart', []);
         return view('succesfulPage');
      }
@@ -240,8 +249,8 @@ class OrderController extends Controller
             $order_detail->save();
         }
         $orderDetails = OrderDetail::where('order_id', $most_recent_order->id)->get();
-        $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id,"checkout");
-        $this->sendEmailVendor($most_recent_order,$order->vendor_id,"incoming order");
+        // $this->sendEmail($most_recent_order,$orderDetails,$order->vendor_id,"checkout");
+         $this->sendEmailVendor($most_recent_order,$order->vendor_id,"incoming order");
         session()->put('cart', []);
         return view('succesfulPage');
 
@@ -249,13 +258,14 @@ class OrderController extends Controller
      
      public function sendEmail($order,$orderDetails,$vendor_id,$type){
         $vendor = Vendor::find($vendor_id);
+        $customer = Customer::find($order->customer_id);
         if(strcmp($type,"checkout")==0){
-            Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+            Mail::to($customer->email)->send(new Email($order,$orderDetails,$vendor,$type));
         }
         else if(strcmp($type,"order status updated")==0){
-            Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+            Mail::to($customer->email)->send(new Email($order,$orderDetails,$vendor,$type));
         }
-        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
+        Mail::to($customer->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
      }
 
      public function sendEmailVendor($order,$vendor_id,$type){

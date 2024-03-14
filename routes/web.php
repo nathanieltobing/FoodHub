@@ -88,7 +88,7 @@ Route::middleware(['checkauth'])->group(function(){
         Route::get('/acceptVendorPrice/{o:id}', [OrderController::class, 'acceptVendorPrice']);
         Route::get('/rejectVendorPrice/{o:id}', [OrderController::class, 'rejectVendorPrice']);
         Route::get('/finishPayment/{o:id}', [OrderController::class, 'finishPayment']);
-        Route::post('/checkout',[OrderController::class, 'checkout']);
+        // Route::post('/checkout',[OrderController::class, 'checkout']);
         Route::post('/sendOrderToVendor',[OrderController::class, 'sendOrderToVendor']);
         Route::post('/minQuantity/{id}',[CartController::class, 'decreaseQuantity']);
         Route::post('/addQuantity/{id}',[CartController::class, 'addQuantity']);
