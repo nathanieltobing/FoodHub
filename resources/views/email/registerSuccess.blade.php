@@ -23,7 +23,6 @@
 
 <body>
     <p>Thank you for registering in FoodHub</p>
-
 </body>
 
 </html>

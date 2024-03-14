@@ -45,7 +45,7 @@ class Email extends Mailable
         }
         else if(strcmp($this->type,"order status updated") == 0){
             $status = $this->order->status;
-            return $this->subject("Order ODR-$id is $status")->view('email.orderUpdated');
+            return $this->subject("There is an update on your order")->view('email.orderUpdated');
         }
     }
 }
