@@ -47,6 +47,50 @@
     </div>
 </div>
 
+
+
+
+
+
+<div class="d-flex justify-content-center" style="gap:20px">
+    <div class="testimonials" style="width: 888px;border: 1px solid #BDBFC9">
+        <div class="inner">
+          <h2>Top Product</h2>
+          <div class="border"></div>
+          <div class="row">
+            <div class="col">
+              <div class="testimonial">
+                <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+                <div class="name">Tobing Catering</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    <div class="testimonials" style="width: 888px;border: 1px solid #BDBFC9">
+        <div class="inner">
+          <h2>Top Vendor</h2>
+          <div class="border"></div>
+          <div class="row">
+            <div class="col">
+              <div class="testimonial">
+                <img src="https://images.unsplash.com/photo-1657586640569-4a3d4577328c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" alt="">
+                <div class="name"> Tobing Catering</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
 <div class="testimonials">
     <div class="inner">
       <h2 class="h2-text">Best Vendors</h2>

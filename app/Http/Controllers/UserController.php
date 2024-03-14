@@ -93,6 +93,10 @@ class UserController extends Controller
     return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
 }
 
+    public function sendEmail($type,$email){
+        Mail::to($email)->send(new Email(null,null,null,$type));
+    }
+
     public function googleCallback() {
         try {
             $user = Socialite::driver('google')->user();
@@ -107,6 +111,7 @@ class UserController extends Controller
                     $newCustomer->status = 'ACTIVE';
                     $newCustomer->password = bcrypt('12343213123'); // temporary password
                     $newCustomer->save();
+                    $this->sendEmail('registration',$user->email);
                     Auth::guard('webcustomer')->login($customer);
                     Session::put('mysession',Auth::guard('webcustomer')->user()->name);
                     return redirect('/');
@@ -121,6 +126,7 @@ class UserController extends Controller
                     $newVendor->description = 'default description'; // temporary description
                     $newVendor->rating = 3; // temporary rating
                     $newVendor->save();
+                    $this->sendEmail('registration',$user->email);
                     Auth::guard('webvendor')->login($vendor);
                     Session::put('mysession',Auth::guard('webvendor')->user()->name);
                     return redirect('/');

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Email;
 
 class VendorController extends Controller
 {
@@ -93,13 +95,13 @@ class VendorController extends Controller
 
         $vendor->save();
 
-        $this->sendEmail('registration');
+        $this->sendEmail('registration',$req->email);
 
         return redirect('/login');
     }
 
-    public function sendEmail($type){
-        Mail::to(Auth::guard('webcustomer')->user()->email)->send(new Email(null,null,null,$type));
+    public function sendEmail($type,$email){
+        Mail::to($email)->send(new Email(null,null,null,$type));
      }
 
     public function checkInAnotherVendorPage($id){
