@@ -101,6 +101,8 @@
                   <th style="font-size: 16px">User</th>
                   <th style="font-size: 16px">Created Date</th>
                   <th style="font-size: 16px">Status</th>
+                  <th style="font-size: 16px">Number Of Transaction</th>
+                  <th style="font-size: 16px">Total Sales</th>
                 </tr>
               </thead>
               <tbody>
@@ -128,6 +130,12 @@
                     <td><button class="status pending" style="border:none;">Inactive</button></td>
                   </form>
                   @endif
+                  <td>
+                    <p class="fontstyle">{{$v->name}}</p>
+                  </td>
+                  <td>
+                    <p class="fontstyle">{{$v->name}}</p>
+                  </td>
                 </tr>
               @empty
 
@@ -138,8 +146,31 @@
               {{$vendors->appends(['customers' => $customers->currentPage()])->links()}}
             </div>
 
-          
+
           </div>
+
+      </div>
+      <div class="box-info" style="margin-top: 5%; margin-right:3%">
+        <li>
+
+            <span  style="line-height: 1.0;">
+              <p   style="text-align:center;font-size:30px;font-weight:700;font-family:Poppins;margin-top:-120px;margin-left: 205px;margin-bottom: 65px ">Top Category</p>
+              <div class="justify-content-center align-items-center">
+
+              <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 260px">Main Course</span>
+              <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 351px">Products Sold : 117</span>
+            </div>
+            </span>
+          </li>
+        <li>
+          <span class="texts" style="line-height: 1.0;">
+            <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 522px ">Top Vendor</p>
+                    <img style="width: 200px" src="/storage/{{$v->image}}" alt="" />
+                    <span  style="font-size:30px;font-weight:700;font-family:Poppins;"  class="fontstyle">{{$v->name}} </span>
+                    <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 215px"> Total Earning: Rp 20.000.000</span>
+          </span>
+        </li>
+
       </div>
     </main>
   </section>
