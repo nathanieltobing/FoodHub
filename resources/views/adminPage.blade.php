@@ -149,19 +149,19 @@
           </div>
 
       </div>
-      <div class="box-info" style="margin-top: 5%; margin-right:3%">
-        <li>
+      <div class="box-info" style="margin-top: 5%; margin-right:3%;background:none">
+        <li style="background:none">
 
            <span class="texts" style="line-height: 1.0;margin-left: 43%;margin-bottom: 215px ">
             <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 66px">Top Category</p>
             <div class="card shadow text-center" style="border-radius: 15px;">
-                <div class="card-body" style="height: 20.5rem;">
+                <div class="card-body" style="height: 23.5rem;">
                 <p style="padding-top :0%;font-size:24px;font-weight:700;font-family:Poppins;">MAIN COURSE</p>
-                <hr class="bg-dark">
+                <hr class="bg-dark" style="    margin-bottom: 25px">
                 <p  class="testimonials" style="font-size:20px;font-weight:700;font-family:Poppins;margin-left: -2px ;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Number Of Transaction: 200</p>
-                <hr class="bg-dark">
+                <hr class="bg-dark" style="    margin-bottom: 25px">
                 <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Total Income: Rp17.000.000</p>
-                <hr class="bg-dark">
+                <hr class="bg-dark"style="    margin-bottom: 40px">
                 <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Products Sold: 117</p>
                 </div>
             </div>
@@ -171,8 +171,8 @@
 
 
         </li>
-        <li>
-          <span class="texts" style="line-height: 1.0;margin-left: 43%;margin-bottom: 175px">
+        <li style="background:none">
+          <span class="texts" style="line-height: 1.0;margin-left: 43%;margin-bottom: 210px">
             <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 66px">Top Vendor</p>
             <div  class="card shadow text-center" style="border-radius: 15px">
 
