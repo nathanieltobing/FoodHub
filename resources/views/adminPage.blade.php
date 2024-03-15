@@ -166,7 +166,7 @@
                         <p class="category-info">Products Sold: 117</p>
                     </div>
                 </div>
-                <div class="card shadow text-center">
+                {{-- <div class="card shadow text-center">
                     <div class="card-body">
                         <h3 class="category-title">DESSERT</h3>
                         <hr class="hrs">
@@ -176,8 +176,8 @@
                         <hr class="hrs">
                         <p class="category-info">Products Sold: 90</p>
                     </div>
-                </div>
-                
+                </div> --}}
+
             </div>
         </div>
         {{-- <div class="top-category">
@@ -209,21 +209,21 @@
             <h2>Top Vendor</h2>
             <div class="vendor-card-container">
                 <div class="card shadow text-center">
-                    <img src="/storage/{{$v->image}}" class="card" alt="Product Image">
+                    <img src="/storage/{{$v->image}}" class="" alt="Product Image">
                     <div class="card-body">
                         <h3 class="vendor-name">Salama Catering</h3>
                         <hr class="hrs">
                         <p class="vendor-info">Product Sold: 120</p>
                     </div>
                 </div>
-                <div class="card shadow text-center">
+                {{-- <div class="card shadow text-center">
                     <img src="/storage/{{$v->image}}" class="card" alt="Product Image">
                     <div class="card-body">
                         <h3 class="vendor-name">Salama Catering</h3>
                         <hr class="hrs">
                         <p class="vendor-info">Product Sold: 120</p>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         {{-- <div class="top-vendor">

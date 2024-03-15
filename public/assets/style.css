@@ -2728,6 +2728,7 @@ hr {
 }
 
 .card {
+    margin-left: 27%;
     border-radius: 15px;
     border: none;
     position: relative; /* Needed for absolute positioning of card body */
@@ -2751,11 +2752,13 @@ hr {
 }
 
 .top-category {
+    /* margin-left: 30%; */
     width: 100%; /* Ensure full width */
 }
 
 
 .top-vendor {
+    /* margin-left: 30%; */
     width: 100%; /* Ensure full width */
 }
 
@@ -2784,6 +2787,7 @@ hr {
 }
 
 h2 {
+    text-align: center;
     font-size: 30px;
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
