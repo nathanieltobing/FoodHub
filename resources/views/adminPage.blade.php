@@ -99,7 +99,6 @@
               <thead>
                 <tr class="fontstyle">
                   <th style="font-size: 16px">User</th>
-                  <th style="font-size: 16px">Created Date</th>
                   <th style="font-size: 16px">Status</th>
                   <th style="font-size: 16px">Number Of Transaction</th>
                   <th style="font-size: 16px">Total Sales</th>
@@ -112,7 +111,7 @@
                     <img src="/storage/{{$v->image}}" alt="" />
                     <p class="fontstyle">{{$v->name}}</p>
                   </td>
-                  <td class="fontstyle">{{\Carbon\Carbon::parse($v->created_at)->format('d-m-Y')}}</td>
+
                   @if ($v->status == 'ACTIVE')
                   <form action="/deactivate/{{$v->id}}" method="POST">
                     {{method_field('PUT')}}
@@ -153,21 +152,41 @@
       <div class="box-info" style="margin-top: 5%; margin-right:3%">
         <li>
 
-            <span  style="line-height: 1.0;">
-              <p   style="text-align:center;font-size:30px;font-weight:700;font-family:Poppins;margin-top:-120px;margin-left: 205px;margin-bottom: 65px ">Top Category</p>
-              <div class="justify-content-center align-items-center">
-
-              <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 260px">Main Course</span>
-              <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 351px">Products Sold : 117</span>
+           <span class="texts" style="line-height: 1.0;margin-left: 43%;margin-bottom: 215px ">
+            <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 66px">Top Category</p>
+            <div class="card shadow text-center" style="border-radius: 15px;">
+                <div class="card-body" style="height: 20.5rem;">
+                <p style="padding-top :0%;font-size:24px;font-weight:700;font-family:Poppins;">MAIN COURSE</p>
+                <hr class="bg-dark">
+                <p  class="testimonials" style="font-size:20px;font-weight:700;font-family:Poppins;margin-left: -2px ;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Number Of Transaction: 200</p>
+                <hr class="bg-dark">
+                <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Total Income: Rp17.000.000</p>
+                <hr class="bg-dark">
+                <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Products Sold: 117</p>
+                </div>
             </div>
-            </span>
-          </li>
-        <li>
-          <span class="texts" style="line-height: 1.0;">
-            <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 522px ">Top Vendor</p>
-                    <img style="width: 200px" src="/storage/{{$v->image}}" alt="" />
+                    {{-- <img style="width: 200px" src="/storage/{{$v->image}}" alt="" />
                     <span  style="font-size:30px;font-weight:700;font-family:Poppins;"  class="fontstyle">{{$v->name}} </span>
-                    <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 215px"> Total Earning: Rp 20.000.000</span>
+                    <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 215px"> Total Earning: Rp 20.000.000</span> --}}
+
+
+        </li>
+        <li>
+          <span class="texts" style="line-height: 1.0;margin-left: 43%;margin-bottom: 175px">
+            <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 66px">Top Vendor</p>
+            <div  class="card shadow text-center" style="border-radius: 15px">
+
+                <img src="/storage/{{$v->image}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 14.5rem;">
+                <div class="card-body" style="height: 8.5rem; overflow: hidden;">
+                    <h5  style="font-size:30px;font-weight:700;font-family:Poppins;"class="card-title fontstyle">Salama Catering</h5>
+                    <hr class="bg-dark">
+                    <h6 style="font-size:24px;font-weight:700;font-family:Poppins;">Product Sold: 120</h6>
+                    {{-- <p class="card-text fontstyle" style="height:5rem; overflow:hidden;" >Makanan Ringan yang blabalbal</p> --}}
+                </div>
+            </div>
+                    {{-- <img style="width: 200px" src="/storage/{{$v->image}}" alt="" />
+                    <span  style="font-size:30px;font-weight:700;font-family:Poppins;"  class="fontstyle">{{$v->name}} </span>
+                    <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 215px"> Total Earning: Rp 20.000.000</span> --}}
           </span>
         </li>
 

@@ -42,41 +42,40 @@
 
     <div class="container mt-5">
         <div class="d-flex">
-            <h1 style="padding-top :0%;font-size:30px;font-weight:700" class="align-self-end fontstyle">Most Ordered Product</h1>
+            <h1 style="padding-top :0%;font-size:30px;font-weight:700" class="align-self-end fontstyle">Transaction</h1>
+        </div>
+        <hr class="bg-dark">
+
+        <div class="card shadow text-center" style="border-radius: 15px;">
+            <div class="card-body" style="height: 20.5rem;">
+            <p style="padding-top :0%;font-size:24px;font-weight:700;font-family:Poppins;">Transaction Report</p>
+            <hr class="bg-dark">
+            <p  class="testimonials" style="font-size:20px;font-weight:700;font-family:Poppins;margin-left: -2px ;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Number Of Transaction: 200</p>
+            <hr class="bg-dark">
+            <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Total Income: Rp17.000.000</p>
+            <hr class="bg-dark">
+            <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Products Sold: 117</p>
+            </div>
+        </div>
+
+
+        <div class="d-flex">
+            <h1 style="padding-top :0%;font-size:30px;font-weight:700;margin-top: 30px" class="align-self-end fontstyle">Most Ordered Product</h1>
         </div>
         <hr class="bg-dark">
 
         <div class="col-md-4 mb-4">
 
-            <div class="d-flex justify-content-center align-items-center" style="width: 820px">
-                <div  class="card shadow text-center" style="border-radius: 15px;margin-right:237px">
-                    <img src="{{ asset('assets/images/basreng.jpg') }}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 12.5rem;">
+            </div>
+            <div >
+                <div  class="card shadow text-center" style="border-radius: 15px">
+                    <img src="{{ asset('assets/images/basreng.jpg') }}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 20.5rem;">
                     <div class="card-body" style="height: 10.5rem; overflow: hidden;">
                         <h5 class="card-title fontstyle">Basreng</h5>
                         <h6 class="card-title text-secondary fontstyle">Appetizer</h6>
                         <p class="card-text fontstyle" style="height:5rem; overflow:hidden;" >Makanan Ringan yang blabalbal</p>
                     </div>
-
                 </div>
-                <div >
-                    <div class="card shadow text-center" style="border-radius: 15px;">
-                        <div class="card-body" style="height: 16.5rem;">
-                        <p style="padding-top :0%;font-size:24px;font-weight:700;font-family:Poppins;">Detail Transaction</p>
-                        <hr class="bg-dark">
-                        <p  class="testimonials" style="font-size:20px;font-weight:700;font-family:Poppins;margin-left: -2px ;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Number Of Transaction: 200</p>
-                        <hr class="bg-dark">
-                        <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Total Income: Rp17.000.000</p>
-                        </div>
-                    </div>
-                    {{-- <p  class="testimonials" style="font-size:20px;font-weight:700;font-family:Poppins;margin-left: -2px ;padding: 10px 10px"> Total Transaction: 200</p>
-                    <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px"> Total Income: Rp17.000.000</p> --}}
-                </div>
-
-
-            </div>
-
-
-
         </div>
     </div>
 
