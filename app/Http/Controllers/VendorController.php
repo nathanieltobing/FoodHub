@@ -59,7 +59,7 @@ class VendorController extends Controller
     }
 
     public function getTopProduct(){
-        $productReporting = ProductReporting::orderBy('number_of_transaction', 'DESC')->first();
+        $productReporting = ProductReporting::orderBy('product_sold', 'DESC')->first();
         // $product = Product::where('id',$productReporting->product_id)->first();
         return $productReporting;
     }
@@ -70,6 +70,8 @@ class VendorController extends Controller
         $topVendor = $this->getTopVendor();
         $topProduct = $this->getTopProduct();
 
+        // $date = Carbon::now();
+        //  dd($date->month);
         return view('homepage', ['featuredVendors'=> $featuredVendors , 'topRatedVendors' => $topRatedVendors,
          'topVendor'=> $topVendor, 'topProduct' => $topProduct]);
 

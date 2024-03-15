@@ -62,7 +62,7 @@
               <div class="testimonial">
                 <a href="/products/{{$topProduct->vendor_id}}"><img src="/storage/{{$topProduct->products->image}}" alt=""></a>
                 <div class="name">{{$topProduct->products->name}}</div>
-                <h1>Total Sold : {{$topProduct->number_of_transaction}}</h1>
+                <h1>Total Sold : {{$topProduct->product_sold}}</h1>
               </div>
             </div>
 

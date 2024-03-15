@@ -19,6 +19,8 @@ class VendorReportingSeeder extends Seeder
             'id' => 1,
             'vendor_id' => 1,
             'number_of_transaction' => 5,
+            'total_earning_monthly' => 5100000,
+            'month' => Carbon::now()->month,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);

@@ -18,6 +18,8 @@ class CreateVendorReportingsTable extends Migration
             $table->timestamps();
             $table->foreignId('vendor_id');
             $table->integer('number_of_transaction');
+            $table->double('total_earning_monthly');
+            $table->integer('month');
             $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('cascade');
 
         });

@@ -20,7 +20,7 @@ class CreateProductReportingsTable extends Migration
             $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('number_of_transaction');
+            $table->integer('product_sold');
         });
     }
 

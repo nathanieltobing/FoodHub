@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
-class ProductReportingSeeder extends Seeder
+class CategoryReportingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +13,9 @@ class ProductReportingSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_reportings')->insert([
+        DB::table('category_reportings')->insert([
             'id' => 1,
-            'vendor_id' => 3,
-            'product_id'=> 2,
+            'category_id' => 3,
             'product_sold' => 7,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

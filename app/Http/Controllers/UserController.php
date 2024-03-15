@@ -107,7 +107,6 @@ class UserController extends Controller
             if($customer == null && $vendor == null) {
                 if(session()->get('registerAs') == 'CUSTOMER') {
                     $newCustomer = new Customer();
-                    $newCustomer->role = 'CUSTOMER';
                     $newCustomer->name = $user->name;
                     $newCustomer->email = $user->email;
                     $newCustomer->status = 'ACTIVE';
@@ -121,7 +120,6 @@ class UserController extends Controller
                 }
                 else if(session()->get('registerAs') == 'VENDOR'){
                     $newVendor = new Vendor();
-                    $newVendor->role = 'VENDOR';
                     $newVendor->name = $user->name;
                     $newVendor->email = $user->email;
                     $newVendor->status = 'ACTIVE';
