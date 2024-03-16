@@ -4,6 +4,7 @@
 
 
   <section class="content">
+
     <main>
         <div class="" style="margin-top: 5%">
 
@@ -161,48 +162,105 @@
           </div>
 
       </div>
-      <div class="box-info" style="margin-top: 5%; margin-right:3%">
-        <li style="background:none">
 
-           <span class="texts" style="line-height: 1.0;margin-left: 43%;margin-bottom: 215px ">
-            <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 66px">Top Category</p>
-            <div class="card shadow text-center" style="border-radius: 15px;">
-                <div class="card-body" style="height: 20.5rem;">
-                <p style="padding-top :0%;font-size:24px;font-weight:700;font-family:Poppins;">MAIN COURSE</p>
-                <hr class="bg-dark">
-                <p  class="testimonials" style="font-size:20px;font-weight:700;font-family:Poppins;margin-left: -2px ;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Number Of Transaction: 200</p>
-                <hr class="bg-dark">
-                <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Total Income: Rp17.000.000</p>
-                <hr class="bg-dark">
-                <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Products Sold: 117</p>
+      <div class="box-info">
+        <div class="top-category">
+            <h2>Top Category</h2>
+            <div class="category-card-container">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <h3 class="category-title">MAIN COURSE</h3>
+                        <hr class="hrs">
+                        <p class="category-info">Number Of Transaction: 200</p>
+                        <hr class="hrs">
+                        <p class="category-info">Total Income: Rp17.000.000</p>
+                        <hr class="hrs">
+                        <p class="category-info">Products Sold: 117</p>
+                    </div>
+                </div>
+                {{-- <div class="card shadow text-center">
+                    <div class="card-body">
+                        <h3 class="category-title">DESSERT</h3>
+                        <hr class="hrs">
+                        <p class="category-info">Number Of Transaction: 150</p>
+                        <hr class="hrs">
+                        <p class="category-info">Total Income: Rp12.000.000</p>
+                        <hr class="hrs">
+                        <p class="category-info">Products Sold: 90</p>
+                    </div>
+                </div> --}}
+
+            </div>
+        </div>
+        {{-- <div class="top-category">
+            <h2>Top Category</h2>
+            <div class="vendor-card-container">
+            <div class="card shadow text-center d-flex">
+                <div class="card-body">
+                    <h3 class="category-title">MAIN COURSE</h3>
+                    <hr class="hrs">
+                    <p class="category-info">Number Of Transaction: 200</p>
+                    <hr class="hrs">
+                    <p class="category-info">Total Income: Rp17.000.000</p>
+                    <hr class="hrs">
+                    <p class="category-info">Products Sold: 117</p>
+                </div>
+                <div class="card-body">
+                    <h3 class="category-title">MAIN COURSE</h3>
+                    <hr class="hrs">
+                    <p class="category-info">Number Of Transaction: 200</p>
+                    <hr class="hrs">
+                    <p class="category-info">Total Income: Rp17.000.000</p>
+                    <hr class="hrs">
+                    <p class="category-info">Products Sold: 117</p>
                 </div>
             </div>
-                    {{-- <img style="width: 200px" src="/storage/{{$v->image}}" alt="" />
-                    <span  style="font-size:30px;font-weight:700;font-family:Poppins;"  class="fontstyle">{{$v->name}} </span>
-                    <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 215px"> Total Earning: Rp 20.000.000</span> --}}
-
-
-        </li>
-        <li style="background: none">
-          <span class="texts" style="line-height: 1.0;margin-left: 43%;margin-bottom: 175px">
-            <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 66px">Top Vendor</p>
-            <div  class="card shadow text-center" style="border-radius: 15px">
-
-                <img src="/storage/{{$v->image}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 14.5rem;">
-                <div class="card-body" style="height: 8.5rem; overflow: hidden;">
-                    <h5  style="font-size:30px;font-weight:700;font-family:Poppins;"class="card-title fontstyle">Salama Catering</h5>
-                    <hr class="bg-dark">
-                    <h6 style="font-size:24px;font-weight:700;font-family:Poppins;">Product Sold: 120</h6>
-                    {{-- <p class="card-text fontstyle" style="height:5rem; overflow:hidden;" >Makanan Ringan yang blabalbal</p> --}}
+            </div>
+        </div> --}}
+        <div class="top-vendor">
+            <h2>Top Vendor</h2>
+            <div class="vendor-card-container">
+                <div class="card shadow text-center">
+                    <img src="/storage/{{$v->image}}" class="" alt="Product Image">
+                    <div class="card-body">
+                        <h3 class="vendor-name">Salama Catering</h3>
+                        <hr class="hrs">
+                        <p class="vendor-info">Product Sold: 120</p>
+                    </div>
+                </div>
+                {{-- <div class="card shadow text-center">
+                    <img src="/storage/{{$v->image}}" class="card" alt="Product Image">
+                    <div class="card-body">
+                        <h3 class="vendor-name">Salama Catering</h3>
+                        <hr class="hrs">
+                        <p class="vendor-info">Product Sold: 120</p>
+                    </div>
+                </div> --}}
+            </div>
+        </div>
+        {{-- <div class="top-vendor">
+            <h2>Top Vendor</h2>
+            <div class="vendor-wrapper">
+            <div class="card shadow text-center">
+                <img src="/storage/{{$v->image}}" class="card" alt="Product Image">
+                <div class="card-body">
+                    <h3 class="vendor-name">Salama Catering</h3>
+                    <hr class="hrs">
+                    <p class="vendor-info">Product Sold: 120</p>
                 </div>
             </div>
-                    {{-- <img style="width: 200px" src="/storage/{{$v->image}}" alt="" />
-                    <span  style="font-size:30px;font-weight:700;font-family:Poppins;"  class="fontstyle">{{$v->name}} </span>
-                    <span style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 215px"> Total Earning: Rp 20.000.000</span> --}}
-          </span>
-        </li>
+            <div class="card shadow text-center">
+                <img src="/storage/{{$v->image}}" class="card" alt="Product Image">
+                <div class="card-body">
+                    <h3 class="vendor-name">Salama Catering</h3>
+                    <hr class="hrs">
+                    <p class="vendor-info">Product Sold: 120</p>
+                </div>
+            </div>
+            </div>
+        </div> --}}
 
-      </div>
+    </div>
     </main>
   </section>
 
