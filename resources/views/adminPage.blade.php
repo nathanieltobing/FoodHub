@@ -145,7 +145,7 @@
                      @if($vendorR == null)
                       <p class="fontstyle">0</p>
                      @else 
-                      <p class="fontstyle">{{$vendorR->total_earning_monthly}}</p>
+                      <p class="fontstyle">Rp{{number_format($vendorR->total_earning_monthly,2,",",".")}}</p>
                      @endif
                   </td>
                 </tr>
@@ -169,13 +169,13 @@
             <div class="category-card-container">
                 <div class="card shadow text-center">
                     <div class="card-body">
-                        <h3 class="category-title">MAIN COURSE</h3>
+                        <h3 class="category-title">{{$topCategory->categories->name}}</h3>
                         <hr class="hrs">
-                        <p class="category-info">Number Of Transaction: 200</p>
+                        <p class="category-info">Product Sold: {{$topCategory->product_sold}}</p>
                         <hr class="hrs">
-                        <p class="category-info">Total Income: Rp17.000.000</p>
+                        {{-- <p class="category-info">Total Income: Rp17.000.000</p>
                         <hr class="hrs">
-                        <p class="category-info">Products Sold: 117</p>
+                        <p class="category-info">Products Sold: 117</p> --}}
                     </div>
                 </div>
                 {{-- <div class="card shadow text-center">

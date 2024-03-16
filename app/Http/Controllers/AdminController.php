@@ -11,16 +11,18 @@ use App\Mail\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Models\CategoryReporting;
 
 class AdminController extends Controller
 {
     public function index(){
         $customers = Customer::paginate(5, ['*'], 'customers');
         $vendors = Vendor::paginate(5, ['*'], 'vendors');
+        $topCategory = CategoryReporting::orderBy('product_sold','DESC')->first();
         $totalCustomer = Customer::get()->count();
         $totalVendor = Vendor::get()->count();
 
-        return view('adminPage', ['customers'=> $customers , 'vendors' => $vendors , 'totalCustomer' => $totalCustomer, 'totalVendor' => $totalVendor]);
+        return view('adminPage', ['customers'=> $customers , 'vendors' => $vendors , 'totalCustomer' => $totalCustomer, 'totalVendor' => $totalVendor, 'topCategory' => $topCategory]);
     }
 
     public function deActivateUser($id, Request $req){
