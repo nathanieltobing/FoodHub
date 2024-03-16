@@ -39,7 +39,7 @@
 
 
     </div>
-
+    @if(Auth::guard('webvendor')->check() && $vendorReporting && $totalProductSold && $productReporting)
     <div class="container mt-5">
         <div class="d-flex">
             <h1 style="padding-top :0%;font-size:30px;font-weight:700" class="align-self-end fontstyle">Transaction</h1>
@@ -78,7 +78,7 @@
                 </div>
         </div>
     </div>
-
+    @endif
    <div class="container mt-5">
         @if (Auth::guard('webcustomer')->check())
             <h1 class="fontstyle" style="font-size:30px;font-weight:700">Product List</h1>

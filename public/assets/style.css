@@ -2727,7 +2727,7 @@ hr {
     width: 45%;
 }
 
-.card {
+.card-admin {
     margin-left: 27%;
     border-radius: 15px;
     border: none;
@@ -2762,7 +2762,7 @@ hr {
     width: 100%; /* Ensure full width */
 }
 
-.card::before { /* Pseudo-element to serve as the background */
+.card-admin::before { /* Pseudo-element to serve as the background */
     content: "";
     display: block;
     position: absolute;
@@ -2773,13 +2773,13 @@ hr {
     background-size: cover;
     background-position: center;
 }
-.card img {
+.card-admin img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
 }
-.card-body {
+.card-admin {
     position: relative; /* So it's positioned relative to the card */
         z-index: 1; /* Ensure content appears above the pseudo-element */
     padding: 20px;
