@@ -59,7 +59,10 @@ Route::get('/register/google-vendor', [VendorController::class, 'registerWithGoo
 
 // google auth
 Route::get('/auth/google', [UserController::class, 'authGoogle']);
+Route::get('/auth/google/vendor', [UserController::class, 'authGoogleVendor']);
+Route::get('/auth/google/customer', [UserController::class, 'authGoogleCustomer']);
 Route::get('/auth/google/callback', [UserController::class, 'googleCallback']);
+
 
 Route::middleware(['checkIfAdmin','checkIfVendor'])->group(function(){
     Route::get('/products/{v:id}',[VendorController::class,'showProductList']);
