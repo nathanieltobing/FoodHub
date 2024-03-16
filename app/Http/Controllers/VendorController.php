@@ -112,7 +112,6 @@ class VendorController extends Controller
         $vendor->email = $req->email;
         $vendor->password = bcrypt($req->password);
         $vendor->status = 'ACTIVE';
-
         $vendor->save();
 
         $this->sendEmail('registration',$req->email);
@@ -145,15 +144,25 @@ class VendorController extends Controller
         return view('productList',[
             'vendor' => $v,
             'products' => $products,
-            'error' => $error
+            'error' => $error,
         ]);
     }
 
     public function showVendorProductList(){
+        $v = Auth::guard('webvendor')->user();
         $products = Product::where('vendor_id',Auth::guard('webvendor')->user()->id)->paginate(3);
+        $vendorReporting = VendorReporting::where('vendor_id', $v->id)->where('month',
+        Carbon::now()->month)->first();
+      
+        $totalProductSold = ProductReporting::where('vendor_id', $v->id)->sum('product_sold');
+        $productReporting = ProductReporting::where('vendor_id', $v->id)->orderBy('product_sold',
+        'DESC')->first();
         return view('productList',[
             'products' => $products,
             'vendor' => Auth::guard('webvendor')->user(),
+            'vendorReporting' => $vendorReporting,
+            'productReporting' => $productReporting,
+            'totalProductSold' => $totalProductSold
         ]);
     }
 

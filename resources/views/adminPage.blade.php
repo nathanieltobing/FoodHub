@@ -100,12 +100,16 @@
                 <tr class="fontstyle">
                   <th style="font-size: 16px">User</th>
                   <th style="font-size: 16px">Status</th>
-                  <th style="font-size: 16px">Number Of Transaction</th>
-                  <th style="font-size: 16px">Total Sales</th>
+                  <th style="font-size: 16px">Total Transaction</th>
+                  <th style="font-size: 16px">Monthly Revenue</th>
                 </tr>
               </thead>
               <tbody>
                 @forelse ($vendors as $v)
+                <?php
+                
+                  $vendorR = \App\Models\VendorReporting::where('vendor_id', $v->id)->where('month',\Carbon\Carbon::now()->month)->first();
+                ?>
                 <tr>
                   <td>
                     <img src="/storage/{{$v->image}}" alt="" />
@@ -130,10 +134,18 @@
                   </form>
                   @endif
                   <td>
-                    <p class="fontstyle">{{$v->name}}</p>
+                    @if($vendorR == null)
+                      <p class="fontstyle">0</p>
+                    @else 
+                     <p class="fontstyle">{{$vendorR->number_of_transaction}}</p>
+                     @endif
                   </td>
                   <td>
-                    <p class="fontstyle">{{$v->name}}</p>
+                     @if($vendorR == null)
+                      <p class="fontstyle">0</p>
+                     @else 
+                      <p class="fontstyle">{{$vendorR->total_earning_monthly}}</p>
+                     @endif
                   </td>
                 </tr>
               @empty
@@ -150,7 +162,7 @@
 
       </div>
       <div class="box-info" style="margin-top: 5%; margin-right:3%">
-        <li>
+        <li style="background:none">
 
            <span class="texts" style="line-height: 1.0;margin-left: 43%;margin-bottom: 215px ">
             <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 66px">Top Category</p>
@@ -171,7 +183,7 @@
 
 
         </li>
-        <li>
+        <li style="background: none">
           <span class="texts" style="line-height: 1.0;margin-left: 43%;margin-bottom: 175px">
             <p  style="font-size:30px;font-weight:700;font-family:Poppins;margin-left: 66px">Top Vendor</p>
             <div  class="card shadow text-center" style="border-radius: 15px">
