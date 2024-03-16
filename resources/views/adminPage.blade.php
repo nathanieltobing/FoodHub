@@ -167,8 +167,9 @@
         <div class="top-category">
             <h2>Top Category</h2>
             <div class="category-card-container">
-                <div class="card shadow text-center">
-                    <div class="card-body">
+            
+                <div class="card-admin shadow text-center">
+                    <div class="card-admin-body">           
                         <h3 class="category-title">{{$topCategory->categories->name}}</h3>
                         <hr class="hrs">
                         <p class="category-info">Product Sold: {{$topCategory->product_sold}}</p>
@@ -220,9 +221,9 @@
         <div class="top-vendor">
             <h2>Top Vendor</h2>
             <div class="vendor-card-container">
-                <div class="card shadow text-center">
+                <div class="card-admin shadow text-center">
                     <img src="/storage/{{$v->image}}" class="" alt="Product Image">
-                    <div class="card-body">
+                    <div class="card-admin-body">
                         <h3 class="vendor-name">Salama Catering</h3>
                         <hr class="hrs">
                         <p class="vendor-info">Product Sold: 120</p>
