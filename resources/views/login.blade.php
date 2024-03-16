@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function(arg) {
   let customerButton = document.getElementById("customerBtn");
   let vendorButton = document.getElementById("vendorBtn");
   let adminButton = document.getElementById("adminBtn");
+  let url = document.getElementById("googleUrl");
 
   customerButton.addEventListener("click", updateButton);
   vendorButton.addEventListener("click", updateButton);
@@ -23,19 +24,23 @@ document.addEventListener("DOMContentLoaded", function(arg) {
       btnElementHighlight = customerButton;
       btnElementHighlight.style.border="1px solid gray";
       role.value = "CUSTOMER";
+      url.href="/auth/google/customer";
+      url.style.display = "flex";
     }
     else if(button.currentTarget.value === "VENDOR"){
       btnElementHighlight.style.border="none";
       btnElementHighlight = vendorButton;
       btnElementHighlight.style.border="1px solid gray";
       role.value = "VENDOR";
-
+      url.href="/auth/google/vendor";
+      url.style.display = "flex";
     }
     else if(button.currentTarget.value === "ADMIN"){
       btnElementHighlight.style.border="none";
       btnElementHighlight = adminButton;
       btnElementHighlight.style.border="1px solid gray";
       role.value = "ADMIN";
+      url.style.display = "none";
     }
   }
 
@@ -95,8 +100,8 @@ document.addEventListener("DOMContentLoaded", function(arg) {
                       <button type="submit" class="btn btn-primary btn-lg" style="line-height :1.66; font-weight: 500; font-family: Poppins;background-color:var(--indigo-500)">Login</button>
                     </div>
 
-                    <div class="d-grid gap-2 mb-3 mb-lg-4"> 
-                      <a href="{{url('/auth/google')}}" class="btn btn-primary btn-lg"
+                    <div class="d-grid gap-2 mb-3 mb-lg-4" id="googleButton"> 
+                      <a href="{{url('/auth/google/customer')}}" class="btn btn-primary btn-lg" id="googleUrl"
                       style="display: flex;justify-content:start;gap:64px;line-height :1.66; font-weight: 500; font-family: Poppins;background-color:var(--white); color:#222;font-size: 18px;">
                       <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg"/>
                       Continue with Google

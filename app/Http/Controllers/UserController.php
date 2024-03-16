@@ -85,8 +85,20 @@ class UserController extends Controller
     }
     
     public function authGoogle() {
+         return Socialite::driver('google')->redirect();
+    }
+
+    public function authGoogleCustomer(){
+        Session::put('vendorRole',false);
         return Socialite::driver('google')->redirect();
     }
+
+    public function authGoogleVendor(){
+        Session::put('vendorRole',true);
+        return Socialite::driver('google')->redirect();
+    }
+
+
 
     public static function quickRandom($length = 16)
 {
@@ -104,59 +116,68 @@ class UserController extends Controller
             $user = Socialite::driver('google')->user();
             $customer = Customer::where('email', $user->email)->first();
             $vendor = Vendor::where('email', $user->email)->first();
-            if($customer == null && $vendor == null) {
-                if(session()->get('registerAs') == 'CUSTOMER') {
-                    $newCustomer = new Customer();
-                    $newCustomer->name = $user->name;
-                    $newCustomer->email = $user->email;
-                    $newCustomer->status = 'ACTIVE';
-                    $newCustomer->password = bcrypt('12343213123'); // temporary password
-                    $newCustomer->save();
-                    $this->sendEmail('registration',$user->email);
-                    $customer = Customer::where('email', $user->email)->first();
-                    Auth::guard('webcustomer')->login($customer);
-                    Session::put('mysession',Auth::guard('webcustomer')->user()->name);
-                    return redirect('/');
+            if($customer == null && session()->get('registerAs') == 'CUSTOMER') {
+                $newCustomer = new Customer();
+                $newCustomer->name = $user->name;
+                $newCustomer->email = $user->email;
+                $newCustomer->status = 'ACTIVE';
+                $newCustomer->password = bcrypt('12343213123'); // temporary password
+                $newCustomer->save();
+                $this->sendEmail('registration',$user->email);
+                $customer = Customer::where('email', $user->email)->first();
+                Auth::guard('webcustomer')->login($customer);
+                Session::put('mysession',Auth::guard('webcustomer')->user()->name);
+                return redirect('/');
+            }        
+            else if($vendor == null && session()->get('registerAs') == 'VENDOR'){
+                $newVendor = new Vendor();
+                $newVendor->name = $user->name;
+                $newVendor->email = $user->email;
+                $newVendor->status = 'ACTIVE';
+                $newVendor->password = bcrypt('asdasdsad'); // temporary password
+                $newVendor->description = 'Add description in profile !'; // temporary description
+                $newVendor->rating = 3; // temporary rating
+                $newVendor->phone = 'Add phone number in profile !';
+                $newVendor->save();
+                $this->sendEmail('registration',$user->email);
+                $vendor = Vendor::where('email', $user->email)->first();
+                Auth::guard('webvendor')->login($vendor);
+                Session::put('mysession',Auth::guard('webvendor')->user()->name);
+                return redirect('/');
+            }
+                
+            $isVendor = session()->get('vendorRole');
+
+            if($isVendor) {
+                if($vendor == null){
+                    return redirect('/login')->withErrors('Your email doesn\'t exist!');
+
                 }
-                else if(session()->get('registerAs') == 'VENDOR'){
-                    $newVendor = new Vendor();
-                    $newVendor->name = $user->name;
-                    $newVendor->email = $user->email;
-                    $newVendor->status = 'ACTIVE';
-                    $newVendor->password = bcrypt('asdasdsad'); // temporary password
-                    $newVendor->description = 'default description'; // temporary description
-                    $newVendor->rating = 3; // temporary rating
-                    $newVendor->save();
-                    $this->sendEmail('registration',$user->email);
-                    $vendor = Vendor::where('email', $user->email)->first();
+                else{
+                    if($vendor->status == 'INACTIVE'){
+                        Auth::guard('webvendor')->logout();
+                        return redirect('/login')->withErrors('Your account is suspended !');
+                    }
                     Auth::guard('webvendor')->login($vendor);
                     Session::put('mysession',Auth::guard('webvendor')->user()->name);
                     return redirect('/');
-                } else {
-                    return redirect('/login')->withErrors('You are not registered !');
                 }
-                
             }
 
-            if($customer != null) {
+            else if($customer != null ) {
                 if($customer->status == 'INACTIVE'){
                     Auth::guard('webcustomer')->logout();
-                    return redirect()->back()->withErrors('Your account is suspended !');
+                    return redirect('/login')->withErrors('Your account is suspended !');
                 } 
                 Auth::guard('webcustomer')->login($customer);
                 Session::put('mysession',Auth::guard('webcustomer')->user()->name);
                 return redirect('/');
             }
-            else if($vendor != null) {
-                if($vendor->status == 'INACTIVE'){
-                    Auth::guard('webvendor')->logout();
-                    return redirect()->back()->withErrors('Your account is suspended !');
-                }
-                Auth::guard('webvendor')->login($vendor);
-                Session::put('mysession',Auth::guard('webvendor')->user()->name);
-                return redirect('/');
+            else{
+                return redirect('/login')->withErrors('Your email doesn\'t exist!');
             }
-
+          
+        
         } catch (Exception $e) {
             return redirect('/login');
         }
