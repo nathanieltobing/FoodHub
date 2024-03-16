@@ -26,7 +26,6 @@ class VendorSeeder extends Seeder
             'description' => 'Gerai Snack Tangerang adalah vendor makanan penyedia makanan ringan berkualitas dan terjangkau',         
             'rating' => 4,
             'image' => 'images/geraiSnack.jpg',
-            'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
             'phone' => '081235287823',
@@ -47,7 +46,6 @@ class VendorSeeder extends Seeder
                 'startPeriod' => $startPeriod,
                 'endPeriod' => $endPeriod
             ]),
-            'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
             'phone' => '081243547696',
@@ -68,7 +66,6 @@ class VendorSeeder extends Seeder
                 'startPeriod' => $startPeriod,
                 'endPeriod' => $endPeriod
             ]),
-            'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
             'phone' => '081223567221',
@@ -84,7 +81,6 @@ class VendorSeeder extends Seeder
             'description' => 'Salama catering menyediakan berbagai menu nasi kotak untuk acara besar maupun kecil dengan rasa yang terpecaya',         
             'rating' => 3,
             'image' => 'images/salamaCatering.jpg',
-            'role' => 'VENDOR',
             'status' => 'ACTIVE',
             'status_updated_by' => '1',
             'phone' => '081231335611',

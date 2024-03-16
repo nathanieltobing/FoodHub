@@ -90,7 +90,6 @@ Route::middleware(['checkauth'])->group(function(){
         Route::post('/editstatus/{o:id}', [OrderController::class, 'editStatus']);
         Route::get('/acceptVendorPrice/{o:id}', [OrderController::class, 'acceptVendorPrice']);
         Route::get('/rejectVendorPrice/{o:id}', [OrderController::class, 'rejectVendorPrice']);
-        Route::get('/finishPayment/{o:id}', [OrderController::class, 'finishPayment']);
 
         // Route::post('/checkout',[OrderController::class, 'checkout']);
 

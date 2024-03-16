@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductReportings extends Migration
+class CreateVendorReportingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateProductReportings extends Migration
      */
     public function up()
     {
-        Schema::create('product_reportings', function (Blueprint $table) {
+        Schema::create('vendor_reportings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('vendor_id');
-            $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('number_of_transaction');
+            $table->double('total_earning_monthly');
+            $table->integer('month');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('cascade');
+
         });
     }
 
@@ -31,6 +32,6 @@ class CreateProductReportings extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_reportings');
+        Schema::dropIfExists('vendor_reportings');
     }
 }

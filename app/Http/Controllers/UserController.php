@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Email;
 use Socialite;
 
 class UserController extends Controller
@@ -105,20 +107,19 @@ class UserController extends Controller
             if($customer == null && $vendor == null) {
                 if(session()->get('registerAs') == 'CUSTOMER') {
                     $newCustomer = new Customer();
-                    $newCustomer->role = 'CUSTOMER';
                     $newCustomer->name = $user->name;
                     $newCustomer->email = $user->email;
                     $newCustomer->status = 'ACTIVE';
                     $newCustomer->password = bcrypt('12343213123'); // temporary password
                     $newCustomer->save();
                     $this->sendEmail('registration',$user->email);
+                    $customer = Customer::where('email', $user->email)->first();
                     Auth::guard('webcustomer')->login($customer);
                     Session::put('mysession',Auth::guard('webcustomer')->user()->name);
                     return redirect('/');
                 }
                 else if(session()->get('registerAs') == 'VENDOR'){
                     $newVendor = new Vendor();
-                    $newVendor->role = 'VENDOR';
                     $newVendor->name = $user->name;
                     $newVendor->email = $user->email;
                     $newVendor->status = 'ACTIVE';
@@ -127,6 +128,7 @@ class UserController extends Controller
                     $newVendor->rating = 3; // temporary rating
                     $newVendor->save();
                     $this->sendEmail('registration',$user->email);
+                    $vendor = Vendor::where('email', $user->email)->first();
                     Auth::guard('webvendor')->login($vendor);
                     Session::put('mysession',Auth::guard('webvendor')->user()->name);
                     return redirect('/');

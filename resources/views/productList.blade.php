@@ -40,6 +40,44 @@
 
     </div>
 
+    <div class="container mt-5">
+        <div class="d-flex">
+            <h1 style="padding-top :0%;font-size:30px;font-weight:700" class="align-self-end fontstyle">Transaction</h1>
+        </div>
+        <hr class="bg-dark">
+
+        <div class="card shadow text-center" style="border-radius: 15px;">
+            <div class="card-body" style="height: 20.5rem;">
+            <p style="padding-top :0%;font-size:24px;font-weight:700;font-family:Poppins;">Transaction Report</p>
+            <hr class="bg-dark">
+            <p  class="testimonials" style="font-size:20px;font-weight:700;font-family:Poppins;margin-left: -2px ;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Total Transaction: {{$vendorReporting->number_of_transaction}}</p>
+            <hr class="bg-dark">
+            <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Monthly Revenue: Rp{{number_format($vendorReporting->total_earning_monthly,2,",",".")}}</p>
+            <hr class="bg-dark">
+            <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Products Sold: {{$totalProductSold}}</p>
+            </div>
+        </div>
+
+
+        <div class="d-flex">
+            <h1 style="padding-top :0%;font-size:30px;font-weight:700;margin-top: 30px" class="align-self-end fontstyle">Most Ordered Product</h1>
+        </div>
+        <hr class="bg-dark">
+
+        <div class="col-md-4 mb-4">
+
+            </div>
+            <div >
+                <div  class="card shadow text-center" style="border-radius: 15px">
+                    <img src="/storage/{{$productReporting->products->image}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 20.5rem;">
+                    <div class="card-body" style="height: 10.5rem; overflow: hidden;">
+                        <h5 class="card-title fontstyle">{{$productReporting->products->name}}</h5>
+                        <h6 class="card-title text-secondary fontstyle">{{$productReporting->products->categories->name}}</h6>
+                        <p class="card-text fontstyle" style="height:5rem; overflow:hidden;" >Product Sold : {{$productReporting->product_sold}}</p>
+                    </div>
+                </div>
+        </div>
+    </div>
 
    <div class="container mt-5">
         @if (Auth::guard('webcustomer')->check())

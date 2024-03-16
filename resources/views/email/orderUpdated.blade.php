@@ -18,12 +18,14 @@
 </style>
 
 <head>
-    <title>There is an update on your order<I/title>
+    <title>Incoming Order FoodHub</title>
 </head>
 
 <body>
     <p>Your order has been updated, please check your order in FoodHub to see the update</p>
-    {{-- <p>Your order is updated to {{$order->status}}</p> --}}
+    <p>
+        {{-- Order No : ODR-{{$order->id}} --}}
+    </p>
 
 </body>
 

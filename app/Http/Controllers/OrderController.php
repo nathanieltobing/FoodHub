@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Mail\Email;
 use App\Models\Order;
+use App\Models\Category;
 use App\Models\Review;
 use App\Models\Vendor;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\OrderDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +55,7 @@ class OrderController extends Controller
             'status' => $status
         ]);
         $order = DB::table('orders')->where('id', $o->id)->first();
-        $this->sendEmail($o,$orderDetails,$order->vendor_id,"order status updated");
+        $this->sendEmail($o,null,$o->vendor_id,"order status updated");
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
@@ -68,7 +70,7 @@ class OrderController extends Controller
             ])->update([
             'nego_status' => 'ACCEPTED'
         ]);
-        $this->sendEmail($o,$orderDetails,$order->vendor_id,"order status updated");
+        $this->sendEmail($o,$o->vendor_id,"order status updated");
         return redirect()->back()->with('message','Order status edited successfully!');
     }
 
@@ -90,7 +92,7 @@ class OrderController extends Controller
             'nego_status' => 'REJECTED',
             'nego_price' => $req->price
         ]);
-        $this->sendEmail($o,$orderDetails,$order->vendor_id,"order status updated");
+        $this->sendEmail($o,null,$o->vendor_id,"order status updated");
         return redirect()->back()->with('message','Order status edited successfully!');
     }
     #Customer terima harga nego
@@ -112,15 +114,6 @@ class OrderController extends Controller
         ]);
         $this->sendEmailVendor($o,$o->vendor_id,"order status updated");
         return redirect()->back()->with('message','Order status edited successfully!');
-    }
-
-    public function finishPayment(Order $o){
-        $o->status = "ON GOING";
-        $o->save();
-        $orderDetails = OrderDetail::where('order_id', $o->id)->get();
-        $this->sendEmail($o,$orderDetails,$order->vendor_id,"checkout");
-        $this->sendEmailVendor($o,$order->vendor_id,"order status updated");
-        return redirect('orderlist');
     }
 
     public function viewConfirmPayment(Order $o){
@@ -303,7 +296,6 @@ class OrderController extends Controller
         else if(strcmp($type,"order status updated")==0){
             Mail::to($customer->email)->send(new Email($order,$orderDetails,$vendor,$type));
         }
-        Mail::to($customer->user()->email)->send(new Email($order,$orderDetails,$vendor,$type));
      }
 
      public function sendEmailVendor($order,$vendor_id,$type){
@@ -317,6 +309,7 @@ class OrderController extends Controller
             ])->update([
             'status' => 'FINISHED'
         ]);
+        $this->addReporting($o);
         return redirect('orderlist')->with('message','Order status edited successfully!');
     }
 
@@ -329,7 +322,80 @@ class OrderController extends Controller
             ])->update([
             'status' => 'FINISHED'
         ]);
-
+        $this->addReporting($o);
         return redirect('orderlist')->with('message','Order status edited successfully!');
+    }
+
+    public function addReporting(Order $o){
+        $vendor = DB::table('vendor_reportings')->where([
+            ['vendor_id', $o->vendor_id],
+            ['month',Carbon::now()->month]
+            ])->first();
+        if($vendor == null ){
+            DB::table('vendor_reportings')->insert([
+                'vendor_id' => $o->vendor_id,
+                'number_of_transaction' => 1,
+                'total_earning_monthly' => $o->total_price,
+                'month' => Carbon::now()->month
+            ]);
+        }
+        else{
+            $numTransaction = $vendor->number_of_transaction;
+            $numTransaction = $numTransaction + 1;
+            $totalEarnMonthly = $vendor->total_earning_monthly;
+            $totalEarnMonthly = $totalEarnMonthly + $o->total_price;
+
+            DB::table('vendor_reportings')->where([
+                ['vendor_id',$o->vendor_id],
+                ['month' , Carbon::now()->month]
+                ])->update([
+                'number_of_transaction' => $numTransaction
+            ]);
+            DB::table('vendor_reportings')->where([
+                ['vendor_id',$o->vendor_id],
+                ['month' , Carbon::now()->month]
+                ])->update([
+                'total_earning_monthly' => $totalEarnMonthly
+            ]);
+        }
+        $orderDetails = OrderDetail::where('order_id', $o->id)->get();
+        foreach($orderDetails as $od){
+
+            $productReporting = DB::table('product_reportings')->where('product_id', $od->product_id)->first();
+            $product = Product::where('id',$od->product_id)->first();
+            $category = DB::table('category_reportings')->where('category_id', $product->category_id)->first();
+            if($productReporting == null){
+                DB::table('product_reportings')->insert([
+                    'vendor_id' => $o->vendor_id,
+                    'product_id' => $od->product_id,
+                    'product_sold' => $od->quantity
+                ]);
+            }
+            else{
+                $productSold = $productReporting->product_sold;
+                $productSold = $productSold + $od->quantity;
+                DB::table('product_reportings')->where([
+                    ['product_id',$od->product_id]
+                    ])->update([
+                    'product_sold' => $productSold
+                ]);
+            }
+            if($category == null){
+                DB::table('category_reportings')->insert([
+                    'category_id' => $product->category_id,
+                    'product_sold' => $od->quantity
+                ]);
+            }
+            else{
+                $productSold = $category->product_sold;
+                $productSold = $productSold + $od->quantity;
+                DB::table('category_reportings')->where([
+                    ['category_id',$product->category_id]
+                    ])->update([
+                    'product_sold' => $productSold
+                ]);
+            }
+        }
+
     }
 }
