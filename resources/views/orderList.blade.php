@@ -68,7 +68,7 @@
                                             <li class="card-text payment-summary-price" style="font-size:16px;font-weight: 700;" >{{ $od->product_name }}</li>
                                             <span style="font-weight : 700;" class="card-text payment-summary-name"> QTY:</span> <span style="margin-left:10px;font-weight : 700;" class="card-text payment-summary-name">x{{ $od->quantity }}</span>
                                 </ul>
-                      
+
 
                             </div>
                             @endif
@@ -87,7 +87,7 @@
                         @endif
                             @if($o->status == 'ON GOING' && Auth::guard('webcustomer')->check())
                             <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
-                                <span ><a href="#" class="btn btn-primary" style="width: 100%;margin-right:80px" data-toggle="modal" data-target="#FinishOrderModal{{$o->id}}">Finish Order</a> </span>
+                                <span ><a href="#" class="btn text-light" style="width: 10rem;background-color:var(--indigo-500)" data-toggle="modal" data-target="#FinishOrderModal{{$o->id}}">Finish Order</a> </span>
                             </div>
                             <div class="modal fade" id="FinishOrderModal{{$o->id}}" tabindex="-1" role="dialog" aria-labelledby="FinishOrderModal{{$o->id}}" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -120,7 +120,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <a href="/finishwithoutreview/{{$o->id}}" class="btn btn-secondary">Finish without review</a>
-                                            <button type="submit" class="btn btn-success">Submit and finish order</button>
+                                            <button type="submit" class="btn text-light" style="background-color:var(--indigo-500)">Submit and finish order</button>
                                             </form>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                                 @elseif ($o->nego_status == 'REJECTED')
                                 <form class="d-flex justify-content-end" method="post" action="/editstatus/{{$o->id}}" style="gap:10px;margin-right: 35px;margin-top: -60px">
                                     <a href="rejectVendorPrice/{{$o->id}}" onclick="return confirm('Are you sure? Order will be cancelled if you reject')"  class="btn btn-danger text-light" style="width: 10rem;">Reject price</a>
-                                    <a href="acceptVendorPrice/{{$o->id}}" class="btn btn-success text-light" style="width: 10rem;">Accept price</a>
+                                    <a href="acceptVendorPrice/{{$o->id}}" class="btn text-light" style="width: 10rem; background-color:var(--indigo-500)">Accept price</a>
                                 @endif
                             @elseif($o->status == 'OPEN' && Auth::guard('webvendor')->check())
                                 @if ($o->nego_price)
@@ -146,12 +146,12 @@
                                     <form class="d-flex justify-content-end" method="post" action="/editstatus/{{$o->id}}" style="gap:10px;margin-right: 35px;margin-top: -60px">
                                         @csrf
                                             <button type="submit" class="btn btn-danger"value="2" name="status" id="status" style="width: 10rem;">Reject order</button>
-                                            <button type="submit" class="btn btn-success" value="1" name="status" id="status" style="width: 10rem;">Accept order</button>
+                                            <button type="submit" class="btn text-light" value="1" name="status" id="status" style="width: 10rem; background-color:var(--indigo-500)">Accept order</button>
                                         </form>
                                      @else
                                         <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
                                             <span ><a href="#" class="btn btn-danger" style="width: 8rem" data-toggle="modal" data-target="#RejectPrice{{$o->id}}">Reject Price</a> </span>
-                                            <a href="/acceptNegoPrice/{{$o->id}}" class="btn btn-success text-light" style="width: 8rem;">Accept Price</a>
+                                            <a href="/acceptNegoPrice/{{$o->id}}" class="btn text-light" style="width: 8rem;background-color:var(--indigo-500)">Accept Price</a>
                                             <div class="modal fade" id="RejectPrice{{$o->id}}" tabindex="-1" role="dialog" aria-labelledby="RejectPrice{{$o->id}}" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -170,7 +170,7 @@
                                                                         <label for="price">Your best price:</label>
                                                                         <input type="number" class="form-control" id="price" name="price" placeholder="" required>
                                                                     </div>
-                                                                    <button type="submit" class="btn btn-primary">Send to customer</button>
+                                                                    <button type="submit" class="btn text-light" style="background-color:var(--indigo-500)">Send to customer</button>
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -182,14 +182,19 @@
                                 @else
                                     <form class="d-flex justify-content-end" method="post" action="/editstatus/{{$o->id}}" style="gap:10px;margin-right: 35px;margin-top: -60px">
                                     @csrf
-                                        <button type="submit" class="btn btn-danger"value="2" name="status" id="status" style="width: 6rem;">Reject</button>
-                                        <button type="submit" class="btn btn-success" value="1" name="status" id="status" style="width: 6rem;">Accept</button>
+                                        <button type="submit" class="btn btn-danger"value="2" name="status" id="status" style="width: 10rem;">Reject order</button>
+                                        <button type="submit" class="btn text-light" value="1" name="status" id="status" style="width: 10rem; background-color:var(--indigo-500)">Accept order</button>
                                     </form>
                                 @endif
                             @elseif($o->status == 'AWAITING PAYMENT' && Auth::guard('webcustomer')->check())
                                 <div class="d-flex justify-content-end" style="gap:10px;margin-right: 35px;margin-top: -60px">
                                     @if (!$o->payment_proof)
-                                        <a href="/confirmPayment/{{$o->id}}" class="btn btn-primary" style="width: 10rem;">Finish payment</a>
+                                        <a href="/confirmPayment/{{$o->id}}" class="btn text-light" style="width: 10rem;background-color:var(--indigo-500)">Finish payment</a>
+                                    @elseif($o->payment_proof && $o->payment_proof_status == 'REJECTED')
+                                        <div style="margin-top: -5%">
+                                            <p class="small text-danger mb-1">*previous payment proof rejected</p>
+                                            <a href="/confirmPayment/{{$o->id}}" class="btn text-light mb-3" style="width: 12rem;background-color:var(--indigo-500)">Upload revision</a>
+                                        </div>
                                     @else
                                         <p class="btn btn-info active" style="width: 10rem;">Admin checking</p>
                                     @endif

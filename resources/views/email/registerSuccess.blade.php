@@ -18,11 +18,15 @@
 </style>
 
 <head>
-    <title>Register Successfull FoodHub<I/title>
+    <title>Incoming Order FoodHub</title>
 </head>
 
 <body>
     <p>Thank you for registering in FoodHub</p>
+    <p>
+        {{-- Order No : ODR-{{$order->id}} --}}
+    </p>
+
 </body>
 
 </html>

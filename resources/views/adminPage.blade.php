@@ -101,12 +101,16 @@
                 <tr class="fontstyle">
                   <th style="font-size: 16px">User</th>
                   <th style="font-size: 16px">Status</th>
-                  <th style="font-size: 16px">Number Of Transaction</th>
-                  <th style="font-size: 16px">Total Sales</th>
+                  <th style="font-size: 16px">Total Transaction</th>
+                  <th style="font-size: 16px">Monthly Revenue</th>
                 </tr>
               </thead>
               <tbody>
                 @forelse ($vendors as $v)
+                <?php
+                
+                  $vendorR = \App\Models\VendorReporting::where('vendor_id', $v->id)->where('month',\Carbon\Carbon::now()->month)->first();
+                ?>
                 <tr>
                   <td>
                     <img src="/storage/{{$v->image}}" alt="" />
@@ -131,10 +135,18 @@
                   </form>
                   @endif
                   <td>
-                    <p class="fontstyle">{{$v->name}}</p>
+                    @if($vendorR == null)
+                      <p class="fontstyle">0</p>
+                    @else 
+                     <p class="fontstyle">{{$vendorR->number_of_transaction}}</p>
+                     @endif
                   </td>
                   <td>
-                    <p class="fontstyle">{{$v->name}}</p>
+                     @if($vendorR == null)
+                      <p class="fontstyle">0</p>
+                     @else 
+                      <p class="fontstyle">Rp{{number_format($vendorR->total_earning_monthly,2,",",".")}}</p>
+                     @endif
                   </td>
                 </tr>
               @empty
@@ -155,15 +167,16 @@
         <div class="top-category">
             <h2>Top Category</h2>
             <div class="category-card-container">
+            
                 <div class="card-admin shadow text-center">
-                    <div class="card-admin-body">
-                        <h3 class="category-title">MAIN COURSE</h3>
+                    <div class="card-admin-body">           
+                        <h3 class="category-title">{{$topCategory->categories->name}}</h3>
                         <hr class="hrs">
-                        <p class="category-info">Number Of Transaction: 200</p>
+                        <p class="category-info">Product Sold: {{$topCategory->product_sold}}</p>
                         <hr class="hrs">
-                        <p class="category-info">Total Income: Rp17.000.000</p>
+                        {{-- <p class="category-info">Total Income: Rp17.000.000</p>
                         <hr class="hrs">
-                        <p class="category-info">Products Sold: 117</p>
+                        <p class="category-info">Products Sold: 117</p> --}}
                     </div>
                 </div>
                 {{-- <div class="card shadow text-center">

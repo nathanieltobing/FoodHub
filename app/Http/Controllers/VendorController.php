@@ -2,23 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Carbon\Carbon;
 use App\Models\Vendor;
+use App\Models\Product;
 use App\Models\Promotion;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Mail;
 use App\Mail\Email;
+use App\Models\ProductReporting;
+use App\Models\VendorReporting;
 
 class VendorController extends Controller
 {
+
     public function index(){
 
         $vendors = Vendor::orderBy('rating','DESC')->paginate(2);
@@ -49,11 +52,28 @@ class VendorController extends Controller
         return $vendor;
     }
 
+    public function getTopVendor(){
+        $vendorReporting = VendorReporting::orderBy('number_of_transaction', 'DESC')->first();
+        // $vendor = Vendor::where('id',$vendorReporting->vendor_id)->first();
+        return $vendorReporting;
+    }
+
+    public function getTopProduct(){
+        $productReporting = ProductReporting::orderBy('product_sold', 'DESC')->first();
+        // $product = Product::where('id',$productReporting->product_id)->first();
+        return $productReporting;
+    }
+
     public function indexHomepage(){
         $featuredVendors = $this->getFeaturedVendors();
         $topRatedVendors = $this->getTopRatedVendor();
+        $topVendor = $this->getTopVendor();
+        $topProduct = $this->getTopProduct();
 
-        return view('homepage', ['featuredVendors'=> $featuredVendors , 'topRatedVendors' => $topRatedVendors]);
+        // $date = Carbon::now();
+        //  dd($date->month);
+        return view('homepage', ['featuredVendors'=> $featuredVendors , 'topRatedVendors' => $topRatedVendors,
+         'topVendor'=> $topVendor, 'topProduct' => $topProduct]);
 
     }
 
@@ -92,7 +112,6 @@ class VendorController extends Controller
         $vendor->email = $req->email;
         $vendor->password = bcrypt($req->password);
         $vendor->status = 'ACTIVE';
-
         $vendor->save();
 
         $this->sendEmail('registration',$req->email);
@@ -125,15 +144,25 @@ class VendorController extends Controller
         return view('productList',[
             'vendor' => $v,
             'products' => $products,
-            'error' => $error
+            'error' => $error,
         ]);
     }
 
     public function showVendorProductList(){
+        $v = Auth::guard('webvendor')->user();
         $products = Product::where('vendor_id',Auth::guard('webvendor')->user()->id)->paginate(3);
+        $vendorReporting = VendorReporting::where('vendor_id', $v->id)->where('month',
+        Carbon::now()->month)->first();
+      
+        $totalProductSold = ProductReporting::where('vendor_id', $v->id)->sum('product_sold');
+        $productReporting = ProductReporting::where('vendor_id', $v->id)->orderBy('product_sold',
+        'DESC')->first();
         return view('productList',[
             'products' => $products,
             'vendor' => Auth::guard('webvendor')->user(),
+            'vendorReporting' => $vendorReporting,
+            'productReporting' => $productReporting,
+            'totalProductSold' => $totalProductSold
         ]);
     }
 

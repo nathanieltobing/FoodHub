@@ -50,11 +50,11 @@
             <div class="card-body" style="height: 20.5rem;">
             <p style="padding-top :0%;font-size:24px;font-weight:700;font-family:Poppins;">Transaction Report</p>
             <hr class="bg-dark">
-            <p  class="testimonials" style="font-size:20px;font-weight:700;font-family:Poppins;margin-left: -2px ;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Number Of Transaction: 200</p>
+            <p  class="testimonials" style="font-size:20px;font-weight:700;font-family:Poppins;margin-left: -2px ;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Total Transaction: {{$vendorReporting->number_of_transaction}}</p>
             <hr class="bg-dark">
-            <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Total Income: Rp17.000.000</p>
+            <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Monthly Revenue: Rp{{number_format($vendorReporting->total_earning_monthly,2,",",".")}}</p>
             <hr class="bg-dark">
-            <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Products Sold: 117</p>
+            <p class="testimonials "style="font-size:20px;font-weight:700;font-family:Poppins;padding: 10px 10px;backdrop-filter:blur(0px);box-shadow:none"> Products Sold: {{$totalProductSold}}</p>
             </div>
         </div>
 
@@ -69,11 +69,11 @@
             </div>
             <div >
                 <div  class="card shadow text-center" style="border-radius: 15px">
-                    <img src="{{ asset('assets/images/basreng.jpg') }}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 20.5rem;">
+                    <img src="/storage/{{$productReporting->products->image}}" class="card-img-top" alt="Product Image" style="border-top-left-radius: 15px; border-top-right-radius: 15px; object-fit:cover; height: 20.5rem;">
                     <div class="card-body" style="height: 10.5rem; overflow: hidden;">
-                        <h5 class="card-title fontstyle">Basreng</h5>
-                        <h6 class="card-title text-secondary fontstyle">Appetizer</h6>
-                        <p class="card-text fontstyle" style="height:5rem; overflow:hidden;" >Makanan Ringan yang blabalbal</p>
+                        <h5 class="card-title fontstyle">{{$productReporting->products->name}}</h5>
+                        <h6 class="card-title text-secondary fontstyle">{{$productReporting->products->categories->name}}</h6>
+                        <p class="card-text fontstyle" style="height:5rem; overflow:hidden;" >Product Sold : {{$productReporting->product_sold}}</p>
                     </div>
                 </div>
         </div>
