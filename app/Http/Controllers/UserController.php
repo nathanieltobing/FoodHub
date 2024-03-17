@@ -98,15 +98,6 @@ class UserController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-
-
-    public static function quickRandom($length = 16)
-{
-    $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-    return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
-}
-
     public function sendEmail($type,$email){
         Mail::to($email)->send(new Email(null,null,null,$type));
     }
@@ -138,6 +129,7 @@ class UserController extends Controller
                 $newVendor->description = 'Add description in profile !'; // temporary description
                 $newVendor->rating = 3; // temporary rating
                 $newVendor->phone = 'Add phone number in profile !';
+                $newVendor->image = 'images/defaultimagevendor2.png';
                 $newVendor->save();
                 $this->sendEmail('registration',$user->email);
                 $vendor = Vendor::where('email', $user->email)->first();
