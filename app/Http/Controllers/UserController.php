@@ -134,7 +134,7 @@ class UserController extends Controller
                 $newVendor->save();
                 $this->sendEmail('registration',$user->email);
                 $vendor = Vendor::where('email', $user->email)->first();
-                Auth::guard('webvendor')->login($customer);
+                Auth::guard('webvendor')->login($vendor);
                 Session::put('mysession',Auth::guard('webvendor')->user()->name);
                 return redirect('/');
             }
