@@ -222,11 +222,11 @@
             <h2>Top Vendor</h2>
             <div class="vendor-card-container">
                 <div class="card-admin shadow text-center">
-                    <img src="/storage/{{$v->image}}" class="" alt="Product Image">
+                    <img src="/storage/{{$topVendor->vendors->image}}" class="" alt="Product Image">
                     <div class="card-admin-body">
-                        <h3 class="vendor-name">Salama Catering</h3>
+                        <h3 class="vendor-name">{{$topVendor->vendors->name}}</h3>
                         <hr class="hrs">
-                        <p class="vendor-info">Product Sold: 120</p>
+                        <p class="vendor-info">Total Transaction: {{$topVendor->number_of_transaction}}</p>
                     </div>
                 </div>
                 {{-- <div class="card shadow text-center">
