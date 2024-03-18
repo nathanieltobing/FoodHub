@@ -167,7 +167,7 @@ class UserController extends Controller
                 }
             }
 
-            else if($customer != null && $vendor == null) {
+            else if($customer != null) {
                 if($customer->status == 'INACTIVE'){
                     Auth::guard('webcustomer')->logout();
                     return redirect('/login')->withErrors('Your account is suspended !');
