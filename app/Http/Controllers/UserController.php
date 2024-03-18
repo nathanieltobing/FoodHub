@@ -107,6 +107,7 @@ class UserController extends Controller
             $user = Socialite::driver('google')->user();
             $customer = Customer::where('email', $user->email)->first();
             $vendor = Vendor::where('email', $user->email)->first();
+            // dd($vendor);
             if($customer == null && session()->get('registerAs') == 'CUSTOMER') {
                 $newCustomer = new Customer();
                 $newCustomer->name = $user->name;
@@ -133,6 +134,16 @@ class UserController extends Controller
                 $newVendor->save();
                 $this->sendEmail('registration',$user->email);
                 $vendor = Vendor::where('email', $user->email)->first();
+                Auth::guard('webvendor')->login($customer);
+                Session::put('mysession',Auth::guard('webvendor')->user()->name);
+                return redirect('/');
+            }
+            else if($customer != null && session()->get('registerAs') == 'CUSTOMER'){
+                Auth::guard('webcustomer')->login($customer);
+                Session::put('mysession',Auth::guard('webcustomer')->user()->name);
+                return redirect('/');
+            }   
+            else if($vendor != null && session()->get('registerAs') == 'VENDOR'){
                 Auth::guard('webvendor')->login($vendor);
                 Session::put('mysession',Auth::guard('webvendor')->user()->name);
                 return redirect('/');
@@ -156,7 +167,7 @@ class UserController extends Controller
                 }
             }
 
-            else if($customer != null ) {
+            else if($customer != null && $vendor == null) {
                 if($customer->status == 'INACTIVE'){
                     Auth::guard('webcustomer')->logout();
                     return redirect('/login')->withErrors('Your account is suspended !');
