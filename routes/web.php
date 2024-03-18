@@ -53,6 +53,9 @@ Route::post('/register/vendor',[VendorController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register/customer', [CustomerController::class, 'register']);
 Route::post('/register/vendor', [VendorController::class, 'register']);
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 
 Route::get('/register/google-customer', [CustomerController::class, 'registerWithGoogle']);
 Route::get('/register/google-vendor', [VendorController::class, 'registerWithGoogle']);
